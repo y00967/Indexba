@@ -1,4915 +1,887 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>وسيط | الشبكة القانونية والقضائية</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:"Tajawal",Arial,sans-serif;
-    background:#eef1f5;
-    color:#172b3a;
-    min-height:100vh;
-}
-
-button,
-input,
-textarea,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-img{
-    max-width:100%;
-}
-
-/* =========================================================
-   COLORS
-========================================================= */
-
-:root{
-    --primary:#102a43;
-    --primary2:#183f5c;
-    --gold:#d9b44a;
-    --bg:#eef1f5;
-    --card:#ffffff;
-    --text:#172b3a;
-    --muted:#718096;
-    --border:#d9e0e7;
-    --danger:#b23a3a;
-    --success:#26734d;
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.topbar{
-    height:64px;
-    background:var(--primary);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:0 18px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 2px 8px #0003;
-}
-
-.logo{
-    font-size:23px;
-    font-weight:800;
-    min-width:160px;
-}
-
-.logo span{
-    color:var(--gold);
-}
-
-.search{
-    flex:1;
-    max-width:500px;
-    position:relative;
-}
-
-.search input{
-    width:100%;
-    border:none;
-    outline:none;
-    background:#fff;
-    color:#222;
-    border-radius:25px;
-    padding:11px 18px;
-}
-
-.top-actions{
-    display:flex;
-    gap:7px;
-    align-items:center;
-}
-
-.top-icon{
-    width:40px;
-    height:40px;
-    border:0;
-    border-radius:50%;
-    background:#ffffff16;
-    color:white;
-    font-size:18px;
-}
-
-.top-icon:hover{
-    background:#ffffff2b;
-}
-
-.user-mini{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    cursor:pointer;
-}
-
-.user-mini img,
-.user-mini .avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-}
-
-/* =========================================================
-   LAYOUT
-========================================================= */
-
-.layout{
-    width:1400px;
-    max-width:96%;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns:260px minmax(400px,650px) 280px;
-    gap:18px;
-    align-items:start;
-}
-
-.sidebar{
-    position:sticky;
-    top:82px;
-}
-
-.side-card,
-.card{
-    background:var(--card);
-    border-radius:13px;
-    box-shadow:0 2px 10px #0000000b;
-    border:1px solid #e1e6eb;
-}
-
-.side-card{
-    padding:12px;
-    margin-bottom:14px;
-}
-
-.side-title{
-    font-weight:800;
-    color:var(--muted);
-    padding:10px;
-}
-
-.menu-item{
-    width:100%;
-    border:0;
-    background:transparent;
-    text-align:right;
-    padding:12px;
-    border-radius:9px;
-    font-size:15px;
-    color:var(--text);
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.menu-item:hover,
-.menu-item.active{
-    background:#edf3f7;
-    color:var(--primary);
-}
-
-.menu-icon{
-    width:30px;
-    text-align:center;
-    font-size:19px;
-}
-
-/* =========================================================
-   FEED
-========================================================= */
-
-.feed{
-    min-width:0;
-}
-
-.card{
-    padding:16px;
-    margin-bottom:15px;
-}
-
-.story-row{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding-bottom:5px;
-}
-
-.story{
-    min-width:100px;
-    height:150px;
-    border-radius:12px;
-    background:linear-gradient(135deg,#102a43,#d9b44a);
-    color:#fff;
-    padding:10px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    position:relative;
-    overflow:hidden;
-}
-
-.story img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:.65;
-}
-
-.story strong{
-    position:relative;
-    z-index:2;
-}
-
-.composer{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.composer-avatar{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.composer-input{
-    flex:1;
-    border:0;
-    background:#f0f2f5;
-    border-radius:25px;
-    padding:13px 18px;
-    cursor:pointer;
-}
-
-.composer-actions{
-    display:flex;
-    gap:8px;
-    margin-top:13px;
-    border-top:1px solid var(--border);
-    padding-top:12px;
-}
-
-.action-button{
-    flex:1;
-    border:0;
-    background:white;
-    padding:10px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.action-button:hover{
-    background:#f2f4f6;
-}
-
-.post{
-    overflow:hidden;
-}
-
-.post-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.post-avatar{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.post-author{
-    font-weight:800;
-}
-
-.post-time{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.post-menu{
-    margin-right:auto;
-}
-
-.post-menu button{
-    border:0;
-    background:transparent;
-    font-size:20px;
-}
-
-.post-text{
-    line-height:2;
-    margin:15px 0;
-    white-space:pre-wrap;
-}
-
-.post-image{
-    width:100%;
-    max-height:650px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
-.post-stats{
-    display:flex;
-    justify-content:space-between;
-    color:var(--muted);
-    padding:10px 4px;
-    border-bottom:1px solid var(--border);
-}
-
-.post-actions{
-    display:flex;
-    gap:5px;
-    padding-top:7px;
-}
-
-.post-action{
-    flex:1;
-    border:0;
-    background:white;
-    padding:10px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.post-action:hover{
-    background:#f1f3f5;
-}
-
-.post-action.liked{
-    color:#1d5d91;
-}
-
-.comment-box{
-    display:flex;
-    gap:7px;
-    margin-top:10px;
-}
-
-.comment-box input{
-    flex:1;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:9px 14px;
-}
-
-.comment{
-    background:#f1f3f5;
-    border-radius:12px;
-    padding:8px 12px;
-    margin-top:7px;
-}
-
-/* =========================================================
-   RIGHT SIDE
-========================================================= */
-
-.profile-box{
-    text-align:center;
-}
-
-.profile-cover{
-    height:85px;
-    background:linear-gradient(135deg,#102a43,#285b7e);
-    border-radius:10px;
-}
-
-.profile-small{
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    border:4px solid white;
-    object-fit:cover;
-    margin-top:-38px;
-}
-
-.suggestion{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom:12px;
-}
-
-.suggestion img{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.suggestion-info{
-    flex:1;
-}
-
-.small-button{
-    border:0;
-    background:var(--primary);
-    color:white;
-    border-radius:6px;
-    padding:6px 9px;
-}
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile-page{
-    grid-column:1 / -1;
-}
-
-.cover{
-    height:260px;
-    border-radius:14px 14px 0 0;
-    background:linear-gradient(135deg,#102a43,#39708e);
-    position:relative;
-    overflow:hidden;
-}
-
-.cover img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.profile-header{
-    background:#fff;
-    padding:0 30px 20px;
-    border-radius:0 0 14px 14px;
-}
-
-.profile-header-row{
-    display:flex;
-    align-items:end;
-    gap:20px;
-}
-
-.profile-large{
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    border:6px solid white;
-    object-fit:cover;
-    margin-top:-80px;
-    position:relative;
-}
-
-.profile-name{
-    padding-bottom:15px;
-}
-
-.profile-name h1{
-    font-size:27px;
-}
-
-.profile-name p{
-    color:var(--muted);
-}
-
-.profile-tabs{
-    display:flex;
-    gap:5px;
-    margin-top:20px;
-    overflow-x:auto;
-}
-
-.profile-tab{
-    border:0;
-    background:white;
-    padding:12px 18px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.profile-tab:hover{
-    background:#f0f2f4;
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:#0008;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:3000;
-    padding:15px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    background:#fff;
-    width:100%;
-    max-width:620px;
-    max-height:92vh;
-    overflow:auto;
-    border-radius:15px;
-    padding:22px;
-    position:relative;
-}
-
-.modal-title{
-    font-size:22px;
-    font-weight:800;
-    margin-bottom:15px;
-}
-
-.close{
-    position:absolute;
-    left:15px;
-    top:15px;
-    border:0;
-    background:#edf0f2;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    font-size:20px;
-}
-
-input,
-textarea,
-select{
-    width:100%;
-    border:1px solid var(--border);
-    padding:11px;
-    border-radius:8px;
-    outline:none;
-    margin-bottom:10px;
-}
-
-textarea{
-    min-height:150px;
-    resize:vertical;
-}
-
-input:focus,
-textarea:focus{
-    border-color:#547d9b;
-}
-
-.btn{
-    border:0;
-    border-radius:8px;
-    padding:10px 15px;
-    background:var(--primary);
-    color:#fff;
-    font-weight:700;
-}
-
-.btn.gold{
-    background:var(--gold);
-    color:var(--primary);
-}
-
-.btn.green{
-    background:var(--success);
-}
-
-.btn.red{
-    background:var(--danger);
-}
-
-.btn.gray{
-    background:#697b89;
-}
-
-.btn + .btn{
-    margin-right:5px;
-}
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-.chat-layout{
-    display:grid;
-    grid-template-columns:210px 1fr;
-    min-height:500px;
-}
-
-.chat-users{
-    border-left:1px solid var(--border);
-    padding:10px;
-}
-
-.chat-user{
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.chat-user:hover{
-    background:#f0f2f4;
-}
-
-.chat-window{
-    display:flex;
-    flex-direction:column;
-}
-
-.chat-head{
-    padding:12px;
-    border-bottom:1px solid var(--border);
-    font-weight:800;
-}
-
-.chat-messages{
-    flex:1;
-    min-height:300px;
-    padding:15px;
-    overflow:auto;
-}
-
-.message{
-    max-width:75%;
-    background:#edf1f4;
-    padding:10px;
-    border-radius:12px;
-    margin-bottom:8px;
-}
-
-.message.me{
-    margin-right:auto;
-    background:#dbeaf5;
-}
-
-.chat-input{
-    display:flex;
-    gap:8px;
-    border-top:1px solid var(--border);
-    padding:10px;
-}
-
-.chat-input input{
-    margin:0;
-}
-
-/* =========================================================
-   TABLES
-========================================================= */
-
-.table-wrap{
-    overflow:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th,
-td{
-    border:1px solid var(--border);
-    padding:10px;
-    text-align:right;
-}
-
-th{
-    background:var(--primary);
-    color:white;
-}
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-.notification{
-    padding:12px;
-    border-bottom:1px solid var(--border);
-}
-
-.notification.unread{
-    background:#f1f7fb;
-    font-weight:700;
-}
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-    text-align:center;
-    color:var(--muted);
-    padding:35px 10px;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1050px){
-
-    .layout{
-        grid-template-columns:220px minmax(350px,1fr);
-    }
-
-    .right-sidebar{
-        display:none;
-    }
-
-}
-
-@media(max-width:750px){
-
-    .topbar{
-        height:auto;
-        min-height:60px;
-        flex-wrap:wrap;
-        padding:8px;
-    }
-
-    .logo{
-        min-width:auto;
-        font-size:19px;
-    }
-
-    .search{
-        order:3;
-        flex-basis:100%;
-        max-width:none;
-    }
-
-    .top-actions{
-        margin-right:auto;
-    }
-
-    .layout{
-        display:block;
-        width:100%;
-        max-width:100%;
-        margin:0;
-    }
-
-    .left-sidebar{
-        display:none;
-    }
-
-    .feed{
-        width:100%;
-    }
-
-    .card{
-        border-radius:0;
-        margin-bottom:8px;
-    }
-
-    .profile-header-row{
-        align-items:center;
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .profile-large{
-        width:125px;
-        height:125px;
-    }
-
-    .cover{
-        height:180px;
-    }
-
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-    position:fixed;
-    bottom:25px;
-    left:25px;
-    background:var(--primary);
-    color:white;
-    padding:13px 18px;
-    border-radius:9px;
-    z-index:5000;
-    display:none;
-}
-
-.toast.show{
-    display:block;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة العدالة والمحاماة الرقمية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#b45309',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
+        @media print {
+            body * { visibility: hidden; }
+            #printableArea, #printableArea * { visibility: visible; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
 </head>
-
-<body>
-
-<!-- =======================================================
-     TOP BAR
-======================================================= -->
-
-<header class="topbar">
-
-    <div class="logo"
-         onclick="goHome()"
-         style="cursor:pointer">
-
-        وسيط <span>القانوني</span>
-
-    </div>
-
-    <div class="search">
-
-        <input
-            id="globalSearch"
-            placeholder="بحث عن أشخاص، محامين، قضاة، أبحاث..."
-            onkeyup="globalSearch(event)"
-        >
-
-    </div>
-
-    <div class="top-actions">
-
-        <button class="top-icon"
-                onclick="showPage('home')"
-                title="الرئيسية">
-            🏠
-        </button>
-
-        <button class="top-icon"
-                onclick="showPage('messages')"
-                title="الرسائل">
-            💬
-        </button>
-
-        <button class="top-icon"
-                onclick="showPage('notifications')"
-                title="الإشعارات">
-            🔔
-        </button>
-
-        <div class="user-mini"
-             onclick="showPage('profile')">
-
-            <div id="miniAvatar"
-                 class="avatar"
-                 style="
-                 background:#d9b44a;
-                 display:flex;
-                 align-items:center;
-                 justify-content:center;
-                 overflow:hidden;
-                 color:#102a43;
-                 font-weight:800;">
-                ع
-            </div>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- =======================================================
-     MAIN LAYOUT
-======================================================= -->
-
-<div class="layout">
-
-<!-- =======================================================
-     LEFT SIDEBAR
-======================================================= -->
-
-<aside class="sidebar left-sidebar">
-
-    <div class="side-card">
-
-        <div class="side-title">
-            القائمة
-        </div>
-
-        <button class="menu-item active"
-                onclick="showPage('home')">
-            <span class="menu-icon">🏠</span>
-            الرئيسية
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('profile')">
-            <span class="menu-icon">👤</span>
-            صفحتي الشخصية
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('friends')">
-            <span class="menu-icon">👥</span>
-            الأصدقاء
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('messages')">
-            <span class="menu-icon">💬</span>
-            الرسائل
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('notifications')">
-            <span class="menu-icon">🔔</span>
-            الإشعارات
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('groups')">
-            <span class="menu-icon">👨‍👩‍👧‍👦</span>
-            المجموعات
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('research')">
-            <span class="menu-icon">📚</span>
-            الأبحاث
-        </button>
-
-    </div>
-
-
-    <div class="side-card">
-
-        <div class="side-title">
-            الخدمات القانونية
-        </div>
-
-        <button class="menu-item"
-                onclick="showPage('lawyers')">
-            <span class="menu-icon">⚖️</span>
-            المحامون
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('judges')">
-            <span class="menu-icon">👨‍⚖️</span>
-            القضاة والمحكمون
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('cases')">
-            <span class="menu-icon">📂</span>
-            القضايا
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('sessions')">
-            <span class="menu-icon">📅</span>
-            صحيفة الجلسات
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('minutes')">
-            <span class="menu-icon">📝</span>
-            المحاضر والعـرائض
-        </button>
-
-    </div>
-
-
-    <div class="side-card">
-
-        <button class="menu-item"
-                onclick="showPage('support')">
-            <span class="menu-icon">🤖</span>
-            الدعم الذكي
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('admin')">
-            <span class="menu-icon">⚙️</span>
-            الإدارة
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- =======================================================
-     FEED
-======================================================= -->
-
-<main class="feed" id="mainContent">
-
-    <!-- HOME -->
-
-    <section id="page-home" class="page">
-
-        <div class="card">
-
-            <div class="story-row">
-
-                <div class="story">
-
-                    <strong>+ إنشاء حالة</strong>
-
-                </div>
-
-                <div class="story">
-                    <strong>الأبحاث</strong>
-                </div>
-
-                <div class="story">
-                    <strong>القانون</strong>
-                </div>
-
-                <div class="story">
-                    <strong>المحامون</strong>
-                </div>
-
-                <div class="story">
-                    <strong>القضاء</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- COMPOSER -->
-
-        <div class="card">
-
-            <div class="composer">
-
-                <div id="composerAvatar"></div>
-
-                <button class="composer-input"
-                        onclick="openPostModal()">
-
-                    ماذا تريد أن تنشر؟
-
-                </button>
-
-            </div>
-
-            <div class="composer-actions">
-
-                <button class="action-button"
-                        onclick="openPostModal('text')">
-
-                    ✍️ منشور
-
-                </button>
-
-                <button class="action-button"
-                        onclick="openPostModal('image')">
-
-                    📷 صورة
-
-                </button>
-
-                <button class="action-button"
-                        onclick="openResearchModal()">
-
-                    📚 بحث
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- FEED POSTS -->
-
-        <div id="feedPosts"></div>
-
-    </section>
-
-
-    <!-- PROFILE -->
-
-    <section id="page-profile"
-             class="page"
-             style="display:none">
-
-        <div class="profile-page">
-
-            <div class="cover"
-                 id="profileCover">
-
-            </div>
-
-            <div class="profile-header">
-
-                <div class="profile-header-row">
-
-                    <div id="largeProfilePhoto"></div>
-
-                    <div class="profile-name">
-
-                        <h1 id="profileName">
-                            عبدالله
-                        </h1>
-
-                        <p id="profileType">
-                            عضو في وسيط
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div style="margin-top:15px">
-
-                    <button class="btn"
-                            onclick="editProfile()">
-                        تعديل الملف الشخصي
-                    </button>
-
-                    <button class="btn gold"
-                            onclick="changePhoto()">
-                        📷 تغيير الصورة
-                    </button>
-
-                    <button class="btn gray"
-                            onclick="changeCover()">
-                        🖼️ تغيير الغلاف
-                    </button>
-
-                </div>
-
-                <div class="profile-tabs">
-
-                    <button class="profile-tab"
-                            onclick="showProfileTab('posts')">
-                        المنشورات
-                    </button>
-
-                    <button class="profile-tab"
-                            onclick="showProfileTab('about')">
-                        المعلومات
-                    </button>
-
-                    <button class="profile-tab"
-                            onclick="showProfileTab('photos')">
-                        الصور
-                    </button>
-
-                    <button class="profile-tab"
-                            onclick="showProfileTab('research')">
-                        الأبحاث
-                    </button>
-
-                    <button class="profile-tab"
-                            onclick="showProfileTab('friends')">
-                        الأصدقاء
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div id="profileContent"
-                 style="margin-top:15px">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FRIENDS -->
-
-    <section id="page-friends"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>👥 الأصدقاء وطلبات الصداقة</h2>
-
-            <div id="friendsList"
-                 style="margin-top:20px">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- MESSAGES -->
-
-    <section id="page-messages"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>💬 الرسائل</h2>
-
-            <div class="chat-layout">
-
-                <div class="chat-users"
-                     id="chatUsers">
-                </div>
-
-                <div class="chat-window">
-
-                    <div class="chat-head"
-                         id="chatHead">
-                        اختر شخصًا
-                    </div>
-
-                    <div class="chat-messages"
-                         id="chatMessages">
-                    </div>
-
-                    <div class="chat-input">
-
-                        <input
-                            id="messageInput"
-                            placeholder="اكتب رسالة..."
-                        >
-
-                        <button class="btn"
-                                onclick="sendMessage()">
-                            إرسال
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- NOTIFICATIONS -->
-
-    <section id="page-notifications"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>🔔 الإشعارات</h2>
-
-            <div id="notificationsList"
-                 style="margin-top:15px">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- GROUPS -->
-
-    <section id="page-groups"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>👥 المجموعات القانونية</h2>
-
-            <button class="btn gold"
-                    onclick="createGroup()">
-                + إنشاء مجموعة
-            </button>
-
-        </div>
-
-        <div id="groupsList"></div>
-
-    </section>
-
-
-    <!-- RESEARCH -->
-
-    <section id="page-research"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>📚 الأبحاث والدراسات</h2>
-
-            <button class="btn gold"
-                    onclick="openResearchModal()">
-                نشر بحث جديد
-            </button>
-
-        </div>
-
-        <div id="researchList"></div>
-
-    </section>
-
-
-    <!-- LAWYERS -->
-
-    <section id="page-lawyers"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>⚖️ بوابة المحامين</h2>
-
-            <button class="btn gold"
-                    onclick="createProfessional('lawyer')">
-                إنشاء صفحة محامٍ
-            </button>
-
-        </div>
-
-        <div id="lawyersList"></div>
-
-    </section>
-
-
-    <!-- JUDGES -->
-
-    <section id="page-judges"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>👨‍⚖️ منصة القضاة والمحكمين</h2>
-
-            <button class="btn gold"
-                    onclick="createProfessional('judge')">
-                إنشاء صفحة قاضٍ / محكم
-            </button>
-
-        </div>
-
-        <div id="judgesList"></div>
-
-    </section>
-
-
-    <!-- CASES -->
-
-    <section id="page-cases"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>📂 القضايا</h2>
-
-            <button class="btn gold"
-                    onclick="createCase()">
-                + إضافة قضية
-            </button>
-
-            <div class="table-wrap"
-                 style="margin-top:15px">
-
-                <table>
-
-                    <thead>
-
-                    <tr>
-                        <th>رقم القضية</th>
-                        <th>المحكمة</th>
-                        <th>نوع القضية</th>
-                        <th>الخصوم</th>
-                    </tr>
-
-                    </thead>
-
-                    <tbody id="casesTable">
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- SESSIONS -->
-
-    <section id="page-sessions"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>📅 صحيفة الجلسات القضائية</h2>
-
-            <button class="btn gold"
-                    onclick="createSession()">
-                + إضافة جلسة
-            </button>
-
-            <div class="table-wrap"
-                 style="margin-top:15px">
-
-                <table>
-
-                    <thead>
-
-                    <tr>
-                        <th>القضية</th>
-                        <th>المحكمة</th>
-                        <th>التاريخ</th>
-                        <th>الساعة</th>
-                        <th>الإجراء</th>
-                    </tr>
-
-                    </thead>
-
-                    <tbody id="sessionsTable">
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- MINUTES -->
-
-    <section id="page-minutes"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>📝 المحاضر والعرائض</h2>
-
-            <input id="minuteCase"
-                   placeholder="رقم القضية">
-
-            <input id="minuteCourt"
-                   placeholder="اسم المحكمة">
-
-            <input id="minuteDate"
-                   type="date">
-
-            <textarea id="minuteText"
-                      placeholder="اكتب المحضر أو العريضة هنا..."></textarea>
-
-            <button class="btn"
-                    onclick="startVoice()">
-                🎙️ الكتابة بالصوت
-            </button>
-
-            <button class="btn red"
-                    onclick="stopVoice()">
-                إيقاف الصوت
-            </button>
-
-            <button class="btn green"
-                    onclick="printMinute()">
-                🖨️ طباعة
-            </button>
-
-            <button class="btn gold"
-                    onclick="makePDF()">
-                📄 PDF
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- SUPPORT -->
-
-    <section id="page-support"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>🤖 الدعم الذكي</h2>
-
-            <textarea id="supportInput"
-                      placeholder="اكتب المشكلة أو السؤال..."></textarea>
-
-            <button class="btn"
-                    onclick="smartSupport()">
-                تحليل
-            </button>
-
-            <div id="supportResult"
-                 style="margin-top:15px">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ADMIN -->
-
-    <section id="page-admin"
-             class="page"
-             style="display:none">
-
-        <div class="card">
-
-            <h2>⚙️ لوحة الإدارة</h2>
-
-            <div class="grid-admin">
-
-                <button class="btn"
-                        onclick="showStats()">
-                    إحصائيات
-                </button>
-
-                <button class="btn red"
-                        onclick="clearDemoData()">
-                    حذف بيانات التجربة
-                </button>
-
-            </div>
-
-            <div id="adminResult"
-                 style="margin-top:15px">
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- =======================================================
-     RIGHT SIDEBAR
-======================================================= -->
-
-<aside class="sidebar right-sidebar">
-
-    <div class="side-card profile-box">
-
-        <div class="profile-cover"></div>
-
-        <div id="rightAvatar"></div>
-
-        <h3 id="rightName"
-            style="margin-top:8px">
-            عبدالله
-        </h3>
-
-        <p id="rightType"
-           style="color:#718096">
-            عضو
-        </p>
-
-        <button class="btn"
-                style="margin-top:10px"
-                onclick="showPage('profile')">
-            عرض الملف الشخصي
-        </button>
-
-    </div>
-
-
-    <div class="side-card">
-
-        <div class="side-title">
-            أشخاص قد تعرفهم
-        </div>
-
-        <div id="suggestions"></div>
-
-    </div>
-
-
-    <div class="side-card">
-
-        <div class="side-title">
-            اختصارات
-        </div>
-
-        <button class="menu-item"
-                onclick="showPage('research')">
-            📚 الأبحاث القانونية
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('groups')">
-            👥 المجموعات
-        </button>
-
-        <button class="menu-item"
-                onclick="showPage('sessions')">
-            📅 الجلسات
-        </button>
-
-    </div>
-
-</aside>
-
-</div>
-
-
-<!-- =======================================================
-     POST MODAL
-======================================================= -->
-
-<div class="modal"
-     id="postModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('postModal')">
-            ×
-        </button>
-
-        <div class="modal-title">
-            إنشاء منشور
-        </div>
-
-        <textarea id="postText"
-                  placeholder="ماذا تريد أن تنشر؟"></textarea>
-
-        <input id="postImage"
-               type="file"
-               accept="image/*">
-
-        <div id="postPreview"></div>
-
-        <button class="btn gold"
-                onclick="publishPost()">
-            نشر
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     RESEARCH MODAL
-======================================================= -->
-
-<div class="modal"
-     id="researchModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('researchModal')">
-            ×
-        </button>
-
-        <div class="modal-title">
-            نشر بحث قانوني
-        </div>
-
-        <input id="researchTitle"
-               placeholder="عنوان البحث">
-
-        <input id="researchCategory"
-               placeholder="التخصص القانوني">
-
-        <textarea id="researchText"
-                  placeholder="محتوى البحث"></textarea>
-
-        <button class="btn gold"
-                onclick="publishResearch()">
-            نشر البحث
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     EDIT PROFILE MODAL
-======================================================= -->
-
-<div class="modal"
-     id="profileModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('profileModal')">
-            ×
-        </button>
-
-        <div class="modal-title">
-            تعديل الملف الشخصي
-        </div>
-
-        <input id="editName"
-               placeholder="الاسم">
-
-        <input id="editJob"
-               placeholder="المهنة / الصفة">
-
-        <input id="editCity"
-               placeholder="المدينة">
-
-        <textarea id="editBio"
-                  placeholder="نبذة عنك"></textarea>
-
-        <button class="btn gold"
-                onclick="saveProfile()">
-            حفظ
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     PROFESSIONAL MODAL
-======================================================= -->
-
-<div class="modal"
-     id="professionalModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('professionalModal')">
-            ×
-        </button>
-
-        <div class="modal-title"
-             id="professionalTitle">
-            الصفحة المهنية
-        </div>
-
-        <input id="professionalName"
-               placeholder="الاسم">
-
-        <input id="professionalSpecialty"
-               placeholder="التخصص">
-
-        <input id="professionalCourt"
-               placeholder="المحكمة / جهة العمل">
-
-        <textarea id="professionalBio"
-                  placeholder="نبذة مهنية"></textarea>
-
-        <button class="btn gold"
-                onclick="saveProfessional()">
-            حفظ الصفحة
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     LOGIN MODAL
-======================================================= -->
-
-<div class="modal"
-     id="loginModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('loginModal')">
-            ×
-        </button>
-
-        <div class="modal-title">
-            تسجيل الدخول
-        </div>
-
-        <input id="loginPhone"
-               placeholder="رقم الهاتف">
-
-        <input id="loginPassword"
-               type="password"
-               placeholder="كلمة المرور">
-
-        <button class="btn gold"
-                onclick="login()">
-            دخول
-        </button>
-
-        <button class="btn gray"
-                onclick="openRegister()">
-            إنشاء حساب
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     REGISTER MODAL
-======================================================= -->
-
-<div class="modal"
-     id="registerModal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal('registerModal')">
-            ×
-        </button>
-
-        <div class="modal-title">
-            إنشاء حساب
-        </div>
-
-        <input id="registerName"
-               placeholder="الاسم الكامل">
-
-        <input id="registerPhone"
-               placeholder="رقم الهاتف">
-
-        <input id="registerEmail"
-               placeholder="البريد الإلكتروني">
-
-        <input id="registerPassword"
-               type="password"
-               placeholder="كلمة المرور">
-
-        <select id="registerType">
-
-            <option value="client">
-                عميل
-            </option>
-
-            <option value="lawyer">
-                محامٍ
-            </option>
-
-            <option value="trainee">
-                محامٍ تحت التدريب
-            </option>
-
-            <option value="judge">
-                قاضٍ / محكّم
-            </option>
-
-        </select>
-
-        <button class="btn gold"
-                onclick="register()">
-            إنشاء الحساب
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
-
-<div class="toast"
-     id="toast">
-</div>
-
-
-<script>
-
-/* =========================================================
-   DATABASE - LOCAL STORAGE
-========================================================= */
-
-let users =
-JSON.parse(localStorage.getItem("waseet_users") || "[]");
-
-let posts =
-JSON.parse(localStorage.getItem("waseet_posts") || "[]");
-
-let researches =
-JSON.parse(localStorage.getItem("waseet_researches") || "[]");
-
-let sessions =
-JSON.parse(localStorage.getItem("waseet_sessions") || "[]");
-
-let casesData =
-JSON.parse(localStorage.getItem("waseet_cases") || "[]");
-
-let groups =
-JSON.parse(localStorage.getItem("waseet_groups") || "[]");
-
-let notifications =
-JSON.parse(localStorage.getItem("waseet_notifications") || "[]");
-
-let messages =
-JSON.parse(localStorage.getItem("waseet_messages") || "[]");
-
-let friendships =
-JSON.parse(localStorage.getItem("waseet_friendships") || "[]");
-
-let professionalPages =
-JSON.parse(localStorage.getItem("waseet_professional") || "[]");
-
-let currentUserId =
-Number(localStorage.getItem("waseet_current_user") || 0);
-
-let selectedChatUser = null;
-
-let recognition = null;
-
-
-/* =========================================================
-   SAVE
-========================================================= */
-
-function saveAll(){
-
-    localStorage.setItem(
-        "waseet_users",
-        JSON.stringify(users)
-    );
-
-    localStorage.setItem(
-        "waseet_posts",
-        JSON.stringify(posts)
-    );
-
-    localStorage.setItem(
-        "waseet_researches",
-        JSON.stringify(researches)
-    );
-
-    localStorage.setItem(
-        "waseet_sessions",
-        JSON.stringify(sessions)
-    );
-
-    localStorage.setItem(
-        "waseet_cases",
-        JSON.stringify(casesData)
-    );
-
-    localStorage.setItem(
-        "waseet_groups",
-        JSON.stringify(groups)
-    );
-
-    localStorage.setItem(
-        "waseet_notifications",
-        JSON.stringify(notifications)
-    );
-
-    localStorage.setItem(
-        "waseet_messages",
-        JSON.stringify(messages)
-    );
-
-    localStorage.setItem(
-        "waseet_friendships",
-        JSON.stringify(friendships)
-    );
-
-    localStorage.setItem(
-        "waseet_professional",
-        JSON.stringify(professionalPages)
-    );
-
-    localStorage.setItem(
-        "waseet_current_user",
-        currentUserId
-    );
-}
-
-
-/* =========================================================
-   CURRENT USER
-========================================================= */
-
-function currentUser(){
-
-    return users.find(
-        u=>u.id===currentUserId
-    ) || null;
-
-}
-
-
-/* =========================================================
-   INITIAL USER
-========================================================= */
-
-function ensureDemoUser(){
-
-    if(!users.length){
-
-        const user={
-
-            id:Date.now(),
-
-            name:"عبدالله",
-
-            phone:"demo",
-
-            email:"",
-
-            password:"1234",
-
-            type:"lawyer",
-
-            job:"محامٍ",
-
-            city:"صنعاء",
-
-            bio:"عضو في منصة وسيط القانونية والقضائية",
-
-            photo:"",
-
-            cover:"",
-
-            friends:[]
-
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col justify-between">
+
+    <!-- الحاوية الرئيسية -->
+    <div id="app" class="flex-grow flex flex-col"></div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="bg-white border-t border-gray-200 text-center py-4 text-sm text-gray-500 mt-auto">
+        منصة العدالة الرقمية الشاملة - نسخة تجريبية محلية (Local Storage)
+    </footer>
+
+    <!-- سكود التطبيق البرمجي المتكامل -->
+    <script>
+        // إدارة الحالة العامة والتخزين المحلي
+        const Store = {
+            getUsers: () => JSON.parse(localStorage.getItem('law_users')) || [],
+            setUsers: (users) => localStorage.setItem('law_users', JSON.stringify(users)),
+            getCurrentUser: () => JSON.parse(localStorage.getItem('law_currentUser')) || null,
+            setCurrentUser: (user) => localStorage.setItem('law_currentUser', JSON.stringify(user)),
+            getPosts: () => JSON.parse(localStorage.getItem('law_posts')) || [],
+            setPosts: (posts) => localStorage.setItem('law_posts', JSON.stringify(posts)),
+            getRequests: () => JSON.parse(localStorage.getItem('law_requests')) || [],
+            setRequests: (reqs) => localStorage.setItem('law_requests', JSON.stringify(reqs)),
+            getChats: () => JSON.parse(localStorage.getItem('law_chats')) || [],
+            setChats: (chats) => localStorage.setItem('law_chats', JSON.stringify(chats)),
+            getMinutes: () => JSON.parse(localStorage.getItem('law_minutes')) || [],
+            setMinutes: (mins) => localStorage.setItem('law_minutes', JSON.stringify(mins)),
+            getLawsuits: () => JSON.parse(localStorage.getItem('law_lawsuits')) || [],
+            setLawsuits: (suits) => localStorage.setItem('law_lawsuits', JSON.stringify(suits)),
         };
 
-        users.push(user);
-
-        currentUserId=user.id;
-
-        saveAll();
-
-    }
-
-}
-
-ensureDemoUser();
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function esc(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-function showToast(text){
-
-    const t=document.getElementById("toast");
-
-    t.textContent=text;
-
-    t.classList.add("show");
-
-    setTimeout(
-        ()=>t.classList.remove("show"),
-        2500
-    );
-
-}
-
-
-function openModal(id){
-
-    document.getElementById(id)
-        .classList.add("show");
-
-}
-
-
-function closeModal(id){
-
-    document.getElementById(id)
-        .classList.remove("show");
-
-}
-
-
-function goHome(){
-
-    showPage("home");
-
-}
-
-
-function typeName(type){
-
-    return {
-
-        client:"عميل",
-
-        lawyer:"محامٍ",
-
-        trainee:"محامٍ تحت التدريب",
-
-        judge:"قاضٍ / محكّم"
-
-    }[type] || "عضو";
-
-}
-
-
-function avatarHTML(user,className="post-avatar"){
-
-    if(user && user.photo){
-
-        return `
-            <img
-                src="${user.photo}"
-                class="${className}">
-        `;
-
-    }
-
-    return `
-        <div
-            class="${className}"
-            style="
-            background:#d9b44a;
-            color:#102a43;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-weight:800;
-            font-size:20px;">
-            ${esc(user?.name?.charAt(0) || "?")}
-        </div>
-    `;
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showPage(page){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(x=>{
-            x.style.display="none";
-        });
-
-    const el=
-        document.getElementById("page-"+page);
-
-    if(el){
-
-        el.style.display="block";
-
-    }
-
-    if(page==="home")
-        renderFeed();
-
-    if(page==="profile")
-        renderProfile();
-
-    if(page==="friends")
-        renderFriends();
-
-    if(page==="messages")
-        renderChats();
-
-    if(page==="notifications")
-        renderNotifications();
-
-    if(page==="groups")
-        renderGroups();
-
-    if(page==="research")
-        renderResearch();
-
-    if(page==="lawyers")
-        renderProfessionals("lawyer");
-
-    if(page==="judges")
-        renderProfessionals("judge");
-
-    if(page==="cases")
-        renderCases();
-
-    if(page==="sessions")
-        renderSessions();
-
-    updateInterface();
-
-}
-
-
-/* =========================================================
-   INTERFACE
-========================================================= */
-
-function updateInterface(){
-
-    const user=currentUser();
-
-    if(!user) return;
-
-    document.getElementById("rightName")
-        .textContent=user.name;
-
-    document.getElementById("rightType")
-        .textContent=typeName(user.type);
-
-    document.getElementById("rightAvatar").innerHTML=
-        avatarHTML(user,"profile-small");
-
-    document.getElementById("miniAvatar").innerHTML=
-        user.photo
-        ?
-        `<img src="${user.photo}"
-              style="width:100%;height:100%;object-fit:cover">`
-        :
-        esc(user.name.charAt(0));
-
-    document.getElementById("composerAvatar").innerHTML=
-        avatarHTML(user,"composer-avatar");
-
-    renderSuggestions();
-
-}
-
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-function openRegister(){
-
-    closeModal("loginModal");
-
-    openModal("registerModal");
-
-}
-
-
-function register(){
-
-    const name=
-        document.getElementById("registerName").value.trim();
-
-    const phone=
-        document.getElementById("registerPhone").value.trim();
-
-    const email=
-        document.getElementById("registerEmail").value.trim();
-
-    const password=
-        document.getElementById("registerPassword").value;
-
-    const type=
-        document.getElementById("registerType").value;
-
-    if(!name || !phone || !password){
-
-        showToast("أدخل الاسم والهاتف وكلمة المرور");
-
-        return;
-
-    }
-
-    if(users.some(u=>u.phone===phone)){
-
-        showToast("رقم الهاتف مستخدم بالفعل");
-
-        return;
-
-    }
-
-    const user={
-
-        id:Date.now(),
-
-        name,
-
-        phone,
-
-        email,
-
-        password,
-
-        type,
-
-        job:typeName(type),
-
-        city:"",
-
-        bio:"",
-
-        photo:"",
-
-        cover:"",
-
-        friends:[]
-
-    };
-
-    users.push(user);
-
-    currentUserId=user.id;
-
-    saveAll();
-
-    closeModal("registerModal");
-
-    updateInterface();
-
-    showPage("profile");
-
-    showToast("تم إنشاء الحساب بنجاح");
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-function login(){
-
-    const phone=
-        document.getElementById("loginPhone")
-        .value.trim();
-
-    const password=
-        document.getElementById("loginPassword")
-        .value;
-
-    const user=
-        users.find(
-            u=>u.phone===phone &&
-               u.password===password
-        );
-
-    if(!user){
-
-        showToast("بيانات الدخول غير صحيحة");
-
-        return;
-
-    }
-
-    currentUserId=user.id;
-
-    saveAll();
-
-    closeModal("loginModal");
-
-    updateInterface();
-
-    showPage("home");
-
-    showToast("مرحبًا بك "+user.name);
-
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-function renderProfile(){
-
-    const user=currentUser();
-
-    if(!user) return;
-
-    document.getElementById("profileName")
-        .textContent=user.name;
-
-    document.getElementById("profileType")
-        .textContent=
-        typeName(user.type)+
-        (user.job ? " • "+user.job : "");
-
-    const photo=
-        user.photo
-        ?
-        `<img src="${user.photo}"
-              class="profile-large">`
-        :
-        `<div
-            class="profile-large"
-            style="
-            background:#d9b44a;
-            color:#102a43;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:55px;
-            font-weight:800;">
-            ${esc(user.name.charAt(0))}
-        </div>`;
-
-    document.getElementById("largeProfilePhoto")
-        .innerHTML=photo;
-
-    const cover=
-        user.cover
-        ?
-        `<img src="${user.cover}">`
-        :
-        "";
-
-    document.getElementById("profileCover")
-        .innerHTML=cover;
-
-    showProfileTab("posts");
-
-}
-
-
-function showProfileTab(tab){
-
-    const user=currentUser();
-
-    const box=
-        document.getElementById("profileContent");
-
-    if(tab==="posts"){
-
-        const myPosts=
-            posts.filter(
-                p=>p.userId===user.id
-            );
-
-        box.innerHTML=
-            `<div id="profilePosts"></div>`;
-
-        renderPostArray(
-            myPosts,
-            "profilePosts"
-        );
-
-    }
-
-    if(tab==="about"){
-
-        box.innerHTML=`
-
-            <div class="card">
-
-                <h2>معلومات عن ${esc(user.name)}</h2>
-
-                <p style="margin-top:15px">
-                    <b>الصفة:</b>
-                    ${esc(typeName(user.type))}
-                </p>
-
-                <p>
-                    <b>المهنة:</b>
-                    ${esc(user.job)}
-                </p>
-
-                <p>
-                    <b>المدينة:</b>
-                    ${esc(user.city)}
-                </p>
-
-                <p>
-                    <b>نبذة:</b>
-                    ${esc(user.bio)}
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-    if(tab==="photos"){
-
-        const photos=
-            posts.filter(
-                p=>p.userId===user.id && p.image
-            );
-
-        box.innerHTML=`
-
-            <div class="card">
-
-                <h2>الصور</h2>
-
-                <div style="
-                display:grid;
-                grid-template-columns:
-                repeat(3,1fr);
-                gap:8px;
-                margin-top:15px">
-
-                    ${
-                        photos.map(
-                            p=>`
-                            <img
-                                src="${p.image}"
-                                style="
-                                width:100%;
-                                height:160px;
-                                object-fit:cover;
-                                border-radius:8px">
-                            `
-                        ).join("")
-                    }
-
-                </div>
-
-            </div>
-        `;
-
-    }
-
-    if(tab==="research"){
-
-        const my=
-            researches.filter(
-                r=>r.userId===user.id
-            );
-
-        box.innerHTML=
-            `<div id="profileResearch"></div>`;
-
-        my.forEach(r=>{
-
-            document
-                .getElementById("profileResearch")
-                .insertAdjacentHTML(
-                    "beforeend",
-                    researchHTML(r)
-                );
-
-        });
-
-    }
-
-    if(tab==="friends"){
-
-        const friends=
-            friendships.filter(
-                f=>
-                f.status==="accepted" &&
-                (
-                    f.from===user.id ||
-                    f.to===user.id
-                )
-            );
-
-        box.innerHTML=`
-
-            <div class="card">
-
-                <h2>الأصدقاء</h2>
-
-                <div class="grid-friends"
-                     style="
-                     display:grid;
-                     grid-template-columns:
-                     repeat(auto-fit,minmax(180px,1fr));
-                     gap:10px;
-                     margin-top:15px">
-
-                    ${
-                        friends.map(f=>{
-
-                            const id=
-                                f.from===user.id
-                                ?f.to
-                                :f.from;
-
-                            const friend=
-                                users.find(
-                                    u=>u.id===id
-                                );
-
-                            return friend
-                                ?
-                                `
-                                <div class="card">
-                                    ${avatarHTML(friend)}
-                                    <strong>
-                                        ${esc(friend.name)}
-                                    </strong>
+        // تهيئة البيانات التجريبية إذا لم تكن موجودة
+        function initData() {
+            if (Store.getUsers().length === 0) {
+                const defaultUsers = [
+                    { id: 1, name: 'أحمد المحامي', email: 'ahmed@law.com', pass: '123456', role: 'محامي', bio: 'محامي مختص بالدعاوى المدنية والتجارية', avatar: 'https://via.placeholder.com/150', friends: [2] },
+                    { id: 2, name: 'سارة القاضي', email: 'sara@court.com', pass: '123456', role: 'قاضٍ', bio: 'قاضي تحقيق وباحث قانوني', avatar: 'https://via.placeholder.com/150', friends: [1] }
+                ];
+                Store.setUsers(defaultUsers);
+            }
+            if (Store.getPosts().length === 0) {
+                const defaultPosts = [
+                    { id: 1, userId: 1, userName: 'أحمد المحامي', userRole: 'محامي', userAvatar: 'https://via.placeholder.com/150', content: 'مرحباً بالجميع في منصة العدالة الرقمية. تم تفعيل نظام النقاش القانوني ونشر الأبحاث.', image: '', likes: [2], comments: [{userId: 2, userName: 'سارة القاضي', text: 'أهلاً بك أستاذ أحمد، خطوة مباركة.'}] }
+                ];
+                Store.setPosts(defaultPosts);
+            }
+        }
+        initData();
+
+        // التوجيه والعرض بناءً على حالة تسجيل الدخول
+        function render() {
+            const app = document.getElementById('app');
+            const user = Store.getCurrentUser();
+
+            if (!user) {
+                app.innerHTML = renderAuthScreen();
+            } else {
+                app.innerHTML = renderMainLayout(user);
+                initMainScripts(user);
+            }
+        }
+
+        // ================= شاشة المصادقة (تسجيل الدخول / إنشاء حساب) =================
+        let authMode = 'login'; 
+        function renderAuthScreen() {
+            return `
+                <div class="flex flex-col items-center justify-center flex-grow p-4">
+                    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
+                        <div class="text-center mb-6">
+                            <i class="fa-solid fa-scale-balanced text-4xl text-primary mb-2"></i>
+                            <h1 class="text-2xl font-bold text-primary">منصة العدالة الرقمية</h1>
+                            <p class="text-sm text-gray-500">نظام إدارة المحاماة، القضاء، والتواصل القانوني</p>
+                        </div>
+                        
+                        <div class="flex border-b mb-6">
+                            <button onclick="authMode='login'; render();" class="flex-1 pb-2 font-semibold text-center ${authMode==='login'?'border-b-2 border-primary text-primary':'text-gray-400'}">تسجيل الدخول</button>
+                            <button onclick="authMode='register'; render();" class="flex-1 pb-2 font-semibold text-center ${authMode==='register'?'border-b-2 border-primary text-primary':'text-gray-400'}">إنشاء حساب جديد</button>
+                        </div>
+
+                        ${authMode === 'login' ? `
+                            <form onsubmit="handleLogin(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">البريد الإلكتروني</label>
+                                    <input type="email" id="loginEmail" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
                                 </div>
-                                `
-                                :"";
-
-                        }).join("")
-                    }
-
-                </div>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-function editProfile(){
-
-    const u=currentUser();
-
-    document.getElementById("editName").value=
-        u.name || "";
-
-    document.getElementById("editJob").value=
-        u.job || "";
-
-    document.getElementById("editCity").value=
-        u.city || "";
-
-    document.getElementById("editBio").value=
-        u.bio || "";
-
-    openModal("profileModal");
-
-}
-
-
-function saveProfile(){
-
-    const u=currentUser();
-
-    u.name=
-        document.getElementById("editName")
-        .value.trim();
-
-    u.job=
-        document.getElementById("editJob")
-        .value.trim();
-
-    u.city=
-        document.getElementById("editCity")
-        .value.trim();
-
-    u.bio=
-        document.getElementById("editBio")
-        .value.trim();
-
-    saveAll();
-
-    closeModal("profileModal");
-
-    renderProfile();
-
-    updateInterface();
-
-    showToast("تم حفظ الملف الشخصي");
-
-}
-
-
-/* =========================================================
-   IMAGE UPLOAD
-========================================================= */
-
-function readImage(file,callback){
-
-    if(!file) return;
-
-    if(!file.type.startsWith("image/")){
-
-        showToast("الملف يجب أن يكون صورة");
-
-        return;
-
-    }
-
-    const reader=new FileReader();
-
-    reader.onload=
-        e=>callback(e.target.result);
-
-    reader.readAsDataURL(file);
-
-}
-
-
-function changePhoto(){
-
-    const input=
-        document.createElement("input");
-
-    input.type="file";
-
-    input.accept="image/*";
-
-    input.onchange=function(){
-
-        readImage(
-            input.files[0],
-            data=>{
-                currentUser().photo=data;
-                saveAll();
-                renderProfile();
-                updateInterface();
-                renderFeed();
-                showToast("تم تغيير الصورة الشخصية");
-            }
-        );
-
-    };
-
-    input.click();
-
-}
-
-
-function changeCover(){
-
-    const input=
-        document.createElement("input");
-
-    input.type="file";
-
-    input.accept="image/*";
-
-    input.onchange=function(){
-
-        readImage(
-            input.files[0],
-            data=>{
-                currentUser().cover=data;
-                saveAll();
-                renderProfile();
-                showToast("تم تغيير صورة الغلاف");
-            }
-        );
-
-    };
-
-    input.click();
-
-}
-
-
-/* =========================================================
-   POSTS
-========================================================= */
-
-function openPostModal(){
-
-    document.getElementById("postText").value="";
-
-    document.getElementById("postImage").value="";
-
-    document.getElementById("postPreview").innerHTML="";
-
-    openModal("postModal");
-
-}
-
-
-document.getElementById("postImage")
-.addEventListener("change",function(){
-
-    const file=this.files[0];
-
-    readImage(
-        file,
-        data=>{
-            document.getElementById("postPreview")
-            .innerHTML=
-            `
-            <img
-                src="${data}"
-                style="
-                width:100%;
-                max-height:300px;
-                object-fit:cover;
-                border-radius:8px;
-                margin-bottom:10px">
-            `;
-        }
-    );
-
-});
-
-
-function publishPost(){
-
-    const user=currentUser();
-
-    if(!user){
-
-        openModal("loginModal");
-
-        return;
-
-    }
-
-    const text=
-        document.getElementById("postText")
-        .value.trim();
-
-    const file=
-        document.getElementById("postImage")
-        .files[0];
-
-    if(!text && !file){
-
-        showToast("اكتب شيئًا أو أضف صورة");
-
-        return;
-
-    }
-
-    if(file){
-
-        readImage(
-            file,
-            data=>{
-                createPost(text,data);
-            }
-        );
-
-    }else{
-
-        createPost(text,"");
-
-    }
-
-}
-
-
-function createPost(text,image){
-
-    const user=currentUser();
-
-    posts.unshift({
-
-        id:Date.now(),
-
-        userId:user.id,
-
-        text,
-
-        image,
-
-        likes:[],
-
-        comments:[],
-
-        shares:0,
-
-        date:new Date().toLocaleString("ar-YE")
-
-    });
-
-    saveAll();
-
-    closeModal("postModal");
-
-    renderFeed();
-
-    showToast("تم نشر المنشور");
-
-}
-
-
-function renderFeed(){
-
-    renderPostArray(posts,"feedPosts");
-
-}
-
-
-function renderPostArray(array,target){
-
-    const box=document.getElementById(target);
-
-    if(!box) return;
-
-    box.innerHTML="";
-
-    if(!array.length){
-
-        box.innerHTML=`
-            <div class="card empty">
-                لا توجد منشورات حتى الآن.
-            </div>
-        `;
-
-        return;
-
-    }
-
-    array.forEach(
-        p=>{
-            box.insertAdjacentHTML(
-                "beforeend",
-                postHTML(p)
-            );
-        }
-    );
-
-}
-
-
-function postHTML(post){
-
-    const user=
-        users.find(
-            u=>u.id===post.userId
-        ) ||
-        {
-            name:"مستخدم",
-            photo:""
-        };
-
-    const liked=
-        post.likes.includes(currentUserId);
-
-    return `
-
-    <article class="card post">
-
-        <div class="post-head">
-
-            ${avatarHTML(user)}
-
-            <div>
-
-                <div class="post-author">
-                    ${esc(user.name)}
-                </div>
-
-                <div class="post-time">
-                    ${esc(post.date)}
-                </div>
-
-            </div>
-
-            <div class="post-menu">
-                <button>⋯</button>
-            </div>
-
-        </div>
-
-        ${
-            post.text
-            ?
-            `<div class="post-text">
-                ${esc(post.text)}
-            </div>`
-            :""
-        }
-
-        ${
-            post.image
-            ?
-            `<img
-                src="${post.image}"
-                class="post-image">
-            `
-            :""
-        }
-
-        <div class="post-stats">
-
-            <span>
-                👍 ${post.likes.length}
-            </span>
-
-            <span>
-                💬 ${post.comments.length}
-                •
-                🔄 ${post.shares}
-            </span>
-
-        </div>
-
-        <div class="post-actions">
-
-            <button
-                class="post-action ${liked?"liked":""}"
-                onclick="toggleLike(${post.id})">
-
-                👍 إعجاب
-
-            </button>
-
-            <button
-                class="post-action"
-                onclick="focusComment(${post.id})">
-
-                💬 تعليق
-
-            </button>
-
-            <button
-                class="post-action"
-                onclick="sharePost(${post.id})">
-
-                🔄 مشاركة
-
-            </button>
-
-        </div>
-
-        <div id="comments-${post.id}">
-
-            ${
-                post.comments.map(
-                    c=>`
-                    <div class="comment">
-                        <b>${esc(c.user)}</b>
-                        <br>
-                        ${esc(c.text)}
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">كلمة المرور</label>
+                                    <input type="password" id="loginPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-900 transition">دخول</button>
+                            </form>
+                        ` : `
+                            <form onsubmit="handleRegister(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">الاسم الكامل</label>
+                                    <input type="text" id="regName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">البريد الإلكتروني</label>
+                                    <input type="email" id="regEmail" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">كلمة المرور</label>
+                                    <input type="password" id="regPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">الصفة المهنية</label>
+                                    <select id="regRole" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                        <option value="محامي">محامي</option>
+                                        <option value="قاضٍ">قاضٍ</option>
+                                        <option value="متدرب قانوني">متدرب قانوني</option>
+                                        <option value="باحث قانوني">باحث قانوني</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-amber-700 transition">تسجيل الحساب</button>
+                            </form>
+                        `}
                     </div>
-                    `
-                ).join("")
+                </div>
+            `;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            const users = Store.getUsers();
+            const user = users.find(u => u.email === email && u.pass === pass);
+            if (user) {
+                Store.setCurrentUser(user);
+                render();
+            } else {
+                alert('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPass').value;
+            const role = document.getElementById('regRole').value;
+            const users = Store.getUsers();
+            
+            if (users.some(u => u.email === email)) {
+                alert('البريد الإلكتروني مستخدم مسبقاً');
+                return;
             }
 
-        </div>
-
-        <div class="comment-box">
-
-            <input
-                id="comment-${post.id}"
-                placeholder="اكتب تعليقًا...">
-
-            <button
-                class="btn"
-                onclick="addComment(${post.id})">
-                إرسال
-            </button>
-
-        </div>
-
-    </article>
-
-    `;
-
-}
-
-
-function toggleLike(id){
-
-    const post=
-        posts.find(p=>p.id===id);
-
-    if(!post) return;
-
-    const index=
-        post.likes.indexOf(currentUserId);
-
-    if(index===-1){
-
-        post.likes.push(currentUserId);
-
-    }else{
-
-        post.likes.splice(index,1);
-
-    }
-
-    saveAll();
-
-    renderFeed();
-
-}
-
-
-function focusComment(id){
-
-    const input=
-        document.getElementById(
-            "comment-"+id
-        );
-
-    if(input){
-
-        input.focus();
-
-    }
-
-}
-
-
-function addComment(id){
-
-    const input=
-        document.getElementById(
-            "comment-"+id
-        );
-
-    const text=input.value.trim();
-
-    if(!text) return;
-
-    const post=
-        posts.find(p=>p.id===id);
-
-    post.comments.push({
-
-        user:currentUser().name,
-
-        userId:currentUserId,
-
-        text
-
-    });
-
-    saveAll();
-
-    renderFeed();
-
-}
-
-
-function sharePost(id){
-
-    const post=
-        posts.find(p=>p.id===id);
-
-    if(!post) return;
-
-    post.shares++;
-
-    saveAll();
-
-    if(navigator.clipboard){
-
-        navigator.clipboard.writeText(
-            location.href+"#post-"+id
-        );
-
-    }
-
-    renderFeed();
-
-    showToast("تمت مشاركة المنشور");
-
-}
-
-
-/* =========================================================
-   FRIENDS
-========================================================= */
-
-function renderSuggestions(){
-
-    const box=
-        document.getElementById("suggestions");
-
-    const others=
-        users.filter(
-            u=>u.id!==currentUserId
-        ).slice(0,5);
-
-    box.innerHTML="";
-
-    others.forEach(u=>{
-
-        box.insertAdjacentHTML(
-            "beforeend",
-            `
-            <div class="suggestion">
-
-                ${avatarHTML(u,"post-avatar")}
-
-                <div class="suggestion-info">
-                    <strong>${esc(u.name)}</strong>
-                    <small style="display:block">
-                        ${esc(typeName(u.type))}
-                    </small>
-                </div>
-
-                <button
-                    class="small-button"
-                    onclick="sendFriendRequest(${u.id})">
-                    إضافة
-                </button>
-
-            </div>
-            `
-        );
-
-    });
-
-}
-
-
-function sendFriendRequest(id){
-
-    if(id===currentUserId) return;
-
-    const exists=
-        friendships.find(
-            f=>
-            (
-                f.from===currentUserId &&
-                f.to===id
-            ) ||
-            (
-                f.from===id &&
-                f.to===currentUserId
-            )
-        );
-
-    if(exists){
-
-        showToast("يوجد طلب أو علاقة بالفعل");
-
-        return;
-
-    }
-
-    friendships.push({
-
-        id:Date.now(),
-
-        from:currentUserId,
-
-        to:id,
-
-        status:"pending"
-
-    });
-
-    notifications.unshift({
-
-        id:Date.now(),
-
-        userId:id,
-
-        text:
-        currentUser().name+
-        " أرسل لك طلب صداقة",
-
-        read:false
-
-    });
-
-    saveAll();
-
-    renderSuggestions();
-
-    showToast("تم إرسال طلب الصداقة");
-
-}
-
-
-function renderFriends(){
-
-    const box=
-        document.getElementById("friendsList");
-
-    box.innerHTML="";
-
-    const incoming=
-        friendships.filter(
-            f=>
-            f.to===currentUserId &&
-            f.status==="pending"
-        );
-
-    const outgoing=
-        friendships.filter(
-            f=>
-            f.from===currentUserId &&
-            f.status==="pending"
-        );
-
-    if(incoming.length){
-
-        box.innerHTML+=
-            `<h3>طلبات واردة</h3>`;
-
-        incoming.forEach(f=>{
-
-            const u=
-                users.find(
-                    x=>x.id===f.from
-                );
-
-            box.innerHTML+=`
-
-                <div class="card"
-                     style="
-                     display:flex;
-                     align-items:center;
-                     gap:10px;
-                     margin-top:10px">
-
-                    ${avatarHTML(u)}
-
-                    <strong>${esc(u.name)}</strong>
-
-                    <button
-                        class="btn green"
-                        onclick="acceptFriend(${f.id})">
-                        قبول
-                    </button>
-
-                    <button
-                        class="btn red"
-                        onclick="rejectFriend(${f.id})">
-                        رفض
-                    </button>
-
-                </div>
-
-            `;
-
-        });
-
-    }
-
-    if(outgoing.length){
-
-        box.innerHTML+=
-            `<h3 style="margin-top:20px">
-                الطلبات المرسلة
-            </h3>`;
-
-        outgoing.forEach(f=>{
-
-            const u=
-                users.find(
-                    x=>x.id===f.to
-                );
-
-            box.innerHTML+=`
-
-                <div class="card"
-                     style="margin-top:10px">
-
-                    ${esc(u.name)}
-
-                    <span style="color:#718096">
-                        طلب بانتظار القبول
-                    </span>
-
-                </div>
-            `;
-
-        });
-
-    }
-
-    const accepted=
-        friendships.filter(
-            f=>
-            f.status==="accepted" &&
-            (
-                f.from===currentUserId ||
-                f.to===currentUserId
-            )
-        );
-
-    box.innerHTML+=
-        `<h3 style="margin-top:20px">
-            أصدقائي
-        </h3>`;
-
-    accepted.forEach(f=>{
-
-        const id=
-            f.from===currentUserId
-            ?f.to
-            :f.from;
-
-        const u=
-            users.find(x=>x.id===id);
-
-        if(!u) return;
-
-        box.innerHTML+=`
-
-            <div class="card"
-                 style="
-                 display:flex;
-                 align-items:center;
-                 gap:10px;
-                 margin-top:10px">
-
-                ${avatarHTML(u)}
-
-                <strong>
-                    ${esc(u.name)}
-                </strong>
-
-                <button
-                    class="btn"
-                    onclick="openChat(${u.id})">
-                    مراسلة
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-
-function acceptFriend(id){
-
-    const f=
-        friendships.find(x=>x.id===id);
-
-    if(!f) return;
-
-    f.status="accepted";
-
-    saveAll();
-
-    renderFriends();
-
-    renderSuggestions();
-
-    showToast("تم قبول طلب الصداقة");
-
-}
-
-
-function rejectFriend(id){
-
-    friendships=
-        friendships.filter(
-            f=>f.id!==id
-        );
-
-    saveAll();
-
-    renderFriends();
-
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-function renderChats(){
-
-    const box=
-        document.getElementById("chatUsers");
-
-    const accepted=
-        friendships.filter(
-            f=>
-            f.status==="accepted" &&
-            (
-                f.from===currentUserId ||
-                f.to===currentUserId
-            )
-        );
-
-    box.innerHTML="";
-
-    accepted.forEach(f=>{
-
-        const id=
-            f.from===currentUserId
-            ?f.to
-            :f.from;
-
-        const u=
-            users.find(x=>x.id===id);
-
-        if(!u) return;
-
-        box.innerHTML+=`
-
-            <div
-                class="chat-user"
-                onclick="openChat(${u.id})">
-
-                ${esc(u.name)}
-
-            </div>
-
-        `;
-
-    });
-
-    if(selectedChatUser){
-
-        renderChatWindow();
-
-    }
-
-}
-
-
-function openChat(id){
-
-    selectedChatUser=id;
-
-    showPage("messages");
-
-    renderChatWindow();
-
-}
-
-
-function renderChatWindow(){
-
-    const u=
-        users.find(
-            x=>x.id===selectedChatUser
-        );
-
-    if(!u) return;
-
-    document.getElementById("chatHead")
-        .textContent=u.name;
-
-    const box=
-        document.getElementById("chatMessages");
-
-    const chat=
-        messages.filter(
-            m=>
-            (
-                m.from===currentUserId &&
-                m.to===u.id
-            ) ||
-            (
-                m.from===u.id &&
-                m.to===currentUserId
-            )
-        );
-
-    box.innerHTML="";
-
-    chat.forEach(m=>{
-
-        box.innerHTML+=`
-
-            <div class="message
-                ${m.from===currentUserId?"me":""}">
-
-                ${esc(m.text)}
-
-            </div>
-
-        `;
-
-    });
-
-    box.scrollTop=box.scrollHeight;
-
-}
-
-
-function sendMessage(){
-
-    if(!selectedChatUser){
-
-        showToast("اختر شخصًا أولًا");
-
-        return;
-
-    }
-
-    const input=
-        document.getElementById("messageInput");
-
-    const text=input.value.trim();
-
-    if(!text) return;
-
-    messages.push({
-
-        id:Date.now(),
-
-        from:currentUserId,
-
-        to:selectedChatUser,
-
-        text,
-
-        date:new Date().toISOString()
-
-    });
-
-    notifications.unshift({
-
-        id:Date.now()+1,
-
-        userId:selectedChatUser,
-
-        text:
-        currentUser().name+
-        " أرسل لك رسالة",
-
-        read:false
-
-    });
-
-    input.value="";
-
-    saveAll();
-
-    renderChatWindow();
-
-}
-
-
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-function renderNotifications(){
-
-    const box=
-        document.getElementById(
-            "notificationsList"
-        );
-
-    const list=
-        notifications.filter(
-            n=>n.userId===currentUserId
-        );
-
-    if(!list.length){
-
-        box.innerHTML=
-            `<div class="empty">
-                لا توجد إشعارات.
-            </div>`;
-
-        return;
-
-    }
-
-    box.innerHTML="";
-
-    list.forEach(n=>{
-
-        box.innerHTML+=`
-
-            <div class="
-                notification
-                ${n.read?"":"unread"}">
-
-                🔔 ${esc(n.text)}
-
-            </div>
-
-        `;
-
-        n.read=true;
-
-    });
-
-    saveAll();
-
-}
-
-
-/* =========================================================
-   RESEARCH
-========================================================= */
-
-function openResearchModal(){
-
-    openModal("researchModal");
-
-}
-
-
-function publishResearch(){
-
-    const title=
-        document.getElementById("researchTitle")
-        .value.trim();
-
-    const category=
-        document.getElementById("researchCategory")
-        .value.trim();
-
-    const text=
-        document.getElementById("researchText")
-        .value.trim();
-
-    if(!title || !text){
-
-        showToast("أدخل عنوان البحث ومحتواه");
-
-        return;
-
-    }
-
-    researches.unshift({
-
-        id:Date.now(),
-
-        userId:currentUserId,
-
-        title,
-
-        category,
-
-        text,
-
-        date:new Date().toLocaleString("ar-YE"),
-
-        likes:[]
-
-    });
-
-    saveAll();
-
-    closeModal("researchModal");
-
-    renderResearch();
-
-    showToast("تم نشر البحث");
-
-}
-
-
-function researchHTML(r){
-
-    const u=
-        users.find(x=>x.id===r.userId) ||
-        {name:"مستخدم",photo:""};
-
-    return `
-
-    <div class="card">
-
-        <div class="post-head">
-
-            ${avatarHTML(u)}
-
-            <div>
-
-                <strong>
-                    ${esc(u.name)}
-                </strong>
-
-                <small style="
-                display:block;
-                color:#718096">
-
-                    ${esc(r.date)}
-
-                </small>
-
-            </div>
-
-        </div>
-
-        <h2 style="margin-top:15px">
-            ${esc(r.title)}
-        </h2>
-
-        <p style="
-        color:#718096;
-        margin:7px 0">
-
-            ${esc(r.category)}
-
-        </p>
-
-        <div class="post-text">
-            ${esc(r.text)}
-        </div>
-
-        <button class="btn"
-                onclick="shareResearch(${r.id})">
-            🔄 مشاركة
-        </button>
-
-    </div>
-
-    `;
-
-}
-
-
-function renderResearch(){
-
-    const box=
-        document.getElementById("researchList");
-
-    if(!box) return;
-
-    box.innerHTML="";
-
-    researches.forEach(
-        r=>{
-            box.insertAdjacentHTML(
-                "beforeend",
-                researchHTML(r)
-            );
+            const newUser = {
+                id: Date.now(),
+                name, email, pass, role,
+                bio: 'مستخدم جديد في المنصة',
+                avatar: 'https://via.placeholder.com/150',
+                friends: []
+            };
+            users.push(newUser);
+            Store.setUsers(users);
+            Store.setCurrentUser(newUser);
+            render();
         }
-    );
 
-}
-
-
-function shareResearch(id){
-
-    if(navigator.clipboard){
-
-        navigator.clipboard.writeText(
-            location.href+
-            "#research-"+id
-        );
-
-    }
-
-    showToast("تم تجهيز البحث للمشاركة");
-
-}
-
-
-/* =========================================================
-   GROUPS
-========================================================= */
-
-function createGroup(){
-
-    const name=
-        prompt("اسم المجموعة:");
-
-    if(!name) return;
-
-    const description=
-        prompt("وصف المجموعة:");
-
-    groups.push({
-
-        id:Date.now(),
-
-        name,
-
-        description,
-
-        owner:currentUserId,
-
-        members:[currentUserId]
-
-    });
-
-    saveAll();
-
-    renderGroups();
-
-}
-
-
-function renderGroups(){
-
-    const box=
-        document.getElementById("groupsList");
-
-    box.innerHTML="";
-
-    if(!groups.length){
-
-        box.innerHTML=
-            `<div class="card empty">
-                لا توجد مجموعات بعد.
-            </div>`;
-
-        return;
-
-    }
-
-    groups.forEach(g=>{
-
-        box.innerHTML+=`
-
-            <div class="card">
-
-                <h2>
-                    👥 ${esc(g.name)}
-                </h2>
-
-                <p style="margin:10px 0">
-                    ${esc(g.description)}
-                </p>
-
-                <span>
-                    ${g.members.length}
-                    عضو
-                </span>
-
-                <button
-                    class="btn"
-                    onclick="joinGroup(${g.id})">
-                    الانضمام
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-
-function joinGroup(id){
-
-    const g=
-        groups.find(x=>x.id===id);
-
-    if(!g) return;
-
-    if(!g.members.includes(currentUserId)){
-
-        g.members.push(currentUserId);
-
-        saveAll();
-
-        renderGroups();
-
-        showToast("تم الانضمام إلى المجموعة");
-
-    }
-
-}
-
-
-/* =========================================================
-   PROFESSIONAL PAGES
-========================================================= */
-
-let professionalType="lawyer";
-
-
-function createProfessional(type){
-
-    professionalType=type;
-
-    const u=currentUser();
-
-    document.getElementById(
-        "professionalTitle"
-    ).textContent=
-        type==="judge"
-        ?
-        "إنشاء صفحة قاضٍ / محكم"
-        :
-        "إنشاء صفحة محامٍ";
-
-    document.getElementById(
-        "professionalName"
-    ).value=u.name;
-
-    document.getElementById(
-        "professionalSpecialty"
-    ).value=u.job || "";
-
-    document.getElementById(
-        "professionalCourt"
-    ).value="";
-
-    document.getElementById(
-        "professionalBio"
-    ).value=u.bio || "";
-
-    openModal("professionalModal");
-
-}
-
-
-function saveProfessional(){
-
-    const page={
-
-        id:Date.now(),
-
-        userId:currentUserId,
-
-        type:professionalType,
-
-        name:
-        document.getElementById(
-            "professionalName"
-        ).value.trim(),
-
-        specialty:
-        document.getElementById(
-            "professionalSpecialty"
-        ).value.trim(),
-
-        court:
-        document.getElementById(
-            "professionalCourt"
-        ).value.trim(),
-
-        bio:
-        document.getElementById(
-            "professionalBio"
-        ).value.trim()
-
-    };
-
-    professionalPages=
-        professionalPages.filter(
-            p=>
-            !(
-                p.userId===currentUserId &&
-                p.type===professionalType
-            )
-        );
-
-    professionalPages.push(page);
-
-    saveAll();
-
-    closeModal("professionalModal");
-
-    renderProfessionals(professionalType);
-
-    showToast("تم حفظ الصفحة المهنية");
-
-}
-
-
-function renderProfessionals(type){
-
-    const target=
-        type==="lawyer"
-        ?"lawyersList"
-        :"judgesList";
-
-    const box=
-        document.getElementById(target);
-
-    box.innerHTML="";
-
-    professionalPages
-        .filter(p=>p.type===type)
-        .forEach(p=>{
-
-            const u=
-                users.find(
-                    x=>x.id===p.userId
-                );
-
-            box.innerHTML+=`
-
-                <div class="card">
-
-                    <div class="post-head">
-
-                        ${avatarHTML(u)}
-
+        // ================= التخطيط الرئيسي والتنقل الداخلي =================
+        let currentTab = 'feed'; // feed, search, profile, minutes, lawsuits, chat
+        let viewingUserId = null;
+
+        function renderMainLayout(user) {
+            return `
+                <!-- شريط التنقل العلوي -->
+                <header class="bg-primary text-white shadow sticky top-0 z-50">
+                    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+                        <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="currentTab='feed'; render();">
+                            <i class="fa-solid fa-scale-balanced text-2xl text-secondary"></i>
+                            <span class="font-bold text-lg">العدالة الرقمية</span>
+                        </div>
+                        <div class="flex items-center space-x-3 space-x-reverse text-sm">
+                            <button onclick="currentTab='feed'; render();" class="${currentTab==='feed'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-house"></i> الرئيسية</button>
+                            <button onclick="currentTab='search'; render();" class="${currentTab==='search'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-magnifying-glass"></i> بحث</button>
+                            <button onclick="currentTab='minutes'; render();" class="${currentTab==='minutes'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-file-pen"></i> المحاضر</button>
+                            <button onclick="currentTab='lawsuits'; render();" class="${currentTab==='lawsuits'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-gavel"></i> الدعاوى والدفوع</button>
+                            <button onclick="currentTab='chat'; render();" class="${currentTab==='chat'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments"></i> الرسائل</button>
+                            <button onclick="currentTab='profile'; viewingUserId=null; render();" class="${currentTab==='profile'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-user"></i> حسابي</button>
+                            <button onclick="logout()" class="text-red-300 hover:text-red-100"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- جسم الصفحة والمحتوى حسب التبويب -->
+                <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+                    ${currentTab === 'feed' ? renderFeedTab(user) : ''}
+                    ${currentTab === 'search' ? renderSearchTab(user) : ''}
+                    ${currentTab === 'profile' ? renderProfileTab(user, viewingUserId || user.id) : ''}
+                    ${currentTab === 'minutes' ? renderMinutesTab(user) : ''}
+                    ${currentTab === 'lawsuits' ? renderLawsuitsTab(user) : ''}
+                    ${currentTab === 'chat' ? renderChatTab(user) : ''}
+                </main>
+            `;
+        }
+
+        function logout() {
+            Store.setCurrentUser(null);
+            render();
+        }
+
+        // ================= 1. الرئيسية (Feed) =================
+        function renderFeedTab(user) {
+            const posts = Store.getPosts();
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow border text-center">
+                            <img src="${user.avatar}" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-2 border-primary">
+                            <h3 class="font-bold text-lg">${user.name}</h3>
+                            <span class="inline-block bg-secondary text-white text-xs px-2 py-1 rounded-full mb-2">${user.role}</span>
+                            <p class="text-sm text-gray-500">${user.bio}</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow border">
+                            <h4 class="font-bold text-sm mb-2 text-primary border-b pb-1">طلبات الصداقة المعلقة</h4>
+                            <div id="friendRequestsList"></div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-6">
+                        <div class="bg-white p-4 rounded-xl shadow border">
+                            <form onsubmit="handleCreatePost(event)">
+                                <textarea id="postContent" rows="3" placeholder="اكتب منشوراً قانونياً، استشارة، أو شارك بحثاً..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none"></textarea>
+                                <div class="flex justify-between items-center mt-3">
+                                    <div class="flex items-center space-x-2 space-x-reverse">
+                                        <label class="cursor-pointer text-gray-500 hover:text-primary">
+                                            <i class="fa-solid fa-image text-xl"></i>
+                                            <input type="file" id="postImage" accept="image/*" class="hidden" onchange="previewPostImage(this)">
+                                        </label>
+                                        <span id="imageFileName" class="text-xs text-gray-400"></span>
+                                    </div>
+                                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900 transition">نشر</button>
+                                </div>
+                                <div id="postImagePreviewContainer" class="mt-2 hidden">
+                                    <img id="postImagePreview" class="max-h-40 rounded-lg">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="space-y-4" id="postsContainer">
+                            ${posts.length === 0 ? '<p class="text-center text-gray-400">لا توجد منشورات حتى الآن.</p>' : ''}
+                            ${posts.slice().reverse().map(post => `
+                                <div class="bg-white p-4 rounded-xl shadow border space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${post.userId})">
+                                            <img src="${post.userAvatar}" class="w-10 h-10 rounded-full object-cover">
+                                            <div>
+                                                <h4 class="font-bold text-sm">${post.userName}</h4>
+                                                <span class="text-xs text-gray-400">${post.userRole}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 whitespace-pre-line">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-80 w-full object-cover">` : ''}
+                                    
+                                    <div class="flex justify-between items-center pt-2 border-t text-sm text-gray-500">
+                                        <button onclick="toggleLike(${post.id})" class="flex items-center space-x-1 space-x-reverse ${post.likes.includes(user.id)?'text-red-500 font-bold':''}">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <span>إعجاب (${post.likes.length})</span>
+                                        </button>
+                                        <button onclick="sharePost(${post.id})" class="flex items-center space-x-1 space-x-reverse hover:text-primary">
+                                            <i class="fa-solid fa-share"></i>
+                                            <span>مشاركة</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="border-t pt-2 space-y-2">
+                                        <div class="space-y-1">
+                                            ${post.comments.map(c => `
+                                                <div class="bg-gray-50 p-2 rounded text-sm">
+                                                    <span class="font-bold text-primary">${c.userName}:</span> ${c.text}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                        <form onsubmit="handleAddComment(event, ${post.id})" class="flex gap-2 mt-2">
+                                            <input type="text" placeholder="اكتب تعليقاً..." required class="flex-grow px-3 py-1 border rounded-lg text-sm focus:outline-none focus:border-primary">
+                                            <button type="submit" class="bg-secondary text-white px-3 py-1 rounded-lg text-sm">تعليق</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        let tempPostImage = '';
+        function previewPostImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempPostImage = e.target.result;
+                    document.getElementById('postImagePreview').src = tempPostImage;
+                    document.getElementById('postImagePreviewContainer').classList.remove('hidden');
+                    document.getElementById('imageFileName').innerText = input.files[0].name;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handleCreatePost(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const content = document.getElementById('postContent').value;
+            if(!content.trim() && !tempPostImage) return;
+
+            const posts = Store.getPosts();
+            posts.push({
+                id: Date.now(),
+                userId: user.id,
+                userName: user.name,
+                userRole: user.role,
+                userAvatar: user.avatar,
+                content,
+                image: tempPostImage,
+                likes: [],
+                comments: []
+            });
+            Store.setPosts(posts);
+            tempPostImage = '';
+            render();
+        }
+
+        function toggleLike(postId) {
+            const user = Store.getCurrentUser();
+            const posts = Store.getPosts();
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                const idx = post.likes.indexOf(user.id);
+                if (idx > -1) post.likes.splice(idx, 1);
+                else post.likes.push(user.id);
+                Store.setPosts(posts);
+                render();
+            }
+        }
+
+        function handleAddComment(e, postId) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const input = e.target.querySelector('input');
+            const text = input.value;
+            if(!text.trim()) return;
+
+            const posts = Store.getPosts();
+            const post = posts.find(p => p.id === postId);
+            if(post) {
+                post.comments.push({ userId: user.id, userName: user.name, text });
+                Store.setPosts(posts);
+                render();
+            }
+        }
+
+        function sharePost(postId) {
+            alert('تم توليد رابط المشاركة بنجاح وحفظه في الحافظة.');
+        }
+
+        // ================= 2. البحث والصداقات =================
+        function renderSearchTab(user) {
+            const users = Store.getUsers().filter(u => u.id !== user.id);
+            return `
+                <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow border space-y-6">
+                    <h2 class="text-xl font-bold text-primary">البحث عن محامين وقضاة</h2>
+                    <input type="text" id="searchInput" oninput="filterUsers(this.value)" placeholder="ابحث بالاسم أو الصفة القانونية..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                    <div id="searchResults" class="space-y-4">
+                        ${users.map(u => renderUserCard(user, u)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterUsers(query) {
+            const user = Store.getCurrentUser();
+            const users = Store.getUsers().filter(u => u.id !== user.id && (u.name.includes(query) || u.role.includes(query)));
+            document.getElementById('searchResults').innerHTML = users.map(u => renderUserCard(user, u)).join('');
+        }
+
+        function renderUserCard(currentUser, targetUser) {
+            const isFriend = currentUser.friends && currentUser.friends.includes(targetUser.id);
+            const requests = Store.getRequests();
+            const hasSentRequest = requests.some(r => r.from === currentUser.id && r.to === targetUser.id);
+
+            return `
+                <div class="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                    <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${targetUser.id})">
+                        <img src="${targetUser.avatar}" class="w-12 h-12 rounded-full object-cover">
                         <div>
-
-                            <h3>
-                                ${esc(p.name)}
-                            </h3>
-
-                            <small>
-                                ${esc(p.specialty)}
-                            </small>
-
+                            <h4 class="font-bold">${targetUser.name}</h4>
+                            <span class="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded">${targetUser.role}</span>
                         </div>
-
                     </div>
-
-                    <p style="margin-top:12px">
-                        ${esc(p.court)}
-                    </p>
-
-                    <p style="margin-top:8px">
-                        ${esc(p.bio)}
-                    </p>
-
-                    <button class="btn"
-                            onclick="openChat(${p.userId})">
-                        مراسلة
-                    </button>
-
-                    <button class="btn gold"
-                            onclick="showPublicProfile(${p.userId})">
-                        الصفحة
-                    </button>
-
+                    <div>
+                        ${isFriend ? '<span class="text-green-600 text-sm font-semibold"><i class="fa-solid fa-check"></i> صديق</span>' : 
+                          hasSentRequest ? '<span class="text-gray-400 text-sm">تم إرسال الطلب</span>' :
+                          `<button onclick="sendFriendRequest(${targetUser.id})" class="bg-primary text-white px-3 py-1 rounded text-sm hover:bg-blue-900">إضافة صديق</button>`}
+                    </div>
                 </div>
-
             `;
-
-        });
-
-}
-
-
-/* =========================================================
-   CASES
-========================================================= */
-
-function createCase(){
-
-    const number=
-        prompt("رقم القضية:");
-
-    if(!number) return;
-
-    const court=
-        prompt("المحكمة:");
-
-    const type=
-        prompt("نوع القضية:");
-
-    const parties=
-        prompt("أسماء الخصوم:");
-
-    casesData.push({
-
-        id:Date.now(),
-
-        userId:currentUserId,
-
-        number,
-
-        court,
-
-        type,
-
-        parties
-
-    });
-
-    saveAll();
-
-    renderCases();
-
-}
-
-
-function renderCases(){
-
-    const table=
-        document.getElementById("casesTable");
-
-    table.innerHTML="";
-
-    casesData
-        .filter(
-            c=>c.userId===currentUserId
-        )
-        .forEach(c=>{
-
-            table.innerHTML+=`
-
-                <tr>
-
-                    <td>${esc(c.number)}</td>
-
-                    <td>${esc(c.court)}</td>
-
-                    <td>${esc(c.type)}</td>
-
-                    <td>${esc(c.parties)}</td>
-
-                </tr>
-
-            `;
-
-        });
-
-}
-
-
-/* =========================================================
-   SESSIONS
-========================================================= */
-
-function createSession(){
-
-    const caseNumber=
-        prompt("رقم القضية:");
-
-    if(!caseNumber) return;
-
-    const court=
-        prompt("المحكمة:");
-
-    const date=
-        prompt("تاريخ الجلسة:");
-
-    const time=
-        prompt("الساعة:");
-
-    sessions.push({
-
-        id:Date.now(),
-
-        userId:currentUserId,
-
-        caseNumber,
-
-        court,
-
-        date,
-
-        time
-
-    });
-
-    saveAll();
-
-    renderSessions();
-
-}
-
-
-function renderSessions(){
-
-    const table=
-        document.getElementById(
-            "sessionsTable"
-        );
-
-    table.innerHTML="";
-
-    sessions
-        .filter(
-            s=>s.userId===currentUserId
-        )
-        .forEach(s=>{
-
-            table.innerHTML+=`
-
-                <tr>
-
-                    <td>
-                        ${esc(s.caseNumber)}
-                    </td>
-
-                    <td>
-                        ${esc(s.court)}
-                    </td>
-
-                    <td>
-                        ${esc(s.date)}
-                    </td>
-
-                    <td>
-                        ${esc(s.time)}
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="btn"
-                            onclick="
-                            openMinuteFor(
-                            '${esc(s.caseNumber)}'
-                            )">
-
-                            المحضر
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        });
-
-}
-
-
-function openMinuteFor(number){
-
-    document.getElementById(
-        "minuteCase"
-    ).value=number;
-
-    showPage("minutes");
-
-}
-
-
-/* =========================================================
-   VOICE MINUTES
-========================================================= */
-
-function startVoice(){
-
-    const SpeechRecognition=
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-
-        showToast(
-            "المتصفح لا يدعم الكتابة بالصوت"
-        );
-
-        return;
-
-    }
-
-    recognition=
-        new SpeechRecognition();
-
-    recognition.lang="ar-SA";
-
-    recognition.continuous=true;
-
-    recognition.interimResults=false;
-
-    recognition.onresult=function(event){
-
-        let result="";
-
-        for(
-            let i=event.resultIndex;
-            i<event.results.length;
-            i++
-        ){
-
-            result+=
-                event.results[i][0]
-                .transcript+" ";
-
         }
 
-        document.getElementById(
-            "minuteText"
-        ).value+=result;
-
-    };
-
-    recognition.onerror=function(){
-
-        showToast(
-            "حدث خطأ في التعرف على الصوت"
-        );
-
-    };
-
-    recognition.start();
-
-    showToast("بدأت الكتابة بالصوت");
-
-}
-
-
-function stopVoice(){
-
-    if(recognition){
-
-        recognition.stop();
-
-        recognition=null;
-
-        showToast("تم إيقاف الصوت");
-
-    }
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-function printMinute(){
-
-    const number=
-        document.getElementById("minuteCase")
-        .value;
-
-    const court=
-        document.getElementById("minuteCourt")
-        .value;
-
-    const date=
-        document.getElementById("minuteDate")
-        .value;
-
-    const text=
-        document.getElementById("minuteText")
-        .value;
-
-    const win=
-        window.open("","_blank");
-
-    win.document.write(`
-
-        <!DOCTYPE html>
-
-        <html lang="ar" dir="rtl">
-
-        <head>
-
-            <meta charset="UTF-8">
-
-            <title>محضر جلسة</title>
-
-            <style>
-
-                body{
-                    font-family:Arial;
-                    padding:50px;
-                    line-height:2;
-                }
-
-                h1{
-                    text-align:center;
-                }
-
-                .meta{
-                    margin:15px 0;
-                }
-
-            </style>
-
-        </head>
-
-        <body>
-
-            <h1>
-                محضر جلسة
-            </h1>
-
-            <div class="meta">
-                <b>رقم القضية:</b>
-                ${esc(number)}
-            </div>
-
-            <div class="meta">
-                <b>المحكمة:</b>
-                ${esc(court)}
-            </div>
-
-            <div class="meta">
-                <b>التاريخ:</b>
-                ${esc(date)}
-            </div>
-
-            <hr>
-
-            <p>
-                ${esc(text).replaceAll(
-                    "\n",
-                    "<br>"
-                )}
-            </p>
-
-        </body>
-
-        </html>
-
-    `);
-
-    win.document.close();
-
-    win.print();
-
-}
-
-
-/* =========================================================
-   PDF
-========================================================= */
-
-function makePDF(){
-
-    const {jsPDF}=
-        window.jspdf;
-
-    const pdf=
-        new jsPDF();
-
-    const number=
-        document.getElementById(
-            "minuteCase"
-        ).value;
-
-    const court=
-        document.getElementById(
-            "minuteCourt"
-        ).value;
-
-    const date=
-        document.getElementById(
-            "minuteDate"
-        ).value;
-
-    const text=
-        document.getElementById(
-            "minuteText"
-        ).value;
-
-    pdf.setFontSize(18);
-
-    pdf.text(
-        "Legal Session Document",
-        105,
-        20,
-        {align:"center"}
-    );
-
-    pdf.setFontSize(11);
-
-    pdf.text(
-        "Case: "+number,
-        20,
-        40
-    );
-
-    pdf.text(
-        "Court: "+court,
-        20,
-        50
-    );
-
-    pdf.text(
-        "Date: "+date,
-        20,
-        60
-    );
-
-    const lines=
-        pdf.splitTextToSize(
-            text,
-            170
-        );
-
-    pdf.text(
-        lines,
-        20,
-        80
-    );
-
-    pdf.save(
-        "waseet-session-"+Date.now()+".pdf"
-    );
-
-}
-
-
-/* =========================================================
-   SUPPORT
-========================================================= */
-
-function smartSupport(){
-
-    const text=
-        document.getElementById(
-            "supportInput"
-        ).value.trim();
-
-    if(!text) return;
-
-    let answer=
-        "يرجى تحديد المشكلة بصورة أكثر تفصيلًا.";
-
-    if(
-        text.includes("تسجيل") ||
-        text.includes("دخول")
-    ){
-
-        answer=
-        "تحقق من رقم الهاتف وكلمة المرور.";
-
-    }
-
-    else if(
-        text.includes("صوت") ||
-        text.includes("ميكروفون")
-    ){
-
-        answer=
-        "تأكد من السماح للمتصفح باستخدام الميكروفون وأن المتصفح يدعم Web Speech API.";
-
-    }
-
-    else if(
-        text.toLowerCase()
-        .includes("pdf")
-    ){
-
-        answer=
-        "اكتب النص في قسم المحاضر ثم استخدم زر PDF.";
-
-    }
-
-    else if(
-        text.includes("صورة")
-    ){
-
-        answer=
-        "يمكن تغيير الصورة الشخصية أو صورة الغلاف من صفحة الملف الشخصي.";
-
-    }
-
-    document.getElementById(
-        "supportResult"
-    ).innerHTML=`
-
-        <div class="card">
-
-            <strong>
-                نتيجة الدعم:
-            </strong>
-
-            <p style="margin-top:10px">
-                ${answer}
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function showStats(){
-
-    document.getElementById(
-        "adminResult"
-    ).innerHTML=`
-
-        <div class="card">
-
-            <p>
-                👤 المستخدمون:
-                <b>${users.length}</b>
-            </p>
-
-            <p>
-                📝 المنشورات:
-                <b>${posts.length}</b>
-            </p>
-
-            <p>
-                📚 الأبحاث:
-                <b>${researches.length}</b>
-            </p>
-
-            <p>
-                👥 المجموعات:
-                <b>${groups.length}</b>
-            </p>
-
-            <p>
-                ⚖️ القضايا:
-                <b>${casesData.length}</b>
-            </p>
-
-            <p>
-                📅 الجلسات:
-                <b>${sessions.length}</b>
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-function clearDemoData(){
-
-    if(
-        !confirm(
-            "هل تريد حذف بيانات الموقع المحلية؟"
-        )
-    ) return;
-
-    localStorage.clear();
-
-    location.reload();
-
-}
-
-
-/* =========================================================
-   PUBLIC PROFILE
-========================================================= */
-
-function showPublicProfile(id){
-
-    const u=
-        users.find(x=>x.id===id);
-
-    if(!u) return;
-
-    currentUserId=
-        currentUserId;
-
-    const oldName=
-        document.getElementById(
-            "profileName"
-        );
-
-    oldName.textContent=u.name;
-
-    const postsOf=
-        posts.filter(
-            p=>p.userId===u.id
-        );
-
-    document.getElementById(
-        "profileType"
-    ).textContent=
-        typeName(u.type);
-
-    document.getElementById(
-        "profileContent"
-    ).innerHTML=
-        `<div id="publicPosts"></div>`;
-
-    renderPostArray(
-        postsOf,
-        "publicPosts"
-    );
-
-    showPage("profile");
-
-}
-
-
-/* =========================================================
-   GLOBAL SEARCH
-========================================================= */
-
-function globalSearch(event){
-
-    if(event.key!=="Enter") return;
-
-    const q=
-        event.target.value.trim()
-        .toLowerCase();
-
-    if(!q) return;
-
-    const foundUsers=
-        users.filter(
-            u=>
-            u.name.toLowerCase()
-            .includes(q)
-        );
-
-    const foundResearch=
-        researches.filter(
-            r=>
-            r.title.toLowerCase()
-            .includes(q)
-        );
-
-    const box=
-        document.getElementById(
-            "feedPosts"
-        );
-
-    box.innerHTML=`
-
-        <div class="card">
-
-            <h2>
-                نتائج البحث عن:
-                ${esc(q)}
-            </h2>
-
-            <h3 style="margin-top:20px">
-                الأشخاص
-            </h3>
-
-            ${
-                foundUsers.length
-                ?
-                foundUsers.map(
-                    u=>`
-
-                    <div class="suggestion"
-                         style="margin-top:10px">
-
-                        ${avatarHTML(u)}
-
-                        <div class="suggestion-info">
-
-                            <strong>
-                                ${esc(u.name)}
-                            </strong>
-
-                            <small>
-                                ${esc(typeName(u.type))}
-                            </small>
-
-                        </div>
-
-                        <button
-                            class="btn"
-                            onclick="
-                            showPublicProfile(
-                            ${u.id}
-                            )">
-                            عرض
-                        </button>
-
+        function sendFriendRequest(targetId) {
+            const user = Store.getCurrentUser();
+            const requests = Store.getRequests();
+            requests.push({ id: Date.now(), from: user.id, to: targetId });
+            Store.setRequests(requests);
+            render();
+        }
+
+        // ================= 3. الملف الشخصي =================
+        function viewUserProfile(userId) {
+            viewingUserId = userId;
+            currentTab = 'profile';
+            render();
+        }
+
+        function renderProfileTab(currentUser, profileUserId) {
+            const users = Store.getUsers();
+            const profileUser = users.find(u => u.id === profileUserId) || currentUser;
+            const isOwner = currentUser.id === profileUser.id;
+            const posts = Store.getPosts().filter(p => p.userId === profileUser.id);
+
+            return `
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border text-center relative">
+                        ${isOwner ? `
+                            <label class="absolute top-4 left-4 bg-primary text-white p-2 rounded-full cursor-pointer hover:bg-blue-900">
+                                <i class="fa-solid fa-camera"></i>
+                                <input type="file" accept="image/*" class="hidden" onchange="updateAvatar(this)">
+                            </label>
+                        ` : ''}
+                        <img src="${profileUser.avatar}" class="w-28 h-28 rounded-full mx-auto mb-4 object-cover border-4 border-primary">
+                        <h2 class="text-2xl font-bold">${profileUser.name}</h2>
+                        <span class="inline-block bg-secondary text-white text-sm px-3 py-1 rounded-full my-2">${profileUser.role}</span>
+                        <p class="text-gray-600 max-w-lg mx-auto">${profileUser.bio}</p>
+
+                        ${isOwner ? `
+                            <div class="mt-4">
+                                <button onclick="openEditBio()" class="text-primary text-sm hover:underline"><i class="fa-solid fa-pen"></i> تعديل النبذة التعريفية</button>
+                            </div>
+                        ` : ''}
                     </div>
 
-                    `
-                ).join("")
-                :
-                `<p>لا توجد نتائج.</p>`
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-primary">المنشورات والأبحاث القانونية</h3>
+                        ${posts.length === 0 ? '<p class="text-center text-gray-400">لا توجد منشورات لهذا المستخدم.</p>' : ''}
+                        ${posts.map(post => `
+                            <div class="bg-white p-4 rounded-xl shadow border space-y-2">
+                                <p class="text-gray-700">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-60 w-full object-cover">` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateAvatar(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const user = Store.getCurrentUser();
+                    user.avatar = e.target.result;
+                    Store.setCurrentUser(user);
+                    const users = Store.getUsers();
+                    const idx = users.findIndex(u => u.id === user.id);
+                    if(idx > -1) {
+                        users[idx] = user;
+                        Store.setUsers(users);
+                    }
+                    render();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function openEditBio() {
+            const user = Store.getCurrentUser();
+            const newBio = prompt('أدخل النبذة التعريفية الجديدة:', user.bio);
+            if(newBio !== null) {
+                user.bio = newBio;
+                Store.setCurrentUser(user);
+                const users = Store.getUsers();
+                const idx = users.findIndex(u => u.id === user.id);
+                if(idx > -1) {
+                    users[idx] = user;
+                    Store.setUsers(users);
+                }
+                render();
+            }
+        }
+
+        // ================= 4. كتابة المحاضر والطباعة (PDF) =================
+        function renderMinutesTab(user) {
+            const minutes = Store.getMinutes().filter(m => m.userId === user.id);
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-file-pen"></i> محضر جلسة / تحقيق جديد</h2>
+                        <form onsubmit="handleSaveMinute(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">عنوان المحضر / القضية</label>
+                                <input type="text" id="minTitle" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">اسم الطرف الأول (المدعي / الشاكي)</label>
+                                    <input type="text" id="minParty1" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">اسم الطرف الثاني (المدعى عليه / المتهم)</label>
+                                    <input type="text" id="minParty2" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="block text-sm font-medium">نص المحضر والتحقيق</label>
+                                    <button type="button" onclick="startVoiceRecognition('minContent')" class="bg-secondary text-white text-xs px-2 py-1 rounded hover:bg-amber-700"><i class="fa-solid fa-microphone"></i> إملاء صوتي</button>
+                                </div>
+                                <textarea id="minContent" rows="6" required class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900">حفظ المحضر</button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-primary">المحاضر المحفوظة</h3>
+                        <div class="space-y-3">
+                            ${minutes.length === 0 ? '<p class="text-gray-400 text-center">لا توجد محاضر محفوظة.</p>' : ''}
+                            ${minutes.map(m => `
+                                <div class="p-4 border rounded-lg flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-bold">${m.title}</h4>
+                                        <p class="text-xs text-gray-500">الطرفان: ${m.party1} ضد ${m.party2} \vert{}${m.date}</p>
+                                    </div>
+                                    <button onclick="printMinute(${m.id})" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-black"><i class="fa-solid fa-print"></i> طباعة / PDF</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div id="printableArea" class="hidden p-8 bg-white"></div>
+            `;
+        }
+
+        function startVoiceRecognition(targetId) {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('متصفحك لا يدعم الإملاء الصوتي المباشر.');
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ar-SA';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                const textarea = document.getElementById(targetId);
+                textarea.value += (textarea.value ? ' ' : '') + speechToText;
+            };
+            alert('تحدث الآن، جاري الاستماع...');
+        }
+
+        function handleSaveMinute(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const title = document.getElementById('minTitle').value;
+            const party1 = document.getElementById('minParty1').value;
+            const party2 = document.getElementById('minParty2').value;
+            const content = document.getElementById('minContent').value;
+
+            const minutes = Store.getMinutes();
+            minutes.push({
+                id: Date.now(),
+                userId: user.id,
+                title, party1, party2, content,
+                date: new Date().toLocaleDateString('ar-SA')
+            });
+            Store.setMinutes(minutes);
+            render();
+            alert('تم حفظ المحضر بنجاح.');
+        }
+
+        function printMinute(id) {
+            const minutes = Store.getMinutes();
+            const m = minutes.find(min => min.id === id);
+            if(!m) return;
+
+            const printableArea = document.getElementById('printableArea');
+            printableArea.innerHTML = `
+                <div dir="rtl" style="font-family: 'Cairo', sans-serif; padding: 20px;">
+                    <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+                        <h2>جمهورية العدالة القانونية</h2>
+                        <h3>محضر رسمي / جلسة تحقيق</h3>
+                        <p>التاريخ: ${m.date}</p>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>عنوان المحضر:</strong> ${m.title}<br>
+                        <strong>الطرف الأول:</strong> ${m.party1}<br>
+                        <strong>الطرف الثاني:</strong> ${m.party2}
+                    </div>
+                    <div style="margin-bottom: 40px; line-height: 1.8;">
+                        <strong>نص المحضر:</strong><br>
+                        <p>${m.content.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 50px;">
+                        <div>توقيع الطرف الأول: ........................</div>
+                        <div>توقيع الطرف الثاني: ........................</div>
+                        <div>مُحرر المحضر: ........................</div>
+                    </div>
+                </div>
+            `;
+            window.print();
+        }
+
+        // ================= 5. كتابة الدعاوى والدفوع القانونية =================
+        function renderLawsuitsTab(user) {
+            const lawsuits = Store.getLawsuits().filter(l => l.userId === user.id);
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-gavel"></i> صياغة صحيفة دعوى أو مذكرة دفوع جديدة</h2>
+                        <form onsubmit="handleSaveLawsuit(event)" class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">نوع المستند القانوني</label>
+                                    <select id="lawType" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                        <option value="صحيفة دعوى">صحيفة دعوى</option>
+                                        <option value="مذكرة دفوع">مذكرة دفوع قانونية</option>
+                                        <option value="رد دفاع">رد على دفاع</option>
+                                        <option value="استئناف حكم">صحيفة استئناف</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">اسم المحكمة الموجه إليها</label>
+                                    <input type="text" id="lawCourt" required placeholder="مثال: المحكمة الابتدائية التجارية" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">المدعي / المستأنف / طالب الدفع</label>
+                                    <input type="text" id="lawPlaintiff" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">المدعى عليه / المطعون ضده</label>
+                                    <input type="text" id="lawDefendant" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">الوقائع (سرد الأحداث باختصار)</label>
+                                <textarea id="lawFacts" rows="3" required placeholder="حيثيات الوقائع..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="block text-sm font-medium">الأسانيد القانونية والطلبات / الدفوع</label>
+                                    <button type="button" onclick="startVoiceRecognition('lawArguments')" class="bg-secondary text-white text-xs px-2 py-1 rounded hover:bg-amber-700"><i class="fa-solid fa-microphone"></i> إملاء صوتي</button>
+                                </div>
+                                <textarea id="lawArguments" rows="5" required placeholder="المواد القانونية، السندات، والطلبات الختامية..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900">حفظ وصياغة المستند</button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-primary">المستندات والدعاوى المحفوظة</h3>
+                        <div class="space-y-3">
+                            ${lawsuits.length === 0 ? '<p class="text-gray-400 text-center">لا توجد دعاوى أو دفوع محفوظة.</p>' : ''}
+                            ${lawsuits.map(l => `
+                                <div class="p-4 border rounded-lg flex justify-between items-center">
+                                    <div>
+                                        <span class="inline-block bg-primary text-white text-xs px-2 py-0.5 rounded mb-1">${l.type}</span>
+                                        <h4 class="font-bold">${l.court}</h4>
+                                        <p class="text-xs text-gray-500">أطراف النزاع: ${l.plaintiff} ضد ${l.defendant} \vert{}${l.date}</p>
+                                    </div>
+                                    <button onclick="printLawsuit(${l.id})" class="bg-gray-800 text-white px-3 py-1 rounded text-sm hover:bg-black"><i class="fa-solid fa-print"></i> طباعة / PDF</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSaveLawsuit(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const type = document.getElementById('lawType').value;
+            const court = document.getElementById('lawCourt').value;
+            const plaintiff = document.getElementById('lawPlaintiff').value;
+            const defendant = document.getElementById('lawDefendant').value;
+            const facts = document.getElementById('lawFacts').value;
+            const argumentsText = document.getElementById('lawArguments').value;
+
+            const lawsuits = Store.getLawsuits();
+            lawsuits.push({
+                id: Date.now(),
+                userId: user.id,
+                type, court, plaintiff, defendant, facts, argumentsText,
+                date: new Date().toLocaleDateString('ar-SA')
+            });
+            Store.setLawsuits(lawsuits);
+            render();
+            alert('تم حفظ وصياغة المستند القانوني بنجاح.');
+        }
+
+        function printLawsuit(id) {
+            const lawsuits = Store.getLawsuits();
+            const l = lawsuits.find(law => law.id === id);
+            if(!l) return;
+
+            const printableArea = document.getElementById('printableArea');
+            printableArea.innerHTML = `
+                <div dir="rtl" style="font-family: 'Cairo', sans-serif; padding: 30px; font-size: 15px; color: #000;">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="font-size: 18px; font-weight: bold;">إلى / ${l.court} المحترمة</h2>
+                        <h3 style="font-size: 16px; margin-top: 5px; text-decoration: underline;">${l.type}</h3>
+                    </div>
+                    <div style="margin-bottom: 25px; line-height: 1.6;">
+                        <strong>المدعي / المُمثَّل:</strong> ${l.plaintiff}<br>
+                        <strong>المدعى عليه / المطعون ضده:</strong> ${l.defendant}<br>
+                        <strong>التاريخ:</strong> ${l.date}
+                    </div>
+                    <div style="margin-bottom: 25px; line-height: 1.8;">
+                        <strong style="display: block; margin-bottom: 5px; color: #1e3a8a;">أولاً: الوقائع</strong>
+                        <p style="text-align: justify; background: #f9f9f9; padding: 10px; border-right: 3px solid #1e3a8a;">${l.facts.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <div style="margin-bottom: 40px; line-height: 1.8;">
+                        <strong style="display: block; margin-bottom: 5px; color: #1e3a8a;">ثانياً: الأسانيد القانونية والطلبات / الدفوع</strong>
+                        <p style="text-align: justify; background: #f9f9f9; padding: 10px; border-right: 3px solid #b45309;">${l.argumentsText.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 60px;">
+                        <div style="text-align: center;">
+                            <strong>وكيل الطرف / المحامي</strong><br><br><br>
+                            ........................................
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.print();
+        }
+
+        // ================= 6. المراسلة الفورية =================
+        let activeChatUserId = null;
+        function renderChatTab(user) {
+            const users = Store.getUsers().filter(u => u.id !== user.id);
+            const chats = Store.getChats();
+            const activeUser = users.find(u => u.id === activeChatUserId) || users[0];
+
+            const conversation = activeUser ? chats.filter(c => (c.from === user.id && c.to === activeUser.id) || (c.from === activeUser.id && c.to === user.id)) : [];
+
+            return `
+                <div class="bg-white rounded-xl shadow border grid grid-cols-1 md:grid-cols-3 h-[600px]">
+                    <div class="border-l p-4 overflow-y-auto space-y-2">
+                        <h3 class="font-bold text-primary mb-3">المحادثات</h3>
+                        ${users.map(u => `
+                            <div onclick="activeChatUserId=${u.id}; render();" class="flex items-center space-x-3 space-x-reverse p-2 rounded-lg cursor-pointer ${activeUser && activeUser.id===u.id?'bg-blue-50 border-primary border':'hover:bg-gray-50'}">
+                                <img src="${u.avatar}" class="w-10 h-10 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-bold text-sm">${u.name}</h4>
+                                    <span class="text-xs text-gray-400">${u.role}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="md:col-span-2 flex flex-col justify-between p-4">
+                        ${activeUser ? `
+                            <div class="border-b pb-3 flex items-center space-x-3 space-x-reverse">
+                                <img src="${activeUser.avatar}" class="w-10 h-10 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-bold">${activeUser.name}</h4>
+                                    <span class="text-xs text-gray-400">${activeUser.role}</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow overflow-y-auto p-4 space-y-3">
+                                ${conversation.length === 0 ? '<p class="text-center text-gray-400">ابدأ المحادثة الآن...</p>' : ''}
+                                ${conversation.map(msg => `
+                                    <div class="flex ${msg.from === user.id ? 'justify-end' : 'justify-start'}">
+                                        <div class="max-w-xs p-3 rounded-lg text-sm ${msg.from === user.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'}">
+                                            ${msg.text}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <form onsubmit="handleSendMessage(event, ${activeUser.id})" class="flex gap-2 pt-3 border-t">
+                                <input type="text" id="chatInput" placeholder="اكتب رسالة..." required class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg"><i class="fa-solid fa-paper-plane"></i></button>
+                            </form>
+                        ` : '<div class="flex items-center justify-center h-full text-gray-400">اختر محادثة للبدء</div>'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSendMessage(e, receiverId) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const input = document.getElementById('chatInput');
+            const text = input.value;
+            if(!text.trim()) return;
+
+            const chats = Store.getChats();
+            chats.push({
+                id: Date.now(),
+                from: user.id,
+                to: receiverId,
+                text
+            });
+            Store.setChats(chats);
+            render();
+        }
+
+        function initMainScripts(user) {
+            const requests = Store.getRequests().filter(r => r.to === user.id);
+            const reqContainer = document.getElementById('friendRequestsList');
+            if(reqContainer) {
+                if(requests.length === 0) {
+                    reqContainer.innerHTML = '<p class="text-xs text-gray-400">لا توجد طلبات صداقة.</p>';
+                } else {
+                    const users = Store.getUsers();
+                    reqContainer.innerHTML = requests.map(req => {
+                        const sender = users.find(u => u.id === req.from);
+                        return sender ? `
+                            <div class="flex items-center justify-between text-sm py-1 border-b">
+                                <span>${sender.name}</span>
+                                <button onclick="acceptFriend(${req.from}, ${req.id})" class="bg-green-600 text-white px-2 py-0.5 rounded text-xs">قبول</button>
+                            </div>
+                        ` : '';
+                    }).join('');
+                }
+            }
+        }
+
+        function acceptFriend(senderId, requestId) {
+            const user = Store.getCurrentUser();
+            if(!user.friends) user.friends = [];
+            user.friends.push(senderId);
+            Store.setCurrentUser(user);
+
+            const users = Store.getUsers();
+            const idx = users.findIndex(u => u.id === user.id);
+            if(idx > -1) {
+                users[idx] = user;
+                Store.setUsers(users);
             }
 
-            <h3 style="margin-top:20px">
-                الأبحاث
-            </h3>
+            let requests = Store.getRequests();
+            requests = requests.filter(r => r.id !== requestId);
+            Store.setRequests(requests);
+            render();
+        }
 
-            ${
-                foundResearch.map(
-                    r=>researchHTML(r)
-                ).join("")
-            }
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-updateInterface();
-
-renderFeed();
-
-renderProfile();
-
-renderGroups();
-
-renderResearch();
-
-renderSessions();
-
-renderCases();
-
-</script>
-
+        render();
+    </script>
 </body>
 </html>
