@@ -40,7 +40,7 @@
         منصة العدالة الرقمية الشاملة - نسخة تجريبية محلية (Local Storage)
     </footer>
 
-    <!-- سكود التطبيق البرمجي المتكامل -->
+    <!-- سكربت التطبيق البرمجي المتكامل -->
     <script>
         // إدارة الحالة العامة والتخزين المحلي
         const Store = {
@@ -50,6 +50,8 @@
             setCurrentUser: (user) => localStorage.setItem('law_currentUser', JSON.stringify(user)),
             getPosts: () => JSON.parse(localStorage.getItem('law_posts')) || [],
             setPosts: (posts) => localStorage.setItem('law_posts', JSON.stringify(posts)),
+            getResearch: () => JSON.parse(localStorage.getItem('law_research')) || [],
+            setResearch: (res) => localStorage.setItem('law_research', JSON.stringify(res)),
             getRequests: () => JSON.parse(localStorage.getItem('law_requests')) || [],
             setRequests: (reqs) => localStorage.setItem('law_requests', JSON.stringify(reqs)),
             getChats: () => JSON.parse(localStorage.getItem('law_chats')) || [],
@@ -75,6 +77,12 @@
                 ];
                 Store.setPosts(defaultPosts);
             }
+            if (Store.getResearch().length === 0) {
+                const defaultResearch = [
+                    { id: 1, userId: 1, userName: 'أحمد المحامي', title: 'دراسة تحليلية حول أحكام محكمة النقض في جرائم الشيك بدون رصيد', category: 'قانون تجاري', content: 'يحتوي هذا البحث على دراسة مقارنة لأبرز أحكام النقض الحديثة وتفسير المادة المتعلقة بالشيك...', fileName: 'بحث_الشيكات_النقض.pdf', date: '2026/06/13' }
+                ];
+                Store.setResearch(defaultResearch);
+            }
         }
         initData();
 
@@ -91,7 +99,7 @@
             }
         }
 
-        // ================= شاشة المصادقة (تسجيل الدخول / إنشاء حساب) =================
+        // ================= شاشة المصادقة =================
         let authMode = 'login'; 
         function renderAuthScreen() {
             return `
@@ -191,13 +199,12 @@
             render();
         }
 
-        // ================= التخطيط الرئيسي والتنقل الداخلي =================
-        let currentTab = 'feed'; // feed, search, profile, minutes, lawsuits, chat
+        // ================= التخطيط والتنقل الداخلي =================
+        let currentTab = 'feed'; // feed, search, profile, minutes, lawsuits, research, chat
         let viewingUserId = null;
 
         function renderMainLayout(user) {
             return `
-                <!-- شريط التنقل العلوي -->
                 <header class="bg-primary text-white shadow sticky top-0 z-50">
                     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
                         <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="currentTab='feed'; render();">
@@ -207,8 +214,9 @@
                         <div class="flex items-center space-x-3 space-x-reverse text-sm">
                             <button onclick="currentTab='feed'; render();" class="${currentTab==='feed'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-house"></i> الرئيسية</button>
                             <button onclick="currentTab='search'; render();" class="${currentTab==='search'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-magnifying-glass"></i> بحث</button>
+                            <button onclick="currentTab='research'; render();" class="${currentTab==='research'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-book-open"></i> الأبحاث والمكتبة</button>
                             <button onclick="currentTab='minutes'; render();" class="${currentTab==='minutes'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-file-pen"></i> المحاضر</button>
-                            <button onclick="currentTab='lawsuits'; render();" class="${currentTab==='lawsuits'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-gavel"></i> الدعاوى والدفوع</button>
+                            <button onclick="currentTab='lawsuits'; render();" class="${currentTab==='lawsuits'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-gavel"></i> الدعاوى</button>
                             <button onclick="currentTab='chat'; render();" class="${currentTab==='chat'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments"></i> الرسائل</button>
                             <button onclick="currentTab='profile'; viewingUserId=null; render();" class="${currentTab==='profile'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-user"></i> حسابي</button>
                             <button onclick="logout()" class="text-red-300 hover:text-red-100"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
@@ -216,11 +224,11 @@
                     </div>
                 </header>
 
-                <!-- جسم الصفحة والمحتوى حسب التبويب -->
                 <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
                     ${currentTab === 'feed' ? renderFeedTab(user) : ''}
                     ${currentTab === 'search' ? renderSearchTab(user) : ''}
                     ${currentTab === 'profile' ? renderProfileTab(user, viewingUserId || user.id) : ''}
+                    ${currentTab === 'research' ? renderResearchTab(user) : ''}
                     ${currentTab === 'minutes' ? renderMinutesTab(user) : ''}
                     ${currentTab === 'lawsuits' ? renderLawsuitsTab(user) : ''}
                     ${currentTab === 'chat' ? renderChatTab(user) : ''}
@@ -233,7 +241,7 @@
             render();
         }
 
-        // ================= 1. الرئيسية (Feed) =================
+        // ================= 1. الرئيسية =================
         function renderFeedTab(user) {
             const posts = Store.getPosts();
             return `
@@ -254,7 +262,7 @@
                     <div class="md:col-span-2 space-y-6">
                         <div class="bg-white p-4 rounded-xl shadow border">
                             <form onsubmit="handleCreatePost(event)">
-                                <textarea id="postContent" rows="3" placeholder="اكتب منشوراً قانونياً، استشارة، أو شارك بحثاً..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none"></textarea>
+                                <textarea id="postContent" rows="3" placeholder="اكتب منشوراً قانونياً أو شارك استشارة في خلاصتك العامة..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none"></textarea>
                                 <div class="flex justify-between items-center mt-3">
                                     <div class="flex items-center space-x-2 space-x-reverse">
                                         <label class="cursor-pointer text-gray-500 hover:text-primary">
@@ -263,7 +271,7 @@
                                         </label>
                                         <span id="imageFileName" class="text-xs text-gray-400"></span>
                                     </div>
-                                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900 transition">نشر</button>
+                                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900 transition">نشر بالرئيسية</button>
                                 </div>
                                 <div id="postImagePreviewContainer" class="mt-2 hidden">
                                     <img id="postImagePreview" class="max-h-40 rounded-lg">
@@ -385,10 +393,10 @@
         }
 
         function sharePost(postId) {
-            alert('تم توليد رابط المشاركة بنجاح وحفظه في الحافظة.');
+            alert('تم توليد رابط المشاركة بنجاح.');
         }
 
-        // ================= 2. البحث والصداقات =================
+        // ================= 2. البحث وصداقات =================
         function renderSearchTab(user) {
             const users = Store.getUsers().filter(u => u.id !== user.id);
             return `
@@ -439,7 +447,7 @@
             render();
         }
 
-        // ================= 3. الملف الشخصي =================
+        // ================= 3. الصفحة الخاصة (الملف الشخصي) والنشر المباشر فيها =================
         function viewUserProfile(userId) {
             viewingUserId = userId;
             currentTab = 'profile';
@@ -451,12 +459,13 @@
             const profileUser = users.find(u => u.id === profileUserId) || currentUser;
             const isOwner = currentUser.id === profileUser.id;
             const posts = Store.getPosts().filter(p => p.userId === profileUser.id);
+            const research = Store.getResearch().filter(r => r.userId === profileUser.id);
 
             return `
                 <div class="max-w-3xl mx-auto space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow border text-center relative">
                         ${isOwner ? `
-                            <label class="absolute top-4 left-4 bg-primary text-white p-2 rounded-full cursor-pointer hover:bg-blue-900">
+                            <label class="absolute top-4 left-4 bg-primary text-white p-2 rounded-full cursor-pointer hover:bg-blue-900" title="تغيير الصورة">
                                 <i class="fa-solid fa-camera"></i>
                                 <input type="file" accept="image/*" class="hidden" onchange="updateAvatar(this)">
                             </label>
@@ -467,18 +476,47 @@
                         <p class="text-gray-600 max-w-lg mx-auto">${profileUser.bio}</p>
 
                         ${isOwner ? `
-                            <div class="mt-4">
+                            <div class="mt-4 flex justify-center gap-4">
                                 <button onclick="openEditBio()" class="text-primary text-sm hover:underline"><i class="fa-solid fa-pen"></i> تعديل النبذة التعريفية</button>
                             </div>
                         ` : ''}
                     </div>
 
+                    ${isOwner ? `
+                        <!-- صندوق النشر المخصص في الصفحة الخاصة -->
+                        <div class="bg-white p-4 rounded-xl shadow border">
+                            <h3 class="text-md font-bold text-primary mb-2"><i class="fa-solid fa-bullhorn"></i> نشر منشور جديد في صفحتك الشخصية</h3>
+                            <form onsubmit="handleProfilePost(event)">
+                                <textarea id="profilePostContent" rows="3" placeholder="ما الذي يدور في ذهنك مهنياً؟ انشر على صفحتك..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none" required></textarea>
+                                <button type="submit" class="mt-2 bg-secondary text-white px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-amber-700">نشر في الصفحة</button>
+                            </form>
+                        </div>
+                    ` : ''}
+
+                    <!-- منشورات الصفحة الخاصة -->
                     <div class="space-y-4">
-                        <h3 class="text-lg font-bold text-primary">المنشورات والأبحاث القانونية</h3>
-                        ${posts.length === 0 ? '<p class="text-center text-gray-400">لا توجد منشورات لهذا المستخدم.</p>' : ''}
+                        <h3 class="text-lg font-bold text-primary">منشورات الصفحة الخاصة</h3>
+                        ${posts.length === 0 ? '<p class="text-center text-gray-400 bg-white p-4 rounded-xl shadow border">لا توجد منشورات شخصية.</p>' : ''}
                         ${posts.map(post => `
                             <div class="bg-white p-4 rounded-xl shadow border space-y-2">
-                                <p class="text-gray-700">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-60 w-full object-cover">` : ''}
+                                <p class="text-gray-700 whitespace-pre-line">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-60 w-full object-cover">` : ''}
+                                <div class="text-xs text-gray-400 text-left">منشور شخصي</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- الأبحاث المنشورة الخاصة بالمستخدم -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-primary">الأبحاث والمستندات القانونية للمستخدم</h3>
+                        ${research.length === 0 ? '<p class="text-center text-gray-400 bg-white p-4 rounded-xl shadow border">لا توجد أبحاث منشورة.</p>' : ''}
+                        ${research.map(res => `
+                            <div class="bg-white p-4 rounded-xl shadow border space-y-2">
+                                <span class="bg-secondary text-white text-xs px-2 py-0.5 rounded">${res.category}</span>
+                                <h4 class="font-bold text-primary">${res.title}</h4>
+                                <p class="text-sm text-gray-600">${res.content}</p>
+                                <div class="text-xs text-gray-400 flex justify-between items-center pt-2 border-t">
+                                    <span>الملف: ${res.fileName} \vert{} التاريخ: ${res.date}</span>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -521,7 +559,116 @@
             }
         }
 
-        // ================= 4. كتابة المحاضر والطباعة (PDF) =================
+        function handleProfilePost(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const content = document.getElementById('profilePostContent').value;
+            if(!content.trim()) return;
+
+            const posts = Store.getPosts();
+            posts.push({
+                id: Date.now(),
+                userId: user.id,
+                userName: user.name,
+                userRole: user.role,
+                userAvatar: user.avatar,
+                content,
+                image: '',
+                likes: [],
+                comments: []
+            });
+            Store.setPosts(posts);
+            render();
+            alert('تم نشر المنشور في صفحتك بنجاح.');
+        }
+
+        // ================= 4. الأبحاث والملفات القانونية (نشر الأبحاث) =================
+        function renderResearchTab(user) {
+            const researchList = Store.getResearch();
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-book-open"></i> نشر بحث أو دراسة قانونية جديدة</h2>
+                        <form onsubmit="handleSaveResearch(event)" class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">عنوان البحث / الدراسة</label>
+                                    <input type="text" id="resTitle" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">التصنيف القانوني</label>
+                                    <select id="resCategory" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                        <option value="قانون مدني">قانون مدني</option>
+                                        <option value="قانون تجاري">قانون تجاري</option>
+                                        <option value="قانون جنائي">قانون جنائي</option>
+                                        <option value="قانون إداري ودستوري">قانون إداري ودستوري</option>
+                                        <option value="أبحاث قضائية">أبحاث قضائية</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">ملخص أو محتوى البحث</label>
+                                <textarea id="resContent" rows="4" required placeholder="اكتب ملخص البحث أو مقدمته القانونية..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">إرفاق ملف البحث (PDF / مستند)</label>
+                                <input type="file" id="resFile" class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50">
+                            </div>
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900">نشر البحث العام</button>
+                        </form>
+                    </div>
+
+                    <!-- مكتبة الأبحاث المنشورة -->
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-primary">المكتبة القانونية (الأبحاث والدراسات العامة)</h3>
+                        <div class="space-y-4">
+                            ${researchList.length === 0 ? '<p class="text-gray-400 text-center">لا توجد أبحاث منشورة حالياً.</p>' : ''}
+                            ${researchList.slice().reverse().map(res => `
+                                <div class="p-4 border rounded-lg space-y-2 hover:bg-gray-50">
+                                    <div class="flex justify-between items-center">
+                                        <span class="bg-primary text-white text-xs px-2 py-0.5 rounded">${res.category}</span>
+                                        <span class="text-xs text-gray-400">الباحث: ${res.userName} \vert{}${res.date}</span>
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800">${res.title}</h4>
+                                    <p class="text-sm text-gray-600 whitespace-pre-line">${res.content}</p>
+                                    <div class="pt-2 border-t flex justify-between items-center text-xs text-secondary font-semibold">
+                                        <span><i class="fa-solid fa-file-pdf"></i> ${res.fileName}</span>
+                                        <button onclick="alert('تم محاكاة تحميل الملف بنجاح.')" class="hover:underline">تحميل المستند</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSaveResearch(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const title = document.getElementById('resTitle').value;
+            const category = document.getElementById('resCategory').value;
+            const content = document.getElementById('resContent').value;
+            const fileInput = document.getElementById('resFile');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'مستند_بحث_قانوني.pdf';
+
+            const researchList = Store.getResearch();
+            researchList.push({
+                id: Date.now(),
+                userId: user.id,
+                userName: user.name,
+                title,
+                category,
+                content,
+                fileName,
+                date: new Date().toLocaleDateString('ar-SA')
+            });
+            Store.setResearch(researchList);
+            render();
+            alert('تم نشر البحث بنجاح في المكتبة وفي صفحتك الشخصية.');
+        }
+
+        // ================= 5. كتابة المحاضر والطباعة =================
         function renderMinutesTab(user) {
             const minutes = Store.getMinutes().filter(m => m.userId === user.id);
             return `
@@ -644,7 +791,7 @@
             window.print();
         }
 
-        // ================= 5. كتابة الدعاوى والدفوع القانونية =================
+        // ================= 6. الدعاوى والدفوع =================
         function renderLawsuitsTab(user) {
             const lawsuits = Store.getLawsuits().filter(l => l.userId === user.id);
             return `
@@ -669,7 +816,7 @@
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium mb-1">المدعي / المستأنف / طالب الدفع</label>
+                                    <label class="block text-sm font-medium mb-1">المدعي / طالب الدفع</label>
                                     <input type="text" id="lawPlaintiff" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
                                 </div>
                                 <div>
@@ -678,15 +825,15 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-1">الوقائع (سرد الأحداث باختصار)</label>
+                                <label class="block text-sm font-medium mb-1">الوقائع</label>
                                 <textarea id="lawFacts" rows="3" required placeholder="حيثيات الوقائع..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
                             </div>
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="block text-sm font-medium">الأسانيد القانونية والطلبات / الدفوع</label>
+                                    <label class="block text-sm font-medium">الأسانيد القانونية والطلبات</label>
                                     <button type="button" onclick="startVoiceRecognition('lawArguments')" class="bg-secondary text-white text-xs px-2 py-1 rounded hover:bg-amber-700"><i class="fa-solid fa-microphone"></i> إملاء صوتي</button>
                                 </div>
-                                <textarea id="lawArguments" rows="5" required placeholder="المواد القانونية، السندات، والطلبات الختامية..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                                <textarea id="lawArguments" rows="5" required placeholder="المواد القانونية، السندات، والطلبات..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
                             </div>
                             <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-900">حفظ وصياغة المستند</button>
                         </form>
@@ -770,7 +917,7 @@
             window.print();
         }
 
-        // ================= 6. المراسلة الفورية =================
+        // ================= 7. المراسلة الفورية =================
         let activeChatUserId = null;
         function renderChatTab(user) {
             const users = Store.getUsers().filter(u => u.id !== user.id);
