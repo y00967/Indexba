@@ -2,647 +2,524 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#102a43">
+<meta name="description" content="وسيط القانوني والقضائي - منصة رقمية للمحاماة والقضاء والبحث القانوني">
 <title>وسيط القانوني والقضائي</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-:root{
-  --primary:#102a43;
-  --primary2:#163b5c;
-  --gold:#d9b44a;
-  --bg:#f4f7fa;
-  --white:#fff;
-  --text:#17202a;
-  --muted:#718096;
-  --border:#dce3ea;
-  --danger:#c0392b;
-  --success:#168a52;
-  --shadow:0 8px 30px rgba(16,42,67,.10);
-}
-
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
 body{
-  margin:0;
-  font-family:'Tajawal',Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+ margin:0;
+ font-family:"Tajawal",Arial,sans-serif;
+ background:#f4f7fa;
+ color:#172b4d;
+ line-height:1.8
 }
+button,input,textarea,select{font-family:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
 
-button,input,textarea,select{
-  font-family:inherit;
+:root{
+ --primary:#102a43;
+ --primary2:#163b5c;
+ --gold:#d9b44a;
+ --gold2:#f1d276;
+ --white:#fff;
+ --bg:#f4f7fa;
+ --muted:#6b7c93;
+ --border:#dfe7ef;
+ --success:#16835b;
+ --danger:#c0392b;
+ --shadow:0 12px 35px rgba(16,42,67,.10)
 }
-
-button{
-  cursor:pointer;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.container{
-  width:min(1180px,94%);
-  margin:auto;
-}
-
-/* HEADER */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:var(--primary);
-  color:white;
-  box-shadow:0 3px 20px rgba(0,0,0,.15);
+ position:sticky;
+ top:0;
+ z-index:1000;
+ background:rgba(16,42,67,.97);
+ color:#fff;
+ box-shadow:0 4px 20px rgba(0,0,0,.15)
 }
-
-.navbar{
-  min-height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
+.nav{
+ max-width:1400px;
+ margin:auto;
+ min-height:72px;
+ display:flex;
+ align-items:center;
+ gap:15px;
+ padding:10px 20px
 }
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:20px;
-  font-weight:800;
-  white-space:nowrap;
+.brand{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-size:20px;
+ font-weight:900;
+ color:#fff;
+ white-space:nowrap
 }
-
-.logo i{
-  color:var(--gold);
-  font-size:27px;
+.brand i{color:var(--gold);font-size:27px}
+.navlinks{
+ display:flex;
+ align-items:center;
+ gap:5px;
+ margin-right:auto;
+ flex-wrap:wrap
 }
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  flex-wrap:wrap;
+.navlinks button{
+ border:0;
+ background:transparent;
+ color:#fff;
+ padding:9px 11px;
+ border-radius:9px;
+ font-size:13px
 }
-
-.nav-links button{
-  border:0;
-  background:transparent;
-  color:#fff;
-  padding:10px 11px;
-  border-radius:8px;
-  font-size:14px;
-}
-
-.nav-links button:hover{
-  background:rgba(255,255,255,.1);
-}
-
-.account-area{
-  display:flex;
-  align-items:center;
-  gap:8px;
+.navlinks button:hover{background:rgba(255,255,255,.1)}
+.account{
+ display:flex;
+ gap:7px;
+ align-items:center
 }
 
 .btn{
-  border:0;
-  border-radius:9px;
-  padding:11px 16px;
-  font-weight:700;
-  transition:.2s;
+ border:0;
+ border-radius:10px;
+ padding:11px 17px;
+ font-weight:700;
+ transition:.2s
 }
-
-.btn:hover{
-  transform:translateY(-1px);
-}
-
-.btn-primary{
-  background:var(--primary);
-  color:white;
-}
-
-.btn-gold{
-  background:var(--gold);
-  color:#17202a;
-}
-
-.btn-light{
-  background:#eef3f7;
-  color:var(--primary);
-}
-
-.btn-danger{
-  background:var(--danger);
-  color:white;
-}
-
-.btn-success{
-  background:var(--success);
-  color:white;
-}
-
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-gold{background:var(--gold);color:#172b4d}
+.btn-light{background:#eef3f7;color:var(--primary)}
+.btn-danger{background:#c0392b;color:#fff}
+.btn-success{background:#16835b;color:#fff}
 .btn-outline{
-  border:1px solid var(--border);
-  background:white;
-  color:var(--primary);
+ background:transparent;
+ border:1px solid var(--border);
+ color:var(--primary)
 }
-
-.small{
-  padding:7px 10px;
-  font-size:13px;
-}
-
-/* HERO */
+.btn-small{padding:7px 11px;font-size:13px}
 
 .hero{
-  background:
-    linear-gradient(135deg,rgba(16,42,67,.97),rgba(22,59,92,.92));
-  color:white;
-  padding:90px 0 80px;
+ min-height:610px;
+ display:flex;
+ align-items:center;
+ background:
+ linear-gradient(135deg,rgba(16,42,67,.97),rgba(22,59,92,.92)),
+ radial-gradient(circle at 20% 20%,#d9b44a,transparent 25%);
+ color:#fff;
+ position:relative;
+ overflow:hidden
 }
-
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:40px;
-  align-items:center;
+.hero:after{
+ content:"";
+ position:absolute;
+ width:450px;height:450px;
+ border:1px solid rgba(217,180,74,.3);
+ border-radius:50%;
+ left:-130px;top:-150px
 }
-
+.hero-inner{
+ max-width:1400px;
+ width:100%;
+ margin:auto;
+ padding:70px 25px;
+ display:grid;
+ grid-template-columns:1.3fr .7fr;
+ gap:45px;
+ align-items:center;
+ position:relative;
+ z-index:2
+}
 .hero h1{
-  font-size:clamp(32px,5vw,55px);
-  margin:0 0 18px;
-  line-height:1.25;
+ font-size:48px;
+ line-height:1.35;
+ margin:0 0 18px;
+ font-weight:900
 }
-
-.hero p{
-  color:#dce8f2;
-  font-size:18px;
-  line-height:2;
-}
-
-.hero-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:25px;
-}
-
+.hero h1 span{color:var(--gold2)}
+.hero p{font-size:19px;color:#dbe6ef;max-width:750px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .hero-card{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
+ background:rgba(255,255,255,.09);
+ border:1px solid rgba(255,255,255,.15);
+ border-radius:25px;
+ padding:30px;
+ backdrop-filter:blur(10px)
 }
-
-.hero-card i{
-  font-size:70px;
-  color:var(--gold);
-  margin-bottom:20px;
+.hero-card h3{margin-top:0;color:var(--gold2)}
+.hero-stat{
+ display:flex;
+ justify-content:space-between;
+ padding:13px 0;
+ border-bottom:1px solid rgba(255,255,255,.12)
 }
+.hero-stat:last-child{border:0}
 
-/* SECTIONS */
-
-section{
-  padding:70px 0;
+.container{
+ max-width:1400px;
+ margin:auto;
+ padding:65px 20px
 }
-
-.section-title{
-  text-align:center;
-  margin-bottom:35px;
-}
-
+.section-title{text-align:center;margin-bottom:35px}
 .section-title h2{
-  color:var(--primary);
-  font-size:30px;
-  margin:0 0 10px;
+ font-size:32px;
+ margin:0 0 7px;
+ color:var(--primary)
 }
-
-.section-title p{
-  color:var(--muted);
-}
-
-/* CARDS */
+.section-title p{color:var(--muted);margin:0}
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:18px
 }
-
 .card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:22px;
-  box-shadow:var(--shadow);
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:22px;
+ box-shadow:var(--shadow)
 }
-
-.card-icon{
-  width:52px;
-  height:52px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#edf3f8;
-  color:var(--primary);
-  font-size:22px;
-  margin-bottom:15px;
+.service i{
+ font-size:31px;
+ color:var(--gold);
+ margin-bottom:10px
 }
+.service h3{margin:5px 0}
+.service p{color:var(--muted);font-size:14px}
 
-.card h3{
-  margin:5px 0 10px;
-  color:var(--primary);
+.tabs{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-bottom:20px
 }
-
-.muted{
-  color:var(--muted);
+.tab{
+ padding:10px 16px;
+ border:1px solid var(--border);
+ background:#fff;
+ border-radius:10px;
+ cursor:pointer;
+ font-weight:700
 }
+.tab.active{background:var(--primary);color:#fff}
 
-.empty{
-  text-align:center;
-  padding:35px;
-  color:var(--muted);
-  background:white;
-  border:1px dashed var(--border);
-  border-radius:14px;
+.profile-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:20px
 }
-
-/* PROFILE */
-
-.profile-card{
-  display:flex;
-  align-items:center;
-  gap:18px;
+.profile{
+ text-align:center;
+ position:relative
 }
-
 .avatar{
-  width:76px;
-  height:76px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#e9eef3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--primary);
-  font-size:28px;
-  font-weight:800;
-  flex-shrink:0;
+ width:90px;
+ height:90px;
+ border-radius:50%;
+ background:#e7edf3;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ margin:0 auto 12px;
+ overflow:hidden;
+ color:var(--primary);
+ font-size:28px;
+ font-weight:900
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.badge{
+ display:inline-block;
+ padding:4px 9px;
+ border-radius:30px;
+ background:#edf3f7;
+ font-size:12px;
+ font-weight:700
 }
 
-.avatar-lg{
-  width:105px;
-  height:105px;
-  font-size:40px;
+.community{
+ background:#edf3f7
 }
-
-.avatar img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
+.community-layout{
+ display:grid;
+ grid-template-columns:270px 1fr 270px;
+ gap:20px;
+ align-items:start
 }
-
-.profile-actions{
-  margin-top:15px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+.sticky{position:sticky;top:90px}
+.side-menu button{
+ display:block;
+ width:100%;
+ text-align:right;
+ border:0;
+ background:transparent;
+ padding:11px;
+ border-radius:9px;
+ margin-bottom:4px;
+ font-weight:700;
+ color:var(--primary)
 }
+.side-menu button:hover{background:#edf3f7}
 
-/* FEED */
-
-.post{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:16px;
-  margin-bottom:18px;
-  overflow:hidden;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
+.post-box{
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:18px;
+ margin-bottom:18px
 }
-
 .post-head{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:18px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ margin-bottom:10px
 }
-
-.post-author{
-  flex:1;
+.mini-avatar{
+ width:45px;height:45px;
+ border-radius:50%;
+ overflow:hidden;
+ background:#e7edf3;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-weight:900
 }
-
-.post-author strong{
-  display:block;
-}
-
-.post-author small{
-  color:var(--muted);
-}
-
-.post-body{
-  padding:0 18px 18px;
-  line-height:1.9;
-  white-space:pre-wrap;
-}
-
+.mini-avatar img{width:100%;height:100%;object-fit:cover}
+.post-content{white-space:pre-wrap}
 .post-image{
-  width:100%;
-  max-height:520px;
-  object-fit:cover;
+ width:100%;
+ max-height:500px;
+ object-fit:cover;
+ border-radius:12px;
+ margin-top:12px
 }
-
 .post-actions{
-  border-top:1px solid var(--border);
-  display:flex;
-  gap:5px;
-  padding:10px 15px;
+ display:flex;
+ gap:6px;
+ border-top:1px solid var(--border);
+ margin-top:14px;
+ padding-top:10px;
+ flex-wrap:wrap
+}
+.action{
+ border:0;
+ background:#f3f6f8;
+ border-radius:8px;
+ padding:7px 12px;
+ color:var(--primary)
+}
+.action:hover{background:#e4ebf1}
+.comment{
+ background:#f5f7f9;
+ padding:9px 12px;
+ border-radius:10px;
+ margin-top:8px;
+ font-size:14px
 }
 
-.post-actions button{
-  border:0;
-  background:transparent;
-  padding:8px 12px;
-  color:var(--muted);
+.topic{
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:14px;
+ background:#fff;
+ margin-bottom:10px
 }
+.topic h4{margin:0 0 5px}
+.topic small{color:var(--muted)}
 
-.post-actions button:hover{
-  color:var(--primary);
+.form{
+ display:grid;
+ gap:12px
 }
-
-/* RESEARCH */
-
-.research-card{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+.form-row{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px
 }
-
-.research-cover{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-.tags{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-}
-
-.tag{
-  background:#edf3f8;
-  color:var(--primary);
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-/* SESSION */
-
-.session-card{
-  border-right:5px solid var(--gold);
-}
-
-.session-date{
-  font-size:18px;
-  font-weight:800;
-  color:var(--primary);
-}
-
-/* DASHBOARD */
-
-.dashboard{
-  display:none;
-}
-
-.dashboard.active{
-  display:block;
-}
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:30px;
-}
-
-.stat{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:20px;
-}
-
-.stat strong{
-  display:block;
-  font-size:28px;
-  color:var(--primary);
-}
-
-/* SEARCH */
-
-.search-box{
-  display:flex;
-  gap:10px;
-  margin-bottom:25px;
-}
-
-.search-box input{
-  flex:1;
-}
-
-/* FORMS */
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:7px;
-  font-weight:700;
-  color:var(--primary);
-}
-
+label{font-weight:700;font-size:14px}
 input,textarea,select{
-  width:100%;
-  border:1px solid var(--border);
-  background:white;
-  border-radius:9px;
-  padding:12px;
-  outline:none;
+ width:100%;
+ padding:12px 13px;
+ border:1px solid var(--border);
+ border-radius:10px;
+ outline:0;
+ background:#fff;
+ color:#172b4d
 }
-
-input:focus,textarea:focus,select:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(16,42,67,.08);
-}
-
-textarea{
-  min-height:130px;
-  resize:vertical;
-}
-
-/* MODAL */
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+textarea{min-height:150px;resize:vertical}
 
 .modal{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.65);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+ z-index:2000
 }
-
-.modal.active{
-  display:flex;
-}
-
+.modal.show{display:flex}
 .modal-box{
-  background:white;
-  width:min(650px,100%);
-  max-height:92vh;
-  overflow:auto;
-  border-radius:18px;
-  padding:25px;
-  position:relative;
+ width:min(800px,100%);
+ max-height:92vh;
+ overflow:auto;
+ background:#fff;
+ border-radius:18px;
+ padding:25px;
+ position:relative
 }
-
 .close{
-  position:absolute;
-  left:18px;
-  top:15px;
-  border:0;
-  background:#eef2f5;
-  width:35px;
-  height:35px;
-  border-radius:50%;
+ position:absolute;
+ left:15px;
+ top:12px;
+ border:0;
+ background:#eef2f5;
+ width:35px;height:35px;
+ border-radius:50%
 }
 
-/* FOOTER */
+.writer{
+ background:#fff
+}
+.writer-grid{
+ display:grid;
+ grid-template-columns:300px 1fr;
+ gap:20px
+}
+.writer-tools .card{margin-bottom:15px}
+.editor{
+ min-height:650px;
+ border:1px solid var(--border);
+ border-radius:15px;
+ overflow:hidden;
+ background:#fff
+}
+.editor-head{
+ padding:12px 15px;
+ background:#f0f4f7;
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+ align-items:center
+}
+.editor textarea{
+ border:0;
+ border-radius:0;
+ min-height:570px;
+ padding:35px;
+ font-size:17px;
+ line-height:2.2
+}
+.counter{
+ padding:7px 15px;
+ background:#f8fafb;
+ color:var(--muted);
+ font-size:13px
+}
+.voice-status{
+ padding:8px 12px;
+ border-radius:8px;
+ background:#f1f3f5;
+ font-size:13px
+}
+.voice-status.active{
+ background:#e7f7ef;
+ color:#16835b
+}
+
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:12px;border-bottom:1px solid var(--border);text-align:right}
+th{background:#f1f5f8}
+
+.empty{
+ text-align:center;
+ padding:40px;
+ color:var(--muted)
+}
 
 footer{
-  background:var(--primary);
-  color:white;
-  padding:45px 0;
+ background:#0b1f33;
+ color:#dbe6ef;
+ padding:45px 20px
 }
-
 .footer-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:30px;
+ max-width:1400px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:2fr 1fr 1fr 1fr;
+ gap:30px
+}
+footer h3{color:#fff}
+footer p{color:#b9c8d5}
+.footer-bottom{
+ max-width:1400px;
+ margin:30px auto 0;
+ border-top:1px solid rgba(255,255,255,.1);
+ padding-top:20px;
+ text-align:center;
+ color:#8fa3b5
 }
 
-footer p{
-  color:#cbd7e2;
-  line-height:1.9;
+.hidden{display:none!important}
+.text-muted{color:var(--muted)}
+.mt{margin-top:20px}
+.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.space{justify-content:space-between}
+.center{text-align:center}
+
+.notice{
+ padding:13px 15px;
+ border-radius:10px;
+ background:#fff7dc;
+ border:1px solid #ead48a;
+ color:#68551c;
+ margin-bottom:15px
 }
 
-footer a{
-  display:block;
-  color:#dce6ee;
-  margin:8px 0;
+.toast{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ background:#102a43;
+ color:#fff;
+ padding:13px 18px;
+ border-radius:10px;
+ z-index:5000;
+ display:none;
+ box-shadow:var(--shadow)
 }
+.toast.show{display:block}
 
-/* TOAST */
-
-#toast{
-  position:fixed;
-  bottom:25px;
-  left:25px;
-  z-index:3000;
-  background:var(--primary);
-  color:white;
-  padding:13px 18px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-  display:none;
+@media(max-width:1100px){
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .community-layout{grid-template-columns:1fr}
+ .sticky{position:static}
+ .writer-grid{grid-template-columns:1fr}
+ .hero-inner{grid-template-columns:1fr}
+ .footer-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-/* COMMENTS */
-
-.comments{
-  padding:10px 18px 18px;
-  border-top:1px solid var(--border);
-}
-
-.comment{
-  padding:8px 0;
-  border-bottom:1px solid #edf0f3;
-  font-size:14px;
-}
-
-.comment-form{
-  display:flex;
-  gap:7px;
-  margin-top:10px;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-  .hero-grid,
-  .grid,
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .dashboard-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .nav-links{
-    display:none;
-  }
-}
-
-@media(max-width:600px){
-  .hero-grid,
-  .grid,
-  .footer-grid,
-  .dashboard-grid{
-    grid-template-columns:1fr;
-  }
-
-  .navbar{
-    min-height:62px;
-  }
-
-  .logo{
-    font-size:16px;
-  }
-
-  .account-area .btn{
-    padding:8px 10px;
-    font-size:12px;
-  }
-
-  section{
-    padding:50px 0;
-  }
-
-  .hero{
-    padding:60px 0;
-  }
-
-  .search-box{
-    flex-direction:column;
-  }
+@media(max-width:700px){
+ .nav{flex-wrap:wrap}
+ .navlinks{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap}
+ .navlinks button{white-space:nowrap}
+ .hero h1{font-size:34px}
+ .hero{min-height:auto}
+ .grid,.profile-grid,.form-row{grid-template-columns:1fr}
+ .container{padding:45px 14px}
+ .footer-grid{grid-template-columns:1fr}
+ .editor textarea{padding:20px;min-height:450px}
 }
 </style>
 </head>
@@ -650,2963 +527,2027 @@ footer a{
 <body>
 
 <header>
-<div class="container navbar">
+<nav class="nav">
+ <div class="brand" onclick="go('home')" style="cursor:pointer">
+  <i class="fa-solid fa-scale-balanced"></i>
+  وسيط القانوني والقضائي
+ </div>
 
-  <a class="logo" href="#home">
-    <i class="fa-solid fa-scale-balanced"></i>
-    <span>وسيط القانوني والقضائي</span>
-  </a>
+ <div class="navlinks">
+  <button onclick="go('home')">الرئيسية</button>
+  <button onclick="go('community')">التفاعل الجماعي</button>
+  <button onclick="go('writer')">الكتابة القانونية</button>
+  <button onclick="go('sessions')">صحيفة الجلسات</button>
+  <button onclick="go('profiles')">المحامون والقضاة</button>
+  <button onclick="go('research')">الأبحاث</button>
+  <button onclick="go('about')">عن المنصة</button>
+ </div>
 
-  <nav class="nav-links">
-    <button onclick="go('home')">الرئيسية</button>
-    <button onclick="go('profiles')">المحامون والقضاة</button>
-    <button onclick="go('posts')">المنشورات</button>
-    <button onclick="go('research')">الأبحاث القانونية</button>
-    <button onclick="go('sessions')">مواعيد الجلسات</button>
-    <button onclick="go('support')">الدعم الذكي</button>
-    <button onclick="go('about')">عن المنصة</button>
-  </nav>
-
-  <div class="account-area" id="accountArea">
-    <button class="btn btn-gold small" onclick="openModal('loginModal')">
-      <i class="fa-solid fa-right-to-bracket"></i> دخول
-    </button>
-    <button class="btn btn-light small" onclick="openModal('registerModal')">
-      إنشاء حساب
-    </button>
-  </div>
-
-</div>
+ <div class="account" id="accountArea"></div>
+</nav>
 </header>
 
 <main>
 
 <!-- HOME -->
-
-<section id="home" class="hero">
-<div class="container hero-grid">
-
-  <div>
-    <h1>منصة وسيط الرقمية للمحاماة والقضاء باليمن</h1>
-
+<section id="home">
+ <div class="hero">
+  <div class="hero-inner">
+   <div>
+    <div class="badge" style="background:rgba(255,255,255,.12);color:#fff">
+     منصة قانونية وقضائية رقمية
+    </div>
+    <h1>
+     منصة <span>وسيط</span> الرقمية
+     <br>للمحاماة والقضاء
+    </h1>
     <p>
-      منصة رقمية تجمع المحامين والقضاة والمحكمين والمتدربين والباحثين
-      القانونيين في بيئة واحدة لإدارة الملفات والصفحات المهنية والنشر
-      القانوني ومواعيد الجلسات والتواصل.
+     مساحة رقمية تجمع المحامين والقضاة والباحثين والمستخدمين،
+     وتوفر أدوات للتواصل القانوني، نشر الأبحاث، إدارة الجلسات،
+     وإنشاء المستندات القانونية بالصوت أو لوحة المفاتيح.
     </p>
 
     <div class="hero-actions">
-      <button class="btn btn-gold" onclick="openModal('registerModal')">
-        <i class="fa-solid fa-user-plus"></i>
-        إنشاء حساب
-      </button>
-
-      <button class="btn btn-light" onclick="go('profiles')">
-        استعراض الصفحات
-      </button>
+     <button class="btn btn-gold" onclick="openRegister()">
+      <i class="fa-solid fa-user-plus"></i> إنشاء حساب
+     </button>
+     <button class="btn btn-light" onclick="go('community')">
+      <i class="fa-solid fa-users"></i> التفاعل الجماعي
+     </button>
+     <button class="btn btn-light" onclick="go('writer')">
+      <i class="fa-solid fa-file-signature"></i> الكتابة القانونية
+     </button>
     </div>
+   </div>
+
+   <div class="hero-card">
+    <h3>منظومة قانونية متكاملة</h3>
+    <div class="hero-stat">
+     <span>التفاعل الجماعي</span>
+     <strong><i class="fa-solid fa-users"></i></strong>
+    </div>
+    <div class="hero-stat">
+     <span>الكتابة بالصوت</span>
+     <strong><i class="fa-solid fa-microphone"></i></strong>
+    </div>
+    <div class="hero-stat">
+     <span>صفحات مهنية</span>
+     <strong><i class="fa-solid fa-id-card"></i></strong>
+    </div>
+    <div class="hero-stat">
+     <span>الأبحاث القانونية</span>
+     <strong><i class="fa-solid fa-book"></i></strong>
+    </div>
+    <div class="hero-stat">
+     <span>صحيفة الجلسات</span>
+     <strong><i class="fa-solid fa-calendar-days"></i></strong>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <div class="container">
+  <div class="section-title">
+   <h2>خدمات وسيط</h2>
+   <p>أدوات رقمية مصممة للبيئة القانونية والقضائية</p>
   </div>
 
-  <div class="hero-card">
-    <i class="fa-solid fa-scale-balanced"></i>
-    <h2>القانون في مكان واحد</h2>
-    <p>
-      حساب شخصي، صفحة مهنية، منشورات، أبحاث، جلسات، وتواصل.
-    </p>
+  <div class="grid">
+   <div class="card service">
+    <i class="fa-solid fa-users"></i>
+    <h3>التفاعل الجماعي</h3>
+    <p>نقاشات ومنشورات وتعليقات ومشاركة المعرفة القانونية.</p>
+    <button class="btn btn-light btn-small" onclick="go('community')">دخول</button>
+   </div>
+
+   <div class="card service">
+    <i class="fa-solid fa-file-signature"></i>
+    <h3>الكتابة القانونية</h3>
+    <p>كتابة العرائض والمذكرات والطلبات بالصوت أو الكيبورد.</p>
+    <button class="btn btn-light btn-small" onclick="go('writer')">فتح المحرر</button>
+   </div>
+
+   <div class="card service">
+    <i class="fa-solid fa-calendar-check"></i>
+    <h3>صحيفة الجلسات</h3>
+    <p>تسجيل مواعيد الجلسات ونشر الإعلانات العامة.</p>
+    <button class="btn btn-light btn-small" onclick="go('sessions')">فتح الصحيفة</button>
+   </div>
+
+   <div class="card service">
+    <i class="fa-solid fa-id-card"></i>
+    <h3>الصفحات المهنية</h3>
+    <p>إنشاء صفحة عامة للمحامي أو القاضي أو المحكم أو الباحث.</p>
+    <button class="btn btn-light btn-small" onclick="go('profiles')">استعراض</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community" class="community hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2><i class="fa-solid fa-users"></i> التفاعل الجماعي</h2>
+   <p>مجتمع قانوني للنقاش ونشر المعرفة والأبحاث والموضوعات القضائية</p>
   </div>
 
-</div>
+  <div class="community-layout">
+
+   <aside class="sticky">
+    <div class="card side-menu">
+     <h3>الأقسام</h3>
+     <button onclick="filterCommunity('all')">
+      <i class="fa-solid fa-layer-group"></i> الكل
+     </button>
+     <button onclick="filterCommunity('قانوني')">
+      <i class="fa-solid fa-scale-balanced"></i> نقاش قانوني
+     </button>
+     <button onclick="filterCommunity('قضائي')">
+      <i class="fa-solid fa-gavel"></i> قضائي
+     </button>
+     <button onclick="filterCommunity('بحث')">
+      <i class="fa-solid fa-book"></i> أبحاث
+     </button>
+     <button onclick="filterCommunity('استشارة')">
+      <i class="fa-solid fa-comments"></i> استشارات
+     </button>
+     <button onclick="filterCommunity('عام')">
+      <i class="fa-solid fa-globe"></i> عام
+     </button>
+    </div>
+   </aside>
+
+   <div>
+    <div class="post-box">
+     <div class="flex space">
+      <div class="flex">
+       <div class="mini-avatar" id="communityUserAvatar">
+        <i class="fa-solid fa-user"></i>
+       </div>
+       <strong id="communityUserName">زائر المنصة</strong>
+      </div>
+      <button class="btn btn-primary" onclick="openPostModal()">
+       <i class="fa-solid fa-pen"></i> اكتب منشورًا
+      </button>
+     </div>
+     <div class="mt text-muted">
+      شارك رأيًا قانونيًا، سؤالًا، بحثًا، أو موضوعًا للنقاش الجماعي.
+     </div>
+    </div>
+
+    <div class="post-box">
+     <div class="form-row">
+      <input id="communitySearch" placeholder="ابحث في المنشورات..."
+       oninput="renderCommunity()">
+      <select id="communitySort" onchange="renderCommunity()">
+       <option value="new">الأحدث</option>
+       <option value="likes">الأكثر تفاعلًا</option>
+       <option value="comments">الأكثر تعليقًا</option>
+      </select>
+     </div>
+    </div>
+
+    <div id="communityPosts"></div>
+   </div>
+
+   <aside class="sticky">
+    <div class="card">
+     <h3>موضوعات نشطة</h3>
+     <div id="activeTopics"></div>
+    </div>
+
+    <div class="card mt">
+     <h3>قواعد التفاعل</h3>
+     <p class="text-muted">
+      احترم المشاركين، ناقش المسائل القانونية بصورة مهنية،
+      ولا تنشر بيانات شخصية أو سرية.
+     </p>
+    </div>
+   </aside>
+
+  </div>
+ </div>
 </section>
 
-<!-- SERVICES -->
+<!-- WRITER -->
+<section id="writer" class="writer hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2><i class="fa-solid fa-file-signature"></i> الكتابة القانونية الذكية</h2>
+   <p>اكتب بالكيبورد أو استخدم الإملاء الصوتي ثم اطبع المستند أو احفظه PDF</p>
+  </div>
 
-<section>
-<div class="container">
+  <div class="notice">
+   <strong>تنبيه:</strong>
+   الإملاء الصوتي يعتمد على دعم المتصفح لميزة Speech Recognition،
+   وقد يطلب المتصفح إذن استخدام الميكروفون.
+  </div>
 
-<div class="section-title">
-<h2>خدمات المنصة</h2>
-<p>منظومة رقمية قابلة للتوسع مستقبلًا إلى نظام متكامل للمحاماة والقضاء.</p>
-</div>
+  <div class="writer-grid">
 
-<div class="grid">
+   <div class="writer-tools">
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
-<h3>بوابة المحامين</h3>
-<p class="muted">
-إنشاء صفحة مهنية للمحامي وعرض البيانات والخدمات والمنشورات والأبحاث.
-</p>
-<button class="btn btn-primary small" onclick="go('profiles')">
-الدخول
-</button>
-</div>
+    <div class="card">
+     <h3>بيانات المستند</h3>
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-gavel"></i></div>
-<h3>منصة القضاة والمحكمين</h3>
-<p class="muted">
-صفحة مهنية للقاضي أو المحكم مع إمكانية عرض البيانات العامة.
-</p>
-<button class="btn btn-primary small" onclick="go('profiles')">
-استعراض
-</button>
-</div>
+     <div class="form">
+      <div>
+       <label>نوع المستند</label>
+       <select id="docType">
+        <option>عريضة دعوى</option>
+        <option>مذكرة دفاع</option>
+        <option>مذكرة جوابية</option>
+        <option>طلب قانوني</option>
+        <option>شكوى</option>
+        <option>استئناف</option>
+        <option>طعن</option>
+        <option>خطاب قانوني</option>
+        <option>محضر جلسة</option>
+        <option>مذكرة قانونية</option>
+        <option>أخرى</option>
+       </select>
+      </div>
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-file-pen"></i></div>
-<h3>الأبحاث القانونية</h3>
-<p class="muted">
-نشر الأبحاث والمقالات القانونية والبحث فيها حسب العنوان والتخصص.
-</p>
-<button class="btn btn-primary small" onclick="go('research')">
-الأبحاث
-</button>
-</div>
+      <div>
+       <label>صفة الكاتب</label>
+       <select id="writerRole">
+        <option>محامي</option>
+        <option>محامي تحت التمرين</option>
+        <option>قاضي</option>
+        <option>محكّم</option>
+        <option>باحث قانوني</option>
+        <option>مستخدم</option>
+       </select>
+      </div>
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-<h3>صحيفة الجلسات</h3>
-<p class="muted">
-تنظيم مواعيد الجلسات وإظهار الإعلانات العامة للمواعيد القادمة.
-</p>
-<button class="btn btn-primary small" onclick="go('sessions')">
-الجلسات
-</button>
-</div>
+      <div>
+       <label>اسم المحكمة</label>
+       <input id="courtName" placeholder="مثال: المحكمة التجارية بأمانة العاصمة">
+      </div>
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-comments"></i></div>
-<h3>التواصل</h3>
-<p class="muted">
-إرسال واستقبال الرسائل بين الحسابات في النسخة التجريبية.
-</p>
-<button class="btn btn-primary small" onclick="requireLogin()">
-التواصل
-</button>
-</div>
+      <div>
+       <label>رقم القضية</label>
+       <input id="caseNumber" placeholder="رقم القضية">
+      </div>
 
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-brain"></i></div>
-<h3>الدعم الذكي</h3>
-<p class="muted">
-أدوات مساعدة وتشخيصية لتوجيه المستخدم إلى القسم المناسب.
-</p>
-<button class="btn btn-primary small" onclick="go('support')">
-الدعم
-</button>
-</div>
+      <div>
+       <label>المدعي / مقدم الطلب</label>
+       <input id="applicant" placeholder="الاسم">
+      </div>
 
-</div>
-</div>
-</section>
+      <div>
+       <label>المدعى عليه / الخصم</label>
+       <input id="opponent" placeholder="الاسم">
+      </div>
 
-<!-- PROFILES -->
+      <div>
+       <label>موضوع المستند</label>
+       <input id="documentSubject" placeholder="موضوع العريضة أو المذكرة">
+      </div>
 
-<section id="profiles">
-<div class="container">
+      <button class="btn btn-primary" onclick="insertWriterTemplate()">
+       <i class="fa-solid fa-wand-magic-sparkles"></i>
+       إدراج نموذج
+      </button>
+     </div>
+    </div>
 
-<div class="section-title">
-<h2>المحامون والقضاة والمحكمون</h2>
-<p>صفحات مهنية عامة يمكن للزوار الوصول إليها.</p>
-</div>
+    <div class="card">
+     <h3>أدوات الكتابة</h3>
 
-<div class="search-box">
-<input id="profileSearch"
-       placeholder="ابحث بالاسم أو التخصص..."
-       oninput="renderProfiles()">
-</div>
+     <div class="flex">
+      <button class="btn btn-success" onclick="startVoiceWriting()">
+       <i class="fa-solid fa-microphone"></i> ابدأ الصوت
+      </button>
 
-<div id="profilesList"></div>
+      <button class="btn btn-danger" onclick="stopVoiceWriting()">
+       <i class="fa-solid fa-stop"></i> إيقاف
+      </button>
+     </div>
 
-</div>
-</section>
+     <div id="voiceStatus" class="voice-status mt">
+      <i class="fa-solid fa-microphone-slash"></i>
+      التسجيل الصوتي متوقف
+     </div>
 
-<!-- POSTS -->
+     <div class="flex mt">
+      <button class="btn btn-light" onclick="clearWriter()">
+       <i class="fa-solid fa-trash"></i> مسح
+      </button>
 
-<section id="posts">
-<div class="container">
+      <button class="btn btn-primary" onclick="printLegalDocument()">
+       <i class="fa-solid fa-print"></i> طباعة
+      </button>
 
-<div class="section-title">
-<h2>المنشورات القانونية</h2>
-<p>مساحة للنشر والتفاعل وتبادل المعرفة القانونية.</p>
-</div>
+      <button class="btn btn-gold" onclick="saveLegalPDF()">
+       <i class="fa-solid fa-file-pdf"></i> حفظ PDF
+      </button>
+     </div>
+    </div>
 
-<div id="postCreateArea"></div>
+    <div class="card">
+     <h3>عداد المستند</h3>
+     <div id="writerCounter">0 كلمة | 0 حرف</div>
+    </div>
 
-<div id="postsList"></div>
+   </div>
 
-</div>
-</section>
+   <div class="editor">
+    <div class="editor-head">
+     <strong>محرر المستند</strong>
+     <span class="text-muted">يمكنك الكتابة مباشرة أو الإملاء بالصوت</span>
+    </div>
 
-<!-- RESEARCH -->
+    <textarea id="legalText"
+     placeholder="اكتب المستند هنا أو اضغط على «ابدأ الصوت» ثم تحدث باللغة العربية..."
+     oninput="updateWriterCounter()"></textarea>
 
-<section id="research">
-<div class="container">
+    <div class="counter" id="writerCounterBottom">
+     0 كلمة | 0 حرف
+    </div>
+   </div>
 
-<div class="section-title">
-<h2>الأبحاث القانونية</h2>
-<p>نشر الأبحاث والدراسات والمقالات القانونية.</p>
-</div>
-
-<div class="search-box">
-<input id="researchSearch"
-       placeholder="ابحث عن بحث أو تخصص..."
-       oninput="renderResearch()">
-<button class="btn btn-primary" onclick="requireLogin('research')">
-<i class="fa-solid fa-plus"></i>
-نشر بحث
-</button>
-</div>
-
-<div id="researchList"></div>
-
-</div>
+  </div>
+ </div>
 </section>
 
 <!-- SESSIONS -->
+<section id="sessions" class="hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2><i class="fa-solid fa-calendar-days"></i> صحيفة الجلسات القضائية</h2>
+   <p>تنظيم مواعيد الجلسات وإعلاناتها</p>
+  </div>
 
-<section id="sessions">
-<div class="container">
+  <div class="card">
+   <div class="flex space">
+    <h3>الجلسات المعلنة</h3>
+    <button class="btn btn-primary" onclick="openSessionModal()">
+     <i class="fa-solid fa-plus"></i> إضافة جلسة
+    </button>
+   </div>
 
-<div class="section-title">
-<h2>إعلانات مواعيد الجلسات</h2>
-<p>المواعيد التي اختار أصحابها نشرها للعامة.</p>
-</div>
-
-<div id="sessionCreateArea"></div>
-
-<div id="sessionsList"></div>
-
-</div>
+   <div class="table-wrap mt">
+    <table>
+     <thead>
+      <tr>
+       <th>القضية</th>
+       <th>المحكمة</th>
+       <th>التاريخ</th>
+       <th>الوقت</th>
+       <th>نوع الجلسة</th>
+       <th>الملاحظة</th>
+      </tr>
+     </thead>
+     <tbody id="sessionsTable"></tbody>
+    </table>
+   </div>
+  </div>
+ </div>
 </section>
 
-<!-- DASHBOARD -->
+<!-- PROFILES -->
+<section id="profiles" class="hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2><i class="fa-solid fa-id-card"></i> الصفحات المهنية</h2>
+   <p>استعراض الصفحات العامة للمحامين والقضاة والمحكمين والباحثين</p>
+  </div>
 
-<section id="dashboard" class="dashboard">
-<div class="container">
+  <div class="flex center">
+   <button class="tab active" onclick="filterProfiles('all',this)">الكل</button>
+   <button class="tab" onclick="filterProfiles('lawyer',this)">المحامون</button>
+   <button class="tab" onclick="filterProfiles('trainee',this)">المتدربون</button>
+   <button class="tab" onclick="filterProfiles('judge',this)">القضاة</button>
+   <button class="tab" onclick="filterProfiles('arbitrator',this)">المحكمون</button>
+   <button class="tab" onclick="filterProfiles('researcher',this)">الباحثون</button>
+  </div>
 
-<div class="section-title">
-<h2>لوحة المستخدم</h2>
-<p>إدارة الحساب والصفحة والمنشورات والأبحاث والجلسات والرسائل.</p>
-</div>
+  <div id="profilesGrid" class="profile-grid mt"></div>
 
-<div id="dashboardStats" class="dashboard-grid"></div>
-
-<div class="card" style="margin-bottom:20px">
-<h3><i class="fa-solid fa-user"></i> حسابي</h3>
-<div id="myProfile"></div>
-
-<div class="profile-actions">
-<button class="btn btn-primary small" onclick="openModal('profileModal')">
-تعديل الصفحة المهنية
-</button>
-
-<button class="btn btn-light small" onclick="openModal('photoModal')">
-تغيير الصورة
-</button>
-
-<button class="btn btn-gold small" onclick="openModal('postModal')">
-نشر منشور
-</button>
-
-<button class="btn btn-primary small" onclick="openModal('researchModal')">
-نشر بحث
-</button>
-
-<button class="btn btn-primary small" onclick="openModal('sessionModal')">
-إعلان جلسة
-</button>
-</div>
-</div>
-
-<div class="card" style="margin-bottom:20px">
-<h3><i class="fa-solid fa-envelope"></i> الرسائل</h3>
-<div id="messagesList"></div>
-</div>
-
-<div class="card">
-<h3><i class="fa-solid fa-user-xmark"></i> إلغاء الاشتراك</h3>
-<p class="muted">
-سيؤدي إلغاء الاشتراك إلى حذف الحساب والصفحة والمنشورات والأبحاث
-والجلسات الخاصة بهذا الحساب من هذا المتصفح.
-</p>
-<button class="btn btn-danger" onclick="unsubscribe()">
-إلغاء الاشتراك نهائيًا
-</button>
-</div>
-
-</div>
+  <div class="center mt">
+   <button class="btn btn-gold" onclick="requireLogin('openProfileModal')">
+    <i class="fa-solid fa-plus"></i>
+    إنشاء صفحتي المهنية
+   </button>
+  </div>
+ </div>
 </section>
 
-<!-- SUPPORT -->
+<!-- RESEARCH -->
+<section id="research" class="hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2><i class="fa-solid fa-book"></i> الأبحاث القانونية</h2>
+   <p>نشر واستعراض البحوث والدراسات القانونية</p>
+  </div>
 
-<section id="support">
-<div class="container">
+  <div class="flex space">
+   <div></div>
+   <button class="btn btn-primary" onclick="requireLogin('openResearchModal')">
+    <i class="fa-solid fa-plus"></i> نشر بحث
+   </button>
+  </div>
 
-<div class="section-title">
-<h2>الدعم الذكي</h2>
-<p>اختر المشكلة أو الخدمة التي تريد الوصول إليها.</p>
-</div>
-
-<div class="grid">
-
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-key"></i></div>
-<h3>مشكلة تسجيل الدخول</h3>
-<p class="muted">مساعدة أولية في الوصول إلى الحساب.</p>
-<button class="btn btn-primary small"
-onclick="toast('في النسخة التجريبية يمكنك إعادة التسجيل من جهازك')">
-مساعدة
-</button>
-</div>
-
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
-<h3>الملفات والمستندات</h3>
-<p class="muted">قسم مخصص مستقبلًا لإدارة الملفات القانونية.</p>
-<button class="btn btn-primary small"
-onclick="toast('سيتم ربط إدارة الملفات بالنسخة الخلفية')">
-فتح
-</button>
-</div>
-
-<div class="card">
-<div class="card-icon"><i class="fa-solid fa-headset"></i></div>
-<h3>الدعم الفني</h3>
-<p class="muted">تواصل مع إدارة المنصة عند توفر النظام الخلفي.</p>
-<button class="btn btn-primary small"
-onclick="toast('تم تسجيل طلب الدعم التجريبي')">
-طلب دعم
-</button>
-</div>
-
-</div>
-</div>
+  <div id="researchGrid" class="grid mt"></div>
+ </div>
 </section>
 
 <!-- ABOUT -->
+<section id="about" class="hidden">
+ <div class="container">
+  <div class="section-title">
+   <h2>عن وسيط</h2>
+   <p>منصة رقمية تجمع أدوات قانونية وقضائية في بيئة واحدة.</p>
+  </div>
 
-<section id="about">
-<div class="container">
+  <div class="card">
+   <h3>رؤية المنصة</h3>
+   <p>
+    تهدف «وسيط القانوني والقضائي» إلى توفير بيئة رقمية تجمع
+    المحامين والقضاة والمحكمين والباحثين والمستخدمين، مع أدوات
+    للتواصل ونشر المعرفة وإدارة المستندات والجلسات.
+   </p>
 
-<div class="section-title">
-<h2>عن منصة وسيط</h2>
-<p>منصة رقمية متخصصة في البيئة القانونية والقضائية.</p>
-</div>
-
-<div class="card">
-<p style="line-height:2">
-تهدف منصة «وسيط القانوني والقضائي» إلى بناء بيئة رقمية تجمع
-المحامين والقضاة والمحكمين والمتدربين والباحثين القانونيين،
-وتوفر أدوات لإدارة الصفحات المهنية والنشر القانوني وتنظيم
-مواعيد الجلسات والتواصل والخدمات القانونية الرقمية.
-</p>
-</div>
-
-</div>
+   <h3>النسخة الحالية</h3>
+   <p>
+    هذه نسخة أولية تعمل داخل المتصفح باستخدام LocalStorage.
+    عند الانتقال إلى الإنتاج يمكن ربطها بخادم وقاعدة بيانات
+    ونظام مصادقة وصلاحيات وتخزين آمن.
+   </p>
+  </div>
+ </div>
 </section>
 
 </main>
 
 <footer>
-<div class="container footer-grid">
+ <div class="footer-grid">
+  <div>
+   <h3>وسيط القانوني والقضائي</h3>
+   <p>
+    منصة رقمية للمحاماة والقضاء والبحث القانوني والتفاعل المهني.
+   </p>
+  </div>
+  <div>
+   <h3>المنصة</h3>
+   <p>التفاعل الجماعي</p>
+   <p>الكتابة القانونية</p>
+   <p>صحيفة الجلسات</p>
+  </div>
+  <div>
+   <h3>المستخدمون</h3>
+   <p>المحامون</p>
+   <p>القضاة</p>
+   <p>الباحثون</p>
+  </div>
+  <div>
+   <h3>الحساب</h3>
+   <p onclick="openLogin()" style="cursor:pointer">تسجيل الدخول</p>
+   <p onclick="openRegister()" style="cursor:pointer">إنشاء حساب</p>
+  </div>
+ </div>
 
-<div>
-<h2>وسيط القانوني والقضائي</h2>
-<p>
-منصة رقمية للمحاماة والقضاء والبحث القانوني.
-</p>
-</div>
-
-<div>
-<h3>روابط</h3>
-<a href="#home">الرئيسية</a>
-<a href="#profiles">المحامون والقضاة</a>
-<a href="#research">الأبحاث</a>
-<a href="#sessions">الجلسات</a>
-</div>
-
-<div>
-<h3>الحساب</h3>
-<a href="#" onclick="openModal('loginModal');return false;">تسجيل الدخول</a>
-<a href="#" onclick="openModal('registerModal');return false;">إنشاء حساب</a>
-</div>
-
-</div>
+ <div class="footer-bottom">
+  © 2026 وسيط القانوني والقضائي — جميع الحقوق محفوظة
+ </div>
 </footer>
 
-<div id="toast"></div>
-
 <!-- LOGIN MODAL -->
-
 <div class="modal" id="loginModal">
-<div class="modal-box">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('loginModal')">×</button>
+  <h2>تسجيل الدخول</h2>
 
-<button class="close" onclick="closeModal('loginModal')">×</button>
+  <form class="form" onsubmit="login(event)">
+   <div>
+    <label>البريد الإلكتروني</label>
+    <input id="loginEmail" type="email" required>
+   </div>
 
-<h2>تسجيل الدخول</h2>
+   <div>
+    <label>كلمة المرور</label>
+    <input id="loginPassword" type="password" required>
+   </div>
 
-<form onsubmit="login(event)">
+   <button class="btn btn-primary">دخول</button>
+  </form>
 
-<div class="form-group">
-<label>البريد الإلكتروني</label>
-<input id="loginEmail" type="email" required>
+  <p class="text-muted">
+   حساب تجريبي:
+   demo@wasit.local
+   / 123456
+  </p>
+ </div>
 </div>
 
-<div class="form-group">
-<label>كلمة المرور</label>
-<input id="loginPassword" type="password" required>
-</div>
-
-<button class="btn btn-primary" type="submit">
-دخول
-</button>
-
-</form>
-
-<p class="muted">
-ليس لديك حساب؟
-<a href="#" onclick="closeModal('loginModal');openModal('registerModal');return false;">
-إنشاء حساب
-</a>
-</p>
-
-</div>
-</div>
-
-<!-- REGISTER MODAL -->
-
+<!-- REGISTER -->
 <div class="modal" id="registerModal">
-<div class="modal-box">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('registerModal')">×</button>
+  <h2>إنشاء حساب</h2>
 
-<button class="close" onclick="closeModal('registerModal')">×</button>
+  <form class="form" onsubmit="register(event)">
+   <div>
+    <label>الاسم الكامل</label>
+    <input id="registerName" required>
+   </div>
 
-<h2>إنشاء حساب جديد</h2>
+   <div>
+    <label>البريد الإلكتروني</label>
+    <input id="registerEmail" type="email" required>
+   </div>
 
-<form onsubmit="register(event)">
+   <div>
+    <label>كلمة المرور</label>
+    <input id="registerPassword" type="password" minlength="6" required>
+   </div>
 
-<div class="form-group">
-<label>الاسم الكامل</label>
-<input id="regName" required>
-</div>
+   <div>
+    <label>نوع الحساب</label>
+    <select id="registerType">
+     <option value="visitor">مستخدم</option>
+     <option value="lawyer">محامي</option>
+     <option value="trainee">محامي تحت التمرين</option>
+     <option value="judge">قاضي</option>
+     <option value="arbitrator">محكّم</option>
+     <option value="researcher">باحث قانوني</option>
+    </select>
+   </div>
 
-<div class="form-group">
-<label>البريد الإلكتروني</label>
-<input id="regEmail" type="email" required>
-</div>
-
-<div class="form-group">
-<label>كلمة المرور</label>
-<input id="regPassword" type="password" minlength="6" required>
-</div>
-
-<div class="form-group">
-<label>نوع الحساب</label>
-<select id="regType">
-<option value="lawyer">محامي</option>
-<option value="trainee">محامي تحت التمرين</option>
-<option value="judge">قاضي</option>
-<option value="arbitrator">محكم</option>
-<option value="researcher">باحث قانوني</option>
-<option value="visitor">مستخدم</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>الصورة الشخصية</label>
-<input id="regPhoto" type="file" accept="image/*">
-</div>
-
-<button class="btn btn-primary" type="submit">
-إنشاء الحساب
-</button>
-
-</form>
-
-</div>
+   <button class="btn btn-primary">إنشاء الحساب</button>
+  </form>
+ </div>
 </div>
 
 <!-- PROFILE MODAL -->
-
 <div class="modal" id="profileModal">
-<div class="modal-box">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('profileModal')">×</button>
+  <h2>إنشاء الصفحة المهنية</h2>
 
-<button class="close" onclick="closeModal('profileModal')">×</button>
+  <form class="form" onsubmit="saveProfile(event)">
+   <div>
+    <label>التخصص</label>
+    <input id="profileSpecialty" placeholder="مدني، تجاري، جنائي...">
+   </div>
 
-<h2>إنشاء / تعديل الصفحة المهنية</h2>
+   <div>
+    <label>المدينة</label>
+    <input id="profileCity" placeholder="صنعاء">
+   </div>
 
-<form onsubmit="saveProfile(event)">
+   <div>
+    <label>رقم الترخيص / القيد</label>
+    <input id="profileLicense">
+   </div>
 
-<div class="form-group">
-<label>الصفة المهنية</label>
-<select id="profileType">
-<option value="lawyer">محامي</option>
-<option value="trainee">محامي تحت التمرين</option>
-<option value="judge">قاضي</option>
-<option value="arbitrator">محكم</option>
-<option value="researcher">باحث قانوني</option>
-</select>
-</div>
+   <div>
+    <label>الخدمات</label>
+    <input id="profileServices" placeholder="ترافع، استشارات، أبحاث...">
+   </div>
 
-<div class="form-group">
-<label>التخصص</label>
-<input id="profileSpecialty" placeholder="مثال: القانون المدني">
-</div>
+   <div>
+    <label>نبذة</label>
+    <textarea id="profileBio"></textarea>
+   </div>
 
-<div class="form-group">
-<label>المدينة</label>
-<input id="profileCity" placeholder="صنعاء">
-</div>
+   <div>
+    <label>الصورة الشخصية</label>
+    <input id="profilePhoto" type="file" accept="image/*">
+   </div>
 
-<div class="form-group">
-<label>نبذة مهنية</label>
-<textarea id="profileBio"></textarea>
-</div>
-
-<div class="form-group">
-<label>الخدمات</label>
-<textarea id="profileServices"
-placeholder="اكتب الخدمات التي تقدمها..."></textarea>
-</div>
-
-<div class="form-group">
-<label>رقم الترخيص / القيد إن وجد</label>
-<input id="profileLicense">
-</div>
-
-<button class="btn btn-primary" type="submit">
-حفظ الصفحة
-</button>
-
-</form>
-
-</div>
-</div>
-
-<!-- PHOTO MODAL -->
-
-<div class="modal" id="photoModal">
-<div class="modal-box">
-
-<button class="close" onclick="closeModal('photoModal')">×</button>
-
-<h2>الصورة الشخصية</h2>
-
-<div id="photoPreview" style="text-align:center;margin:20px"></div>
-
-<input id="photoInput" type="file" accept="image/*">
-
-<br><br>
-
-<button class="btn btn-primary" onclick="savePhoto()">
-حفظ الصورة
-</button>
-
-</div>
+   <button class="btn btn-primary">حفظ الصفحة</button>
+  </form>
+ </div>
 </div>
 
 <!-- POST MODAL -->
-
 <div class="modal" id="postModal">
-<div class="modal-box">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('postModal')">×</button>
+  <h2>منشور جديد</h2>
 
-<button class="close" onclick="closeModal('postModal')">×</button>
+  <form class="form" onsubmit="createPost(event)">
+   <div>
+    <label>تصنيف المنشور</label>
+    <select id="postCategory">
+     <option>عام</option>
+     <option>قانوني</option>
+     <option>قضائي</option>
+     <option>بحث</option>
+     <option>استشارة</option>
+    </select>
+   </div>
 
-<h2>نشر منشور</h2>
+   <div>
+    <label>الموضوع</label>
+    <input id="postTitle" placeholder="عنوان الموضوع">
+   </div>
 
-<form onsubmit="createPost(event)">
+   <div>
+    <label>المحتوى</label>
+    <textarea id="postText" required placeholder="اكتب موضوعك..."></textarea>
+   </div>
 
-<div class="form-group">
-<label>محتوى المنشور</label>
-<textarea id="postText"
-placeholder="اكتب منشورك القانوني..."></textarea>
-</div>
+   <div>
+    <label>إرفاق صورة</label>
+    <input id="postImage" type="file" accept="image/*">
+   </div>
 
-<div class="form-group">
-<label>صورة اختيارية</label>
-<input id="postImage" type="file" accept="image/*">
-</div>
-
-<button class="btn btn-primary">
-نشر
-</button>
-
-</form>
-
-</div>
-</div>
-
-<!-- RESEARCH MODAL -->
-
-<div class="modal" id="researchModal">
-<div class="modal-box">
-
-<button class="close" onclick="closeModal('researchModal')">×</button>
-
-<h2>نشر بحث قانوني</h2>
-
-<form onsubmit="createResearch(event)">
-
-<div class="form-group">
-<label>عنوان البحث</label>
-<input id="researchTitle" required>
-</div>
-
-<div class="form-group">
-<label>التخصص</label>
-<input id="researchSpecialty" required>
-</div>
-
-<div class="form-group">
-<label>الملخص</label>
-<textarea id="researchAbstract" required></textarea>
-</div>
-
-<div class="form-group">
-<label>نص البحث</label>
-<textarea id="researchBody" style="min-height:250px" required></textarea>
-</div>
-
-<div class="form-group">
-<label>صورة الغلاف</label>
-<input id="researchCover" type="file" accept="image/*">
-</div>
-
-<button class="btn btn-primary">
-نشر البحث
-</button>
-
-</form>
-
-</div>
+   <button class="btn btn-primary">نشر الموضوع</button>
+  </form>
+ </div>
 </div>
 
 <!-- SESSION MODAL -->
-
 <div class="modal" id="sessionModal">
-<div class="modal-box">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('sessionModal')">×</button>
+  <h2>إضافة جلسة</h2>
 
-<button class="close" onclick="closeModal('sessionModal')">×</button>
+  <form class="form" onsubmit="saveSession(event)">
+   <div class="form-row">
+    <div>
+     <label>رقم القضية</label>
+     <input id="sessionCase" required>
+    </div>
+    <div>
+     <label>المحكمة</label>
+     <input id="sessionCourt" required>
+    </div>
+   </div>
 
-<h2>إعلان موعد جلسة</h2>
+   <div class="form-row">
+    <div>
+     <label>التاريخ</label>
+     <input id="sessionDate" type="date" required>
+    </div>
+    <div>
+     <label>الوقت</label>
+     <input id="sessionTime" type="time" required>
+    </div>
+   </div>
 
-<form onsubmit="createSession(event)">
+   <div>
+    <label>نوع الجلسة</label>
+    <select id="sessionType">
+     <option>مرافعة</option>
+     <option>نظر</option>
+     <option>نطق بالحكم</option>
+     <option>تأجيل</option>
+     <option>إدارية</option>
+     <option>أخرى</option>
+    </select>
+   </div>
 
-<div class="form-group">
-<label>رقم القضية</label>
-<input id="sessionCase" required>
+   <div>
+    <label>الملاحظة</label>
+    <textarea id="sessionNote"></textarea>
+   </div>
+
+   <label>
+    <input id="sessionPublic" type="checkbox" checked style="width:auto">
+    نشر موعد الجلسة للعامة
+   </label>
+
+   <button class="btn btn-primary">حفظ الجلسة</button>
+  </form>
+ </div>
 </div>
 
-<div class="form-group">
-<label>المحكمة</label>
-<input id="sessionCourt" required>
+<!-- RESEARCH MODAL -->
+<div class="modal" id="researchModal">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('researchModal')">×</button>
+  <h2>نشر بحث قانوني</h2>
+
+  <form class="form" onsubmit="saveResearch(event)">
+   <div>
+    <label>عنوان البحث</label>
+    <input id="researchTitle" required>
+   </div>
+
+   <div>
+    <label>التخصص</label>
+    <input id="researchSpecialty" placeholder="قانون مدني...">
+   </div>
+
+   <div>
+    <label>الملخص</label>
+    <textarea id="researchAbstract"></textarea>
+   </div>
+
+   <div>
+    <label>نص البحث</label>
+    <textarea id="researchBody" style="min-height:300px" required></textarea>
+   </div>
+
+   <button class="btn btn-primary">نشر البحث</button>
+  </form>
+ </div>
 </div>
 
-<div class="form-group">
-<label>تاريخ الجلسة</label>
-<input id="sessionDate" type="date" required>
-</div>
-
-<div class="form-group">
-<label>وقت الجلسة</label>
-<input id="sessionTime" type="time" required>
-</div>
-
-<div class="form-group">
-<label>نوع الجلسة</label>
-<select id="sessionType">
-<option>مرافعة</option>
-<option>نظر</option>
-<option>نطق بالحكم</option>
-<option>تحقيق</option>
-<option>صلح</option>
-<option>استئناف</option>
-<option>تنفيذ</option>
-<option>أخرى</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>ملاحظات / إعلان</label>
-<textarea id="sessionNote"></textarea>
-</div>
-
-<div class="form-group">
-<label>
-<input id="sessionPublic" type="checkbox" checked style="width:auto">
- نشر الموعد للعامة
-</label>
-</div>
-
-<button class="btn btn-primary">
-حفظ الموعد
-</button>
-
-</form>
-
-</div>
-</div>
-
-<!-- MESSAGE MODAL -->
-
-<div class="modal" id="messageModal">
-<div class="modal-box">
-
-<button class="close" onclick="closeModal('messageModal')">×</button>
-
-<h2>إرسال رسالة</h2>
-
-<div id="messageTarget"></div>
-
-<textarea id="messageText"
-placeholder="اكتب رسالتك..."></textarea>
-
-<br><br>
-
-<button class="btn btn-primary" onclick="sendMessage()">
-إرسال الرسالة
-</button>
-
-</div>
-</div>
-
-<!-- RESEARCH DETAIL MODAL -->
-
-<div class="modal" id="researchDetailModal">
-<div class="modal-box">
-
-<button class="close" onclick="closeModal('researchDetailModal')">×</button>
-
-<div id="researchDetail"></div>
-
-</div>
-</div>
-
-<!-- PROFILE DETAIL MODAL -->
-
+<!-- PROFILE DETAIL -->
 <div class="modal" id="profileDetailModal">
-<div class="modal-box">
-
-<button class="close" onclick="closeModal('profileDetailModal')">×</button>
-
-<div id="profileDetail"></div>
-
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('profileDetailModal')">×</button>
+  <div id="profileDetail"></div>
+ </div>
 </div>
+
+<!-- RESEARCH DETAIL -->
+<div class="modal" id="researchDetailModal">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal('researchDetailModal')">×</button>
+  <div id="researchDetail"></div>
+ </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
+/* =========================================================
+   وسيط القانوني والقضائي
+   النسخة التجريبية — LocalStorage
+========================================================= */
 
-/* =========================
-   STORAGE
-========================= */
+const KEYS={
+ users:"wasit_v2_users",
+ posts:"wasit_v2_posts",
+ research:"wasit_v2_research",
+ sessions:"wasit_v2_sessions",
+ current:"wasit_v2_current"
+};
 
-const KEY_USERS = "wasit_users";
-const KEY_POSTS = "wasit_posts";
-const KEY_RESEARCH = "wasit_research";
-const KEY_SESSIONS = "wasit_sessions";
-const KEY_MESSAGES = "wasit_messages";
+let communityFilter="all";
+let recognition=null;
+let isListening=false;
 
-let currentUserId =
-  localStorage.getItem("wasit_current_user") || null;
-
-let messageTargetId = null;
-
-function getUsers(){
-  return JSON.parse(localStorage.getItem(KEY_USERS) || "[]");
+function getData(key, fallback=[]){
+ try{
+  return JSON.parse(localStorage.getItem(key)) ?? fallback;
+ }catch(e){
+  return fallback;
+ }
 }
 
-function saveUsers(data){
-  localStorage.setItem(KEY_USERS, JSON.stringify(data));
-}
-
-function getPosts(){
-  return JSON.parse(localStorage.getItem(KEY_POSTS) || "[]");
-}
-
-function savePosts(data){
-  localStorage.setItem(KEY_POSTS, JSON.stringify(data));
-}
-
-function getResearch(){
-  return JSON.parse(localStorage.getItem(KEY_RESEARCH) || "[]");
-}
-
-function saveResearch(data){
-  localStorage.setItem(KEY_RESEARCH, JSON.stringify(data));
-}
-
-function getSessions(){
-  return JSON.parse(localStorage.getItem(KEY_SESSIONS) || "[]");
-}
-
-function saveSessions(data){
-  localStorage.setItem(KEY_SESSIONS, JSON.stringify(data));
-}
-
-function getMessages(){
-  return JSON.parse(localStorage.getItem(KEY_MESSAGES) || "[]");
-}
-
-function saveMessages(data){
-  localStorage.setItem(KEY_MESSAGES, JSON.stringify(data));
+function setData(key,value){
+ localStorage.setItem(key,JSON.stringify(value));
 }
 
 function uid(prefix="id"){
-  return prefix + "_" +
-    Date.now().toString(36) +
-    Math.random().toString(36).slice(2,8);
+ return prefix+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,9);
 }
 
-function currentUser(){
-  if(!currentUserId) return null;
-  return getUsers().find(u => u.id === currentUserId) || null;
-}
-
-/* =========================
-   SECURITY HELPERS
-========================= */
-
-function escapeHtml(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function safeUrl(url){
-  if(!url) return "";
-  if(url.startsWith("data:image/")) return url;
-  return "";
-}
-
-/* =========================
-   IMAGE COMPRESSION
-========================= */
-
-function imageToDataURL(file, maxSize=800){
-  return new Promise((resolve,reject)=>{
-
-    if(!file){
-      resolve("");
-      return;
-    }
-
-    if(!file.type.startsWith("image/")){
-      reject(new Error("الملف ليس صورة"));
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = e => {
-
-      const img = new Image();
-
-      img.onload = () => {
-
-        let w = img.width;
-        let h = img.height;
-
-        if(w > maxSize || h > maxSize){
-
-          if(w > h){
-            h = Math.round(h * maxSize / w);
-            w = maxSize;
-          }else{
-            w = Math.round(w * maxSize / h);
-            h = maxSize;
-          }
-
-        }
-
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img,0,0,w,h);
-
-        resolve(
-          canvas.toDataURL("image/jpeg",0.78)
-        );
-      };
-
-      img.onerror = reject;
-      img.src = e.target.result;
-    };
-
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-/* =========================
-   UI
-========================= */
-
-function openModal(id){
-  document.getElementById(id)?.classList.add("active");
-
-  if(id === "profileModal"){
-    loadProfileForm();
-  }
-
-  if(id === "photoModal"){
-    renderPhotoPreview();
-  }
-}
-
-function closeModal(id){
-  document.getElementById(id)?.classList.remove("active");
+function escapeHtml(value=""){
+ return String(value)
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 }
 
 function toast(message){
-  const el = document.getElementById("toast");
-  el.textContent = message;
-  el.style.display = "block";
-
-  setTimeout(()=>{
-    el.style.display = "none";
-  },3000);
+ const el=document.getElementById("toast");
+ el.textContent=message;
+ el.classList.add("show");
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>el.classList.remove("show"),2800);
 }
 
 function go(id){
-  document.querySelectorAll(".dashboard").forEach(x=>{
-    x.classList.remove("active");
-  });
+ document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));
+ const section=document.getElementById(id);
+ if(section) section.classList.remove("hidden");
 
-  const el = document.getElementById(id);
+ window.scrollTo({top:0,behavior:"smooth"});
 
-  if(el){
-    el.scrollIntoView({behavior:"smooth"});
-  }
+ if(id==="community") renderCommunity();
+ if(id==="profiles") renderProfiles();
+ if(id==="research") renderResearch();
+ if(id==="sessions") renderSessions();
+}
 
-  renderAll();
+function closeModal(id){
+ document.getElementById(id)?.classList.remove("show");
+}
+
+function openLogin(){
+ document.getElementById("loginModal").classList.add("show");
+}
+
+function openRegister(){
+ document.getElementById("registerModal").classList.add("show");
+}
+
+function openPostModal(){
+ if(!currentUser()){
+  openLogin();
+  toast("يجب تسجيل الدخول أولًا");
+  return;
+ }
+ document.getElementById("postModal").classList.add("show");
+}
+
+function openSessionModal(){
+ if(!currentUser()){
+  openLogin();
+  toast("يجب تسجيل الدخول أولًا");
+  return;
+ }
+ document.getElementById("sessionModal").classList.add("show");
+}
+
+function openProfileModal(){
+ document.getElementById("profileModal").classList.add("show");
+
+ const u=currentUser();
+ if(u && u.profile){
+  document.getElementById("profileSpecialty").value=u.profile.specialty||"";
+  document.getElementById("profileCity").value=u.profile.city||"";
+  document.getElementById("profileLicense").value=u.profile.license||"";
+  document.getElementById("profileServices").value=u.profile.services||"";
+  document.getElementById("profileBio").value=u.profile.bio||"";
+ }
+}
+
+function openResearchModal(){
+ document.getElementById("researchModal").classList.add("show");
+}
+
+function currentUser(){
+ const id=localStorage.getItem(KEYS.current);
+ if(!id)return null;
+ return getData(KEYS.users,[]).find(u=>u.id===id)||null;
 }
 
 function requireLogin(action){
-  if(!currentUser()){
-    toast("يجب تسجيل الدخول أولًا");
-    openModal("loginModal");
-    return;
-  }
+ if(!currentUser()){
+  openLogin();
+  toast("سجل الدخول أولًا");
+  return;
+ }
 
-  if(action === "research"){
-    openModal("researchModal");
-  }else{
-    openModal("messageModal");
-  }
+ if(action==="openProfileModal")openProfileModal();
+ if(action==="openResearchModal")openResearchModal();
 }
 
-/* =========================
-   REGISTER
-========================= */
-
-async function register(event){
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("regName").value.trim();
-
-  const email =
-    document.getElementById("regEmail").value.trim().toLowerCase();
-
-  const password =
-    document.getElementById("regPassword").value;
-
-  const type =
-    document.getElementById("regType").value;
-
-  const photoFile =
-    document.getElementById("regPhoto").files[0];
-
-  const users = getUsers();
-
-  if(users.some(u => u.email === email)){
-    toast("هذا البريد مسجل مسبقًا");
-    return;
-  }
-
-  let photo = "";
-
-  try{
-    if(photoFile){
-      photo = await imageToDataURL(photoFile,600);
-    }
-  }catch(e){
-    toast("تعذر معالجة الصورة");
-    return;
-  }
-
-  const user = {
-    id:uid("user"),
-    name,
-    email,
-    password,
-    type,
-    photo,
-    profile:{
-      specialty:"",
-      city:"",
-      bio:"",
-      services:"",
-      license:""
-    },
-    createdAt:new Date().toISOString()
-  };
-
-  users.push(user);
-  saveUsers(users);
-
-  currentUserId = user.id;
-  localStorage.setItem("wasit_current_user",user.id);
-
-  closeModal("registerModal");
-
-  toast("تم إنشاء الحساب بنجاح");
-
-  updateAccountArea();
-  renderAll();
-
-  setTimeout(()=>{
-    document.getElementById("dashboard").classList.add("active");
-    document.getElementById("dashboard")
-      .scrollIntoView({behavior:"smooth"});
-  },300);
+function typeName(type){
+ return {
+  lawyer:"محامي",
+  trainee:"محامي تحت التمرين",
+  judge:"قاضي",
+  arbitrator:"محكّم",
+  researcher:"باحث قانوني",
+  visitor:"مستخدم"
+ }[type]||"مستخدم";
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* ================= ACCOUNT ================= */
 
-function login(event){
+function register(e){
+ e.preventDefault();
 
-  event.preventDefault();
+ const users=getData(KEYS.users,[]);
+ const email=document.getElementById("registerEmail").value.trim().toLowerCase();
 
-  const email =
-    document.getElementById("loginEmail").value.trim().toLowerCase();
+ if(users.some(u=>u.email===email)){
+  toast("البريد الإلكتروني مستخدم بالفعل");
+  return;
+ }
 
-  const password =
-    document.getElementById("loginPassword").value;
+ const user={
+  id:uid("user"),
+  name:document.getElementById("registerName").value.trim(),
+  email,
+  password:document.getElementById("registerPassword").value,
+  type:document.getElementById("registerType").value,
+  photo:"",
+  profile:{
+   specialty:"",
+   city:"",
+   bio:"",
+   services:"",
+   license:""
+  },
+  createdAt:new Date().toISOString()
+ };
 
-  const user =
-    getUsers().find(
-      u => u.email === email && u.password === password
-    );
+ users.push(user);
+ setData(KEYS.users,users);
+ localStorage.setItem(KEYS.current,user.id);
 
-  if(!user){
-    toast("البريد الإلكتروني أو كلمة المرور غير صحيحة");
-    return;
-  }
-
-  currentUserId = user.id;
-
-  localStorage.setItem(
-    "wasit_current_user",
-    user.id
-  );
-
-  closeModal("loginModal");
-
-  toast("تم تسجيل الدخول");
-
-  updateAccountArea();
-  renderAll();
-
-  document.getElementById("dashboard")
-    .classList.add("active");
-
-  document.getElementById("dashboard")
-    .scrollIntoView({behavior:"smooth"});
+ closeModal("registerModal");
+ updateAccount();
+ toast("تم إنشاء الحساب بنجاح");
 }
 
-/* =========================
-   LOGOUT
-========================= */
+function login(e){
+ e.preventDefault();
+
+ const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+ const password=document.getElementById("loginPassword").value;
+
+ const user=getData(KEYS.users,[]).find(
+  u=>u.email===email && u.password===password
+ );
+
+ if(!user){
+  toast("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+  return;
+ }
+
+ localStorage.setItem(KEYS.current,user.id);
+ closeModal("loginModal");
+ updateAccount();
+ toast("مرحبًا "+user.name);
+ renderCommunity();
+ renderProfiles();
+}
 
 function logout(){
-
-  currentUserId = null;
-  localStorage.removeItem("wasit_current_user");
-
-  updateAccountArea();
-
-  document.getElementById("dashboard")
-    .classList.remove("active");
-
-  toast("تم تسجيل الخروج");
+ localStorage.removeItem(KEYS.current);
+ updateAccount();
+ toast("تم تسجيل الخروج");
+ go("home");
 }
 
-/* =========================
-   ACCOUNT AREA
-========================= */
+function deleteAccount(){
+ const u=currentUser();
+ if(!u)return;
 
-function updateAccountArea(){
+ if(!confirm("هل أنت متأكد من إلغاء الحساب وحذف بياناته من هذه النسخة؟"))return;
 
-  const area =
-    document.getElementById("accountArea");
+ let users=getData(KEYS.users,[]);
+ users=users.filter(x=>x.id!==u.id);
+ setData(KEYS.users,users);
 
-  const user = currentUser();
+ setData(
+  KEYS.posts,
+  getData(KEYS.posts,[]).filter(x=>x.userId!==u.id)
+ );
 
-  if(!user){
+ setData(
+  KEYS.research,
+  getData(KEYS.research,[]).filter(x=>x.userId!==u.id)
+ );
 
-    area.innerHTML = `
-      <button class="btn btn-gold small"
-              onclick="openModal('loginModal')">
-        <i class="fa-solid fa-right-to-bracket"></i>
-        دخول
-      </button>
+ setData(
+  KEYS.sessions,
+  getData(KEYS.sessions,[]).filter(x=>x.userId!==u.id)
+ );
 
-      <button class="btn btn-light small"
-              onclick="openModal('registerModal')">
-        إنشاء حساب
-      </button>
-    `;
+ localStorage.removeItem(KEYS.current);
+ updateAccount();
+ toast("تم حذف الحساب");
+ go("home");
+}
 
-    return;
-  }
+function updateAccount(){
+ const area=document.getElementById("accountArea");
+ const u=currentUser();
 
-  area.innerHTML = `
-    <button class="btn btn-light small"
-            onclick="go('dashboard')">
-      <i class="fa-solid fa-user"></i>
-      ${escapeHtml(user.name)}
-    </button>
-
-    <button class="btn btn-danger small"
-            onclick="logout()">
-      خروج
-    </button>
+ if(!u){
+  area.innerHTML=`
+   <button class="btn btn-light btn-small" onclick="openLogin()">دخول</button>
+   <button class="btn btn-gold btn-small" onclick="openRegister()">حساب جديد</button>
   `;
+  document.getElementById("communityUserName").textContent="زائر المنصة";
+  return;
+ }
+
+ const avatar=u.photo
+ ? `<img src="${safeImage(u.photo)}">`
+ : `<i class="fa-solid fa-user"></i>`;
+
+ area.innerHTML=`
+  <div class="mini-avatar" style="width:36px;height:36px">${avatar}</div>
+  <button class="btn btn-light btn-small" onclick="openProfileModal()">${escapeHtml(u.name)}</button>
+  <button class="btn btn-light btn-small" onclick="deleteAccount()" title="حذف الحساب">
+   <i class="fa-solid fa-user-xmark"></i>
+  </button>
+  <button class="btn btn-gold btn-small" onclick="logout()">خروج</button>
+ `;
+
+ document.getElementById("communityUserName").textContent=u.name;
+
+ if(u.photo){
+  document.getElementById("communityUserAvatar").innerHTML=
+   `<img src="${safeImage(u.photo)}">`;
+ }
 }
 
-/* =========================
-   PROFILE
-========================= */
-
-function loadProfileForm(){
-
-  const user = currentUser();
-
-  if(!user) return;
-
-  const p = user.profile || {};
-
-  document.getElementById("profileType").value =
-    user.type || "lawyer";
-
-  document.getElementById("profileSpecialty").value =
-    p.specialty || "";
-
-  document.getElementById("profileCity").value =
-    p.city || "";
-
-  document.getElementById("profileBio").value =
-    p.bio || "";
-
-  document.getElementById("profileServices").value =
-    p.services || "";
-
-  document.getElementById("profileLicense").value =
-    p.license || "";
+function safeImage(src){
+ return String(src).startsWith("data:image/") ? src : "";
 }
 
-function saveProfile(event){
+/* ================= IMAGE ================= */
 
-  event.preventDefault();
+function imageToDataURL(file,maxSize=1000){
+ return new Promise((resolve,reject)=>{
+  if(!file)return resolve("");
 
-  const user = currentUser();
+  const reader=new FileReader();
 
-  if(!user){
-    toast("يجب تسجيل الدخول");
-    return;
-  }
+  reader.onload=()=>{
+   const img=new Image();
 
-  const users = getUsers();
+   img.onload=()=>{
+    let w=img.width;
+    let h=img.height;
 
-  const index =
-    users.findIndex(u => u.id === user.id);
+    if(Math.max(w,h)>maxSize){
+     if(w>h){
+      h=Math.round(h*maxSize/w);
+      w=maxSize;
+     }else{
+      w=Math.round(w*maxSize/h);
+      h=maxSize;
+     }
+    }
 
-  if(index < 0) return;
+    const canvas=document.createElement("canvas");
+    canvas.width=w;
+    canvas.height=h;
 
-  users[index].type =
-    document.getElementById("profileType").value;
+    const ctx=canvas.getContext("2d");
+    ctx.drawImage(img,0,0,w,h);
 
-  users[index].profile = {
-    specialty:
-      document.getElementById("profileSpecialty").value.trim(),
+    resolve(canvas.toDataURL("image/jpeg",.82));
+   };
 
-    city:
-      document.getElementById("profileCity").value.trim(),
-
-    bio:
-      document.getElementById("profileBio").value.trim(),
-
-    services:
-      document.getElementById("profileServices").value.trim(),
-
-    license:
-      document.getElementById("profileLicense").value.trim()
+   img.onerror=reject;
+   img.src=reader.result;
   };
 
-  saveUsers(users);
-
-  closeModal("profileModal");
-
-  toast("تم حفظ الصفحة المهنية");
-
-  renderAll();
+  reader.onerror=reject;
+  reader.readAsDataURL(file);
+ });
 }
 
-/* =========================
-   PHOTO
-========================= */
+/* ================= PROFILE ================= */
 
-function renderPhotoPreview(){
+async function saveProfile(e){
+ e.preventDefault();
 
-  const user = currentUser();
+ const u=currentUser();
+ if(!u)return;
 
-  if(!user) return;
+ const users=getData(KEYS.users,[]);
+ const index=users.findIndex(x=>x.id===u.id);
 
-  const el =
-    document.getElementById("photoPreview");
+ let photo=users[index].photo||"";
+ const file=document.getElementById("profilePhoto").files[0];
 
-  if(user.photo){
+ if(file){
+  photo=await imageToDataURL(file,700);
+ }
 
-    el.innerHTML = `
-      <img src="${safeUrl(user.photo)}"
-           class="avatar avatar-lg"
-           style="display:inline-block">
-    `;
-
-  }else{
-
-    el.innerHTML = `
-      <div class="avatar avatar-lg"
-           style="margin:auto">
-        ${escapeHtml(user.name.charAt(0))}
-      </div>
-    `;
+ users[index]={
+  ...users[index],
+  photo,
+  profile:{
+   specialty:document.getElementById("profileSpecialty").value.trim(),
+   city:document.getElementById("profileCity").value.trim(),
+   license:document.getElementById("profileLicense").value.trim(),
+   services:document.getElementById("profileServices").value.trim(),
+   bio:document.getElementById("profileBio").value.trim()
   }
+ };
+
+ setData(KEYS.users,users);
+ closeModal("profileModal");
+ updateAccount();
+ renderProfiles();
+ toast("تم حفظ الصفحة المهنية");
 }
 
-async function savePhoto(){
-
-  const user = currentUser();
-
-  if(!user) return;
-
-  const file =
-    document.getElementById("photoInput").files[0];
-
-  if(!file){
-    toast("اختر صورة أولًا");
-    return;
-  }
-
-  try{
-
-    const photo =
-      await imageToDataURL(file,600);
-
-    const users = getUsers();
-
-    const index =
-      users.findIndex(u => u.id === user.id);
-
-    users[index].photo = photo;
-
-    saveUsers(users);
-
-    closeModal("photoModal");
-
-    toast("تم تحديث الصورة");
-
-    renderAll();
-
-  }catch(e){
-
-    toast("تعذر حفظ الصورة");
-
-  }
+function filterProfiles(type,button){
+ document.querySelectorAll("#profiles .tab").forEach(x=>x.classList.remove("active"));
+ button.classList.add("active");
+ renderProfiles(type);
 }
 
-/* =========================
-   PROFILE LIST
-========================= */
+function renderProfiles(type="all"){
+ const users=getData(KEYS.users,[]);
+ const grid=document.getElementById("profilesGrid");
 
-function typeLabel(type){
+ const list=type==="all"
+  ? users
+  : users.filter(u=>u.type===type);
 
-  const map = {
-    lawyer:"محامي",
-    trainee:"محامي تحت التمرين",
-    judge:"قاضي",
-    arbitrator:"محكم",
-    researcher:"باحث قانوني",
-    visitor:"مستخدم"
-  };
+ if(!list.length){
+  grid.innerHTML=`<div class="empty" style="grid-column:1/-1">لا توجد صفحات بعد.</div>`;
+  return;
+ }
 
-  return map[type] || type || "مستخدم";
-}
-
-function avatarHtml(user){
-
-  if(user?.photo){
-
-    return `
-      <div class="avatar">
-        <img src="${safeUrl(user.photo)}">
-      </div>
-    `;
-
-  }
+ grid.innerHTML=list.map(u=>{
+  const p=u.profile||{};
+  const avatar=u.photo
+   ? `<img src="${safeImage(u.photo)}">`
+   : `<i class="fa-solid fa-user"></i>`;
 
   return `
-    <div class="avatar">
-      ${escapeHtml((user?.name || "?").charAt(0))}
-    </div>
+   <div class="card profile">
+    <div class="avatar">${avatar}</div>
+    <h3>${escapeHtml(u.name)}</h3>
+    <span class="badge">${typeName(u.type)}</span>
+    <p class="text-muted">
+     ${escapeHtml(p.specialty||"لم يحدد التخصص")}
+    </p>
+    <p>${escapeHtml(p.city||"")}</p>
+    <button class="btn btn-primary btn-small"
+     onclick="showProfile('${u.id}')">
+     عرض الصفحة
+    </button>
+   </div>
   `;
+ }).join("");
 }
-
-function renderProfiles(){
-
-  const users = getUsers();
-
-  const query =
-    (document.getElementById("profileSearch")?.value || "")
-      .toLowerCase()
-      .trim();
-
-  const filtered =
-    users.filter(u => {
-
-      const text =
-        `${u.name} ${u.type}
-        ${u.profile?.specialty || ""}
-        ${u.profile?.city || ""}`.toLowerCase();
-
-      return text.includes(query);
-    });
-
-  const container =
-    document.getElementById("profilesList");
-
-  if(!filtered.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        لا توجد صفحات مهنية حتى الآن.
-        أنشئ حسابًا وأنشئ صفحتك.
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="grid">
-      ${filtered.map(u => {
-
-        const p = u.profile || {};
-
-        return `
-          <div class="card">
-
-            <div class="profile-card">
-
-              ${avatarHtml(u)}
-
-              <div>
-                <h3>${escapeHtml(u.name)}</h3>
-                <div class="muted">
-                  ${escapeHtml(typeLabel(u.type))}
-                </div>
-              </div>
-
-            </div>
-
-            <p>
-              <strong>التخصص:</strong>
-              ${escapeHtml(p.specialty || "غير محدد")}
-            </p>
-
-            <p>
-              <strong>المدينة:</strong>
-              ${escapeHtml(p.city || "غير محددة")}
-            </p>
-
-            <div class="profile-actions">
-
-              <button class="btn btn-primary small"
-                onclick="showProfile('${u.id}')">
-                عرض الصفحة
-              </button>
-
-              ${
-                currentUser() && currentUser().id !== u.id
-                ?
-                `<button class="btn btn-gold small"
-                  onclick="openMessage('${u.id}')">
-                  تواصل
-                </button>`
-                : ""
-              }
-
-            </div>
-
-          </div>
-        `;
-
-      }).join("")}
-    </div>
-  `;
-}
-
-/* =========================
-   PUBLIC PROFILE
-========================= */
 
 function showProfile(id){
+ const u=getData(KEYS.users,[]).find(x=>x.id===id);
+ if(!u)return;
 
-  const user =
-    getUsers().find(u => u.id === id);
+ const p=u.profile||{};
 
-  if(!user){
-    toast("الصفحة غير موجودة");
-    return;
-  }
-
-  const p = user.profile || {};
-
-  const posts =
-    getPosts()
-      .filter(x => x.userId === id);
-
-  const research =
-    getResearch()
-      .filter(x => x.userId === id);
-
-  const sessions =
-    getSessions()
-      .filter(x => x.userId === id && x.public);
-
-  document.getElementById("profileDetail").innerHTML = `
-
-    <div style="text-align:center">
-
-      ${avatarHtml(user)}
-
-      <h2>${escapeHtml(user.name)}</h2>
-
-      <div class="tag">
-        ${escapeHtml(typeLabel(user.type))}
-      </div>
-
-    </div>
-
-    <hr>
-
-    <p>
-      <strong>التخصص:</strong>
-      ${escapeHtml(p.specialty || "غير محدد")}
-    </p>
-
-    <p>
-      <strong>المدينة:</strong>
-      ${escapeHtml(p.city || "غير محددة")}
-    </p>
-
-    <p>
-      <strong>رقم الترخيص / القيد:</strong>
-      ${escapeHtml(p.license || "غير منشور")}
-    </p>
-
-    <h3>نبذة</h3>
-
-    <p style="white-space:pre-wrap;line-height:1.9">
-      ${escapeHtml(p.bio || "لا توجد نبذة منشورة.")}
-    </p>
-
-    <h3>الخدمات</h3>
-
-    <p style="white-space:pre-wrap;line-height:1.9">
-      ${escapeHtml(p.services || "لا توجد خدمات منشورة.")}
-    </p>
-
-    <hr>
-
-    <h3>منشوراته (${posts.length})</h3>
-
+ document.getElementById("profileDetail").innerHTML=`
+  <div class="center">
+   <div class="avatar">
     ${
-      posts.length
-      ?
-      posts.slice(0,5).map(post => `
-        <div class="card" style="margin-bottom:10px">
-          ${escapeHtml(post.text)}
-        </div>
-      `).join("")
-      :
-      `<p class="muted">لا توجد منشورات.</p>`
+     u.photo
+     ? `<img src="${safeImage(u.photo)}">`
+     : `<i class="fa-solid fa-user"></i>`
     }
+   </div>
 
-    <h3>أبحاثه (${research.length})</h3>
+   <h2>${escapeHtml(u.name)}</h2>
+   <span class="badge">${typeName(u.type)}</span>
 
-    ${
-      research.length
-      ?
-      research.slice(0,5).map(r => `
-        <div class="card" style="margin-bottom:10px">
-          <strong>${escapeHtml(r.title)}</strong>
-          <p class="muted">${escapeHtml(r.specialty)}</p>
-          <button class="btn btn-primary small"
-            onclick="showResearch('${r.id}')">
-            قراءة
-          </button>
-        </div>
-      `).join("")
-      :
-      `<p class="muted">لا توجد أبحاث.</p>`
-    }
+   <p><strong>التخصص:</strong>
+    ${escapeHtml(p.specialty||"غير محدد")}
+   </p>
 
-    <h3>إعلانات الجلسات (${sessions.length})</h3>
+   <p><strong>المدينة:</strong>
+    ${escapeHtml(p.city||"غير محددة")}
+   </p>
 
-    ${
-      sessions.length
-      ?
-      sessions.map(s => `
-        <div class="card" style="margin-bottom:10px">
-          <strong>${escapeHtml(s.caseNumber)}</strong>
-          <p>
-            ${escapeHtml(s.court)}
-          </p>
-          <p>
-            ${escapeHtml(s.date)}
-            —
-            ${escapeHtml(s.time)}
-          </p>
-        </div>
-      `).join("")
-      :
-      `<p class="muted">لا توجد إعلانات جلسات عامة.</p>`
-    }
+   <p><strong>الخدمات:</strong>
+    ${escapeHtml(p.services||"غير محددة")}
+   </p>
 
-    ${
-      currentUser() && currentUser().id !== user.id
-      ?
-      `
-      <button class="btn btn-gold"
-        onclick="closeModal('profileDetailModal');openMessage('${user.id}')">
-        <i class="fa-solid fa-envelope"></i>
-        التواصل مع صاحب الصفحة
-      </button>
-      `
-      :
-      ""
-    }
+   <p>${escapeHtml(p.bio||"")}</p>
+  </div>
+ `;
+
+ document.getElementById("profileDetailModal").classList.add("show");
+}
+
+/* ================= COMMUNITY ================= */
+
+function filterCommunity(type){
+ communityFilter=type;
+ renderCommunity();
+}
+
+async function createPost(e){
+ e.preventDefault();
+
+ const u=currentUser();
+ if(!u)return;
+
+ let image="";
+ const file=document.getElementById("postImage").files[0];
+
+ if(file){
+  image=await imageToDataURL(file,1200);
+ }
+
+ const posts=getData(KEYS.posts,[]);
+
+ posts.unshift({
+  id:uid("post"),
+  userId:u.id,
+  category:document.getElementById("postCategory").value,
+  title:document.getElementById("postTitle").value.trim(),
+  text:document.getElementById("postText").value.trim(),
+  image,
+  likes:[],
+  comments:[],
+  createdAt:new Date().toISOString()
+ });
+
+ setData(KEYS.posts,posts);
+
+ e.target.reset();
+ closeModal("postModal");
+ renderCommunity();
+ toast("تم نشر الموضوع");
+}
+
+function renderCommunity(){
+ const box=document.getElementById("communityPosts");
+ let posts=getData(KEYS.posts,[]);
+ const users=getData(KEYS.users,[]);
+ const search=(document.getElementById("communitySearch")?.value||"")
+  .trim().toLowerCase();
+
+ if(communityFilter!=="all"){
+  posts=posts.filter(p=>p.category===communityFilter);
+ }
+
+ if(search){
+  posts=posts.filter(p=>
+   (p.title||"").toLowerCase().includes(search) ||
+   (p.text||"").toLowerCase().includes(search)
+  );
+ }
+
+ const sort=document.getElementById("communitySort")?.value||"new";
+
+ posts.sort((a,b)=>{
+  if(sort==="likes")return (b.likes?.length||0)-(a.likes?.length||0);
+  if(sort==="comments")return (b.comments?.length||0)-(a.comments?.length||0);
+  return new Date(b.createdAt)-new Date(a.createdAt);
+ });
+
+ if(!posts.length){
+  box.innerHTML=`
+   <div class="post-box empty">
+    <i class="fa-solid fa-comments" style="font-size:35px"></i>
+    <p>لا توجد منشورات مطابقة.</p>
+   </div>`;
+ }else{
+  box.innerHTML=posts.map(p=>renderPost(p,users)).join("");
+ }
+
+ renderActiveTopics();
+}
+
+function renderPost(p,users){
+ const author=users.find(u=>u.id===p.userId)||{
+  name:"مستخدم",
+  type:"visitor",
+  photo:""
+ };
+
+ const me=currentUser();
+ const liked=me && (p.likes||[]).includes(me.id);
+
+ const comments=(p.comments||[]).map(c=>{
+  const cu=users.find(u=>u.id===c.userId);
+  return `
+   <div class="comment">
+    <strong>${escapeHtml(cu?.name||"مستخدم")}:</strong>
+    ${escapeHtml(c.text)}
+   </div>
   `;
+ }).join("");
 
-  openModal("profileDetailModal");
-}
+ return `
+  <div class="post-box">
+   <div class="post-head">
+    <div class="mini-avatar">
+     ${
+      author.photo
+      ? `<img src="${safeImage(author.photo)}">`
+      : `<i class="fa-solid fa-user"></i>`
+     }
+    </div>
+    <div>
+     <strong>${escapeHtml(author.name)}</strong>
+     <div class="text-muted" style="font-size:12px">
+      ${typeName(author.type)} · ${formatDate(p.createdAt)}
+     </div>
+    </div>
+   </div>
 
-/* =========================
-   POSTS
-========================= */
+   <span class="badge">${escapeHtml(p.category)}</span>
 
-function renderPostCreateArea(){
+   ${p.title?`<h3>${escapeHtml(p.title)}</h3>`:""}
 
-  const area =
-    document.getElementById("postCreateArea");
+   <div class="post-content">${escapeHtml(p.text)}</div>
 
-  if(currentUser()){
+   ${
+    p.image
+    ? `<img class="post-image" src="${safeImage(p.image)}">`
+    :""
+   }
 
-    area.innerHTML = `
-      <div class="card" style="margin-bottom:25px">
+   <div class="post-actions">
+    <button class="action" onclick="toggleLike('${p.id}')">
+     <i class="${liked?"fa-solid":"fa-regular"} fa-heart"></i>
+     ${p.likes?.length||0}
+    </button>
 
-        <h3>
-          <i class="fa-solid fa-pen"></i>
-          ماذا تريد أن تنشر؟
-        </h3>
+    <button class="action" onclick="focusComment('${p.id}')">
+     <i class="fa-regular fa-comment"></i>
+     ${p.comments?.length||0}
+    </button>
 
-        <button class="btn btn-primary"
-          onclick="openModal('postModal')">
-          إنشاء منشور
-        </button>
+    <button class="action" onclick="sharePost('${p.id}')">
+     <i class="fa-solid fa-share-nodes"></i> مشاركة
+    </button>
 
-      </div>
-    `;
-
-  }else{
-
-    area.innerHTML = `
-      <div class="card" style="margin-bottom:25px;text-align:center">
-
-        <p class="muted">
-          لتتمكن من نشر منشور، قم بإنشاء حساب.
-        </p>
-
-        <button class="btn btn-primary"
-          onclick="openModal('registerModal')">
-          إنشاء حساب
-        </button>
-
-      </div>
-    `;
-  }
-}
-
-async function createPost(event){
-
-  event.preventDefault();
-
-  const user = currentUser();
-
-  if(!user){
-    toast("يجب تسجيل الدخول");
-    return;
-  }
-
-  const text =
-    document.getElementById("postText").value.trim();
-
-  const file =
-    document.getElementById("postImage").files[0];
-
-  if(!text && !file){
-    toast("اكتب محتوى المنشور أو أضف صورة");
-    return;
-  }
-
-  let image = "";
-
-  try{
-
-    if(file){
-      image = await imageToDataURL(file,1000);
+    ${
+     me && me.id===p.userId
+     ? `<button class="action" onclick="deletePost('${p.id}')">
+       <i class="fa-solid fa-trash"></i> حذف
+       </button>`
+     :""
     }
+   </div>
 
-  }catch(e){
+   <div class="mt">
+    ${comments}
 
-    toast("تعذر معالجة الصورة");
-    return;
-  }
-
-  const posts = getPosts();
-
-  posts.unshift({
-
-    id:uid("post"),
-    userId:user.id,
-    text,
-    image,
-    likes:[],
-    comments:[],
-    createdAt:new Date().toISOString()
-
-  });
-
-  savePosts(posts);
-
-  document.getElementById("postText").value = "";
-  document.getElementById("postImage").value = "";
-
-  closeModal("postModal");
-
-  toast("تم نشر المنشور");
-
-  renderAll();
-}
-
-function renderPosts(){
-
-  const container =
-    document.getElementById("postsList");
-
-  const posts =
-    getPosts().sort(
-      (a,b) =>
-      new Date(b.createdAt) -
-      new Date(a.createdAt)
-    );
-
-  if(!posts.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        لا توجد منشورات حتى الآن.
+    ${
+     me
+     ? `
+      <div class="flex mt">
+       <input id="comment_${p.id}" placeholder="اكتب تعليقًا...">
+       <button class="btn btn-primary btn-small"
+        onclick="addComment('${p.id}')">
+        تعليق
+       </button>
       </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    posts.map(post => {
-
-      const user =
-        getUsers().find(u => u.id === post.userId);
-
-      if(!user) return "";
-
-      const liked =
-        currentUser() &&
-        post.likes?.includes(currentUser().id);
-
-      return `
-
-        <article class="post">
-
-          <div class="post-head">
-
-            ${avatarHtml(user)}
-
-            <div class="post-author">
-
-              <strong>
-                <a href="#"
-                   onclick="showProfile('${user.id}');return false;">
-                  ${escapeHtml(user.name)}
-                </a>
-              </strong>
-
-              <small>
-                ${escapeHtml(typeLabel(user.type))}
-                ·
-                ${formatDate(post.createdAt)}
-              </small>
-
-            </div>
-
-          </div>
-
-          <div class="post-body">
-            ${escapeHtml(post.text)}
-          </div>
-
-          ${
-            post.image
-            ?
-            `<img class="post-image"
-                  src="${safeUrl(post.image)}">`
-            :
-            ""
-          }
-
-          <div class="post-actions">
-
-            <button onclick="toggleLike('${post.id}')">
-              <i class="fa-solid fa-heart"
-                 style="${liked ? 'color:#c0392b':''}"></i>
-              ${post.likes?.length || 0}
-            </button>
-
-            <button onclick="focusComment('${post.id}')">
-              <i class="fa-solid fa-comment"></i>
-              ${post.comments?.length || 0}
-            </button>
-
-            <button onclick="sharePost('${post.id}')">
-              <i class="fa-solid fa-share-nodes"></i>
-              مشاركة
-            </button>
-
-            ${
-              currentUser()?.id === post.userId
-              ?
-              `<button onclick="deletePost('${post.id}')">
-                <i class="fa-solid fa-trash"></i>
-              </button>`
-              :
-              ""
-            }
-
-          </div>
-
-          <div class="comments">
-
-            ${
-              (post.comments || []).map(c => {
-
-                const cu =
-                  getUsers().find(u => u.id === c.userId);
-
-                return `
-                  <div class="comment">
-                    <strong>
-                      ${escapeHtml(cu?.name || "مستخدم")}
-                    </strong>
-                    :
-                    ${escapeHtml(c.text)}
-                  </div>
-                `;
-
-              }).join("")
-            }
-
-            ${
-              currentUser()
-              ?
-              `
-              <div class="comment-form">
-                <input id="comment_${post.id}"
-                       placeholder="اكتب تعليقًا...">
-
-                <button class="btn btn-primary small"
-                        onclick="addComment('${post.id}')">
-                  إرسال
-                </button>
-              </div>
-              `
-              :
-              ""
-            }
-
-          </div>
-
-        </article>
-      `;
-
-    }).join("");
-}
-
-function toggleLike(postId){
-
-  const user = currentUser();
-
-  if(!user){
-    openModal("loginModal");
-    return;
-  }
-
-  const posts = getPosts();
-
-  const post =
-    posts.find(p => p.id === postId);
-
-  if(!post) return;
-
-  post.likes = post.likes || [];
-
-  const index =
-    post.likes.indexOf(user.id);
-
-  if(index >= 0){
-    post.likes.splice(index,1);
-  }else{
-    post.likes.push(user.id);
-  }
-
-  savePosts(posts);
-  renderPosts();
-}
-
-function addComment(postId){
-
-  const user = currentUser();
-
-  if(!user){
-    openModal("loginModal");
-    return;
-  }
-
-  const input =
-    document.getElementById("comment_"+postId);
-
-  const text =
-    input.value.trim();
-
-  if(!text) return;
-
-  const posts = getPosts();
-
-  const post =
-    posts.find(p => p.id === postId);
-
-  if(!post) return;
-
-  post.comments = post.comments || [];
-
-  post.comments.push({
-    userId:user.id,
-    text,
-    createdAt:new Date().toISOString()
-  });
-
-  savePosts(posts);
-
-  renderPosts();
-}
-
-function focusComment(postId){
-
-  setTimeout(()=>{
-
-    const input =
-      document.getElementById("comment_"+postId);
-
-    if(input){
-      input.focus();
+     `
+     : `<small class="text-muted">سجل الدخول للمشاركة والتعليق.</small>`
     }
+   </div>
+  </div>
+ `;
+}
 
-  },100);
+function toggleLike(id){
+ const me=currentUser();
+ if(!me){
+  openLogin();
+  return;
+ }
+
+ const posts=getData(KEYS.posts,[]);
+ const p=posts.find(x=>x.id===id);
+ if(!p)return;
+
+ p.likes=p.likes||[];
+
+ if(p.likes.includes(me.id)){
+  p.likes=p.likes.filter(x=>x!==me.id);
+ }else{
+  p.likes.push(me.id);
+ }
+
+ setData(KEYS.posts,posts);
+ renderCommunity();
+}
+
+function addComment(id){
+ const me=currentUser();
+ if(!me){
+  openLogin();
+  return;
+ }
+
+ const input=document.getElementById("comment_"+id);
+ const text=input?.value.trim();
+
+ if(!text)return;
+
+ const posts=getData(KEYS.posts,[]);
+ const p=posts.find(x=>x.id===id);
+
+ if(!p)return;
+
+ p.comments=p.comments||[];
+ p.comments.push({
+  id:uid("comment"),
+  userId:me.id,
+  text,
+  createdAt:new Date().toISOString()
+ });
+
+ setData(KEYS.posts,posts);
+ renderCommunity();
+}
+
+function focusComment(id){
+ const el=document.getElementById("comment_"+id);
+ if(el){
+  el.focus();
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+ }
 }
 
 function deletePost(id){
+ const me=currentUser();
+ if(!me)return;
 
-  const user = currentUser();
+ if(!confirm("حذف المنشور؟"))return;
 
-  if(!user) return;
+ let posts=getData(KEYS.posts,[]);
+ posts=posts.filter(p=>!(p.id===id && p.userId===me.id));
 
-  if(!confirm("هل تريد حذف المنشور؟")) return;
-
-  savePosts(
-    getPosts().filter(
-      p => !(p.id === id && p.userId === user.id)
-    )
-  );
-
-  toast("تم حذف المنشور");
-  renderAll();
+ setData(KEYS.posts,posts);
+ renderCommunity();
+ toast("تم حذف المنشور");
 }
 
 async function sharePost(id){
+ const url=location.href.split("#")[0]+"#community";
 
-  const url =
-    location.href.split("#")[0] +
-    "#post-" + id;
-
+ try{
   if(navigator.share){
-
-    try{
-      await navigator.share({
-        title:"منشور من منصة وسيط",
-        url
-      });
-      return;
-    }catch(e){}
+   await navigator.share({
+    title:"وسيط القانوني والقضائي",
+    text:"موضوع قانوني على منصة وسيط",
+    url
+   });
+  }else{
+   await navigator.clipboard.writeText(url);
+   toast("تم نسخ رابط المنصة");
   }
-
-  await copyText(url);
-  toast("تم نسخ رابط المنشور");
+ }catch(e){}
 }
 
-/* =========================
-   RESEARCH
-========================= */
+function renderActiveTopics(){
+ const posts=getData(KEYS.posts,[]);
+ const topics={};
 
-async function createResearch(event){
+ posts.forEach(p=>{
+  topics[p.category]=(topics[p.category]||0)+1;
+ });
 
-  event.preventDefault();
+ const list=Object.entries(topics)
+  .sort((a,b)=>b[1]-a[1])
+  .slice(0,6);
 
-  const user = currentUser();
+ document.getElementById("activeTopics").innerHTML=
+ list.length
+ ? list.map(x=>`
+   <div class="topic">
+    <h4>${escapeHtml(x[0])}</h4>
+    <small>${x[1]} منشور</small>
+   </div>
+  `).join("")
+ : `<p class="text-muted">ستظهر الموضوعات هنا بعد نشرها.</p>`;
+}
 
-  if(!user){
-    toast("يجب تسجيل الدخول");
-    return;
-  }
+/* ================= RESEARCH ================= */
 
-  const title =
-    document.getElementById("researchTitle").value.trim();
+function saveResearch(e){
+ e.preventDefault();
 
-  const specialty =
-    document.getElementById("researchSpecialty").value.trim();
+ const u=currentUser();
+ if(!u)return;
 
-  const abstract =
-    document.getElementById("researchAbstract").value.trim();
+ const data=getData(KEYS.research,[]);
 
-  const body =
-    document.getElementById("researchBody").value.trim();
+ data.unshift({
+  id:uid("research"),
+  userId:u.id,
+  title:document.getElementById("researchTitle").value.trim(),
+  specialty:document.getElementById("researchSpecialty").value.trim(),
+  abstract:document.getElementById("researchAbstract").value.trim(),
+  body:document.getElementById("researchBody").value.trim(),
+  createdAt:new Date().toISOString()
+ });
 
-  const file =
-    document.getElementById("researchCover").files[0];
-
-  let cover = "";
-
-  try{
-
-    if(file){
-      cover =
-        await imageToDataURL(file,1000);
-    }
-
-  }catch(e){
-
-    toast("تعذر معالجة الغلاف");
-    return;
-  }
-
-  const research = getResearch();
-
-  research.unshift({
-
-    id:uid("research"),
-    userId:user.id,
-    title,
-    specialty,
-    abstract,
-    body,
-    cover,
-    createdAt:new Date().toISOString()
-
-  });
-
-  saveResearch(research);
-
-  document.getElementById("researchTitle").value = "";
-  document.getElementById("researchSpecialty").value = "";
-  document.getElementById("researchAbstract").value = "";
-  document.getElementById("researchBody").value = "";
-  document.getElementById("researchCover").value = "";
-
-  closeModal("researchModal");
-
-  toast("تم نشر البحث");
-
-  renderAll();
+ setData(KEYS.research,data);
+ e.target.reset();
+ closeModal("researchModal");
+ renderResearch();
+ toast("تم نشر البحث");
 }
 
 function renderResearch(){
+ const box=document.getElementById("researchGrid");
+ const data=getData(KEYS.research,[]);
+ const users=getData(KEYS.users,[]);
 
-  const container =
-    document.getElementById("researchList");
+ if(!data.length){
+  box.innerHTML=`
+   <div class="empty" style="grid-column:1/-1">
+    لا توجد أبحاث منشورة حتى الآن.
+   </div>`;
+  return;
+ }
 
-  const query =
-    (document.getElementById("researchSearch")?.value || "")
-      .toLowerCase()
-      .trim();
+ box.innerHTML=data.map(r=>{
+  const u=users.find(x=>x.id===r.userId);
 
-  const list =
-    getResearch()
-      .filter(r => {
-
-        const text =
-          `${r.title}
-           ${r.specialty}
-           ${r.abstract}`.toLowerCase();
-
-        return text.includes(query);
-
-      })
-      .sort(
-        (a,b) =>
-        new Date(b.createdAt) -
-        new Date(a.createdAt)
-      );
-
-  if(!list.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        لا توجد أبحاث مطابقة.
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="grid">
-
-      ${list.map(r => {
-
-        const user =
-          getUsers().find(u => u.id === r.userId);
-
-        return `
-
-          <article class="card research-card">
-
-            ${
-              r.cover
-              ?
-              `<img class="research-cover"
-                    src="${safeUrl(r.cover)}">`
-              :
-              `<div class="card-icon">
-                <i class="fa-solid fa-book-open"></i>
-              </div>`
-            }
-
-            <h3>${escapeHtml(r.title)}</h3>
-
-            <div class="tags">
-              <span class="tag">
-                ${escapeHtml(r.specialty)}
-              </span>
-            </div>
-
-            <p class="muted">
-              الباحث:
-              ${escapeHtml(user?.name || "مستخدم")}
-            </p>
-
-            <p>
-              ${escapeHtml(
-                (r.abstract || "").slice(0,220)
-              )}
-              ${(r.abstract || "").length > 220 ? "..." : ""}
-            </p>
-
-            <button class="btn btn-primary small"
-              onclick="showResearch('${r.id}')">
-              قراءة البحث
-            </button>
-
-          </article>
-        `;
-
-      }).join("")}
-
+  return `
+   <div class="card">
+    <span class="badge">${escapeHtml(r.specialty||"بحث قانوني")}</span>
+    <h3>${escapeHtml(r.title)}</h3>
+    <p class="text-muted">${escapeHtml(r.abstract||"")}</p>
+    <small>
+     بواسطة ${escapeHtml(u?.name||"باحث")}
+    </small>
+    <div class="mt">
+     <button class="btn btn-primary btn-small"
+      onclick="showResearch('${r.id}')">
+      قراءة البحث
+     </button>
     </div>
+   </div>
   `;
+ }).join("");
 }
 
 function showResearch(id){
+ const r=getData(KEYS.research,[]).find(x=>x.id===id);
+ if(!r)return;
 
-  const r =
-    getResearch().find(x => x.id === id);
+ document.getElementById("researchDetail").innerHTML=`
+  <span class="badge">${escapeHtml(r.specialty||"بحث قانوني")}</span>
+  <h2>${escapeHtml(r.title)}</h2>
+  <p class="text-muted">${escapeHtml(r.abstract||"")}</p>
+  <hr>
+  <div style="white-space:pre-wrap;line-height:2">
+   ${escapeHtml(r.body)}
+  </div>
+ `;
 
-  if(!r){
-    toast("البحث غير موجود");
-    return;
-  }
-
-  const user =
-    getUsers().find(u => u.id === r.userId);
-
-  document.getElementById("researchDetail").innerHTML = `
-
-    ${
-      r.cover
-      ?
-      `<img src="${safeUrl(r.cover)}"
-            style="width:100%;max-height:350px;object-fit:cover;border-radius:12px">`
-      :
-      ""
-    }
-
-    <h2>${escapeHtml(r.title)}</h2>
-
-    <div class="tags">
-      <span class="tag">
-        ${escapeHtml(r.specialty)}
-      </span>
-    </div>
-
-    <p class="muted">
-      إعداد:
-      ${escapeHtml(user?.name || "مستخدم")}
-    </p>
-
-    <hr>
-
-    <h3>الملخص</h3>
-
-    <p style="white-space:pre-wrap;line-height:2">
-      ${escapeHtml(r.abstract)}
-    </p>
-
-    <h3>البحث</h3>
-
-    <div style="white-space:pre-wrap;line-height:2">
-      ${escapeHtml(r.body)}
-    </div>
-
-    ${
-      currentUser()?.id === r.userId
-      ?
-      `
-      <br>
-      <button class="btn btn-danger"
-        onclick="deleteResearch('${r.id}')">
-        حذف البحث
-      </button>
-      `
-      :
-      ""
-    }
-  `;
-
-  openModal("researchDetailModal");
+ document.getElementById("researchDetailModal").classList.add("show");
 }
 
-function deleteResearch(id){
+/* ================= SESSIONS ================= */
 
-  const user = currentUser();
+function saveSession(e){
+ e.preventDefault();
 
-  if(!user) return;
+ const u=currentUser();
+ if(!u)return;
 
-  if(!confirm("هل تريد حذف هذا البحث؟")) return;
+ const sessions=getData(KEYS.sessions,[]);
 
-  saveResearch(
-    getResearch().filter(
-      r => !(r.id === id && r.userId === user.id)
-    )
-  );
+ sessions.unshift({
+  id:uid("session"),
+  userId:u.id,
+  caseNumber:document.getElementById("sessionCase").value.trim(),
+  court:document.getElementById("sessionCourt").value.trim(),
+  date:document.getElementById("sessionDate").value,
+  time:document.getElementById("sessionTime").value,
+  type:document.getElementById("sessionType").value,
+  note:document.getElementById("sessionNote").value.trim(),
+  public:document.getElementById("sessionPublic").checked,
+  createdAt:new Date().toISOString()
+ });
 
-  closeModal("researchDetailModal");
+ setData(KEYS.sessions,sessions);
 
-  toast("تم حذف البحث");
-
-  renderAll();
-}
-
-/* =========================
-   SESSIONS
-========================= */
-
-function renderSessionCreateArea(){
-
-  const area =
-    document.getElementById("sessionCreateArea");
-
-  if(currentUser()){
-
-    area.innerHTML = `
-      <div class="card" style="margin-bottom:25px">
-
-        <h3>إعلان موعد جلسة</h3>
-
-        <p class="muted">
-          يمكنك تحديد ما إذا كان الإعلان عامًا أو خاصًا بحسابك.
-        </p>
-
-        <button class="btn btn-primary"
-          onclick="openModal('sessionModal')">
-          <i class="fa-solid fa-calendar-plus"></i>
-          إضافة موعد
-        </button>
-
-      </div>
-    `;
-
-  }else{
-
-    area.innerHTML = `
-      <div class="card" style="margin-bottom:25px;text-align:center">
-
-        <p class="muted">
-          لإضافة موعد جلسة، يجب تسجيل الدخول.
-        </p>
-
-        <button class="btn btn-primary"
-          onclick="openModal('loginModal')">
-          تسجيل الدخول
-        </button>
-
-      </div>
-    `;
-  }
-}
-
-function createSession(event){
-
-  event.preventDefault();
-
-  const user = currentUser();
-
-  if(!user){
-    toast("يجب تسجيل الدخول");
-    return;
-  }
-
-  const session = {
-
-    id:uid("session"),
-    userId:user.id,
-
-    caseNumber:
-      document.getElementById("sessionCase").value.trim(),
-
-    court:
-      document.getElementById("sessionCourt").value.trim(),
-
-    date:
-      document.getElementById("sessionDate").value,
-
-    time:
-      document.getElementById("sessionTime").value,
-
-    type:
-      document.getElementById("sessionType").value,
-
-    note:
-      document.getElementById("sessionNote").value.trim(),
-
-    public:
-      document.getElementById("sessionPublic").checked,
-
-    createdAt:new Date().toISOString()
-
-  };
-
-  const sessions = getSessions();
-
-  sessions.push(session);
-
-  saveSessions(sessions);
-
-  document.querySelector("#sessionModal form").reset();
-
-  closeModal("sessionModal");
-
-  toast("تم حفظ موعد الجلسة");
-
-  renderAll();
+ e.target.reset();
+ closeModal("sessionModal");
+ renderSessions();
+ toast("تم حفظ الجلسة");
 }
 
 function renderSessions(){
+ const body=document.getElementById("sessionsTable");
+ const sessions=getData(KEYS.sessions,[]).filter(x=>x.public);
 
-  const container =
-    document.getElementById("sessionsList");
+ if(!sessions.length){
+  body.innerHTML=`
+   <tr>
+    <td colspan="6" class="empty">لا توجد جلسات معلنة.</td>
+   </tr>`;
+  return;
+ }
 
-  const now = new Date();
-
-  const list =
-    getSessions()
-      .filter(s => {
-
-        if(s.public) return true;
-
-        return currentUser() &&
-               s.userId === currentUser().id;
-
-      })
-      .sort(
-        (a,b) =>
-        new Date(`${a.date}T${a.time}`) -
-        new Date(`${b.date}T${b.time}`)
-      );
-
-  if(!list.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        لا توجد مواعيد جلسات منشورة.
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <div class="grid">
-
-      ${list.map(s => {
-
-        const user =
-          getUsers().find(u => u.id === s.userId);
-
-        const isOwner =
-          currentUser()?.id === s.userId;
-
-        const sessionDate =
-          new Date(`${s.date}T${s.time}`);
-
-        const expired =
-          sessionDate < now;
-
-        return `
-
-          <div class="card session-card">
-
-            <div class="session-date">
-              ${escapeHtml(s.date)}
-              —
-              ${escapeHtml(s.time)}
-            </div>
-
-            <h3>
-              القضية:
-              ${escapeHtml(s.caseNumber)}
-            </h3>
-
-            <p>
-              <strong>المحكمة:</strong>
-              ${escapeHtml(s.court)}
-            </p>
-
-            <p>
-              <strong>نوع الجلسة:</strong>
-              ${escapeHtml(s.type)}
-            </p>
-
-            <p>
-              <strong>صاحب الإعلان:</strong>
-              ${escapeHtml(user?.name || "مستخدم")}
-            </p>
-
-            ${
-              s.note
-              ?
-              `<p class="muted">
-                ${escapeHtml(s.note)}
-              </p>`
-              :
-              ""
-            }
-
-            <span class="tag">
-              ${expired ? "انتهت" : "موعد قادم"}
-            </span>
-
-            ${
-              isOwner
-              ?
-              `
-              <br><br>
-              <button class="btn btn-danger small"
-                onclick="deleteSession('${s.id}')">
-                حذف
-              </button>
-              `
-              :
-              ""
-            }
-
-          </div>
-
-        `;
-
-      }).join("")}
-
-    </div>
-  `;
+ body.innerHTML=sessions.map(s=>`
+  <tr>
+   <td>${escapeHtml(s.caseNumber)}</td>
+   <td>${escapeHtml(s.court)}</td>
+   <td>${escapeHtml(s.date)}</td>
+   <td>${escapeHtml(s.time)}</td>
+   <td>${escapeHtml(s.type)}</td>
+   <td>${escapeHtml(s.note||"—")}</td>
+  </tr>
+ `).join("");
 }
 
-function deleteSession(id){
+/* ================= LEGAL WRITER ================= */
 
-  const user = currentUser();
+function updateWriterCounter(){
+ const text=document.getElementById("legalText").value||"";
+ const trimmed=text.trim();
+ const words=trimmed ? trimmed.split(/\s+/).length : 0;
+ const chars=text.length;
 
-  if(!user) return;
+ const value=`${words} كلمة | ${chars} حرف`;
 
-  if(!confirm("هل تريد حذف موعد الجلسة؟")) return;
-
-  saveSessions(
-    getSessions().filter(
-      s => !(s.id === id && s.userId === user.id)
-    )
-  );
-
-  toast("تم حذف الموعد");
-
-  renderAll();
+ document.getElementById("writerCounter").textContent=value;
+ document.getElementById("writerCounterBottom").textContent=value;
 }
 
-/* =========================
-   MESSAGES
-========================= */
+function insertWriterTemplate(){
+ const type=document.getElementById("docType").value;
+ const court=document.getElementById("courtName").value.trim();
+ const caseNo=document.getElementById("caseNumber").value.trim();
+ const applicant=document.getElementById("applicant").value.trim();
+ const opponent=document.getElementById("opponent").value.trim();
+ const subject=document.getElementById("documentSubject").value.trim();
 
-function openMessage(targetId){
+ let template="";
 
-  const user = currentUser();
+ if(type==="عريضة دعوى"){
+  template=`
+بسم الله الرحمن الرحيم
 
-  if(!user){
+لدى ${court||"المحكمة المختصة"}
 
-    toast("يجب تسجيل الدخول أولًا");
+صحيفة دعوى
 
-    openModal("loginModal");
+المدعي: ${applicant||"...................."}
+ضد
+المدعى عليه: ${opponent||"...................."}
 
-    return;
-  }
+رقم القضية: ${caseNo||"...................."}
 
-  if(user.id === targetId){
-    toast("لا يمكنك مراسلة نفسك");
-    return;
-  }
+الموضوع: ${subject||"...................."}
 
-  const target =
-    getUsers().find(u => u.id === targetId);
+سيدي رئيس المحكمة الموقر،
 
-  if(!target) return;
+أتقدم إلى عدالتكم بهذه الدعوى، وأوضح لعدالتكم الوقائع والأسانيد والطلبات على النحو الآتي:
 
-  messageTargetId = targetId;
+أولًا: الوقائع
+....................................................................
 
-  document.getElementById("messageTarget").innerHTML = `
-    <div class="profile-card"
-         style="margin-bottom:20px">
+ثانيًا: الأسانيد القانونية
+....................................................................
 
-      ${avatarHtml(target)}
+ثالثًا: الطلبات
+1- ..................................................................
+2- ..................................................................
+3- ..................................................................
 
-      <div>
-        <strong>${escapeHtml(target.name)}</strong>
-        <div class="muted">
-          ${escapeHtml(typeLabel(target.type))}
-        </div>
-      </div>
+وتفضلوا بقبول الاحترام.
 
-    </div>
-  `;
+مقدمها:
+${applicant||"...................."}
 
-  document.getElementById("messageText").value = "";
+التاريخ: ....................
+التوقيع: ....................
+`;
+ }else if(type==="مذكرة دفاع"){
+  template=`
+بسم الله الرحمن الرحيم
 
-  openModal("messageModal");
+لدى ${court||"المحكمة المختصة"}
+
+مذكرة دفاع
+
+في القضية رقم: ${caseNo||"...................."}
+
+مقدمة من:
+${applicant||"...................."}
+
+ضد:
+${opponent||"...................."}
+
+الموضوع: ${subject||"مذكرة دفاع"}
+
+أولًا: موجز الوقائع
+....................................................................
+
+ثانيًا: الدفوع والأسانيد
+....................................................................
+
+ثالثًا: الرد على ما ورد في الدعوى
+....................................................................
+
+رابعًا: الطلبات
+....................................................................
+
+وتفضلوا بقبول الاحترام.
+
+مقدم المذكرة:
+${applicant||"...................."}
+
+التاريخ: ....................
+`;
+ }else{
+  template=`
+بسم الله الرحمن الرحيم
+
+لدى ${court||"المحكمة المختصة"}
+
+${type}
+
+رقم القضية: ${caseNo||"...................."}
+
+مقدم من: ${applicant||"...................."}
+ضد: ${opponent||"...................."}
+
+الموضوع: ${subject||"...................."}
+
+أتقدم إلى عدالتكم بهذا المستند، وأعرض الآتي:
+
+أولًا: الوقائع
+....................................................................
+
+ثانيًا: الأسانيد
+....................................................................
+
+ثالثًا: الطلبات
+....................................................................
+
+وتفضلوا بقبول فائق الاحترام.
+
+الاسم: ${applicant||"...................."}
+التاريخ: ....................
+التوقيع: ....................
+`;
+ }
+
+ document.getElementById("legalText").value=template.trim();
+ updateWriterCounter();
+ toast("تم إدراج النموذج");
 }
 
-function sendMessage(){
+function clearWriter(){
+ if(!confirm("مسح نص المستند؟"))return;
 
-  const user = currentUser();
+ document.getElementById("legalText").value="";
+ updateWriterCounter();
+}
 
-  if(!user || !messageTargetId){
-    return;
+function startVoiceWriting(){
+ const SpeechRecognition=
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+ if(!SpeechRecognition){
+  toast("المتصفح لا يدعم الإملاء الصوتي");
+  return;
+ }
+
+ if(isListening)return;
+
+ recognition=new SpeechRecognition();
+ recognition.lang="ar-YE";
+ recognition.continuous=true;
+ recognition.interimResults=true;
+
+ recognition.onstart=()=>{
+  isListening=true;
+  const status=document.getElementById("voiceStatus");
+  status.classList.add("active");
+  status.innerHTML=
+   '<i class="fa-solid fa-microphone"></i> الاستماع جارٍ... تحدث الآن';
+ };
+
+ recognition.onresult=(event)=>{
+  let finalText="";
+  let interimText="";
+
+  for(let i=event.resultIndex;i<event.results.length;i++){
+   const transcript=event.results[i][0].transcript;
+
+   if(event.results[i].isFinal){
+    finalText+=transcript+" ";
+   }else{
+    interimText+=transcript;
+   }
   }
 
-  const text =
-    document.getElementById("messageText")
-      .value.trim();
-
-  if(!text){
-    toast("اكتب الرسالة");
-    return;
+  if(finalText){
+   const textarea=document.getElementById("legalText");
+   textarea.value+=
+    (textarea.value && !textarea.value.endsWith(" ") ? " ":"")
+    +finalText;
+   updateWriterCounter();
   }
+ };
 
-  const messages = getMessages();
+ recognition.onerror=(event)=>{
+  console.log(event.error);
 
-  messages.push({
+  if(event.error==="not-allowed"){
+   toast("يجب السماح باستخدام الميكروفون");
+  }else{
+   toast("حدث خطأ في التعرف الصوتي");
+  }
+ };
 
-    id:uid("message"),
-    from:user.id,
-    to:messageTargetId,
-    text,
-    createdAt:new Date().toISOString()
+ recognition.onend=()=>{
+  isListening=false;
+  const status=document.getElementById("voiceStatus");
+  status.classList.remove("active");
+  status.innerHTML=
+   '<i class="fa-solid fa-microphone-slash"></i> التسجيل الصوتي متوقف';
+ };
 
+ try{
+  recognition.start();
+ }catch(e){
+  toast("تعذر تشغيل الميكروفون");
+ }
+}
+
+function stopVoiceWriting(){
+ if(recognition){
+  try{recognition.stop()}catch(e){}
+ }
+
+ isListening=false;
+
+ const status=document.getElementById("voiceStatus");
+ status.classList.remove("active");
+ status.innerHTML=
+  '<i class="fa-solid fa-microphone-slash"></i> التسجيل الصوتي متوقف';
+}
+
+function buildPrintableDocument(){
+ const type=document.getElementById("docType").value;
+ const court=document.getElementById("courtName").value.trim();
+ const caseNo=document.getElementById("caseNumber").value.trim();
+ const applicant=document.getElementById("applicant").value.trim();
+ const opponent=document.getElementById("opponent").value.trim();
+ const subject=document.getElementById("documentSubject").value.trim();
+ const text=document.getElementById("legalText").value;
+
+ return `
+  <div class="print-page">
+   <div class="print-head">
+    <div>بسم الله الرحمن الرحيم</div>
+    <h2>${escapeHtml(court||"المحكمة المختصة")}</h2>
+    <h1>${escapeHtml(type)}</h1>
+   </div>
+
+   <div class="print-meta">
+    <p><strong>رقم القضية:</strong> ${escapeHtml(caseNo||"................")}</p>
+    <p><strong>مقدم المستند:</strong> ${escapeHtml(applicant||"................")}</p>
+    <p><strong>الخصم:</strong> ${escapeHtml(opponent||"................")}</p>
+    <p><strong>الموضوع:</strong> ${escapeHtml(subject||"................")}</p>
+   </div>
+
+   <div class="print-body">${escapeHtml(text)}</div>
+
+   <div class="print-sign">
+    <p>مقدم المستند: ${escapeHtml(applicant||"................")}</p>
+    <p>التاريخ: ....................</p>
+    <p>التوقيع: ....................</p>
+   </div>
+  </div>
+ `;
+}
+
+function printLegalDocument(){
+ const text=document.getElementById("legalText").value.trim();
+
+ if(!text){
+  toast("اكتب المستند أولًا");
+  return;
+ }
+
+ const win=window.open("","_blank");
+
+ if(!win){
+  toast("يرجى السماح بالنوافذ المنبثقة للطباعة");
+  return;
+ }
+
+ win.document.write(`
+ <!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+ <meta charset="UTF-8">
+ <title>مستند قانوني</title>
+ <style>
+  @page{size:A4;margin:20mm}
+  body{
+   font-family:Arial,"Tahoma",sans-serif;
+   color:#111;
+   background:#fff;
+   margin:0
+  }
+  .print-page{
+   width:100%;
+   font-size:16px;
+   line-height:2.1
+  }
+  .print-head{
+   text-align:center;
+   margin-bottom:25px
+  }
+  .print-head h1{font-size:25px;margin:10px 0}
+  .print-head h2{font-size:20px}
+  .print-meta{
+   border:1px solid #999;
+   padding:12px 18px;
+   margin-bottom:25px
+  }
+  .print-meta p{margin:3px 0}
+  .print-body{
+   white-space:pre-wrap;
+   text-align:right;
+   min-height:400px
+  }
+  .print-sign{
+   margin-top:50px;
+   text-align:right
+  }
+ </style>
+ </head>
+ <body>
+ ${buildPrintableDocument()}
+ <script>
+  window.onload=function(){
+   window.print();
+  };
+ <\/script>
+ </body>
+ </html>
+ `);
+
+ win.document.close();
+}
+
+function saveLegalPDF(){
+ const text=document.getElementById("legalText").value.trim();
+
+ if(!text){
+  toast("اكتب المستند أولًا");
+  return;
+ }
+
+ /*
+  لا يحتاج الموقع إلى مكتبة خارجية:
+  ستفتح نافذة الطباعة، ومن خيارات الطابعة
+  يختار المستخدم "Save as PDF / حفظ كملف PDF".
+ */
+ printLegalDocument();
+}
+
+/* ================= DEMO DATA ================= */
+
+function initialize(){
+ let users=getData(KEYS.users,[]);
+
+ if(!users.some(u=>u.email==="demo@wasit.local")){
+  users.push({
+   id:"demo-lawyer",
+   name:"محامي تجريبي",
+   email:"demo@wasit.local",
+   password:"123456",
+   type:"lawyer",
+   photo:"",
+   profile:{
+    specialty:"القانون المدني والتجاري",
+    city:"صنعاء",
+    bio:"صفحة تجريبية لمنصة وسيط القانوني والقضائي.",
+    services:"استشارات، أبحاث، مرافعات",
+    license:"تجريبي"
+   },
+   createdAt:new Date().toISOString()
   });
 
-  saveMessages(messages);
-
-  closeModal("messageModal");
-
-  toast("تم إرسال الرسالة");
-
-  renderDashboard();
-}
-
-function renderMessages(){
-
-  const container =
-    document.getElementById("messagesList");
-
-  const user = currentUser();
-
-  if(!user){
-    container.innerHTML = "";
-    return;
-  }
-
-  const messages =
-    getMessages()
-      .filter(
-        m => m.to === user.id || m.from === user.id
-      )
-      .sort(
-        (a,b) =>
-        new Date(b.createdAt) -
-        new Date(a.createdAt)
-      );
-
-  if(!messages.length){
-
-    container.innerHTML = `
-      <p class="muted">
-        لا توجد رسائل.
-      </p>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    messages.map(m => {
-
-      const otherId =
-        m.from === user.id ? m.to : m.from;
-
-      const other =
-        getUsers().find(u => u.id === otherId);
-
-      const incoming =
-        m.to === user.id;
-
-      return `
-
-        <div class="card"
-             style="margin-bottom:10px">
-
-          <div class="profile-card">
-
-            ${avatarHtml(other)}
-
-            <div>
-
-              <strong>
-                ${escapeHtml(other?.name || "مستخدم")}
-              </strong>
-
-              <div class="muted">
-                ${incoming ? "رسالة واردة" : "رسالة مرسلة"}
-                ·
-                ${formatDate(m.createdAt)}
-              </div>
-
-            </div>
-
-          </div>
-
-          <p style="white-space:pre-wrap">
-            ${escapeHtml(m.text)}
-          </p>
-
-          ${
-            incoming
-            ?
-            `
-            <button class="btn btn-gold small"
-              onclick="openMessage('${otherId}')">
-              الرد
-            </button>
-            `
-            :
-            ""
-          }
-
-        </div>
-
-      `;
-
-    }).join("");
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-function renderDashboard(){
-
-  const dashboard =
-    document.getElementById("dashboard");
-
-  if(!currentUser()){
-
-    dashboard.classList.remove("active");
-    return;
-  }
-
-  dashboard.classList.add("active");
-
-  const user = currentUser();
-
-  const posts =
-    getPosts().filter(p => p.userId === user.id);
-
-  const research =
-    getResearch().filter(r => r.userId === user.id);
-
-  const sessions =
-    getSessions().filter(s => s.userId === user.id);
-
-  const messages =
-    getMessages().filter(
-      m => m.to === user.id || m.from === user.id
-    );
-
-  document.getElementById("dashboardStats").innerHTML = `
-
-    <div class="stat">
-      <span class="muted">المنشورات</span>
-      <strong>${posts.length}</strong>
-    </div>
-
-    <div class="stat">
-      <span class="muted">الأبحاث</span>
-      <strong>${research.length}</strong>
-    </div>
-
-    <div class="stat">
-      <span class="muted">الجلسات</span>
-      <strong>${sessions.length}</strong>
-    </div>
-
-    <div class="stat">
-      <span class="muted">الرسائل</span>
-      <strong>${messages.length}</strong>
-    </div>
-  `;
-
-  const p = user.profile || {};
-
-  document.getElementById("myProfile").innerHTML = `
-
-    <div class="profile-card">
-
-      ${avatarHtml(user)}
-
-      <div>
-
-        <h3>
-          ${escapeHtml(user.name)}
-        </h3>
-
-        <p class="muted">
-          ${escapeHtml(typeLabel(user.type))}
-        </p>
-
-        <p>
-          ${escapeHtml(p.specialty || "لم تحدد التخصص")}
-        </p>
-
-      </div>
-
-    </div>
-  `;
-
-  renderMessages();
-}
-
-/* =========================
-   UNSUBSCRIBE
-========================= */
-
-function unsubscribe(){
-
-  const user = currentUser();
-
-  if(!user) return;
-
-  const confirmation =
-    prompt(
-      "للتأكيد اكتب: إلغاء الاشتراك"
-    );
-
-  if(confirmation !== "إلغاء الاشتراك"){
-    toast("لم يتم إلغاء الاشتراك");
-    return;
-  }
-
-  saveUsers(
-    getUsers().filter(u => u.id !== user.id)
-  );
-
-  savePosts(
-    getPosts().filter(p => p.userId !== user.id)
-  );
-
-  saveResearch(
-    getResearch().filter(r => r.userId !== user.id)
-  );
-
-  saveSessions(
-    getSessions().filter(s => s.userId !== user.id)
-  );
-
-  saveMessages(
-    getMessages().filter(
-      m => m.from !== user.id && m.to !== user.id
-    )
-  );
-
-  currentUserId = null;
-
-  localStorage.removeItem("wasit_current_user");
-
-  document.getElementById("dashboard")
-    .classList.remove("active");
-
-  updateAccountArea();
-  renderAll();
-
-  toast("تم إلغاء الاشتراك وحذف بيانات الحساب المحلي");
-}
-
-/* =========================
-   UTILITIES
-========================= */
-
-function formatDate(date){
-
-  try{
-
-    return new Date(date).toLocaleDateString(
-      "ar-YE",
-      {
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-      }
-    );
-
-  }catch(e){
-
-    return date;
-  }
-}
-
-async function copyText(text){
-
-  try{
-
-    await navigator.clipboard.writeText(text);
-
-  }catch(e){
-
-    const input =
-      document.createElement("textarea");
-
-    input.value = text;
-
-    document.body.appendChild(input);
-
-    input.select();
-
-    document.execCommand("copy");
-
-    input.remove();
-  }
-}
-
-/* =========================
-   ROUTING
-========================= */
-
-function handleHash(){
-
-  const hash =
-    location.hash;
-
-  if(hash.startsWith("#profile-")){
-
-    const id =
-      hash.replace("#profile-","");
-
-    showProfile(id);
-
-  }
-
-  if(hash.startsWith("#research-")){
-
-    const id =
-      hash.replace("#research-","");
-
-    showResearch(id);
-
-  }
-
-  if(hash.startsWith("#post-")){
-
-    const id =
-      hash.replace("#post-","");
-
-    go("posts");
-
-    setTimeout(()=>{
-      focusComment(id);
-    },500);
-  }
-}
-
-/* =========================
-   RENDER ALL
-========================= */
-
-function renderAll(){
-
-  updateAccountArea();
-
-  renderProfiles();
-
-  renderPostCreateArea();
-
-  renderPosts();
-
-  renderResearch();
-
-  renderSessionCreateArea();
-
-  renderSessions();
-
-  renderDashboard();
-}
-
-/* =========================
-   DEMO DATA
-========================= */
-
-function createDemoData(){
-
-  const users = getUsers();
-
-  if(users.length) return;
-
-  const demo = {
-
-    id:"demo-lawyer",
-
-    name:"محامي تجريبي",
-
-    email:"demo@wasit.local",
-
-    password:"123456",
-
-    type:"lawyer",
-
-    photo:"",
-
-    profile:{
-      specialty:"القانون المدني",
-      city:"صنعاء",
-      bio:"صفحة تجريبية لمنصة وسيط القانوني والقضائي.",
-      services:"الاستشارات القانونية والبحث القانوني.",
-      license:""
-    },
-
-    createdAt:new Date().toISOString()
-
-  };
-
-  saveUsers([demo]);
-
-  savePosts([{
-
+  setData(KEYS.users,users);
+ }
+
+ if(!localStorage.getItem(KEYS.posts)){
+  setData(KEYS.posts,[
+   {
     id:"demo-post",
-
     userId:"demo-lawyer",
-
-    text:"مرحبًا بكم في منصة وسيط القانوني والقضائي.",
-
+    category:"قانوني",
+    title:"مرحبًا بكم في التفاعل الجماعي",
+    text:"هذه مساحة تجريبية للنقاش القانوني ونشر المعرفة والأبحاث.",
     image:"",
-
     likes:[],
-
     comments:[],
-
     createdAt:new Date().toISOString()
+   }
+  ]);
+ }
 
-  }]);
+ if(!localStorage.getItem(KEYS.research)){
+  setData(KEYS.research,[]);
+ }
 
-  saveResearch([]);
+ if(!localStorage.getItem(KEYS.sessions)){
+  setData(KEYS.sessions,[]);
+ }
 
-  saveSessions([]);
-
-  saveMessages([]);
+ updateAccount();
+ renderCommunity();
+ renderProfiles();
+ renderResearch();
+ renderSessions();
+ updateWriterCounter();
 }
 
-/* =========================
-   INIT
-========================= */
+document.addEventListener("click",function(e){
+ if(e.target.classList.contains("modal")){
+  e.target.classList.remove("show");
+ }
+});
 
-createDemoData();
-
-renderAll();
-
-handleHash();
-
-window.addEventListener(
-  "hashchange",
-  handleHash
-);
-
+initialize();
 </script>
 
 </body>
