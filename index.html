@@ -28,6 +28,7 @@
     <div class="container navbar">
 
         <a href="index.html" class="logo">
+
             <span class="logo-icon">
                 <i class="fas fa-scale-balanced"></i>
             </span>
@@ -36,38 +37,19 @@
                 <strong>وسيط</strong>
                 <small>القانوني والقضائي</small>
             </span>
+
         </a>
 
-        <button class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </button>
+        <nav class="nav">
 
-        <nav class="nav" id="mainNav">
-
-            <a href="#home">الرئيسية</a>
-            <a href="#profiles">الصفحات المهنية</a>
-            <a href="#sessions">صحيفة الجلسات</a>
-            <a href="#lawyers">المحامون</a>
-            <a href="#judges">القضاة والمحكمون</a>
-            <a href="#smart">الدعم الذكي</a>
+            <a href="index.html">الرئيسية</a>
+            <a href="#services">الخدمات</a>
+            <a href="#professionals">المهنيون</a>
+            <a href="#about">عن المنصة</a>
 
         </nav>
 
-        <div class="header-actions">
-
-            <button class="btn login-small"
-                    onclick="openLogin()">
-                <i class="fas fa-right-to-bracket"></i>
-                دخول
-            </button>
-
-            <button class="btn gold"
-                    onclick="openRegister()">
-                <i class="fas fa-user-plus"></i>
-                إنشاء حساب
-            </button>
-
-        </div>
+        <div class="header-actions" id="headerActions"></div>
 
     </div>
 
@@ -76,61 +58,40 @@
 
 <main>
 
-<!-- HERO -->
+<section class="hero">
 
-<section class="hero" id="home">
+    <div class="container hero-grid">
 
-    <div class="container hero-content">
-
-        <div class="hero-text">
+        <div class="hero-content">
 
             <div class="badge">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-scale-balanced"></i>
                 منصة قانونية وقضائية رقمية
             </div>
 
             <h1>
-                منصة وسيط الرقمية
-                <span>للمحاماة والقضاء باليمن</span>
+                وسيط
+                <span>القانوني والقضائي</span>
             </h1>
 
             <p>
-                منظومة رقمية تجمع المحامين والقضاة والمحكمين
-                والمحامين تحت التدريب والعملاء في منصة واحدة.
+                منصة رقمية تجمع المحامين والقضاة والمحكمين
+                والمحامين تحت التدريب والعملاء في بيئة واحدة.
             </p>
 
-            <div class="hero-buttons">
+            <div class="hero-actions">
 
-                <button class="btn gold big"
-                        onclick="openRegister()">
+                <a href="register.html"
+                   class="btn gold big">
                     <i class="fas fa-user-plus"></i>
                     إنشاء حساب
-                </button>
-
-                <a href="#sessions"
-                   class="btn secondary big">
-                    <i class="fas fa-calendar-days"></i>
-                    صحيفة الجلسات
                 </a>
 
-            </div>
-
-            <div class="hero-stats">
-
-                <div>
-                    <strong>24/7</strong>
-                    <span>خدمات رقمية</span>
-                </div>
-
-                <div>
-                    <strong>4</strong>
-                    <span>أنواع حسابات</span>
-                </div>
-
-                <div>
-                    <strong>اليمن</strong>
-                    <span>نطاق المنصة</span>
-                </div>
+                <a href="login.html"
+                   class="btn secondary big">
+                    <i class="fas fa-right-to-bracket"></i>
+                    تسجيل الدخول
+                </a>
 
             </div>
 
@@ -139,43 +100,112 @@
 
         <div class="hero-card">
 
-            <div class="court-icon">
+            <div class="hero-card-icon">
                 <i class="fas fa-building-columns"></i>
             </div>
 
-            <h3>منظومة قانونية متكاملة</h3>
+            <h2>
+                أنشئ حضورك القانوني
+            </h2>
 
             <p>
-                أدوات لإدارة الحسابات والملفات والجلسات
-                والصفحات المهنية والخدمات القانونية.
+                أنشئ حسابك، ثم أنشئ صفحتك المهنية
+                ليتمكن الآخرون من التعرف عليك وخدماتك.
             </p>
 
-            <div class="hero-card-list">
+            <div class="check-list">
 
                 <div>
                     <i class="fas fa-check"></i>
-                    إنشاء حساب شخصي
+                    صفحة محامي
                 </div>
 
                 <div>
                     <i class="fas fa-check"></i>
-                    صفحة مهنية
+                    صفحة قاضٍ / محكم
                 </div>
 
                 <div>
                     <i class="fas fa-check"></i>
-                    إدارة القضايا
+                    صفحة محامٍ تحت التدريب
                 </div>
 
                 <div>
                     <i class="fas fa-check"></i>
+                    صفحة عامة قابلة للمشاركة
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="services">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>الخدمات</span>
+
+            <h2>
+                منظومة قانونية متكاملة
+            </h2>
+
+            <p>
+                أدوات رقمية لتنظيم العمل القانوني والقضائي.
+            </p>
+
+        </div>
+
+
+        <div class="cards-3">
+
+            <div class="service-card">
+
+                <i class="fas fa-user-tie"></i>
+
+                <h3>
+                    صفحة المحامي
+                </h3>
+
+                <p>
+                    أنشئ صفحة مهنية تعرض تخصصك وخبرتك وخدماتك.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <i class="fas fa-gavel"></i>
+
+                <h3>
+                    صفحة القاضي والمحكم
+                </h3>
+
+                <p>
+                    صفحة مهنية مخصصة للقضاة والمحكمين.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <i class="fas fa-calendar-days"></i>
+
+                <h3>
                     صحيفة الجلسات
-                </div>
+                </h3>
 
-                <div>
-                    <i class="fas fa-check"></i>
-                    الدعم الذكي
-                </div>
+                <p>
+                    تنظيم مواعيد الجلسات والملفات القانونية.
+                </p>
 
             </div>
 
@@ -186,109 +216,27 @@
 </section>
 
 
-<!-- PROFILES -->
-
-<section class="section" id="profiles">
+<section class="section light" id="professionals">
 
     <div class="container">
 
         <div class="section-title">
 
-            <span>الصفحات المهنية</span>
+            <span>المهنيون</span>
 
-            <h2>أنشئ صفحتك المهنية</h2>
+            <h2>
+                صفحات مهنية عامة
+            </h2>
 
             <p>
-                اختر نوع الحساب وأنشئ حضورك المهني داخل المنصة.
+                يمكن للمستخدم إنشاء صفحته المهنية ومشاركتها.
             </p>
 
         </div>
 
 
-        <div class="profile-grid">
-
-            <div class="profile-card">
-
-                <div class="card-icon">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-
-                <h3>صفحة المحامي</h3>
-
-                <p>
-                    صفحة لعرض الاسم والتخصص والخبرة والخدمات
-                    وبيانات التواصل.
-                </p>
-
-                <button class="btn primary full"
-                        onclick="openRegister('lawyer')">
-                    إنشاء حساب محامي
-                </button>
-
-            </div>
-
-
-            <div class="profile-card judge-card">
-
-                <div class="card-icon">
-                    <i class="fas fa-gavel"></i>
-                </div>
-
-                <h3>صفحة القاضي / المحكم</h3>
-
-                <p>
-                    مساحة مهنية لإدارة البيانات والملفات
-                    والخدمات المسموح بها.
-                </p>
-
-                <button class="btn gold full"
-                        onclick="openRegister('judge')">
-                    إنشاء حساب قاضٍ / محكم
-                </button>
-
-            </div>
-
-
-            <div class="profile-card">
-
-                <div class="card-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-
-                <h3>محامٍ تحت التدريب</h3>
-
-                <p>
-                    أدوات لتنظيم التدريب والقضايا والجلسات
-                    والملفات القانونية.
-                </p>
-
-                <button class="btn primary full"
-                        onclick="openRegister('trainee')">
-                    إنشاء حساب متدرب
-                </button>
-
-            </div>
-
-
-            <div class="profile-card">
-
-                <div class="card-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-
-                <h3>حساب العميل</h3>
-
-                <p>
-                    متابعة الطلبات والخدمات والملفات
-                    والتواصل مع مقدم الخدمة.
-                </p>
-
-                <button class="btn primary full"
-                        onclick="openRegister('client')">
-                    إنشاء حساب عميل
-                </button>
-
-            </div>
+        <div id="publicProfiles"
+             class="profiles-grid">
 
         </div>
 
@@ -297,14 +245,102 @@
 </section>
 
 
-<!-- SESSIONS -->
-
-<section class="section light" id="sessions">
+<section class="cta" id="about">
 
     <div class="container">
 
-        <div class="section-title">
+        <h2>
+            ابدأ الآن
+        </h2>
 
-            <span>إدارة الجلسات</span>
+        <p>
+            أنشئ حسابك وأنشئ صفحتك المهنية.
+        </p>
 
-            <h2>صحيفة
+        <a href="register.html"
+           class="btn gold big">
+            إنشاء حساب
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div>
+
+            <div class="logo footer-logo">
+
+                <span class="logo-icon">
+                    <i class="fas fa-scale-balanced"></i>
+                </span>
+
+                <span>
+                    <strong>وسيط</strong>
+                    <small>القانوني والقضائي</small>
+                </span>
+
+            </div>
+
+            <p>
+                منصة رقمية للمحاماة والقضاء والخدمات القانونية.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>المنصة</h4>
+
+            <a href="index.html">
+                الرئيسية
+            </a>
+
+            <a href="register.html">
+                إنشاء حساب
+            </a>
+
+            <a href="login.html">
+                تسجيل الدخول
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>الحساب</h4>
+
+            <a href="dashboard.html">
+                لوحة المستخدم
+            </a>
+
+            <a href="#professionals">
+                الصفحات المهنية
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 وسيط القانوني والقضائي
+
+    </div>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
