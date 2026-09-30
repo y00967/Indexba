@@ -37,12 +37,11 @@
 
     <!-- تذييل الصفحة -->
     <footer class="bg-white border-t border-gray-200 text-center py-4 text-sm text-gray-500 mt-auto">
-        منصة العدالة الرقمية الشاملة - نظام المحاماة والقضاء الذكي | تخصيص: الأستاذ / عبدالله صالح صالح محمد الجلال[span_1](start_span)[span_1](end_span)
+        منصة العدالة الرقمية الشاملة - نظام المحاماة والقضاء الذكي | تخصيص وإشراف: الأستاذ / عبدالله صالح صالح محمد الجلال[span_8](start_span)[span_8](end_span)
     </footer>
 
     <!-- سكربت التطبيق البرمجي المتكامل -->
     <script>
-        // Store & LocalStorage Management
         const Store = {
             getUsers: () => JSON.parse(localStorage.getItem('law_users_v3')) || [],
             setUsers: (users) => localStorage.setItem('law_users_v3', JSON.stringify(users)),
@@ -62,20 +61,19 @@
             setChats: (chats) => localStorage.setItem('law_chats_v3', JSON.stringify(chats)),
         };
 
-        // تهيئة البيانات الافتراضية مع دمج بيانات الأستاذ / عبدالله الجلال
         function initData() {
             if (Store.getUsers().length === 0) {
                 Store.setUsers([
                     { 
                         id: 1, 
-                        name: 'عبدالله صالح صالح محمد الجلال',[span_2](start_span)[span_2](end_span)
+                        name: 'عبدالله صالح صالح محمد الجلال', 
                         email: 'abdullah@law.com', 
                         phone: '967771234567', 
                         pass: '123456', 
-                        role: 'محامي ابتدائي',[span_3](start_span)[span_3](end_span)
+                        role: 'محامي ابتدائي', 
                         verified: true, 
                         subscriptionActive: true, 
-                        bio: 'محامي تحت التحديث إلى محامي ابتدائي وممارس قانوني، مهتم بالقضايا المدنية والتجارية والإدارية.',[span_4](start_span)[span_4](end_span)
+                        bio: 'محامي ممارس ومستشار قانوني، مهتم بالقضايا المدنية والتجارية والإدارية وصياغة العقود واللوائح.', 
                         location: 'صنعاء، اليمن', 
                         avatar: 'https://via.placeholder.com/150', 
                         socials: { email: 'abdullah@law.com', phone: '967771234567', whatsapp: '967771234567', telegram: 'abdullah_aljalal', x: 'abdullah_law' } 
@@ -84,7 +82,7 @@
             }
             if (Store.getLibraryBooks().length === 0) {
                 Store.setLibraryBooks([
-                    { id: 1, title: 'شرح قانون الإجراءات الجزائية والمدنية', author: 'د. قاضي القضاة', category: 'قانون جنائي', fileName: 'شرح_الإجراءات.pdf', date: '2026/06/13', uploaderName: 'عبدالله صالح الجلال' }[span_5](start_span)[span_5](end_span)
+                    { id: 1, title: 'شرح قانون الإجراءات الجزائية والمدنية اليمني', author: 'موسوعة القضاء والتشريع', category: 'قانون جنائي ومدني', fileName: 'شرح_الإجراءات.pdf', date: '2026/06/13', uploaderName: 'عبدالله صالح الجلال' }
                 ]);
             }
         }
@@ -104,12 +102,11 @@
             }
         }
 
-        // ================= المصادقة والتحقق والاشتراك =================
         let authMode = 'login';
         function renderAuthScreen() {
             return `
                 <div class="flex flex-col items-center justify-center flex-grow p-4 bg-gray-50">
-                    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
+                    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-200">
                         <div class="text-center mb-6">
                             <i class="fa-solid fa-scale-balanced text-4xl text-primary mb-2"></i>
                             <h1 class="text-2xl font-bold text-primary">منصة العدالة الرقمية الشاملة</h1>
@@ -129,13 +126,13 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">رقم الهاتف</label>
-                                    <input type="text" id="loginPhone" required placeholder="مثال: 96777XXXXXXX" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="967771234567">
+                                    <input type="text" id="loginPhone" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="967771234567">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">كلمة المرور</label>
                                     <input type="password" id="loginPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="123456">
                                 </div>
-                                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-900 transition">دخول آمن</button>
+                                <button type="submit" class="w-full bg-primary text-white py-2.5 rounded-lg font-semibold hover:bg-blue-900 transition shadow">دخول آمن للمنصة</button>
                             </form>
                         ` : `
                             <form onsubmit="handleRegister(event)" class="space-y-4">
@@ -156,18 +153,13 @@
                                     <input type="password" id="regPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-1">الصفة المهنية والتصنيف</label>
+                                    <label class="block text-sm font-medium mb-1">الصفة المهنية</label>
                                     <select id="regRole" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
-                                        <optgroup label="المحامون">
-                                            <option value="محامي تحت التمرين">محامي تحت التمرين</option>
-                                            <option value="محامي ابتدائي" selected>محامي ابتدائي</option>
-                                            <option value="محامي استئنافي">محامي استئنافي</option>
-                                            <option value="محامي محكمة عليا">محامي محكمة عليا</option>
-                                        </optgroup>
-                                        <optgroup label="القضاة">
-                                            <option value="قاضي محكمة ابتدائية">قاضي محكمة ابتدائية</option>
-                                            <option value="قاضي محكمة استئنافية">قاضي محكمة استئنافية</option>
-                                        </optgroup>
+                                        <option value="محامي ابتدائي" selected>محامي ابتدائي</option>
+                                        <option value="محامي استئنافي">محامي استئنافي</option>
+                                        <option value="محامي محكمة عليا">محامي محكمة عليا</option>
+                                        <option value="قاضي محكمة">قاضي محكمة</option>
+                                        <option value="أمين سر">أمين سر</option>
                                         <option value="مستخدم عادي / عميل">مستخدم عادي / عميل</option>
                                     </select>
                                 </div>
@@ -175,7 +167,7 @@
                                     <label class="block text-sm font-medium mb-1">إثبات الهوية / كارنيه النقابة</label>
                                     <input type="file" id="regIDCard" accept="image/*" class="w-full text-sm border rounded-lg p-2 bg-gray-50" required>
                                 </div>
-                                <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-amber-700 transition">إنشاء الحساب وتفعيل النظام</button>
+                                <button type="submit" class="w-full bg-secondary text-white py-2.5 rounded-lg font-semibold hover:bg-amber-700 transition shadow">تسجيل وطلب التوثيق</button>
                             </form>
                         `}
                     </div>
@@ -194,7 +186,7 @@
                 Store.setCurrentUser(user);
                 render();
             } else {
-                alert('البيانات المدخلة غير صحيحة.');
+                alert('البيانات المدخلة غير صحيحة (تأكد من البريد ورقم الهاتف وكلمة المرور)');
             }
         }
 
@@ -208,13 +200,12 @@
             const fileInput = document.getElementById('regIDCard');
 
             if (fileInput.files.length === 0) {
-                alert('يرجى إرفاق إثبات الهوية.');
+                alert('يرجى إرفاق إثبات الهوية للتحقق.');
                 return;
             }
 
             const reader = new FileReader();
             reader.onload = function(event) {
-                const idCardImg = event.target.result;
                 const users = Store.getUsers();
                 if (users.some(u => u.email === email)) {
                     alert('البريد الإلكتروني مستخدم مسبقاً.');
@@ -225,18 +216,17 @@
                     id: Date.now(),
                     name, email, phone, pass, role,
                     verified: true,
-                    subscriptionActive: false,
+                    subscriptionActive: true,
                     bio: 'مرحباً بك في صفحتي المهنية القانونية.',
                     location: 'صنعاء، اليمن',
-                    avatar: 'https://via.placeholder.com/150',
-                    idCard: idCardImg,
+                    avatar: event.target.result,
                     socials: { email, phone, whatsapp: phone, telegram: '', x: '' }
                 };
 
                 users.push(newUser);
                 Store.setUsers(users);
                 Store.setCurrentUser(newUser);
-                alert('تم إنشاء الحساب بنجاح.');
+                alert(`تم إنشاء الحساب وتوثيقه بنجاح.`);
                 render();
             };
             reader.readAsDataURL(fileInput.files[0]);
@@ -245,11 +235,11 @@
         function renderSubscriptionScreen(user) {
             return `
                 <div class="flex flex-col items-center justify-center flex-grow p-4 bg-gray-50">
-                    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200 text-center space-y-4">
+                    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border text-center space-y-4">
                         <i class="fa-solid fa-credit-card text-5xl text-secondary"></i>
                         <h2 class="text-2xl font-bold text-primary">تجديد الاشتراك الشهري</h2>
-                        <p class="text-sm text-gray-600">عزيزي ${user.name}، يتطلب النظام اشتراكاً شهرياً لاستمرار تفعيل صلاحيات المنصة المهنية.</p>
-                        <button onclick="paySubscription()" class="w-full bg-secondary text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition">دفع الاشتراك وتفعيل الحساب</button>
+                        <p class="text-sm text-gray-600">عزيزي ${user.name}، يتطلب النظام اشتراكاً شهرياً لاستمرار تفعيل صلاحيات المنصة المهنية بالكامل.</p>
+                        <button onclick="paySubscription()" class="w-full bg-secondary text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition">سداد وتفعيل الحساب الآن</button>
                         <button onclick="logout()" class="text-red-500 text-sm hover:underline">تسجيل الخروج</button>
                     </div>
                 </div>
@@ -260,25 +250,25 @@
             const user = Store.getCurrentUser();
             user.subscriptionActive = true;
             Store.setCurrentUser(user);
-            const users = Store.getUsers();
-            const idx = users.findIndex(u => u.id === user.id);
-            if(idx > -1) { users[idx] = user; Store.setUsers(users); }
-            alert('تم سداد الاشتراك بنجاح وتفعيل كافة الصلاحيات!');
             render();
         }
 
-        // ================= التخطيط والتنقل الرئيسي =================
         let currentTab = 'feed';
         let viewingUserId = null;
 
         function renderMainLayout(user) {
+            const isLegalProfessional = user.role.includes('محامي') || user.role.includes('قاض') || user.role.includes('أمين سر');
             return `
-                <header class="bg-primary text-white shadow sticky top-0 z-50">
+                <header class="bg-primary text-white shadow-md sticky top-0 z-50">
                     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
                         <div class="flex items-center space-x-4 space-x-reverse">
                             <div class="flex items-center space-x-2 space-x-reverse cursor-pointer" onclick="currentTab='feed'; render();">
                                 <i class="fa-solid fa-scale-balanced text-2xl text-secondary"></i>
-                                <span class="font-bold text-lg hidden sm:inline">العدالة الرقمية</span>
+                                <span class="font-bold text-lg hidden sm:inline">العدالة الرقمية الذكية</span>
+                            </div>
+                            <div class="relative">
+                                <input type="text" id="headerSearch" oninput="quickSearch(this.value)" placeholder="بحث سريع..." class="px-3 py-1 text-sm rounded-lg text-gray-800 bg-white focus:outline-none w-36 sm:w-56">
+                                <div id="quickSearchResults" class="absolute right-0 mt-1 w-64 bg-white text-gray-800 shadow-xl rounded-lg hidden z-50 p-2 border max-h-60 overflow-y-auto"></div>
                             </div>
                         </div>
 
@@ -292,20 +282,21 @@
                             <div id="userDropdownMenu" class="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-xl border hidden z-50 py-2">
                                 <a href="#" onclick="currentTab='profile'; viewingUserId=null; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-user ml-2"></i> صفحتي الشخصية</a>
                                 <a href="#" onclick="currentTab='library'; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-book ml-2"></i> المكتبة القانونية</a>
+                                <a href="#" onclick="currentTab='settings'; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-gear ml-2"></i> إعدادات الحساب</a>
                                 <div class="border-t my-1"></div>
                                 <a href="#" onclick="logout();" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-right-from-bracket ml-2"></i> تسجيل الخروج</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-blue-950 text-xs sm:text-sm py-2 px-4">
+                    <div class="bg-blue-950 text-xs sm:text-sm py-2 px-4 border-t border-blue-900">
                         <div class="max-w-6xl mx-auto flex flex-wrap gap-4 items-center justify-center">
                             <button onclick="currentTab='feed'; render();" class="${currentTab==='feed'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-house"></i> الرئيسية</button>
                             <button onclick="currentTab='search'; render();" class="${currentTab==='search'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-magnifying-glass"></i> دليل المحامين والقضاة</button>
                             <button onclick="currentTab='library'; render();" class="${currentTab==='library'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-book-open"></i> المكتبة القانونية</button>
                             <button onclick="currentTab='minutes'; render();" class="${currentTab==='minutes'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-file-pen"></i> المحاضر والتحقيقات</button>
                             <button onclick="currentTab='lawsuits'; render();" class="${currentTab==='lawsuits'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-gavel"></i> الدعاوى والدفوع</button>
-                            <button onclick="currentTab='consults'; render();" class="${currentTab==='consults'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments-dollar"></i> طلب واستشارة قانونية</button>
+                            ${isLegalProfessional ? `<button onclick="currentTab='consults'; render();" class="${currentTab==='consults'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments-dollar"></i> الدراسات والاستشارات</button>` : ''}
                             <button onclick="currentTab='chat'; render();" class="${currentTab==='chat'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments"></i> المراسلة</button>
                         </div>
                     </div>
@@ -320,6 +311,7 @@
                     ${currentTab === 'lawsuits' ? renderLawsuitsTab(user) : ''}
                     ${currentTab === 'consults' ? renderConsultsTab(user) : ''}
                     ${currentTab === 'chat' ? renderChatTab(user) : ''}
+                    ${currentTab === 'settings' ? renderSettingsTab(user) : ''}
                 </main>
             `;
         }
@@ -343,44 +335,55 @@
             render();
         }
 
-        // ================= 1. الرئيسية والمنشورات =================
+        function quickSearch(query) {
+            const box = document.getElementById('quickSearchResults');
+            if(!query.trim()) { box.classList.add('hidden'); return; }
+            const users = Store.getUsers().filter(u => u.name.includes(query) || u.role.includes(query));
+            let html = '';
+            users.forEach(u => html += `<div onclick="viewUserProfile(${u.id}); document.getElementById('quickSearchResults').classList.add('hidden');" class="p-2 hover:bg-gray-100 cursor-pointer text-xs border-b">👤 ${u.name} (${u.role})</div>`);
+            if(html) { box.innerHTML = html; box.classList.remove('hidden'); } else { box.classList.add('hidden'); }
+        }
+
         function renderFeedTab(user) {
             const posts = Store.getPosts();
             return `
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-xl shadow border text-center space-y-2">
-                            <img src="${user.avatar}" class="w-20 h-20 rounded-full mx-auto object-cover border-2 border-primary">
+                        <div class="bg-white p-5 rounded-xl shadow border text-center space-y-3">
+                            <img src="${user.avatar}" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-primary shadow">
                             <h3 class="font-bold text-lg">${user.name}</h3>
-                            <span class="inline-block bg-secondary text-white text-xs px-2 py-1 rounded-full">${user.role}</span>
-                            <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot"></i> ${user.location || 'غير محدد'}</p>
+                            <span class="inline-block bg-secondary text-white text-xs px-3 py-1 rounded-full">${user.role}</span>
+                            <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot"></i> ${user.location || 'صنعاء، اليمن'}</p>
                             <p class="text-sm text-gray-600">${user.bio}</p>
+                            <div class="text-green-600 text-xs font-semibold"><i class="fa-solid fa-shield-check"></i> حساب موثق ورسمي</div>
                         </div>
                     </div>
 
                     <div class="md:col-span-2 space-y-6">
-                        <div class="bg-white p-4 rounded-xl shadow border">
+                        <div class="bg-white p-5 rounded-xl shadow border">
                             <form onsubmit="handleCreatePost(event)">
-                                <textarea id="postContent" rows="3" placeholder="شارك تعميماً قضائياً أو مقالاً قانونياً..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none" required></textarea>
+                                <textarea id="postContent" rows="3" placeholder="شارك تعميماً قضائياً، رؤية قانونية، أو مقالاً..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary resize-none text-sm"></textarea>
                                 <div class="flex justify-between items-center mt-3">
                                     <input type="file" id="postImage" accept="image/*" class="text-xs">
-                                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-900">نشر</button>
+                                    <button type="submit" class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-900 transition">نشر بالرئيسية</button>
                                 </div>
                             </form>
                         </div>
 
                         <div class="space-y-4">
-                            ${posts.length === 0 ? '<p class="text-center text-gray-400">لا توجد منشورات حتى الآن.</p>' : ''}
+                            ${posts.length === 0 ? '<p class="text-center text-gray-400 bg-white p-6 rounded-xl shadow border">لا توجد منشورات حالياً.</p>' : ''}
                             ${posts.slice().reverse().map(post => `
-                                <div class="bg-white p-4 rounded-xl shadow border space-y-3">
-                                    <div class="flex items-center space-x-3 space-x-reverse">
-                                        <img src="${post.userAvatar}" class="w-10 h-10 rounded-full object-cover">
-                                        <div>
-                                            <h4 class="font-bold text-sm">${post.userName}</h4>
-                                            <span class="text-xs text-gray-400">${post.userRole}</span>
+                                <div class="bg-white p-5 rounded-xl shadow border space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${post.userId})">
+                                            <img src="${post.userAvatar}" class="w-10 h-10 rounded-full object-cover border">
+                                            <div>
+                                                <h4 class="font-bold text-sm">${post.userName}</h4>
+                                                <span class="text-xs text-gray-400">${post.userRole}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p class="text-gray-700 whitespace-pre-line">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-80 w-full object-cover">` : ''}
+                                    <p class="text-gray-700 whitespace-pre-line text-sm leading-relaxed">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-80 w-full object-cover">` : ''}
                                 </div>
                             `).join('')}
                         </div>
@@ -394,7 +397,8 @@
             const user = Store.getCurrentUser();
             const content = document.getElementById('postContent').value;
             const fileInput = document.getElementById('postImage');
-            
+            if(!content.trim()) return;
+
             if(fileInput.files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = function(ev) { savePostFinal(user, content, ev.target.result); };
@@ -411,32 +415,46 @@
             render();
         }
 
-        // ================= 2. دليل المحامين والقضاة =================
         function renderSearchTab(user) {
             const users = Store.getUsers();
             return `
                 <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow border space-y-6">
-                    <h2 class="text-xl font-bold text-primary">دليل العدالة (المحامون والقضاة)</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${users.map(u => `
-                            <div class="flex items-center justify-between p-4 border rounded-lg shadow-sm">
-                                <div class="flex items-center space-x-3 space-x-reverse">
-                                    <img src="${u.avatar}" class="w-14 h-14 rounded-full object-cover border">
-                                    <div>
-                                        <h4 class="font-bold text-lg">${u.name}</h4>
-                                        <span class="text-xs bg-secondary text-white px-2 py-0.5 rounded">${u.role}</span>
-                                        <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> ${u.location || 'صنعاء'}</p>
-                                    </div>
-                                </div>
-                                <button onclick="viewingUserId=${u.id}; currentTab='profile'; render();" class="bg-primary text-white px-3 py-1.5 rounded-lg text-sm">الملف</button>
-                            </div>
-                        `).join('')}
+                    <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-magnifying-glass"></i> دليل العدالة والمحامين</h2>
+                    <input type="text" id="searchInput" oninput="filterUsers(this.value)" placeholder="ابحث بالاسم أو التخصص..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-primary text-sm">
+                    <div id="directoryResults" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${users.map(u => renderUserCard(u)).join('')}
                     </div>
                 </div>
             `;
         }
 
-        // ================= 3. الصفحة الشخصية وتحديث الصورة =================
+        function filterUsers(query) {
+            const users = Store.getUsers().filter(u => u.name.includes(query) || u.role.includes(query));
+            document.getElementById('directoryResults').innerHTML = users.map(u => renderUserCard(u)).join('');
+        }
+
+        function renderUserCard(targetUser) {
+            return `
+                <div class="flex items-center justify-between p-4 border rounded-xl hover:bg-gray-50 shadow-sm transition">
+                    <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${targetUser.id})">
+                        <img src="${targetUser.avatar}" class="w-14 h-14 rounded-full object-cover border">
+                        <div>
+                            <h4 class="font-bold text-base">${targetUser.name}</h4>
+                            <span class="text-xs bg-secondary text-white px-2 py-0.5 rounded">${targetUser.role}</span>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> ${targetUser.location || 'اليمن'}</p>
+                        </div>
+                    </div>
+                    <button onclick="viewUserProfile(${targetUser.id})" class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs hover:bg-blue-900">الملف الشخصي</button>
+                </div>
+            `;
+        }
+
+        function viewUserProfile(userId) {
+            viewingUserId = userId;
+            currentTab = 'profile';
+            render();
+        }
+
         function renderProfileTab(currentUser, profileUserId) {
             const users = Store.getUsers();
             const profileUser = users.find(u => u.id === profileUserId) || currentUser;
@@ -444,17 +462,32 @@
 
             return `
                 <div class="max-w-3xl mx-auto space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow border text-center space-y-3">
-                        <img id="previewImage" src="${profileUser.avatar}" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-primary">
+                    <div class="bg-white p-8 rounded-xl shadow border text-center space-y-4">
+                        <div class="relative w-32 h-32 mx-auto">
+                            <img id="previewImage" src="${profileUser.avatar}" class="w-32 h-32 rounded-full object-cover border-4 border-primary shadow-md">
+                            ${isOwner ? `
+                                <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="updateProfileAvatar(event)">
+                                <button type="button" onclick="document.getElementById('imageInput').click()" class="absolute bottom-0 left-0 bg-secondary text-white p-2 rounded-full text-xs shadow hover:bg-amber-700" title="تغيير الصورة">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                            ` : ''}
+                        </div>
                         <h2 class="text-2xl font-bold">${profileUser.name}</h2>
                         <span class="inline-block bg-secondary text-white text-sm px-3 py-1 rounded-full">${profileUser.role}</span>
-                        <p class="text-gray-600 max-w-lg mx-auto">${profileUser.bio}</p>
+                        <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> الموقع: <strong>${profileUser.location || 'اليمن'}</strong></p>
+                        <p class="text-gray-600 max-w-lg mx-auto text-sm leading-relaxed">${profileUser.bio}</p>
+
+                        <div class="text-green-600 text-sm font-bold"><i class="fa-solid fa-shield-check"></i> حساب موثق ورسمي بالمنصة</div>
+
+                        <div class="pt-3 border-t flex flex-wrap justify-center gap-4 text-xl text-primary">
+                            ${profileUser.socials?.whatsapp ? `<a href="https://wa.me/${profileUser.socials.whatsapp}" target="_blank" title="واتساب" class="text-green-600"><i class="fa-brands fa-whatsapp"></i></a>` : ''}
+                            ${profileUser.socials?.telegram ? `<a href="https://t.me/${profileUser.socials.telegram}" target="_blank" title="تليجرام" class="text-sky-500"><i class="fa-brands fa-telegram"></i></a>` : ''}
+                            ${profileUser.socials?.email ? `<a href="mailto:${profileUser.socials.email}" title="البريد"><i class="fa-solid fa-envelope"></i></a>` : ''}
+                        </div>
 
                         ${isOwner ? `
-                            <div class="mt-4 flex justify-center gap-2">
-                                <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="previewSelectedImage(event)">
-                                <button onclick="document.getElementById('imageInput').click()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm">تغيير الصورة الشخصية</button>
-                                <button onclick="openEditProfile()" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg text-sm">تعديل النبذة</button>
+                            <div class="mt-4">
+                                <button onclick="openEditProfile()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-900 transition"><i class="fa-solid fa-pen"></i> تعديل النبذة ومعلومات التواصل</button>
                             </div>
                         ` : ''}
                     </div>
@@ -462,18 +495,19 @@
             `;
         }
 
-        function previewSelectedImage(event) {
+        function updateProfileAvatar(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('previewImage').src = e.target.result;
                     const user = Store.getCurrentUser();
                     user.avatar = e.target.result;
                     Store.setCurrentUser(user);
                     const users = Store.getUsers();
                     const idx = users.findIndex(u => u.id === user.id);
                     if(idx > -1) { users[idx] = user; Store.setUsers(users); }
+                    render();
+                    alert('تم تحديث الصورة الشخصية بنجاح!');
                 }
                 reader.readAsDataURL(file);
             }
@@ -482,32 +516,34 @@
         function openEditProfile() {
             const user = Store.getCurrentUser();
             const newBio = prompt('تعديل النبذة التعريفية:', user.bio);
-            if(newBio !== null) {
-                user.bio = newBio;
-                Store.setCurrentUser(user);
-                const users = Store.getUsers();
-                const idx = users.findIndex(u => u.id === user.id);
-                if(idx > -1) { users[idx] = user; Store.setUsers(users); }
-                render();
-            }
+            const newLocation = prompt('تحديد الموقع:', user.location || '');
+            const newWhatsapp = prompt('رقم الواتساب:', user.socials?.whatsapp || '');
+            if(newBio !== null) user.bio = newBio;
+            if(newLocation !== null) user.location = newLocation;
+            if(newWhatsapp !== null) user.socials.whatsapp = newWhatsapp;
+
+            Store.setCurrentUser(user);
+            const users = Store.getUsers();
+            const idx = users.findIndex(u => u.id === user.id);
+            if(idx > -1) { users[idx] = user; Store.setUsers(users); }
+            render();
         }
 
-        // ================= 4. المكتبة القانونية =================
         function renderLibraryTab(user) {
             const books = Store.getLibraryBooks();
             return `
                 <div class="max-w-4xl mx-auto space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-book"></i> المكتبة القانونية العامة</h2>
-                        <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-book"></i> المكتبة القانونية والأبحاث العامة</h2>
+                        <div class="space-y-3">
                             ${books.map(b => `
-                                <div class="p-4 border rounded-lg flex justify-between items-center bg-gray-50">
+                                <div class="p-4 border rounded-xl flex justify-between items-center bg-gray-50">
                                     <div>
                                         <span class="bg-primary text-white text-xs px-2 py-0.5 rounded">${b.category}</span>
-                                        <h4 class="font-bold text-lg text-gray-800 mt-1">${b.title}</h4>
-                                        <p class="text-xs text-gray-500">ناشر الكتاب: ${b.uploaderName} \vert{} التاريخ: ${b.date}</p>
+                                        <h4 class="font-bold text-base text-gray-800 mt-1">${b.title}</h4>
+                                        <p class="text-xs text-gray-500">الناشر: ${b.uploaderName} \vert{} التاريخ: ${b.date}</p>
                                     </div>
-                                    <button onclick="alert('جاري تحميل الكتاب: ${b.fileName}')" class="bg-secondary text-white px-4 py-2 rounded-lg text-sm"><i class="fa-solid fa-download"></i> تحميل</button>
+                                    <button onclick="alert('جاري تحميل الكتاب: ${b.fileName}')" class="bg-secondary text-white px-4 py-2 rounded-lg text-sm hover:bg-amber-700 transition"><i class="fa-solid fa-download"></i> تحميل</button>
                                 </div>
                             `).join('')}
                         </div>
@@ -516,26 +552,42 @@
             `;
         }
 
-        // ================= 5. المحاضر والتحقيقات =================
         function renderMinutesTab(user) {
             const minutes = Store.getMinutes().filter(m => m.userId === user.id);
             return `
                 <div class="max-w-4xl mx-auto space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-file-pen"></i> تسجيل محضر تحقيق جديد</h2>
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-file-pen"></i> تسجيل محضر تحقيق سري</h2>
                         <form onsubmit="handleSaveMinute(event)" class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium mb-1">عنوان المحضر</label>
-                                <input type="text" id="minTitle" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                <label class="block text-sm font-medium mb-1">عنوان المحضر / القضية</label>
+                                <input type="text" id="minTitle" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary text-sm">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">نص المحضر والتحقيق</label>
-                                <textarea id="minContent" rows="5" required class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                                <textarea id="minContent" rows="5" required placeholder="سجل أقوال الأطراف والوقائع..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary text-sm"></textarea>
                             </div>
-                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">حفظ المحضر</button>
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-900 transition">حفظ المحضر بسرية تامة</button>
                         </form>
                     </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-primary">المحاضر المحفوظة</h3>
+                        <div class="space-y-3">
+                            ${minutes.length === 0 ? '<p class="text-gray-400 text-center">لا توجد محاضر محفوظة.</p>' : ''}
+                            ${minutes.map(m => `
+                                <div class="p-4 border rounded-xl flex justify-between items-center bg-gray-50">
+                                    <div>
+                                        <h4 class="font-bold text-sm">${m.title}</h4>
+                                        <p class="text-xs text-gray-500">التاريخ: ${m.date}</p>
+                                    </div>
+                                    <button onclick="printMinute(${m.id})" class="bg-gray-800 text-white px-3 py-1.5 rounded text-xs"><i class="fa-solid fa-print"></i> طباعة / PDF</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
                 </div>
+                <div id="printableArea" class="hidden"></div>
             `;
         }
 
@@ -551,100 +603,51 @@
             render();
         }
 
-        // ================= 6. صياغة الدعاوى والدفوع =================
+        function printMinute(id) {
+            const m = Store.getMinutes().find(min => min.id === id);
+            if(!m) return;
+            const area = document.getElementById('printableArea');
+            area.innerHTML = `<div dir="rtl" style="padding:40px; font-family:'Cairo';"><h2>محضر رسمي سري</h2><hr/><p><strong>العنوان:</strong> ${m.title}</p><p>${m.content.replace(/\n/g, '<br>')}</p></div>`;
+            window.print();
+        }
+
         function renderLawsuitsTab(user) {
             return `
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-gavel"></i> صياغة صحيفة دعوى</h2>
-                        <p class="text-sm text-gray-600">قسم مخصص لصياغة وتجهيز صحائف الدعاوى والمذكرات القانونية بدقة عالية.</p>
-                    </div>
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow border space-y-4">
+                    <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-gavel"></i> صياغة صحيفة دعوى ومذكرة دفوع</h2>
+                    <p class="text-sm text-gray-600">هذا القسم مخصص لإعداد المذكرات وصحائف الدعاوى القانونية باحترافية وتصديرها بصيغ رسمية.</p>
                 </div>
             `;
         }
 
-        // ================= 7. طلب خدمة الاستشارة والدراسة القانونية =================
         function renderConsultsTab(user) {
-            const consults = Store.getConsultations();
             return `
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-comments-dollar"></i> طلب خدمة استشارة ودراسة قضية</h2>
-                        <p class="text-sm text-gray-600">قم بتقديم تفاصيل استشارتك أو قضيتك ليتم دراستها من قِبل المحامي المختص وتحديد الأتعاب المناسبة.</p>
-                        <form onsubmit="handleSendConsult(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-1">نوع الطلب</label>
-                                <select id="consultType" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
-                                    <option value="استشارة قانونية عاجلة">استشارة قانونية عاجلة</option>
-                                    <option value="دراسة ملف قضية">دراسة ملف قضية</option>
-                                    <option value="مراجعة عقد قانوني">مراجعة عقد قانوني</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">تفاصيل وموضوع الاستشارة</label>
-                                <textarea id="consultDetails" rows="4" required placeholder="اشرح تفاصيل موضوعك القانوني هنا..." class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1">إرفاق المستندات (إن وجدت)</label>
-                                <input type="file" id="consultFile" class="w-full p-2 border rounded-lg bg-gray-50 text-sm">
-                            </div>
-                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition">إرسال طلب الاستشارة للمحامي</button>
-                        </form>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
-                        <h3 class="text-lg font-bold text-primary">طلبات الاستشارات المرسلة وحالة الرد</h3>
-                        <div class="space-y-3">
-                            ${consults.length === 0 ? '<p class="text-gray-400 text-center py-4">لا توجد طلبات استشارة مسجلة حتى الآن.</p>' : ''}
-                            ${consults.map(c => `
-                                <div class="p-4 border rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 gap-2">
-                                    <div>
-                                        <span class="bg-secondary text-white text-xs px-2 py-0.5 rounded">${c.type}</span>
-                                        <p class="text-sm font-semibold mt-1">${c.details}</p>
-                                        <p class="text-xs text-gray-500 mt-1">الأتعاب المحددة: <strong class="text-primary">${c.fee ? c.fee : 'قيد المراجعة وتحديد الأتعاب من المحامي'}</strong></p>
-                                    </div>
-                                    ${!c.fee && (user.role.includes('محامي')) ? `
-                                        <button onclick="setConsultFee(${c.id})" class="bg-secondary text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-amber-700">تحديد الأتعاب</button>
-                                    ` : ''}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow border space-y-4">
+                    <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-comments-dollar"></i> طلبات الدراسات والاستشارات القانونية</h2>
+                    <p class="text-sm text-gray-600">إدارة ودراسة القضايا الواردة من الموكلين وتحديد الأتعاب.</p>
                 </div>
             `;
         }
 
-        function handleSendConsult(e) {
-            e.preventDefault();
-            const type = document.getElementById('consultType').value;
-            const details = document.getElementById('consultDetails').value;
-            const consults = Store.getConsultations();
-            consults.push({ id: Date.now(), type, details, fee: null });
-            Store.setConsultations(consults);
-            alert('تم إرسال طلب الاستشارة ودراسة القضية بنجاح إلى المحامي.');
-            render();
-        }
-
-        function setConsultFee(id) {
-            const fee = prompt('أدخل مبلغ الأتعاب المحدد لهذه الاستشارة أو الدراسة:');
-            if(fee) {
-                const consults = Store.getConsultations();
-                const c = consults.find(item => item.id === id);
-                if(c) { 
-                    c.fee = fee + ' ريال / دولار'; 
-                    Store.setConsultations(consults); 
-                    render(); 
-                }
-            }
-        }
-
-        // ================= 8. المراسلة الفورية =================
         function renderChatTab(user) {
             return `
-                <div class="bg-white rounded-xl shadow border p-6 text-center text-gray-500">
-                    <i class="fa-solid fa-comments text-4xl text-primary mb-2"></i>
-                    <h3 class="font-bold text-lg text-gray-800">نظام المراسلة الفورية</h3>
-                    <p class="text-sm">يمكنك التواصل المباشر مع العملاء والمحامين عبر نافذة المحادثات.</p>
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow border text-center py-12">
+                    <i class="fa-solid fa-comments text-4xl text-primary mb-3"></i>
+                    <h3 class="font-bold text-lg">نظام المراسلة الفورية القانونية</h3>
+                    <p class="text-sm text-gray-500">التواصل الآمن بين الزملاء والموكلين قيد التفعيل المباشر.</p>
+                </div>
+            `;
+        }
+
+        function renderSettingsTab(user) {
+            return `
+                <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow border space-y-4">
+                    <h2 class="text-xl font-bold text-primary">إعدادات الحساب</h2>
+                    <p class="text-sm text-gray-600"><strong>الاسم:</strong> ${user.name}</p>
+                    <p class="text-sm text-gray-600"><strong>البريد الإلكتروني:</strong> ${user.email}</p>
+                    <p class="text-sm text-gray-600"><strong>رقم الهاتف:</strong> ${user.phone}</p>
+                    <p class="text-sm text-gray-600"><strong>الصفة المهنية:</strong> ${user.role}</p>
+                    <button onclick="logout()" class="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition">تسجيل الخروج</button>
                 </div>
             `;
         }
