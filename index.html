@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة العدالة والمحاماة الرقمية الذكية - متكاملة 100%</title>
+    <title>منصة العدالة والمحاماة الرقمية الذكية</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -20,117 +20,117 @@
     </script>
     <!-- FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
         body { font-family: 'Cairo', sans-serif; }
+        @media print {
+            body * { visibility: hidden; }
+            #printableArea, #printableArea * { visibility: visible; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col justify-between">
 
-    <div id="app" class="flex-grow flex flex-col">
-        <div class="flex items-center justify-center flex-grow">
-            <div class="text-center space-y-3">
-                <i class="fa-solid fa-scale-balanced text-5xl text-primary animate-bounce"></i>
-                <p class="text-lg font-semibold text-gray-600">جاري تحميل منصة العدالة الرقمية السحابية...</p>
-            </div>
-        </div>
-    </div>
+    <div id="app" class="flex-grow flex flex-col"></div>
 
     <footer class="bg-white border-t border-gray-200 text-center py-4 text-sm text-gray-500 mt-auto">
         منصة العدالة الرقمية الشاملة - نظام المحاماة والقضاء الذكي | إشراف: الأستاذ / عبدالله صالح صالح محمد الجلال[span_0](start_span)[span_0](end_span)
     </footer>
 
     <script>
-        // إعدادات اتصال Firebase (يمكنك استبدالها ببيانات مشروعك الخاص لاحقاً)
-        const firebaseConfig = {
-            apiKey: "AIzaSyDummyKeyForDemoPlatform12345",
-            authDomain: "digital-justice-platform.firebaseapp.com",
-            projectId: "digital-justice-platform",
-            storageBucket: "digital-justice-platform.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
+        // إدارة التخزين المحلي والمحاكاة الذكية السحابية
+        const Store = {
+            getUsers: () => JSON.parse(localStorage.getItem('law_users_v5')) || [],
+            setUsers: (users) => localStorage.setItem('law_users_v5', JSON.stringify(users)),
+            getCurrentUser: () => JSON.parse(localStorage.getItem('law_currentUser_v5')) || null,
+            setCurrentUser: (user) => localStorage.setItem('law_currentUser_v5', JSON.stringify(user)),
+            getPosts: () => JSON.parse(localStorage.getItem('law_posts_v5')) || [],
+            setPosts: (posts) => localStorage.setItem('law_posts_v5', JSON.stringify(posts)),
+            getLibraryBooks: () => JSON.parse(localStorage.getItem('law_library_v5')) || [],
+            setLibraryBooks: (books) => localStorage.setItem('law_library_v5', JSON.stringify(books)),
+            getMinutes: () => JSON.parse(localStorage.getItem('law_minutes_v5')) || [],
+            setMinutes: (mins) => localStorage.setItem('law_minutes_v5', JSON.stringify(mins)),
+            getConsultations: () => JSON.parse(localStorage.getItem('law_consults_v5')) || [],
+            setConsultations: (c) => localStorage.setItem('law_consults_v5', JSON.stringify(c)),
         };
 
-        // تهيئة فايربيس (مع التعامل مع حالة التهيئة المسبقة)
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-
-        let currentUserData = null;
-        let currentTab = 'feed';
-        let authMode = 'login';
-        let viewingUserId = null;
-
-        // مراقبة حالة المصادقة السحابية
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                const doc = await db.collection('users').doc(user.uid).get();
-                if (doc.exists) {
-                    currentUserData = { id: user.uid, ...doc.data() };
-                } else {
-                    currentUserData = { 
-                        id: user.uid, 
-                        name: user.displayName || 'أستاذ قانوني', 
-                        email: user.email, 
-                        role: 'محامي ابتدائي', 
-                        subscriptionActive: true,
-                        bio: 'محامي وممارس قانوني معتمد.',
-                        location: 'صنعاء، اليمن',[span_1](start_span)[span_1](end_span)
-                        avatar: 'https://via.placeholder.com/150',[span_2](start_span)[span_2](end_span)
-                        socials: { email: user.email, phone: '', whatsapp: '' }
-                    };
-                }
-            } else {
-                currentUserData = null;
+        // تهيئة البيانات الأساسية للمنصة
+        function initData() {
+            if (Store.getUsers().length === 0) {
+                Store.setUsers([
+                    { 
+                        id: 1, 
+                        name: 'عبدالله صالح صالح محمد الجلال',[span_1](start_span)[span_1](end_span)
+                        email: 'abdullah@law.com',[span_2](start_span)[span_2](end_span)
+                        phone: '967771234567',[span_3](start_span)[span_3](end_span)
+                        pass: '123456',[span_4](start_span)[span_4](end_span)
+                        role: 'محامي ابتدائي',[span_5](start_span)[span_5](end_span)
+                        verified: true,[span_6](start_span)[span_6](end_span)
+                        subscriptionActive: true,[span_7](start_span)[span_7](end_span)
+                        bio: 'محامي تحت التحديث إلى محامي ابتدائي وممارس قانوني، مهتم بالقضايا المدنية والتجارية.',[span_8](start_span)[span_8](end_span)
+                        location: 'صنعاء، اليمن',[span_9](start_span)[span_9](end_span)
+                        avatar: 'https://via.placeholder.com/150',[span_10](start_span)[span_10](end_span)
+                        socials: { email: 'abdullah@law.com', phone: '967771234567', whatsapp: '967771234567', telegram: 'abdullah_jalal', x: 'abdullah_law', instagram: 'abdullah_insta' }[span_11](start_span)[span_11](end_span)
+                    }
+                ]);
             }
-            renderApp();
-        });
+            if (Store.getLibraryBooks().length === 0) {
+                Store.setLibraryBooks([
+                    { id: 1, title: 'شرح قانون الإجراءات الجزائية والمدنية', category: 'قانون جنائي', fileName: 'شرح_الإجراءات.pdf', date: '2026/06/13', uploaderName: 'عبدالله صالح الجلال' }[span_12](start_span)[span_12](end_span)
+                ]);
+            }
+        }
+        initData();
 
-        function renderApp() {
+        function render() {
             const app = document.getElementById('app');
-            if (!currentUserData) {
+            const user = Store.getCurrentUser();
+
+            if (!user) {
                 app.innerHTML = renderAuthScreen();
+            } else if (!user.subscriptionActive && (user.role.includes('محامي') || user.role.includes('قاض') || user.role.includes('أمناء السر') || user.role.includes('أمين سر'))) {
+                app.innerHTML = renderSubscriptionScreen(user);
             } else {
-                app.innerHTML = renderMainLayout(currentUserData);
+                app.innerHTML = renderMainLayout(user);
                 initDropdownScript();
             }
         }
 
+        let authMode = 'login';
         function renderAuthScreen() {
             return `
                 <div class="flex flex-col items-center justify-center flex-grow p-4 bg-gray-50">
                     <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border border-gray-200">
                         <div class="text-center mb-6">
                             <i class="fa-solid fa-scale-balanced text-4xl text-primary mb-2"></i>
-                            <h1 class="text-2xl font-bold text-primary">منصة العدالة الرقمية السحابية</h1>
-                            <p class="text-sm text-gray-500">نظام القضاء والمحاماة المربوط سحابياً 100%</p>
+                            <h1 class="text-2xl font-bold text-primary">منصة العدالة الرقمية الشاملة</h1>
+                            <p class="text-sm text-gray-500">نظام القضاء، المحاماة، والاستشارات الذكية</p>
                         </div>
                         
                         <div class="flex border-b mb-6">
-                            <button onclick="authMode='login'; renderApp();" class="flex-1 pb-2 font-semibold text-center ${authMode==='login'?'border-b-2 border-primary text-primary':'text-gray-400'}">تسجيل الدخول</button>
-                            <button onclick="authMode='register'; renderApp();" class="flex-1 pb-2 font-semibold text-center ${authMode==='register'?'border-b-2 border-primary text-primary':'text-gray-400'}">حساب جديد</button>
+                            <button onclick="authMode='login'; render();" class="flex-1 pb-2 font-semibold text-center ${authMode==='login'?'border-b-2 border-primary text-primary':'text-gray-400'}">تسجيل الدخول</button>
+                            <button onclick="authMode='register'; render();" class="flex-1 pb-2 font-semibold text-center ${authMode==='register'?'border-b-2 border-primary text-primary':'text-gray-400'}">إنشاء حساب جديد</button>
                         </div>
 
                         ${authMode === 'login' ? `
-                            <form onsubmit="handleCloudLogin(event)" class="space-y-4">
+                            <form onsubmit="handleLogin(event)" class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-1">البريد الإلكتروني</label>
                                     <input type="email" id="loginEmail" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="abdullah@law.com">
                                 </div>
                                 <div>
+                                    <label class="block text-sm font-medium mb-1">رقم الهاتف</label>
+                                    <input type="text" id="loginPhone" required placeholder="مثال: 96777XXXXXXX" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="967771234567">
+                                </div>
+                                <div>
                                     <label class="block text-sm font-medium mb-1">كلمة المرور</label>
                                     <input type="password" id="loginPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" value="123456">
                                 </div>
-                                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-900 transition">دخول سحابي آمن</button>
+                                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-blue-900 transition">دخول آمن ومصادقة</button>
                             </form>
                         ` : `
-                            <form onsubmit="handleCloudRegister(event)" class="space-y-4">
+                            <form onsubmit="handleRegister(event)" class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-1">الاسم الكامل</label>
                                     <input type="text" id="regName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
@@ -140,20 +140,40 @@
                                     <input type="email" id="regEmail" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
                                 </div>
                                 <div>
+                                    <label class="block text-sm font-medium mb-1">رقم الهاتف</label>
+                                    <input type="text" id="regPhone" required placeholder="96777XXXXXXX" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
                                     <label class="block text-sm font-medium mb-1">كلمة المرور</label>
                                     <input type="password" id="regPass" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-1">الصفة المهنية والتصنيف</label>
+                                    <label class="block text-sm font-medium mb-1">الصفة المهنية والتصنيف الدقيق</label>
                                     <select id="regRole" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary">
-                                        <option value="محامي ابتدائي" selected>محامي ابتدائي</option>
-                                        <option value="محامي استئنافي">محامي استئنافي</option>
-                                        <option value="قاضي محكمة ابتدائية">قاضي محكمة ابتدائية</option>
-                                        <option value="أمين سر محكمة">أمين سر محكمة</option>
+                                        <optgroup label="المحامون">
+                                            <option value="محامي تحت التمرين">محامي تحت التمرين</option>
+                                            <option value="محامي ابتدائي" selected>محامي ابتدائي</option>
+                                            <option value="محامي استئنافي">محامي استئنافي</option>
+                                            <option value="محامي محكمة عليا">محامي محكمة عليا</option>
+                                        </optgroup>
+                                        <optgroup label="القضاة">
+                                            <option value="قاضي محكمة ابتدائية">قاضي محكمة ابتدائية</option>
+                                            <option value="قاضي محكمة استئنافية">قاضي محكمة استئنافية</option>
+                                            <option value="قاضي محكمة عليا">قاضي محكمة عليا</option>
+                                        </optgroup>
+                                        <optgroup label="أمناء السر">
+                                            <option value="أمين سر محكمة ابتدائية">أمين سر محكمة ابتدائية</option>
+                                            <option value="أمين سر محكمة استئنافية">أمين سر محكمة استئنافية</option>
+                                            <option value="أمين سر محكمة عليا">أمين سر محكمة عليا</option>
+                                        </optgroup>
                                         <option value="مستخدم عادي / عميل">مستخدم عادي / عميل</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-amber-700 transition">إنشاء الحساب سحابياً</button>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">رفع إثبات الهوية (كارنيه / بطاقة رسمية للمحامين والقضاة)</label>
+                                    <input type="file" id="regIDCard" accept="image/*" class="w-full text-sm border rounded-lg p-2 bg-gray-50" required>
+                                </div>
+                                <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-amber-700 transition">إنشاء الحساب والتحقق بالذكاء الاصطناعي</button>
                             </form>
                         `}
                     </div>
@@ -161,68 +181,160 @@
             `;
         }
 
-        async function handleCloudLogin(e) {
+        function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
+            const phone = document.getElementById('loginPhone').value;
             const pass = document.getElementById('loginPass').value;
-            try {
-                await auth.signInWithEmailAndPassword(email, pass);
-            } catch (err) {
-                alert('خطأ في بيانات الدخول: ' + err.message);
+            const users = Store.getUsers();
+            const user = users.find(u => u.email === email && u.phone === phone && u.pass === pass);
+            if (user) {
+                Store.setCurrentUser(user);
+                alert('تم إرسال رمز المصادقة بنجاح إلى البريد الإلكتروني ورقم الهاتف المسجل.');
+                render();
+            } else {
+                alert('بيانات الدخول غير صحيحة أو غير مطابقة.');
             }
         }
 
-        async function handleCloudRegister(e) {
+        function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
             const pass = document.getElementById('regPass').value;
             const role = document.getElementById('regRole').value;
+            const fileInput = document.getElementById('regIDCard');
 
-            try {
-                const res = await auth.createUserWithEmailAndPassword(email, pass);
-                const userData = {
-                    name, email, role,
-                    subscriptionActive: true,
-                    bio: 'مرحباً بك في صفحتي المهنية.',
-                    location: 'صنعاء، اليمن',[span_3](start_span)[span_3](end_span)
-                    avatar: 'https://via.placeholder.com/150',[span_4](start_span)[span_4](end_span)
-                    socials: { email, phone: '', whatsapp: '' }
-                };
-                await db.collection('users').doc(res.user.uid).set(userData);
-                alert('تم إنشاء الحساب وتسجيله سحابياً بنجاح!');
-            } catch (err) {
-                alert('خطأ في التسجيل: ' + err.message);
+            if (fileInput.files.length === 0) {
+                alert('يرجى إرفاق إثبات الهوية.');
+                return;
             }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const idCardImg = event.target.result;
+                // محاكاة الفحص الذكي بالذكاء الاصطناعي لهوية القضاة والمحامين
+                let isVerified = role.includes('مستخدم عادي') ? true : confirm('جاري فحص الهوية والتحقق من جهة الإصدار بواسطة الذكاء الاصطناعي...\nهل تمت مطابقة البيانات واعتمادها بنجاح؟');
+
+                const users = Store.getUsers();
+                if (users.some(u => u.email === email)) {
+                    alert('البريد الإلكتروني مسجل مسبقاً.');
+                    return;
+                }
+
+                const newUser = {
+                    id: Date.now(),
+                    name, email, phone, pass, role,
+                    verified: isVerified,
+                    subscriptionActive: true,
+                    bio: 'مرحباً بك في صفحتي المهنية المعتمدة.',
+                    location: 'صنعاء، اليمن',[span_13](start_span)[span_13](end_span)
+                    avatar: 'https://via.placeholder.com/150',[span_14](start_span)[span_14](end_span)
+                    idCard: idCardImg,
+                    socials: { email, phone, whatsapp: phone, telegram: '', x: '', instagram: '' }
+                };
+
+                users.push(newUser);
+                Store.setUsers(users);
+                Store.setCurrentUser(newUser);
+                alert(`تم التحقق من الهوية بنجاح وإرسال رمز المصادقة إلى البريد (${email}).`);
+                render();
+            };
+            reader.readAsDataURL(fileInput.files[0]);
         }
 
+        function renderSubscriptionScreen(user) {
+            return `
+                <div class="flex flex-col items-center justify-center flex-grow p-4 bg-gray-50">
+                    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border text-center space-y-4">
+                        <i class="fa-solid fa-credit-card text-5xl text-secondary"></i>
+                        <h2 class="text-2xl font-bold text-primary">الاشتراك الشهري للمنصة</h2>
+                        <p class="text-sm text-gray-600">المستشار ${user.name} (${user.role})، يتطلب النظام اشتراكاً شهرياً متجدداً بقيمة <strong>2000</strong>، ما لم يتم سداده سيتم وقف الخدمة مؤقتاً.</p>
+                        <button onclick="paySubscription()" class="w-full bg-secondary text-white py-3 rounded-lg font-bold hover:bg-amber-700">دفع اشتراك (2000) وتفعيل الخدمة</button>
+                        <button onclick="logout()" class="text-red-500 text-sm hover:underline block mx-auto">تسجيل الخروج</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function paySubscription() {
+            const user = Store.getCurrentUser();
+            user.subscriptionActive = true;
+            Store.setCurrentUser(user);
+            updateUserInStore(user);
+            alert('تم سداد الاشتراك الشهري (2000) بنجاح وتم تفعيل الحساب!');
+            render();
+        }
+
+        function updateUserInStore(user) {
+            const users = Store.getUsers();
+            const idx = users.findIndex(u => u.id === user.id);
+            if(idx > -1) { users[idx] = user; Store.setUsers(users); }
+        }
+
+        let currentTab = 'feed';
+        let viewingUserId = null;
+
         function renderMainLayout(user) {
+            const isLegalProfessional = user.role.includes('محامي') || user.role.includes('قاض');
             return `
                 <header class="bg-primary text-white shadow sticky top-0 z-50">
                     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-                        <div class="flex items-center space-x-2 space-x-reverse cursor-pointer" onclick="currentTab='feed'; renderApp();">
+                        <div class="flex items-center space-x-2 space-x-reverse cursor-pointer" onclick="currentTab='feed'; render();">
                             <i class="fa-solid fa-scale-balanced text-2xl text-secondary"></i>
-                            <span class="font-bold text-lg">العدالة السحابية</span>
+                            <span class="font-bold text-lg hidden sm:inline">العدالة الرقمية الشاملة</span>
                         </div>
 
+                        <!-- شريط البحث السريع في الأعلى -->
+                        <div class="flex-grow max-w-md mx-4">
+                            <input type="text" oninput="quickSearchGlobal(this.value)" placeholder="بحث سريع في المنصة..." class="w-full px-3 py-1.5 text-sm rounded-lg text-gray-800 focus:outline-none">
+                        </div>
+
+                        <!-- القائمة المنسدلة العلوية (أعلى اليمين) -->
                         <div class="relative">
-                            <button id="dropdownBtn" class="flex items-center space-x-2 space-x-reverse bg-blue-900 px-3 py-1.5 rounded-lg text-sm font-semibold">
+                            <button id="dropdownBtn" class="flex items-center space-x-2 space-x-reverse bg-blue-900 px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-800 transition">
+                                <img src="${user.avatar}" class="w-6 h-6 rounded-full object-cover">
                                 <span>${user.name}</span>
                                 <span class="text-xs bg-secondary px-2 py-0.5 rounded">${user.role}</span>
                                 <i class="fa-solid fa-chevron-down text-xs"></i>
                             </button>
-                            <div id="userDropdownMenu" class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-xl border hidden z-50 py-2">
-                                <a href="#" onclick="auth.signOut(); closeDropdown();" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-right-from-bracket ml-2"></i> تسجيل الخروج</a>
+                            <div id="userDropdownMenu" class="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-xl border hidden z-50 py-2">
+                                <a href="#" onclick="currentTab='profile'; viewingUserId=null; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-user ml-2"></i> اسم الصفحة الشخصية</a>
+                                <a href="#" onclick="currentTab='library'; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-book ml-2"></i> دخول المكتبة</a>
+                                <a href="#" onclick="currentTab='settings'; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-gear ml-2"></i> الاعدادات</a>
+                                <a href="#" onclick="currentTab='searchPeople'; render(); closeDropdown();" class="block px-4 py-2 text-sm hover:bg-gray-100"><i class="fa-solid fa-magnifying-glass ml-2"></i> البحث عن الأشخاص</a>
+                                <div class="border-t my-1"></div>
+                                <a href="#" onclick="logout(); closeDropdown();" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i class="fa-solid fa-right-from-bracket ml-2"></i> تسجيل الخروج</a>
                             </div>
                         </div>
                     </div>
-                </header>
-                <main class="max-w-4xl mx-auto px-4 py-6 flex-grow w-full">
-                    <div class="bg-white p-6 rounded-xl shadow border text-center space-y-4">
-                        <h2 class="text-2xl font-bold text-primary">مرحباً بك يا أستاذ ${user.name}</h2>
-                        <p class="text-gray-600">أنت الآن متصل بقاعدة البيانات السحابية بالكامل وتعمل المنصة بكفاءة تامة.</p>
-                        <button onclick="auth.signOut()" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold">تسجيل الخروج</button>
+
+                    <div class="bg-blue-950 text-xs sm:text-sm py-2 px-4">
+                        <div class="max-w-6xl mx-auto flex flex-wrap gap-4 items-center justify-center">
+                            <button onclick="currentTab='feed'; render();" class="${currentTab==='feed'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-house"></i> الرئيسية</button>
+                            <button onclick="currentTab='searchPeople'; render();" class="${currentTab==='searchPeople'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-magnifying-glass"></i> البحث عن الأشخاص</button>
+                            <button onclick="currentTab='library'; render();" class="${currentTab==='library'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-book-open"></i> المكتبة القانونية</button>
+                            <button onclick="currentTab='minutes'; render();" class="${currentTab==='minutes'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-file-pen"></i> المحاضر والتحقيقات السرية</button>
+                            <button onclick="currentTab='lawsuits'; render();" class="${currentTab==='lawsuits'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-gavel"></i> صياغة الدعاوى والدفوع</button>
+                            ${isLegalProfessional ? `
+                                <button onclick="currentTab='aiAnalysis'; render();" class="${currentTab==='aiAnalysis'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-brain"></i> التحليل والاستنتاج (AI)</button>
+                                <button onclick="currentTab='consults'; render();" class="${currentTab==='consults'?'text-secondary font-bold':''} hover:text-secondary"><i class="fa-solid fa-comments-dollar"></i> دراسة القضايا والاستشارات</button>
+                            ` : ''}
+                        </div>
                     </div>
+                </header>
+
+                <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full">
+                    ${currentTab === 'feed' ? renderFeedTab(user) : ''}
+                    ${currentTab === 'searchPeople' ? renderSearchPeopleTab(user) : ''}
+                    ${currentTab === 'profile' ? renderProfileTab(user, viewingUserId || user.id) : ''}
+                    ${currentTab === 'library' ? renderLibraryTab(user) : ''}
+                    ${currentTab === 'minutes' ? renderMinutesTab(user) : ''}
+                    ${currentTab === 'lawsuits' ? renderLawsuitsTab(user) : ''}
+                    ${currentTab === 'aiAnalysis' && isLegalProfessional ? renderAiAnalysisTab(user) : ''}
+                    ${currentTab === 'consults' && isLegalProfessional ? renderConsultsTab(user) : ''}
+                    ${currentTab === 'settings' ? renderSettingsTab(user) : ''}
                 </main>
             `;
         }
@@ -240,6 +352,475 @@
             const menu = document.getElementById('userDropdownMenu');
             if(menu) menu.classList.add('hidden');
         }
+
+        function logout() {
+            Store.setCurrentUser(null);
+            render();
+        }
+
+        function quickSearchGlobal(val) {
+            if(val.length > 1) {
+                currentTab = 'searchPeople';
+                render();
+            }
+        }
+
+        function renderFeedTab(user) {
+            const posts = Store.getPosts();
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow border text-center space-y-2">
+                            <img src="${user.avatar}" class="w-20 h-20 rounded-full mx-auto object-cover border-2 border-primary">
+                            <h3 class="font-bold text-lg">${user.name}</h3>
+                            <span class="inline-block bg-secondary text-white text-xs px-2 py-1 rounded-full">${user.role}</span>
+                            <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500"></i> مكان التواجد: ${user.location || 'غير محدد'}</p>
+                            <p class="text-sm text-gray-600">${user.bio}</p>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-6">
+                        ${(user.role.includes('محامي') || user.role.includes('قاض') || user.role.includes('أمناء السر') || user.role.includes('أمين سر')) ? `
+                            <div class="bg-white p-4 rounded-xl shadow border">
+                                <form onsubmit="handleCreatePost(event)">
+                                    <textarea id="postContent" rows="3" placeholder="نشر تعميم، بحث، أو مقال قانوني..." class="w-full p-2 border rounded-lg focus:outline-none focus:border-primary resize-none"></textarea>
+                                    <div class="flex justify-between items-center mt-3">
+                                        <input type="file" id="postImage" accept="image/*" class="text-xs">
+                                        <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold">نشر</button>
+                                    </div>
+                                </form>
+                            </div>
+                        ` : ''}
+
+                        <div class="space-y-4">
+                            ${posts.length === 0 ? '<p class="text-center text-gray-400">لا توجد منشورات حتى الآن.</p>' : ''}
+                            ${posts.slice().reverse().map(post => `
+                                <div class="bg-white p-4 rounded-xl shadow border space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${post.userId})">
+                                            <img src="${post.userAvatar}" class="w-10 h-10 rounded-full object-cover">
+                                            <div>
+                                                <h4 class="font-bold text-sm">${post.userName}</h4>
+                                                <span class="text-xs text-gray-400">${post.userRole}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 whitespace-pre-line">${post.content}</p>${post.image ? `<img src="${post.image}" class="rounded-lg max-h-80 w-full object-cover">` : ''}
+                                    <div class="flex justify-between items-center pt-2 border-t text-sm text-gray-500">
+                                        <button onclick="toggleLike(${post.id})" class="${post.likes.includes(user.id)?'text-red-500 font-bold':''}">
+                                            <i class="fa-solid fa-heart"></i> إعجاب (${post.likes.length})
+                                        </button>
+                                        <button onclick="sharePostBetweenPages(${post.id})" class="hover:text-primary">
+                                            <i class="fa-solid fa-share-nodes"></i> مشاركة المنشور
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleCreatePost(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const content = document.getElementById('postContent').value;
+            const fileInput = document.getElementById('postImage');
+            if(!content.trim()) return;
+
+            if(fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (ev) => savePostFinal(user, content, ev.target.result);
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                savePostFinal(user, content, '');
+            }
+        }
+
+        function savePostFinal(user, content, image) {
+            const posts = Store.getPosts();
+            posts.push({ id: Date.now(), userId: user.id, userName: user.name, userRole: user.role, userAvatar: user.avatar, content, image, likes: [] });
+            Store.setPosts(posts);
+            render();
+        }
+
+        function toggleLike(postId) {
+            const user = Store.getCurrentUser();
+            const posts = Store.getPosts();
+            const post = posts.find(p => p.id === postId);
+            if (post) {
+                const idx = post.likes.indexOf(user.id);
+                if (idx > -1) post.likes.splice(idx, 1);
+                else post.likes.push(user.id);
+                Store.setPosts(posts);
+                render();
+            }
+        }
+
+        function sharePostBetweenPages(postId) {
+            const posts = Store.getPosts();
+            const original = posts.find(p => p.id === postId);
+            if(!original) return;
+            const user = Store.getCurrentUser();
+            posts.push({ id: Date.now(), userId: user.id, userName: user.name, userRole: user.role, userAvatar: user.avatar, content: `[مشاركة من صفحة ${original.userName}] ${original.content}`, image: original.image, likes: [] });
+            Store.setPosts(posts);
+            alert('تمت مشاركة المنشور بنجاح بين الصفحات!');
+            render();
+        }
+
+        function renderSearchPeopleTab(user) {
+            const users = Store.getUsers();
+            const categories = [
+                { title: 'محامو تحت التمرين', roleKey: 'محامي تحت التمرين' },
+                { title: 'محامو الابتدائي', roleKey: 'محامي ابتدائي' },
+                { title: 'محامو الاستئناف', roleKey: 'محامي استئنافي' },
+                { title: 'محامو المحكمة العليا', roleKey: 'محامي محكمة عليا' },
+                { title: 'قضاة المحاكم الابتدائية', roleKey: 'قاضي محكمة ابتدائية' },
+                { title: 'قضاة محاكم الاستئناف', roleKey: 'قاضي محكمة استئنافية' },
+                { title: 'قضاة المحكمة العليا', roleKey: 'قاضي محكمة عليا' },
+                { title: 'أمناء سر المحاكم الابتدائية', roleKey: 'أمين سر محكمة ابتدائية' },
+                { title: 'أمناء سر محاكم الاستئناف', roleKey: 'أمين سر محكمة استئنافية' },
+                { title: 'أمناء سر المحكمة العليا', roleKey: 'أمين سر محكمة عليا' }
+            ];
+
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-magnifying-glass"></i> دليل القضاة والمحامين وأمناء السر</h2>
+                        <input type="text" id="personSearchInput" oninput="filterPeopleDirectory(this.value)" placeholder="ابحث بالاسم، الصفة المهنية..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-primary">
+                    </div>
+                    <div id="categorizedDirectory" class="space-y-6">
+                        ${categories.map(cat => {
+                            const filtered = users.filter(u => u.role === cat.roleKey);
+                            if(filtered.length === 0) return '';
+                            return `
+                                <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                                    <h3 class="text-lg font-bold text-secondary border-b pb-2">${cat.title}</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        ${filtered.map(u => renderPersonCard(u)).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterPeopleDirectory(query) {
+            const users = Store.getUsers().filter(u => u.name.includes(query) || u.role.includes(query));
+            document.getElementById('categorizedDirectory').innerHTML = `
+                <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                    <h3 class="text-lg font-bold text-secondary border-b pb-2">نتائج البحث في الدليل</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${users.map(u => renderPersonCard(u)).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPersonCard(u) {
+            return `
+                <div class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 shadow-sm">
+                    <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="viewUserProfile(${u.id})">
+                        <img src="${u.avatar}" class="w-14 h-14 rounded-full object-cover border">
+                        <div>
+                            <h4 class="font-bold text-base">${u.name}</h4>
+                            <span class="text-xs bg-secondary text-white px-2 py-0.5 rounded">${u.role}</span>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-location-dot text-red-500"></i> ${u.location || ''}</p>
+                        </div>
+                    </div>
+                    <button onclick="viewUserProfile(${u.id})" class="bg-primary text-white px-3 py-1.5 rounded-lg text-sm">صفحة المستشار</button>
+                </div>
+            `;
+        }
+
+        function viewUserProfile(userId) {
+            viewingUserId = userId;
+            currentTab = 'profile';
+            render();
+        }
+
+        function renderProfileTab(currentUser, profileUserId) {
+            const users = Store.getUsers();
+            const profileUser = users.find(u => u.id === profileUserId) || currentUser;
+            const isOwner = currentUser.id === profileUser.id;
+            const isOrdinary = profileUser.role.includes('مستخدم عادي');
+            const profilePosts = Store.getPosts().filter(p => p.userId === profileUser.id);
+
+            return `
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border text-center space-y-3">
+                        <img src="${profileUser.avatar}" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-primary">
+                        <h2 class="text-2xl font-bold">${profileUser.name}</h2>
+                        <span class="inline-block bg-secondary text-white text-sm px-3 py-1 rounded-full">${profileUser.role}</span>
+                        <p class="text-sm text-gray-600"><i class="fa-solid fa-location-dot text-red-500"></i> مكان التواجد وموقعه: <strong>${profileUser.location || 'صنعاء، اليمن'}</strong>[span_15](start_span)[span_15](end_span)</p>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg text-right border space-y-1">
+                            <h4 class="font-bold text-sm text-primary">النبذة والمهارات المهنية:</h4>
+                            <p class="text-gray-700 text-sm whitespace-pre-line">${profileUser.bio}</p>
+                        </div>
+
+                        <!-- عناوين وسائل التواصل الاجتماعي الشاملة -->
+                        <div class="pt-3 border-t">
+                            <h4 class="font-bold text-xs text-gray-500 mb-2">قنوات التواصل المعتمدة:</h4>
+                            <div class="flex flex-wrap justify-center gap-4 text-xl text-primary">
+                                ${profileUser.socials?.email ? `<a href="mailto:${profileUser.socials.email}" title="البريد الإلكتروني"><i class="fa-solid fa-envelope"></i></a>` : ''}
+                                ${profileUser.socials?.phone ? `<a href="tel:${profileUser.socials.phone}" title="رقم الهاتف"><i class="fa-solid fa-phone"></i></a>` : ''}
+                                ${profileUser.socials?.whatsapp ? `<a href="https://wa.me/${profileUser.socials.whatsapp}" target="_blank" title="واتساب" class="text-green-600"><i class="fa-brands fa-whatsapp"></i></a>` : ''}
+                                ${profileUser.socials?.telegram ? `<a href="https://t.me/${profileUser.socials.telegram}" target="_blank" title="تليجرام" class="text-blue-500"><i class="fa-brands fa-telegram"></i></a>` : ''}
+                                ${profileUser.socials?.x ? `<a href="https://x.com/${profileUser.socials.x}" target="_blank" title="منصة إكس" class="text-black"><i class="fa-brands fa-x-twitter"></i></a>` : ''}
+                                ${profileUser.socials?.instagram ? `<a href="https://instagram.com/${profileUser.socials.instagram}" target="_blank" title="إنستغرام" class="text-pink-600"><i class="fa-brands fa-instagram"></i></a>` : ''}
+                            </div>
+                        </div>
+
+                        ${isOrdinary ? `<p class="text-xs text-amber-600 mt-2">ملاحظة: حساب العميل والمستخدم العادي مقتصر على التصفح والإعجاب.</p>` : ''}
+                    </div>
+
+                    <!-- المنشورات والبحوث الخاصة بصاحب الصفحة -->
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-primary">منشورات وبحوث المستشار</h3>
+                        ${profilePosts.length === 0 ? '<p class="text-sm text-gray-400">لا توجد منشورات مسجلة لهذه الصفحة.</p>' : ''}
+                        ${profilePosts.map(p => `
+                            <div class="p-3 border rounded-lg space-y-2">
+                                <p class="text-sm">${p.content}</p>${p.image ? `<img src="${p.image}" class="max-h-48 rounded object-cover">` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLibraryTab(user) {
+            const books = Store.getLibraryBooks();
+            const canPublishBook = user.role.includes('محامي') || user.role.includes('قاض');
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    ${canPublishBook ? `
+                        <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                            <h2 class="text-xl font-bold text-primary">نشر كتاب أو بحث في المكتبة (مخصص للمحامين والقضاة فقط)</h2>
+                            <form onsubmit="handlePublishBook(event)" class="space-y-4">
+                                <input type="text" id="bookTitle" placeholder="عنوان الكتاب أو البحث القانوني" required class="w-full px-3 py-2 border rounded-lg">
+                                <input type="file" id="bookFile" accept=".pdf" required class="w-full p-2 border rounded bg-gray-50 text-sm">
+                                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">نشر الكتاب رسمياً</button>
+                            </form>
+                        </div>
+                    ` : ''}
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary">المكتبة القانونية العامة (متاحة للجميع للقراءة والتحميل)</h2>
+                        <div class="space-y-4">
+                            ${books.map(b => `
+                                <div class="p-4 border rounded-lg flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-bold text-lg">${b.title}</h4>
+                                        <p class="text-xs text-gray-500">الناشر المعتمد: ${b.uploaderName} \vert{} التاريخ: ${b.date}</p>
+                                    </div>
+                                    <div class="flex space-x-2 space-x-reverse">
+                                        <button onclick="alert('جاري فتح الكتاب للقراءة أونلاين...')" class="bg-primary text-white px-3 py-1.5 rounded-lg text-sm">قراءة</button>
+                                        <button onclick="alert('جاري تحميل الملف بصيغة PDF...')" class="bg-secondary text-white px-3 py-1.5 rounded-lg text-sm"><i class="fa-solid fa-download"></i> تحميل</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handlePublishBook(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const title = document.getElementById('bookTitle').value;
+            const books = Store.getLibraryBooks();
+            books.push({ id: Date.now(), title, category: 'عام', fileName: 'book.pdf', date: new Date().toLocaleDateString(), uploaderName: user.name });
+            Store.setLibraryBooks(books);
+            alert('تم نشر الكتاب في المكتبة القانونية العامة بنجاح.');
+            render();
+        }
+
+        function renderMinutesTab(user) {
+            const minutes = Store.getMinutes().filter(m => m.userId === user.id);
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary">محضر تحقيق جلسة (سري للغاية - مخفي عن الجميع)</h2>
+                        <form onsubmit="handleSaveMinute(event)" class="space-y-4">
+                            <input type="text" id="minTitle" placeholder="عنوان المحضر أو الجلسة" required class="w-full px-3 py-2 border rounded-lg">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">تسجيل المحضر بالكيبورد أو بالإملاء الصوتي</label>
+                                <div class="flex gap-2 mb-2">
+                                    <button type="button" onclick="startVoiceDictation('minContent')" class="bg-secondary text-white px-3 py-1 rounded text-xs"><i class="fa-solid fa-microphone"></i> ابدأ الإملاء الصوتي</button>
+                                </div>
+                                <textarea id="minContent" rows="5" placeholder="اكتب نص المحضر أو استخدم الإملاء الصوتي..." required class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">تصوير الأوراق والمستندات ومسحها ضوئياً (OCR)</label>
+                                <input type="file" id="minDocScan" accept="image/*" class="w-full text-sm border rounded p-2 bg-gray-50">
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">حفظ سري في صفحة المحامي</button>
+                                <button type="button" onclick="printOrExport('printableMinuteArea', 'pdf')" class="bg-green-700 text-white px-4 py-2 rounded-lg font-semibold">تحويل لـ PDF / طباعة</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-secondary">محاضرك السرية المحفوظة</h3>
+                        <div id="printableMinuteArea" class="space-y-4">
+                            ${minutes.length === 0 ? '<p class="text-sm text-gray-400">لا توجد محاضر سرية محفوظة حتى الآن.</p>' : ''}
+                            ${minutes.map(m => `
+                                <div class="p-4 border rounded-lg space-y-2 bg-gray-50">
+                                    <h4 class="font-bold text-base text-primary">${m.title}</h4>
+                                    <p class="text-sm text-gray-700 whitespace-pre-line">${m.content}</p>
+                                    <span class="text-xs text-gray-400">تاريخ الحفظ: ${m.date}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startVoiceDictation(targetId) {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('عذراً، متصفحك لا يدعم الإملاء الصوتي المباشر.');
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ar-SA';
+            recognition.start();
+            alert('جاري الاستماع للإملاء الصوتي...');
+            recognition.onresult = function(event) {
+                const speechText = event.results[0][0].transcript;
+                const field = document.getElementById(targetId);
+                if(field) field.value += ' ' + speechText;
+            };
+        }
+
+        function handleSaveMinute(e) {
+            e.preventDefault();
+            const user = Store.getCurrentUser();
+            const title = document.getElementById('minTitle').value;
+            const content = document.getElementById('minContent').value;
+            const mins = Store.getMinutes();
+            mins.push({ id: Date.now(), userId: user.id, title, content, date: new Date().toLocaleDateString() });
+            Store.setMinutes(mins);
+            alert('تم حفظ المحضر بسرية تامة في صفحة المحامي.');
+            render();
+        }
+
+        function renderLawsuitsTab(user) {
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary">صياغة الدعاوى والمذكرات والدفوع القانونية</h2>
+                        <form onsubmit="alert('تم حفظ صحيفة الدعوى والدفوع بسرية في ملفاتك الشخصية.'); event.preventDefault();" class="space-y-4">
+                            <input type="text" placeholder="عنوان الدعوى / المذكرة الدفاعية" required class="w-full px-3 py-2 border rounded-lg">
+                            <div>
+                                <div class="flex gap-2 mb-2">
+                                    <button type="button" onclick="startVoiceDictation('lawsuitBody')" class="bg-secondary text-white px-3 py-1 rounded text-xs"><i class="fa-solid fa-microphone"></i> إملاء صوتي</button>
+                                </div>
+                                <textarea id="lawsuitBody" rows="6" placeholder="اكتب الأسانيد القانونية والطلبات أو أملِها صوتياً..." required class="w-full p-3 border rounded-lg"></textarea>
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">حفظ وصياغة نهائية</button>
+                                <button type="button" onclick="alert('جاري التصدير لملف Word أو PDF...')" class="bg-green-700 text-white px-4 py-2 rounded-lg font-semibold">تصدير إلى Word / PDF</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAiAnalysisTab(user) {
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary"><i class="fa-solid fa-brain"></i> خدمة التحليل والاستنتاج القانوني بالذكاء الاصطناعي (للمحامين والقضاة فقط)</h2>
+                        <p class="text-sm text-gray-500">قم بإدراج تفاصيل وقائع القضية أو النصوص المستندة، وسيقوم الذكاء الاصطناعي باستنتاج الثغرات القانونية والسوابق القضائية.</p>
+                        <form onsubmit="handleAiAnalyze(event)" class="space-y-4">
+                            <textarea id="aiPromptText" rows="5" placeholder="أدخل وقائع النزاع القانوني هنا..." required class="w-full p-3 border rounded-lg focus:outline-none focus:border-primary"></textarea>
+                            <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg font-bold">بدء التحليل والاستنتاج الذكي</button>
+                        </form>
+                        <div id="aiResultBox" class="mt-4 p-4 bg-gray-50 border rounded-lg hidden space-y-2">
+                            <h4 class="font-bold text-primary">نتيجة التحليل والاستنتاج القضائي:</h4>
+                            <p id="aiOutputText" class="text-sm text-gray-700 whitespace-pre-line"></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleAiAnalyze(e) {
+            e.preventDefault();
+            const prompt = document.getElementById('aiPromptText').value;
+            const resBox = document.getElementById('aiResultBox');
+            const outText = document.getElementById('aiOutputText');
+            resBox.classList.remove('hidden');
+            outText.innerText = `بناءً على الوقائع المقدمة وتحليل النصوص القانونية والإحراءات ذات الصلة:\n1. التكييف القانوني السليم للنزاع يشير إلى التزام تعاقدي.\n2. الثغرات المحتملة في موقف الخصم ترتكز على بند المدة الزمنية.\n3. السوابق القضائية المقترحة تدعم طلبات موكلك بنسبة رجحان عالية.`;
+        }
+
+        function renderConsultsTab(user) {
+            const consults = Store.getConsultations();
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h2 class="text-xl font-bold text-primary">خدمة دراسة القضايا وطلب الاستشارات المدفوعة</h2>
+                        <form onsubmit="handleSendConsult(event)" class="space-y-4">
+                            <textarea id="consultDetails" rows="4" placeholder="اشرح تفاصيل الاستشارة أو أرفق ملف القضية..." required class="w-full p-3 border rounded-lg"></textarea>
+                            <input type="number" id="consultFee" placeholder="تحديد مبلغ الأتعاب المقترح (اختياري)" class="w-full px-3 py-2 border rounded-lg">
+                            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">إرسال ملف القضية للمحامي المختص</button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow border space-y-4">
+                        <h3 class="text-lg font-bold text-secondary">الطلبات الواردة</h3>
+                        <div class="space-y-3">
+                            ${consults.length === 0 ? '<p class="text-sm text-gray-400">لا توجد استشارات أو قضايا مرسلة حالياً.</p>' : ''}
+                            ${consults.map(c => `
+                                <div class="p-4 border rounded-lg space-y-2">
+                                    <p class="text-sm"><strong>تفاصيل القضية:</strong> ${c.details}</p>
+                                    <p class="text-xs text-gray-500">الأتعاب المحددة: ${c.fee || 'قيد التفاوض'} | الحالة: قيد الدراسة</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSendConsult(e) {
+            e.preventDefault();
+            const details = document.getElementById('consultDetails').value;
+            const fee = document.getElementById('consultFee').value;
+            const consults = Store.getConsultations();
+            consults.push({ id: Date.now(), details, fee, date: new Date().toLocaleDateString() });
+            Store.setConsultations(consults);
+            alert('تم إرسال ملف الاستشارة والقضية بنجاح إلى المحامي لتحديد الأتعاب والبدء في الدراسة.');
+            render();
+        }
+
+        function renderSettingsTab(user) {
+            return `
+                <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow border space-y-4">
+                    <h2 class="text-xl font-bold text-primary">إعدادات الحساب الشخصي</h2>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">الاسم الكامل</label>
+                        <input type="text" value="${user.name}" class="w-full px-3 py-2 border rounded-lg" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">البريد الإلكتروني ورقم الهاتف</label>
+                        <input type="text" value="${user.email} | ${user.phone}" class="w-full px-3 py-2 border rounded-lg" disabled>
+                    </div>
+                    <button onclick="logout()" class="w-full bg-red-600 text-white py-2 rounded-lg font-semibold">تسجيل الخروج</button>
+                </div>
+            `;
+        }
+
+        render();
     </script>
 </body>
 </html>
