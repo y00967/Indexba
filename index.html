@@ -1,336 +1,362 @@
 from pathlib import Path
-import re
 
-src = Path("/mnt/data/index (3).html")
-out = Path("/mnt/data/wasit_social_accounts_updated.html")
-html = src.read_text(encoding="utf-8")
+html = r'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة العدالة والمحاماة الرقمية</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f3f6fa;color:#172033}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+.hidden{display:none!important}
+.container{width:min(1100px,94%);margin:auto}
+header{background:#102a43;color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #0002}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:22px;font-weight:800;color:#d9b44a}
+.navlinks{display:flex;gap:7px;flex-wrap:wrap}
+.navlinks button,.account-btn{background:#ffffff12;color:#fff;padding:10px 13px;border-radius:9px}
+.navlinks button:hover,.account-btn:hover{background:#ffffff22}
+.account-area{position:relative}
+.account-btn{display:flex;align-items:center;gap:8px}
+.avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#d9b44a;color:#102a43;display:grid;place-items:center;font-weight:bold}
+.dropdown{position:absolute;right:0;top:52px;background:#fff;color:#172033;width:230px;border-radius:12px;box-shadow:0 8px 30px #0003;overflow:hidden}
+.dropdown button{display:block;width:100%;text-align:right;background:#fff;padding:13px 16px}
+.dropdown button:hover{background:#f1f5f9}
+main{padding:25px 0}
+.hero{background:linear-gradient(135deg,#102a43,#1e4d73);color:#fff;border-radius:18px;padding:40px 25px;margin-bottom:22px}
+.hero h1{margin:0 0 10px;font-size:31px}
+.hero p{line-height:1.9;color:#e6eef5}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+.card{background:#fff;border-radius:15px;padding:20px;box-shadow:0 3px 15px #0000000c;margin-bottom:18px}
+.card h2,.card h3{margin-top:0}
+.post{border-top:1px solid #e5e7eb;padding-top:15px;margin-top:15px}
+.post-head{display:flex;align-items:center;gap:10px}
+.muted{color:#64748b;font-size:14px}
+textarea,input,select{width:100%;padding:12px;border:1px solid #d5dce5;border-radius:9px;outline:none;background:#fff}
+textarea{min-height:110px;resize:vertical}
+label{display:block;margin:10px 0 6px;font-weight:bold}
+.btn{padding:11px 17px;border-radius:9px;background:#102a43;color:#fff;margin:4px}
+.btn.gold{background:#b98b20}
+.btn.light{background:#e8eef5;color:#102a43}
+.btn.danger{background:#b42318}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.profile-cover{height:190px;background:linear-gradient(135deg,#102a43,#d9b44a);border-radius:16px 16px 0 0;position:relative}
+.profile-main{background:#fff;border-radius:0 0 16px 16px;padding:0 25px 25px}
+.profile-avatar{width:115px;height:115px;border-radius:50%;border:5px solid #fff;object-fit:cover;background:#d9b44a;position:relative;margin-top:-58px}
+.profile-title{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.badge{display:inline-block;background:#e7f0f8;color:#102a43;padding:6px 10px;border-radius:20px;font-size:13px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:50}
+.modal.show{display:flex}
+.modal-box{background:#fff;width:min(500px,100%);max-height:92vh;overflow:auto;border-radius:16px;padding:23px}
+.modal-head{display:flex;justify-content:space-between;align-items:center}
+.close{background:#eee;border-radius:50%;width:35px;height:35px}
+.auth-tabs{display:flex;gap:8px;margin-bottom:15px}
+.auth-tabs button{flex:1;padding:11px;border-radius:8px;background:#e9eef4}
+.auth-tabs button.active{background:#102a43;color:#fff}
+.notice{padding:12px;border-radius:9px;background:#eef6ff;color:#174a72;margin:10px 0}
+footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:35px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.navlinks{display:none}.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
 
-# CSS additions
-css = r'''
-/* ACCOUNT SYSTEM */
-.account-menu{position:relative;display:none}.account-menu.active{display:block}
-.account-trigger{display:flex;align-items:center;gap:8px;border:1px solid rgba(217,180,74,.7);background:transparent;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
-.avatar-mini{width:34px;height:34px;border-radius:50%;background:#d9b44a;color:#102a43;display:flex;align-items:center;justify-content:center;font-weight:900;overflow:hidden}
-.avatar-mini img,.profile-avatar img{width:100%;height:100%;object-fit:cover}
-.account-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:250px;background:#fff;color:#17202a;border-radius:14px;box-shadow:0 12px 35px rgba(0,0,0,.2);padding:10px;display:none;z-index:2500}
-.account-dropdown.open{display:block}.account-summary{padding:12px;border-bottom:1px solid #eee;margin-bottom:6px}
-.account-summary strong{display:block;font-size:16px}.account-summary small{color:#777}
-.account-dropdown button{width:100%;border:0;background:transparent;text-align:right;padding:11px;border-radius:8px}
-.account-dropdown button:hover{background:#f1f3f5}
-.private-page{display:none}.profile-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.avatar-upload{position:relative;width:110px}.avatar-upload input{display:none}
-.avatar-upload label{display:block;position:absolute;bottom:-5px;left:-5px;width:34px;height:34px;border-radius:50%;background:#102a43;color:#fff;text-align:center;padding-top:8px;cursor:pointer;border:2px solid #fff}
-.account-badge{display:inline-flex;align-items:center;gap:6px;background:#eef3f8;color:#102a43;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:700}
-.auth-switch{text-align:center;margin-top:14px;color:#666}.auth-switch button{border:0;background:transparent;color:#102a43;font-weight:800}
-@media(max-width:700px){.profile-edit-grid{grid-template-columns:1fr}.account-dropdown{right:auto;left:0}}
-'''
-html = html.replace("/* RESPONSIVE */", css + "\n/* RESPONSIVE */", 1)
+<header>
+<div class="container nav">
+  <div class="logo">⚖ وسيط القانوني</div>
+  <div class="navlinks">
+    <button onclick="showHome()">الرئيسية</button>
+    <button onclick="showFeed()">المجتمع</button>
+    <button onclick="showProfile()">صفحتي</button>
+  </div>
+  <div class="account-area">
+    <button id="guestButtons" class="account-btn" onclick="openAuth('login')">دخول / إنشاء حساب</button>
+    <button id="accountButton" class="account-btn hidden" onclick="toggleMenu()">
+      <span id="headerName">حسابي</span><span id="headerAvatar" class="avatar">ع</span>
+    </button>
+    <div id="accountMenu" class="dropdown hidden">
+      <button onclick="showProfile();toggleMenu()">👤 صفحتي الشخصية</button>
+      <button onclick="openEdit();toggleMenu()">✏️ تعديل الحساب</button>
+      <button onclick="showFeed();toggleMenu()">🌐 المجتمع</button>
+      <button onclick="logout()">🚪 تسجيل الخروج</button>
+    </div>
+  </div>
+</div>
+</header>
 
-# Header account UI
-old = '''<div class="user-actions">
+<main class="container">
+<section id="home">
+  <div class="hero">
+    <h1>منصة العدالة والمحاماة الرقمية</h1>
+    <p>منصة اجتماعية وقانونية تجمع المحامين والقضاة والباحثين والمستخدمين في مساحة رقمية واحدة.</p>
+    <button class="btn gold" onclick="openAuth('register')">إنشاء حساب شخصي</button>
+    <button class="btn light" onclick="openAuth('login')">تسجيل الدخول</button>
+  </div>
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>المجتمع القانوني</h2>
+        <p>أنشئ حسابك، أنشر أبحاثك ومنشوراتك، وتواصل مع المجتمع القانوني.</p>
+        <button class="btn" onclick="showFeed()">الدخول إلى المجتمع</button>
+      </div>
+      <div class="card">
+        <h2>مزايا المنصة</h2>
+        <div class="notice">👨‍⚖️ صفحات المحامين والقضاة</div>
+        <div class="notice">📚 مكتبة قانونية</div>
+        <div class="notice">📝 إعداد المحاضر والمذكرات</div>
+        <div class="notice">🤖 تحليل القضايا بالذكاء الاصطناعي — واجهة تجريبية</div>
+      </div>
+    </div>
+    <aside class="card">
+      <h3>حسابك الشخصي</h3>
+      <p class="muted">أنشئ حسابًا خاصًا بك لتظهر صفحتك الشخصية وتدير معلوماتك ومنشوراتك.</p>
+      <button class="btn" onclick="openAuth('register')">إنشاء حساب</button>
+    </aside>
+  </div>
+</section>
 
-<button class="btn btn-outline" onclick="openModal('loginModal')">
-دخول
-</button>
+<section id="feed" class="hidden">
+  <div class="card">
+    <h2>🌐 المجتمع</h2>
+    <textarea id="postText" placeholder="بماذا تفكر؟ اكتب منشورًا قانونيًا أو بحثًا..."></textarea>
+    <div class="actions"><button class="btn" onclick="publishPost()">نشر</button></div>
+  </div>
+  <div id="posts"></div>
+</section>
 
-<button class="btn btn-primary" onclick="openModal('registerModal')">
-إنشاء حساب
-</button>
+<section id="profile" class="hidden">
+  <div class="profile-cover"></div>
+  <div class="profile-main">
+    <img id="profileAvatar" class="profile-avatar" alt="الصورة الشخصية">
+    <div class="profile-title">
+      <div>
+        <h1 id="profileName">اسم المستخدم</h1>
+        <span id="profileRole" class="badge">مستخدم</span>
+        <p id="profileBio" class="muted">لا توجد نبذة بعد.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" onclick="openEdit()">تعديل الملف الشخصي</button>
+        <label class="btn light">تغيير الصورة<input type="file" accept="image/*" hidden onchange="changeAvatar(event)"></label>
+      </div>
+    </div>
+    <hr>
+    <h3>معلومات الحساب</h3>
+    <p><b>اسم المستخدم:</b> <span id="profileUsername"></span></p>
+    <p><b>البريد الإلكتروني:</b> <span id="profileEmail"></span></p>
+    <p><b>حالة الحساب:</b> <span class="badge">حساب شخصي</span></p>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>منشوراتي</h3>
+    <div id="myPosts"></div>
+  </div>
+</section>
+</main>
 
-</div>'''
-new = '''<div class="user-actions">
-<div id="guestActions">
-<button class="btn btn-outline" onclick="openModal('loginModal')">دخول</button>
-<button class="btn btn-primary" onclick="openModal('registerModal')">إنشاء حساب</button>
+<footer>منصة العدالة والمحاماة الرقمية — نموذج أولي قابل للتطوير</footer>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal">
+<div class="modal-box">
+  <div class="modal-head"><h2 id="authTitle">تسجيل الدخول</h2><button class="close" onclick="closeAuth()">×</button></div>
+  <div class="auth-tabs">
+    <button id="loginTab" onclick="openAuth('login')">تسجيل الدخول</button>
+    <button id="registerTab" onclick="openAuth('register')">إنشاء حساب</button>
+  </div>
+  <div id="loginForm">
+    <label>البريد الإلكتروني أو اسم المستخدم</label>
+    <input id="loginIdentity" placeholder="example@email.com">
+    <label>كلمة المرور</label>
+    <input id="loginPassword" type="password" placeholder="••••••••">
+    <button class="btn" onclick="login()">دخول</button>
+  </div>
+  <div id="registerForm" class="hidden">
+    <label>الاسم الكامل</label>
+    <input id="regName" placeholder="اكتب اسمك">
+    <label>البريد الإلكتروني</label>
+    <input id="regEmail" type="email" placeholder="example@email.com">
+    <label>اسم المستخدم</label>
+    <input id="regUsername" placeholder="username">
+    <label>التصنيف المهني</label>
+    <select id="regRole">
+      <option>مستخدم عادي</option>
+      <option>محامي تحت التمرين</option>
+      <option>محامي</option>
+      <option>قاضي</option>
+      <option>باحث قانوني</option>
+    </select>
+    <label>كلمة المرور</label>
+    <input id="regPassword" type="password" placeholder="6 أحرف على الأقل">
+    <button class="btn" onclick="register()">إنشاء الحساب</button>
+  </div>
+  <p id="authMessage" class="notice hidden"></p>
+</div>
 </div>
 
-<div class="account-menu" id="accountMenu">
-<button class="account-trigger" onclick="toggleAccountMenu()">
-<span class="avatar-mini" id="headerAvatar"><i class="fa-solid fa-user"></i></span>
-<span id="headerUserName">حسابي</span>
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-<div class="account-dropdown" id="accountDropdown">
-<div class="account-summary">
-<strong id="menuUserName">المستخدم</strong>
-<small id="menuUserRole">عضو في المنصة</small>
-</div>
-<button onclick="openMyProfile()"><i class="fa-solid fa-user"></i> صفحتي الشخصية</button>
-<button onclick="showSection('social');socialTab('feed');closeAccountMenu()"><i class="fa-solid fa-house"></i> المجتمع</button>
-<button onclick="openProfileEditor()"><i class="fa-solid fa-pen"></i> تعديل الحساب</button>
-<button onclick="openModal('professionalModal');closeAccountMenu()"><i class="fa-solid fa-id-card"></i> الصفحة المهنية</button>
-<button onclick="logoutUser()" style="color:#b42318"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</button>
-</div>
-</div>
-</div>'''
-if old not in html:
-    raise RuntimeError("header user-actions not found")
-html = html.replace(old, new, 1)
-
-# Private profile section
-marker = '''<main class="dashboard-content">
-
-<div id="feed">'''
-profile_section = '''<main class="dashboard-content">
-
-<div id="personalProfilePage" class="private-page">
-<div class="profile-cover"></div>
-<div class="profile-box">
-<div style="display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap">
-<div class="avatar-upload">
-<div class="profile-avatar" id="privateAvatar"><i class="fa-solid fa-user"></i></div>
-<label for="avatarInput" title="تغيير الصورة"><i class="fa-solid fa-camera"></i></label>
-<input id="avatarInput" type="file" accept="image/*" onchange="changeAvatar(event)">
-</div>
-<div style="flex:1;min-width:220px">
-<div class="profile-name" id="privateProfileName">المستخدم</div>
-<div class="profile-role" id="privateProfileRole">عضو في منصة وسيط</div>
-<div style="margin-top:8px"><span class="account-badge"><i class="fa-solid fa-lock"></i> صفحة شخصية خاصة</span></div>
-</div>
-<button class="btn btn-primary" onclick="openProfileEditor()"><i class="fa-solid fa-pen"></i> تعديل الملف الشخصي</button>
-</div>
-<p id="privateProfileBio" style="line-height:2;margin-top:18px;color:#555">لم تتم إضافة نبذة شخصية بعد.</p>
-<div class="cover-actions">
-<button class="btn btn-primary" onclick="socialTab('feed')"><i class="fa-solid fa-newspaper"></i> المنشورات</button>
-<button class="btn btn-outline" style="color:#102a43;border-color:#102a43" onclick="socialTab('friends')"><i class="fa-solid fa-user-group"></i> الأصدقاء</button>
-</div>
-</div>
-<div class="card">
-<h2 class="section-title">معلومات الحساب</h2>
-<div class="profile-edit-grid">
-<div><strong>البريد الإلكتروني</strong><p id="privateProfileEmail">—</p></div>
-<div><strong>نوع الحساب</strong><p id="privateProfileRole2">—</p></div>
-<div><strong>اسم المستخدم</strong><p id="privateProfileUsername">—</p></div>
-<div><strong>الحالة</strong><p><span class="account-badge"><i class="fa-solid fa-circle-check"></i> نشط</span></p></div>
-</div>
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal">
+<div class="modal-box">
+  <div class="modal-head"><h2>تعديل الحساب</h2><button class="close" onclick="closeEdit()">×</button></div>
+  <label>الاسم</label><input id="editName">
+  <label>اسم المستخدم</label><input id="editUsername">
+  <label>التصنيف</label>
+  <select id="editRole">
+    <option>مستخدم عادي</option><option>محامي تحت التمرين</option><option>محامي</option><option>قاضي</option><option>باحث قانوني</option>
+  </select>
+  <label>نبذة شخصية</label><textarea id="editBio"></textarea>
+  <button class="btn" onclick="saveEdit()">حفظ التعديلات</button>
 </div>
 </div>
 
-<div id="feed">'''
-if marker not in html:
-    raise RuntimeError("profile insertion marker not found")
-html = html.replace(marker, profile_section, 1)
+<script>
+const USERS_KEY="wasit_accounts_v3";
+const CURRENT_KEY="wasit_current_v3";
+const POSTS_KEY="wasit_posts_v3";
 
-# Edit modal
-modal_marker = "<!-- PROFESSIONAL PAGE -->"
-edit_modal = '''<!-- EDIT PERSONAL PROFILE -->
-<div class="modal" id="profileEditModal">
-<div class="modal-content">
-<div class="modal-header"><h2>تعديل الحساب الشخصي</h2><button class="close" onclick="closeModal('profileEditModal')">×</button></div>
-<div class="form-group"><label>الاسم الكامل</label><input id="editProfileName" type="text"></div>
-<div class="form-group"><label>اسم المستخدم</label><input id="editProfileUsername" type="text"></div>
-<div class="form-group"><label>نبذة شخصية</label><textarea id="editProfileBio" placeholder="اكتب نبذة عن نفسك..."></textarea></div>
-<div class="form-group"><label>نوع الحساب</label>
-<select id="editProfileRole">
-<option value="user">مستخدم</option><option value="lawyer">محامي</option>
-<option value="trainee">محامي تحت التمرين</option><option value="judge">قاضي</option>
-</select></div>
-<button class="btn btn-primary" style="width:100%" onclick="saveProfileChanges()"><i class="fa-solid fa-floppy-disk"></i> حفظ التعديلات</button>
-</div></div>
-
-'''
-html = html.replace(modal_marker, edit_modal + modal_marker, 1)
-
-# Locate JS block using regex, robust to spacing.
-start_match = re.search(r'/\* =========================\s+REGISTER\s+========================= \*/', html)
-if not start_match:
-    # inspect nearby marker and use simpler marker
-    start = html.index("/* =========================\n   REGISTER")
-else:
-    start = start_match.start()
-
-end_match = re.search(r'/\* =========================\s+PROFESSIONAL PAGE\s+========================= \*/', html[start:])
-if not end_match:
-    # actual source has variable spaces; find next PROFESSIONAL PAGE comment
-    pos = html.find("PROFESSIONAL PAGE", start)
-    if pos == -1:
-        raise RuntimeError("professional page marker not found")
-    end = html.rfind("/*", start, pos)
-else:
-    end = start + end_match.start()
-
-account_js = r'''/* =========================
-   ACCOUNT / REGISTER / LOGIN
-========================= */
-const ACCOUNT_KEY="wasitAccounts_v2";
-const CURRENT_ACCOUNT_KEY="wasitCurrentAccount_v2";
-
-function getAccounts(){try{return JSON.parse(localStorage.getItem(ACCOUNT_KEY)||"[]")}catch(e){return[]}}
-function saveAccounts(a){localStorage.setItem(ACCOUNT_KEY,JSON.stringify(a))}
-function getCurrentAccount(){try{return JSON.parse(localStorage.getItem(CURRENT_ACCOUNT_KEY)||"null")}catch(e){return null}}
-function saveCurrentAccount(u){localStorage.setItem(CURRENT_ACCOUNT_KEY,JSON.stringify(u));localStorage.setItem("wasitUser",JSON.stringify(u))}
-function normalizeEmail(v){return String(v||"").trim().toLowerCase()}
-function createUsername(name,accounts){
-    let base=(name||"user").replace(/\s+/g,"").replace(/[^\u0600-\u06FFa-zA-Z0-9_]/g,"").slice(0,18)||"user";
-    let u=base,n=1; while(accounts.some(a=>a.username===u))u=base+(n++); return u;
+function getUsers(){return JSON.parse(localStorage.getItem(USERS_KEY)||"[]")}
+function saveUsers(x){localStorage.setItem(USERS_KEY,JSON.stringify(x))}
+function getCurrent(){
+  const id=localStorage.getItem(CURRENT_KEY);
+  return getUsers().find(u=>u.id===id)||null;
 }
-function registerUser(){
-    const name=document.getElementById("registerName").value.trim();
-    const role=document.getElementById("registerRole").value;
-    const email=normalizeEmail(document.getElementById("registerEmail").value);
-    const password=document.getElementById("registerPassword").value;
-    if(!name||!email||!password)return showNotification("يرجى استكمال بيانات الحساب");
-    if(password.length<6)return showNotification("كلمة المرور يجب ألا تقل عن 6 أحرف");
-    const accounts=getAccounts();
-    if(accounts.some(a=>a.email===email))return showNotification("هذا البريد مسجل مسبقًا");
-    const user={id:"u_"+Date.now(),name,username:createUsername(name,accounts),role,email,password,bio:"",avatar:"",createdAt:new Date().toISOString()};
-    accounts.push(user);saveAccounts(accounts);saveCurrentAccount(user);updateAccountUI(user);updatePrivateProfile(user);
-    closeModal("registerModal");showNotification("تم إنشاء الحساب وتسجيل الدخول بنجاح");showSection("social");socialTab("profile");
+function saveCurrent(u){localStorage.setItem(CURRENT_KEY,u.id)}
+function esc(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 }
-function loginUser(){
-    const identifier=normalizeEmail(document.getElementById("loginEmail").value);
-    const password=document.getElementById("loginPassword").value;
-    const user=getAccounts().find(a=>(normalizeEmail(a.email)===identifier||normalizeEmail(a.username)===identifier)&&a.password===password);
-    if(!user)return showNotification("بيانات الدخول غير صحيحة");
-    saveCurrentAccount(user);updateAccountUI(user);updatePrivateProfile(user);closeModal("loginModal");
-    document.getElementById("loginPassword").value="";showNotification("تم تسجيل الدخول بنجاح");showSection("social");socialTab("profile");
+function msg(text){
+  const e=document.getElementById("authMessage");
+  e.textContent=text;e.classList.remove("hidden");
 }
-function logoutUser(){
-    localStorage.removeItem(CURRENT_ACCOUNT_KEY);localStorage.removeItem("wasitUser");
-    closeAccountMenu();document.getElementById("guestActions").style.display="flex";showNotification("تم تسجيل الخروج");showHome();
+function openAuth(mode){
+  document.getElementById("authModal").classList.add("show");
+  const login=mode==="login";
+  document.getElementById("authTitle").textContent=login?"تسجيل الدخول":"إنشاء حساب";
+  document.getElementById("loginForm").classList.toggle("hidden",!login);
+  document.getElementById("registerForm").classList.toggle("hidden",login);
+  document.getElementById("loginTab").classList.toggle("active",login);
+  document.getElementById("registerTab").classList.toggle("active",!login);
+  document.getElementById("authMessage").classList.add("hidden");
 }
-function updateAccountUI(user){
-    if(!user)return;
-    document.getElementById("guestActions").style.display="none";document.getElementById("accountMenu").classList.add("active");
-    document.getElementById("headerUserName").textContent=user.name;document.getElementById("menuUserName").textContent=user.name;
-    document.getElementById("menuUserRole").textContent=getRoleName(user.role);
-    document.getElementById("headerAvatar").innerHTML=user.avatar?`<img src="${user.avatar}" alt="صورة الحساب">`:`<i class="fa-solid fa-user"></i>`;
+function closeAuth(){document.getElementById("authModal").classList.remove("show")}
+function register(){
+  const name=document.getElementById("regName").value.trim();
+  const email=document.getElementById("regEmail").value.trim().toLowerCase();
+  const username=document.getElementById("regUsername").value.trim().replace(/\s+/g,"");
+  const role=document.getElementById("regRole").value;
+  const password=document.getElementById("regPassword").value;
+  if(!name||!email||!username||!password)return msg("يرجى تعبئة جميع الحقول.");
+  if(password.length<6)return msg("كلمة المرور يجب ألا تقل عن 6 أحرف.");
+  const users=getUsers();
+  if(users.some(u=>u.email===email))return msg("البريد الإلكتروني مستخدم بالفعل.");
+  if(users.some(u=>u.username.toLowerCase()===username.toLowerCase()))return msg("اسم المستخدم مستخدم بالفعل.");
+  const user={id:"u_"+Date.now(),name,email,username,role,bio:"مرحبًا بكم في صفحتي الشخصية.",password,avatar:"",createdAt:new Date().toISOString()};
+  users.push(user);saveUsers(users);saveCurrent(user);closeAuth();updateUI();showProfile();
 }
-function updatePrivateProfile(user){
-    if(!user)return;
-    document.getElementById("privateProfileName").textContent=user.name||"المستخدم";
-    document.getElementById("privateProfileRole").textContent=getRoleName(user.role);
-    document.getElementById("privateProfileRole2").textContent=getRoleName(user.role);
-    document.getElementById("privateProfileEmail").textContent=user.email||"—";
-    document.getElementById("privateProfileUsername").textContent="@"+(user.username||"user");
-    document.getElementById("privateProfileBio").textContent=user.bio||"لم تتم إضافة نبذة شخصية بعد.";
-    document.getElementById("privateAvatar").innerHTML=user.avatar?`<img src="${user.avatar}" alt="صورة الحساب">`:`<i class="fa-solid fa-user"></i>`;
+function login(){
+  const identity=document.getElementById("loginIdentity").value.trim().toLowerCase();
+  const password=document.getElementById("loginPassword").value;
+  const user=getUsers().find(u=>(u.email.toLowerCase()===identity||u.username.toLowerCase()===identity)&&u.password===password);
+  if(!user)return msg("بيانات الدخول غير صحيحة.");
+  saveCurrent(user);closeAuth();updateUI();showProfile();
 }
-function toggleAccountMenu(){document.getElementById("accountDropdown").classList.toggle("open")}
-function closeAccountMenu(){document.getElementById("accountDropdown").classList.remove("open")}
-function openMyProfile(){closeAccountMenu();showSection("social");socialTab("profile")}
-function openProfileEditor(){
-    const u=getCurrentAccount();if(!u){showNotification("يرجى تسجيل الدخول أولًا");openModal("loginModal");return}
-    document.getElementById("editProfileName").value=u.name||"";
-    document.getElementById("editProfileUsername").value=u.username||"";
-    document.getElementById("editProfileBio").value=u.bio||"";
-    document.getElementById("editProfileRole").value=u.role||"user";
-    closeAccountMenu();openModal("profileEditModal");
+function logout(){
+  localStorage.removeItem(CURRENT_KEY);updateUI();showHome();
 }
-function saveProfileChanges(){
-    const u=getCurrentAccount();if(!u)return;
-    const name=document.getElementById("editProfileName").value.trim(),username=document.getElementById("editProfileUsername").value.trim();
-    const bio=document.getElementById("editProfileBio").value.trim(),role=document.getElementById("editProfileRole").value;
-    if(!name||!username)return showNotification("الاسم واسم المستخدم مطلوبان");
-    const accounts=getAccounts(),idx=accounts.findIndex(a=>a.id===u.id);
-    if(idx<0)return;
-    if(accounts.some(a=>a.id!==u.id&&a.username===username))return showNotification("اسم المستخدم مستخدم بالفعل");
-    accounts[idx]={...accounts[idx],name,username,bio,role};saveAccounts(accounts);saveCurrentAccount(accounts[idx]);
-    updateAccountUI(accounts[idx]);updatePrivateProfile(accounts[idx]);closeModal("profileEditModal");showNotification("تم حفظ بيانات الحساب");
+function toggleMenu(){document.getElementById("accountMenu").classList.toggle("hidden")}
+document.addEventListener("click",e=>{
+  const area=document.querySelector(".account-area");
+  if(!area.contains(e.target))document.getElementById("accountMenu").classList.add("hidden");
+});
+function updateUI(){
+  const u=getCurrent();
+  document.getElementById("guestButtons").classList.toggle("hidden",!!u);
+  document.getElementById("accountButton").classList.toggle("hidden",!u);
+  if(u){
+    document.getElementById("headerName").textContent=u.name;
+    const av=document.getElementById("headerAvatar");
+    if(u.avatar){av.innerHTML="";av.style.backgroundImage=`url(${u.avatar})`;av.style.backgroundSize="cover"}
+    else{av.style.backgroundImage="";av.textContent=u.name.charAt(0)}
+  }
 }
-function changeAvatar(event){
-    const file=event.target.files&&event.target.files[0],u=getCurrentAccount();if(!file||!u)return;
-    if(!file.type.startsWith("image/"))return showNotification("يرجى اختيار صورة");
-    const r=new FileReader();r.onload=e=>{
-        const a=getAccounts(),i=a.findIndex(x=>x.id===u.id);if(i<0)return;
-        a[i].avatar=e.target.result;saveAccounts(a);saveCurrentAccount(a[i]);updateAccountUI(a[i]);updatePrivateProfile(a[i]);showNotification("تم تحديث الصورة الشخصية");
-    };r.readAsDataURL(file);
+function hideAll(){
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("feed").classList.add("hidden");
+  document.getElementById("profile").classList.add("hidden");
 }
-'''
-html = html[:start] + account_js + "\n\n" + html[end:]
+function showHome(){hideAll();document.getElementById("home").classList.remove("hidden")}
+function showFeed(){
+  hideAll();document.getElementById("feed").classList.remove("hidden");renderPosts();
+}
+function showProfile(){
+  const u=getCurrent();
+  if(!u)return openAuth("login");
+  hideAll();document.getElementById("profile").classList.remove("hidden");
+  renderProfile();
+}
+function renderProfile(){
+  const u=getCurrent();if(!u)return;
+  document.getElementById("profileName").textContent=u.name;
+  document.getElementById("profileRole").textContent=u.role;
+  document.getElementById("profileBio").textContent=u.bio||"لا توجد نبذة بعد.";
+  document.getElementById("profileUsername").textContent="@"+u.username;
+  document.getElementById("profileEmail").textContent=u.email;
+  const img=document.getElementById("profileAvatar");
+  img.src=u.avatar||"data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="100%" height="100%" fill="#d9b44a"/><text x="50%" y="58%" text-anchor="middle" font-size="50" font-family="Arial" fill="#102a43">${u.name.charAt(0)}</text></svg>`);
+  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]").filter(p=>p.userId===u.id);
+  document.getElementById("myPosts").innerHTML=posts.length?posts.map(p=>`<div class="post"><b>${esc(p.name)}</b><p>${esc(p.text)}</p><span class="muted">${new Date(p.date).toLocaleString("ar-YE")}</span></div>`).join(""):"<p class='muted'>لم تنشر أي منشورات بعد.</p>";
+}
+function openEdit(){
+  const u=getCurrent();if(!u)return openAuth("login");
+  document.getElementById("editName").value=u.name;
+  document.getElementById("editUsername").value=u.username;
+  document.getElementById("editRole").value=u.role;
+  document.getElementById("editBio").value=u.bio||"";
+  document.getElementById("editModal").classList.add("show");
+}
+function closeEdit(){document.getElementById("editModal").classList.remove("show")}
+function saveEdit(){
+  const current=getCurrent();if(!current)return;
+  const users=getUsers();
+  const name=document.getElementById("editName").value.trim();
+  const username=document.getElementById("editUsername").value.trim().replace(/\s+/g,"");
+  if(!name||!username)return alert("الاسم واسم المستخدم مطلوبان.");
+  if(users.some(u=>u.id!==current.id&&u.username.toLowerCase()===username.toLowerCase()))return alert("اسم المستخدم مستخدم بالفعل.");
+  const u=users.find(x=>x.id===current.id);
+  u.name=name;u.username=username;u.role=document.getElementById("editRole").value;u.bio=document.getElementById("editBio").value.trim();
+  saveUsers(users);closeEdit();updateUI();renderProfile();
+}
+function changeAvatar(e){
+  const file=e.target.files[0];if(!file)return;
+  if(!file.type.startsWith("image/"))return alert("اختر صورة.");
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const users=getUsers(),u=getCurrent(),target=users.find(x=>x.id===u.id);
+    target.avatar=reader.result;saveUsers(users);updateUI();renderProfile();
+  };
+  reader.readAsDataURL(file);
+}
+function publishPost(){
+  const u=getCurrent();if(!u)return openAuth("login");
+  const text=document.getElementById("postText").value.trim();
+  if(!text)return alert("اكتب محتوى المنشور.");
+  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
+  posts.unshift({id:Date.now(),userId:u.id,name:u.name,text,date:new Date().toISOString()});
+  localStorage.setItem(POSTS_KEY,JSON.stringify(posts));
+  document.getElementById("postText").value="";renderPosts();
+}
+function renderPosts(){
+  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
+  const box=document.getElementById("posts");
+  box.innerHTML=posts.length?posts.map(p=>`<div class="card"><div class="post-head"><span class="avatar">${esc(p.name.charAt(0))}</span><div><b>${esc(p.name)}</b><div class="muted">${new Date(p.date).toLocaleString("ar-YE")}</div></div></div><div class="post"><p>${esc(p.text)}</p><div class="actions"><button class="btn light">إعجاب</button><button class="btn light">تعليق</button><button class="btn light">مشاركة</button></div></div></div>`).join(""):"<div class='card'><p class='muted'>لا توجد منشورات. كن أول من ينشر.</p></div>";
+}
+window.addEventListener("load",()=>{
+  updateUI();showHome();
+});
+</script>
+</body>
+</html>'''
 
-# Update socialTab
-old_social = '''function socialTab(tab){
-
-    ["feed","profile","friends","messages"]
-    .forEach(id=>{
-
-        document.getElementById(id).style.display="none";
-
-    });
-
-    document.getElementById(tab)
-        .style.display="block";
-}'''
-new_social = '''function socialTab(tab){
-    const user=getCurrentAccount();
-    if((tab==="profile"||tab==="friends"||tab==="messages")&&!user){
-        showNotification("يرجى تسجيل الدخول للوصول إلى حسابك الشخصي");openModal("loginModal");return;
-    }
-    ["feed","profile","personalProfilePage","friends","messages"].forEach(id=>{
-        const el=document.getElementById(id);if(el)el.style.display="none";
-    });
-    if(tab==="profile"){updatePrivateProfile(user);document.getElementById("personalProfilePage").style.display="block";return}
-    document.getElementById(tab).style.display="block";
-}'''
-if old_social not in html:
-    raise RuntimeError("socialTab not found")
-html=html.replace(old_social,new_social,1)
-
-# Require login to post and use current user name.
-html=html.replace('''function publishPost(){
-
-    const text=''', '''function publishPost(){
-    const user=getCurrentAccount();
-    if(!user){showNotification("سجل الدخول أولًا حتى تنشر");openModal("loginModal");return}
-    const text=''', 1)
-html=html.replace("<strong>المستخدم</strong>", "<strong>${escapeHTML(user.name)}</strong>", 1)
-
-# Login/register switches
-html=html.replace('''<button class="btn btn-primary"
-style="width:100%"
-onclick="loginUser()">
-
-دخول
-
-</button>''', '''<button class="btn btn-primary" style="width:100%" onclick="loginUser()">دخول</button>
-<div class="auth-switch">ليس لديك حساب؟ <button onclick="closeModal('loginModal');openModal('registerModal')">إنشاء حساب جديد</button></div>''',1)
-html=html.replace('''<button class="btn btn-primary"
-style="width:100%"
-onclick="registerUser()">
-
-إنشاء الحساب
-
-</button>''', '''<button class="btn btn-primary" style="width:100%" onclick="registerUser()">إنشاء الحساب</button>
-<div class="auth-switch">لديك حساب بالفعل؟ <button onclick="closeModal('registerModal');openModal('loginModal')">تسجيل الدخول</button></div>''',1)
-
-# Replace load listener robustly: from window.addEventListener to final closing.
-load_start=html.find('window.addEventListener("load",()=>{')
-if load_start<0: raise RuntimeError("load listener not found")
-load_end=html.find('});',load_start)
-if load_end<0: raise RuntimeError("load listener end not found")
-load_end+=3
-load_js='''window.addEventListener("load",()=>{
-    let user=getCurrentAccount();
-    if(!user){
-        const oldSaved=localStorage.getItem("wasitUser");
-        if(oldSaved){
-            try{
-                const old=JSON.parse(oldSaved),accounts=getAccounts();
-                user={id:"u_"+Date.now(),name:old.name||"المستخدم",username:createUsername(old.name||"user",accounts),
-                    role:old.role||"user",email:old.email||"",password:"",bio:"",avatar:"",createdAt:new Date().toISOString()};
-                accounts.push(user);saveAccounts(accounts);saveCurrentAccount(user);
-            }catch(e){}
-        }
-    }
-    if(user){
-        updateAccountUI(user);updatePrivateProfile(user);
-        const pn=document.getElementById("profileName"),pr=document.getElementById("profileRole");
-        if(pn)pn.textContent=user.name;if(pr)pr.textContent=getRoleName(user.role);
-    }else{
-        document.getElementById("guestActions").style.display="flex";
-        document.getElementById("accountMenu").classList.remove("active");
-    }
-    document.addEventListener("click",e=>{
-        const menu=document.getElementById("accountMenu");
-        if(menu&&!menu.contains(e.target))closeAccountMenu();
-    });
-});'''
-html=html[:load_start]+load_js+html[load_end:]
-
-# Ensure social buttons don't need login just to open feed.
-html=html.replace("onclick=\"showSection('social')\"", "onclick=\"showSection('social');socialTab('feed')\"")
-
-out.write_text(html,encoding="utf-8")
-print(f"تم إنشاء الملف المعدل بنجاح: {out}")
-print(f"الحجم: {out.stat().st_size:,} بايت")
+path=Path("/mnt/data/منصة_العدالة_والمحاماة_ملف_HTML_واحد.html")
+path.write_text(html,encoding="utf-8")
+print(path)
