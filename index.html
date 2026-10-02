@@ -1,609 +1,33 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>وسيط القانوني والقضائي</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:"Tajawal",sans-serif;
-    background:#f3f5f7;
-    color:#17202a;
-}
-
-button,
-input,
-textarea,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-/* HEADER */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:#102a43;
-    color:white;
-    box-shadow:0 3px 15px rgba(0,0,0,.15);
-}
-
-.navbar{
-    max-width:1450px;
-    margin:auto;
-    min-height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    padding:10px 20px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:21px;
-    font-weight:900;
-    white-space:nowrap;
-}
-
-.logo i{
-    color:#d9b44a;
-    font-size:27px;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    flex-wrap:wrap;
-}
-
-.nav-links button{
-    border:0;
-    background:transparent;
-    color:white;
-    padding:10px 12px;
-    border-radius:8px;
-    font-size:14px;
-}
-
-.nav-links button:hover{
-    background:rgba(255,255,255,.12);
-}
-
-.user-actions{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.btn{
-    border:0;
-    border-radius:8px;
-    padding:11px 17px;
-    font-weight:700;
-}
-
-.btn-primary{
-    background:#d9b44a;
-    color:#102a43;
-}
-
-.btn-outline{
-    background:transparent;
-    border:1px solid #d9b44a;
-    color:#d9b44a;
-}
-
-/* HERO */
-
-.hero{
-    background:linear-gradient(135deg,#102a43,#1f4e79);
-    color:white;
-    padding:70px 20px;
-}
-
-.hero-inner{
-    max-width:1250px;
-    margin:auto;
-    text-align:center;
-}
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:18px;
-    font-weight:900;
-}
-
-.hero p{
-    max-width:800px;
-    margin:auto;
-    line-height:2;
-    font-size:18px;
-    color:#e8eef4;
-}
-
-.hero-buttons{
-    margin-top:30px;
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-/* MAIN */
-
-.container{
-    max-width:1350px;
-    margin:auto;
-    padding:30px 18px;
-}
-
-.section-title{
-    margin-bottom:20px;
-    font-size:25px;
-    font-weight:900;
-    color:#102a43;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.card{
-    background:white;
-    border-radius:14px;
-    padding:22px;
-    box-shadow:0 3px 15px rgba(0,0,0,.07);
-}
-
-.service-card{
-    text-align:center;
-    transition:.2s;
-}
-
-.service-card:hover{
-    transform:translateY(-4px);
-}
-
-.service-card i{
-    font-size:35px;
-    color:#d9b44a;
-    margin-bottom:15px;
-}
-
-.service-card h3{
-    margin-bottom:8px;
-}
-
-.service-card p{
-    color:#667;
-    line-height:1.8;
-    font-size:14px;
-}
-
-/* DASHBOARD */
-
-.dashboard{
-    display:none;
-}
-
-.dashboard.active{
-    display:block;
-}
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:250px 1fr;
-    gap:20px;
-}
-
-.sidebar{
-    background:#102a43;
-    color:white;
-    border-radius:14px;
-    padding:15px;
-    height:max-content;
-}
-
-.sidebar button{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:white;
-    padding:13px;
-    text-align:right;
-    border-radius:8px;
-    margin-bottom:5px;
-}
-
-.sidebar button:hover,
-.sidebar button.active{
-    background:rgba(255,255,255,.12);
-}
-
-.dashboard-content{
-    min-width:0;
-}
-
-/* PROFILE */
-
-.profile-cover{
-    background:linear-gradient(135deg,#102a43,#1f4e79);
-    height:180px;
-    border-radius:14px 14px 0 0;
-}
-
-.profile-box{
-    background:white;
-    padding:20px;
-    border-radius:0 0 14px 14px;
-    margin-bottom:20px;
-}
-
-.profile-avatar{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:#d9b44a;
-    color:#102a43;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:38px;
-    border:5px solid white;
-    margin-top:-65px;
-    position:relative;
-}
-
-.profile-name{
-    font-size:25px;
-    font-weight:900;
-    margin-top:10px;
-}
-
-.profile-role{
-    color:#777;
-    margin-top:5px;
-}
-
-/* FORMS */
-
-.form-card{
-    max-width:600px;
-    margin:30px auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 25px rgba(0,0,0,.08);
-}
-
-.form-card h2{
-    margin-bottom:25px;
-    color:#102a43;
-}
-
-.form-group{
-    margin-bottom:16px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:7px;
-    font-weight:700;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-    width:100%;
-    padding:12px;
-    border:1px solid #d8dee4;
-    border-radius:8px;
-    outline:none;
-}
-
-.form-group textarea{
-    min-height:140px;
-    resize:vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-    border-color:#d9b44a;
-}
-
-/* POSTS */
-
-.post{
-    background:white;
-    border-radius:14px;
-    padding:20px;
-    margin-bottom:15px;
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-.post-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.small-avatar{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    background:#102a43;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.post-text{
-    line-height:2;
-    margin-bottom:15px;
-}
-
-.post-actions{
-    border-top:1px solid #eee;
-    padding-top:12px;
-    display:flex;
-    gap:10px;
-}
-
-.post-actions button{
-    border:0;
-    background:#f1f3f5;
-    padding:9px 15px;
-    border-radius:7px;
-}
-
-/* TABLE */
-
-.table-wrapper{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-}
-
-th,
-td{
-    padding:13px;
-    border-bottom:1px solid #eee;
-    text-align:right;
-}
-
-th{
-    background:#102a43;
-    color:white;
-}
-
-/* FEATURES */
-
-.feature-list{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.feature{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
-}
-
-.feature i{
-    color:#d9b44a;
-    font-size:25px;
-    margin-bottom:10px;
-}
-
-.feature h3{
-    margin-bottom:8px;
-}
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:2000;
-    padding:20px;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modal-content{
-    background:white;
-    width:100%;
-    max-width:550px;
-    max-height:90vh;
-    overflow:auto;
-    border-radius:15px;
-    padding:25px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close{
-    border:0;
-    background:#eee;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-}
-
-/* NOTIFICATION */
-
-.notification{
-    position:fixed;
-    left:20px;
-    bottom:20px;
-    background:#102a43;
-    color:white;
-    padding:15px 20px;
-    border-radius:10px;
-    display:none;
-    z-index:3000;
-}
-
-/* FOOTER */
-
-footer{
-    background:#102a43;
-    color:white;
-    margin-top:50px;
-    padding:35px 20px;
-}
-
-.footer-inner{
-    max-width:1250px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-footer h3{
-    color:#d9b44a;
-    margin-bottom:12px;
-}
-
-footer p{
-    line-height:2;
-    color:#d7e0e8;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .feature-list{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .nav-links{
-        display:none;
-    }
-}
-
-@media(max-width:700px){
-    .hero h1{
-        font-size:29px;
-    }
-
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-
-    .grid,
-    .feature-list,
-    .footer-inner{
-        grid-template-columns:1fr;
-    }
-
-    .sidebar{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:5px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- HEADER -->
-
-<header>
-<div class="navbar">
-
-<div class="logo">
-<i class="fa-solid fa-scale-balanced"></i>
-<span>وسيط القانوني والقضائي</span>
-</div>
-
-<nav class="nav-links">
-
-<button onclick="showHome()">
-<i class="fa-solid fa-house"></i>
-الرئيسية
-</button>
-
-<button onclick="showSection('social')">
-<i class="fa-solid fa-users"></i>
-المجتمع القانوني
-</button>
-
-<button onclick="showSection('cases')">
-<i class="fa-solid fa-folder-open"></i>
-القضايا
-</button>
-
-<button onclick="showSection('library')">
-<i class="fa-solid fa-book"></i>
-المكتبة القانونية
-</button>
-
-<button onclick="showSection('sessions')">
-<i class="fa-solid fa-calendar-days"></i>
-صحيفة الجلسات
-</button>
-
-</nav>
-
-<div class="user-actions">
+from pathlib import Path
+import re
+
+src = Path("/mnt/data/index (3).html")
+out = Path("/mnt/data/wasit_social_accounts_updated.html")
+html = src.read_text(encoding="utf-8")
+
+# CSS additions
+css = r'''
+/* ACCOUNT SYSTEM */
+.account-menu{position:relative;display:none}.account-menu.active{display:block}
+.account-trigger{display:flex;align-items:center;gap:8px;border:1px solid rgba(217,180,74,.7);background:transparent;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
+.avatar-mini{width:34px;height:34px;border-radius:50%;background:#d9b44a;color:#102a43;display:flex;align-items:center;justify-content:center;font-weight:900;overflow:hidden}
+.avatar-mini img,.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.account-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:250px;background:#fff;color:#17202a;border-radius:14px;box-shadow:0 12px 35px rgba(0,0,0,.2);padding:10px;display:none;z-index:2500}
+.account-dropdown.open{display:block}.account-summary{padding:12px;border-bottom:1px solid #eee;margin-bottom:6px}
+.account-summary strong{display:block;font-size:16px}.account-summary small{color:#777}
+.account-dropdown button{width:100%;border:0;background:transparent;text-align:right;padding:11px;border-radius:8px}
+.account-dropdown button:hover{background:#f1f3f5}
+.private-page{display:none}.profile-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.avatar-upload{position:relative;width:110px}.avatar-upload input{display:none}
+.avatar-upload label{display:block;position:absolute;bottom:-5px;left:-5px;width:34px;height:34px;border-radius:50%;background:#102a43;color:#fff;text-align:center;padding-top:8px;cursor:pointer;border:2px solid #fff}
+.account-badge{display:inline-flex;align-items:center;gap:6px;background:#eef3f8;color:#102a43;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:700}
+.auth-switch{text-align:center;margin-top:14px;color:#666}.auth-switch button{border:0;background:transparent;color:#102a43;font-weight:800}
+@media(max-width:700px){.profile-edit-grid{grid-template-columns:1fr}.account-dropdown{right:auto;left:0}}
+'''
+html = html.replace("/* RESPONSIVE */", css + "\n/* RESPONSIVE */", 1)
+
+# Header account UI
+old = '''<div class="user-actions">
 
 <button class="btn btn-outline" onclick="openModal('loginModal')">
 دخول
@@ -613,1280 +37,210 @@ footer p{
 إنشاء حساب
 </button>
 
+</div>'''
+new = '''<div class="user-actions">
+<div id="guestActions">
+<button class="btn btn-outline" onclick="openModal('loginModal')">دخول</button>
+<button class="btn btn-primary" onclick="openModal('registerModal')">إنشاء حساب</button>
 </div>
 
-</div>
-</header>
-
-
-<!-- HOME -->
-
-<section id="home">
-
-<div class="hero">
-
-<div class="hero-inner">
-
-<h1>
-منصة العدالة والمحاماة الرقمية الذكية
-</h1>
-
-<p>
-منصة رقمية تجمع المحامين والقضاة والمحامين تحت التمرين والباحثين
-والجمهور في بيئة قانونية متكاملة لإدارة القضايا والجلسات والأبحاث
-والتواصل ونشر المعرفة القانونية.
-</p>
-
-<div class="hero-buttons">
-
-<button class="btn btn-primary"
-onclick="openModal('registerModal')">
-<i class="fa-solid fa-user-plus"></i>
-إنشاء حساب
+<div class="account-menu" id="accountMenu">
+<button class="account-trigger" onclick="toggleAccountMenu()">
+<span class="avatar-mini" id="headerAvatar"><i class="fa-solid fa-user"></i></span>
+<span id="headerUserName">حسابي</span>
+<i class="fa-solid fa-chevron-down"></i>
 </button>
-
-<button class="btn btn-outline"
-onclick="showSection('social')">
-<i class="fa-solid fa-users"></i>
-دخول المجتمع القانوني
-</button>
-
+<div class="account-dropdown" id="accountDropdown">
+<div class="account-summary">
+<strong id="menuUserName">المستخدم</strong>
+<small id="menuUserRole">عضو في المنصة</small>
 </div>
-
+<button onclick="openMyProfile()"><i class="fa-solid fa-user"></i> صفحتي الشخصية</button>
+<button onclick="showSection('social');socialTab('feed');closeAccountMenu()"><i class="fa-solid fa-house"></i> المجتمع</button>
+<button onclick="openProfileEditor()"><i class="fa-solid fa-pen"></i> تعديل الحساب</button>
+<button onclick="openModal('professionalModal');closeAccountMenu()"><i class="fa-solid fa-id-card"></i> الصفحة المهنية</button>
+<button onclick="logoutUser()" style="color:#b42318"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</button>
 </div>
 </div>
+</div>'''
+if old not in html:
+    raise RuntimeError("header user-actions not found")
+html = html.replace(old, new, 1)
 
+# Private profile section
+marker = '''<main class="dashboard-content">
 
-<div class="container">
+<div id="feed">'''
+profile_section = '''<main class="dashboard-content">
 
-<h2 class="section-title">
-خدمات المنصة
-</h2>
-
-<div class="grid">
-
-<div class="card service-card"
-onclick="showSection('cases')">
-<i class="fa-solid fa-folder-tree"></i>
-<h3>إدارة القضايا</h3>
-<p>
-إنشاء ملف متكامل للقضية وحفظ الوقائع والطلبات والدفوع والمستندات.
-</p>
-</div>
-
-<div class="card service-card"
-onclick="showSection('sessions')">
-<i class="fa-solid fa-microphone"></i>
-<h3>المحاضر الذكية</h3>
-<p>
-كتابة المحاضر بالكيبورد أو الصوت مع إمكانية الطباعة والتصدير.
-</p>
-</div>
-
-<div class="card service-card"
-onclick="showSection('library')">
-<i class="fa-solid fa-book-open"></i>
-<h3>المكتبة القانونية</h3>
-<p>
-مكتبة مفتوحة للقراءة ونشر الأبحاث والكتب القانونية.
-</p>
-</div>
-
-<div class="card service-card"
-onclick="showSection('social')">
-<i class="fa-solid fa-comments"></i>
-<h3>المجتمع القانوني</h3>
-<p>
-منشورات وتعليقات ومشاركة وصداقات وتواصل بين أعضاء المنصة.
-</p>
-</div>
-
-</div>
-
-<br><br>
-
-<h2 class="section-title">
-الذكاء القانوني
-</h2>
-
-<div class="feature-list">
-
-<div class="feature">
-<i class="fa-solid fa-brain"></i>
-<h3>تحليل القضية</h3>
-<p>
-تحليل الوقائع واستخراج المسائل القانونية ونقاط البحث.
-</p>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-scale-balanced"></i>
-<h3>تحليل الدفوع</h3>
-<p>
-تنظيم الدفوع والطلبات وربطها بالوقائع والمستندات.
-</p>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-file-lines"></i>
-<h3>المذكرات القانونية</h3>
-<p>
-إنشاء مسودات للمذكرات والعروض القانونية قابلة للتحرير.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SOCIAL -->
-
-<section id="social" class="dashboard">
-
-<div class="container">
-
-<div class="dashboard-grid">
-
-<aside class="sidebar">
-
-<button onclick="socialTab('feed')">
-<i class="fa-solid fa-house"></i>
-الرئيسية
-</button>
-
-<button onclick="socialTab('profile')">
-<i class="fa-solid fa-user"></i>
-ملفي الشخصي
-</button>
-
-<button onclick="socialTab('friends')">
-<i class="fa-solid fa-user-group"></i>
-الأصدقاء
-</button>
-
-<button onclick="socialTab('messages')">
-<i class="fa-solid fa-message"></i>
-الرسائل
-</button>
-
-<button onclick="openModal('professionalModal')">
-<i class="fa-solid fa-id-card"></i>
-إنشاء صفحة مهنية
-</button>
-
-</aside>
-
-
-<main class="dashboard-content">
-
-<div id="feed">
-
-<div class="card">
-
-<h2 class="section-title">
-ماذا تريد أن تنشر؟
-</h2>
-
-<textarea
-id="newPost"
-placeholder="اكتب منشورًا أو بحثًا أو فكرة قانونية..."
-style="width:100%;min-height:110px;padding:15px;border:1px solid #ddd;border-radius:10px;">
-</textarea>
-
-<br><br>
-
-<button class="btn btn-primary"
-onclick="publishPost()">
-<i class="fa-solid fa-paper-plane"></i>
-نشر
-</button>
-
-</div>
-
-<br>
-
-<div id="posts">
-
-<div class="post">
-
-<div class="post-head">
-
-<div class="small-avatar">
-<i class="fa-solid fa-user"></i>
-</div>
-
-<div>
-<strong>عضو في المجتمع القانوني</strong>
-<br>
-<small>منذ قليل</small>
-</div>
-
-</div>
-
-<div class="post-text">
-مرحبًا بكم في المجتمع القانوني لمنصة وسيط.
-هنا يمكن للمحامين والقضاة والباحثين تبادل المعرفة
-والأبحاث والمناقشات القانونية.
-</div>
-
-<div class="post-actions">
-
-<button>
-<i class="fa-regular fa-thumbs-up"></i>
-إعجاب
-</button>
-
-<button>
-<i class="fa-regular fa-comment"></i>
-تعليق
-</button>
-
-<button>
-<i class="fa-solid fa-share"></i>
-مشاركة
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="profile" style="display:none">
-
+<div id="personalProfilePage" class="private-page">
 <div class="profile-cover"></div>
-
 <div class="profile-box">
-
-<div class="profile-avatar">
-<i class="fa-solid fa-user"></i>
+<div style="display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap">
+<div class="avatar-upload">
+<div class="profile-avatar" id="privateAvatar"><i class="fa-solid fa-user"></i></div>
+<label for="avatarInput" title="تغيير الصورة"><i class="fa-solid fa-camera"></i></label>
+<input id="avatarInput" type="file" accept="image/*" onchange="changeAvatar(event)">
 </div>
-
-<div class="profile-name"
-id="profileName">
-المستخدم الجديد
+<div style="flex:1;min-width:220px">
+<div class="profile-name" id="privateProfileName">المستخدم</div>
+<div class="profile-role" id="privateProfileRole">عضو في منصة وسيط</div>
+<div style="margin-top:8px"><span class="account-badge"><i class="fa-solid fa-lock"></i> صفحة شخصية خاصة</span></div>
 </div>
-
-<div class="profile-role"
-id="profileRole">
-عضو في منصة وسيط
+<button class="btn btn-primary" onclick="openProfileEditor()"><i class="fa-solid fa-pen"></i> تعديل الملف الشخصي</button>
 </div>
-
-<br>
-
-<button class="btn btn-primary"
-onclick="openModal('professionalModal')">
-إنشاء الصفحة المهنية
-</button>
-
+<p id="privateProfileBio" style="line-height:2;margin-top:18px;color:#555">لم تتم إضافة نبذة شخصية بعد.</p>
+<div class="cover-actions">
+<button class="btn btn-primary" onclick="socialTab('feed')"><i class="fa-solid fa-newspaper"></i> المنشورات</button>
+<button class="btn btn-outline" style="color:#102a43;border-color:#102a43" onclick="socialTab('friends')"><i class="fa-solid fa-user-group"></i> الأصدقاء</button>
 </div>
-
 </div>
-
-
-<div id="friends" style="display:none">
-
 <div class="card">
-
-<h2 class="section-title">
-طلبات الصداقة
-</h2>
-
-<p>
-لا توجد طلبات جديدة حاليًا.
-</p>
-
-<br>
-
-<button class="btn btn-primary"
-onclick="showNotification('سيتم تطوير البحث عن الأعضاء في المرحلة التالية')">
-البحث عن محامين وقضاة
-</button>
-
+<h2 class="section-title">معلومات الحساب</h2>
+<div class="profile-edit-grid">
+<div><strong>البريد الإلكتروني</strong><p id="privateProfileEmail">—</p></div>
+<div><strong>نوع الحساب</strong><p id="privateProfileRole2">—</p></div>
+<div><strong>اسم المستخدم</strong><p id="privateProfileUsername">—</p></div>
+<div><strong>الحالة</strong><p><span class="account-badge"><i class="fa-solid fa-circle-check"></i> نشط</span></p></div>
+</div>
+</div>
 </div>
 
-</div>
-
-
-<div id="messages" style="display:none">
-
-<div class="card">
-
-<h2 class="section-title">
-الرسائل والتواصل
-</h2>
-
-<p>
-يمكن للمستخدمين التواصل من خلال نظام الرسائل الخاص بالمنصة.
-</p>
-
-<br>
-
-<button class="btn btn-primary"
-onclick="showNotification('نظام المحادثات سيتم ربطه بقاعدة البيانات في المرحلة التالية')">
-فتح المحادثات
-</button>
-
-</div>
-
-</div>
-
-</main>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CASES -->
-
-<section id="cases" class="dashboard">
-
-<div class="container">
-
-<div class="card">
-
-<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
-
-<h2 class="section-title">
-إدارة القضايا
-</h2>
-
-<button class="btn btn-primary"
-onclick="openModal('caseModal')">
-<i class="fa-solid fa-plus"></i>
-قضية جديدة
-</button>
-
-</div>
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-<tr>
-<th>رقم القضية</th>
-<th>اسم القضية</th>
-<th>الصفة</th>
-<th>آخر جلسة</th>
-<th>الحالة</th>
-<th>إجراء</th>
-</tr>
-</thead>
-
-<tbody id="casesTable">
-
-<tr>
-<td>ق-2026/102</td>
-<td>قضية نموذجية</td>
-<td>محامي</td>
-<td>30/09/2026</td>
-<td>منظورة</td>
-<td>
-<button class="btn btn-primary"
-onclick="openCase()">
-فتح الملف
-</button>
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<br>
-
-<div class="feature-list">
-
-<div class="feature">
-<i class="fa-solid fa-file-circle-plus"></i>
-<h3>الوقائع</h3>
-<p>تسجيل وقائع القضية وترتيبها زمنيًا.</p>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-gavel"></i>
-<h3>الدفوع والطلبات</h3>
-<p>حفظ جميع الدفوع والطلبات داخل ملف القضية.</p>
-</div>
-
-<div class="feature">
-<i class="fa-solid fa-paperclip"></i>
-<h3>المستندات</h3>
-<p>إرفاق المستندات والصور والملفات بالقضية.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SESSIONS -->
-
-<section id="sessions" class="dashboard">
-
-<div class="container">
-
-<div class="card">
-
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-
-<h2 class="section-title">
-صحيفة الجلسات القضائية
-</h2>
-
-<button class="btn btn-primary"
-onclick="openModal('sessionModal')">
-<i class="fa-solid fa-plus"></i>
-محضر جلسة جديد
-</button>
-
-</div>
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-<tr>
-<th>التاريخ</th>
-<th>القضية</th>
-<th>المحكمة</th>
-<th>الجلسة</th>
-<th>الحالة</th>
-</tr>
-</thead>
-
-<tbody id="sessionsTable">
-
-<tr>
-<td>30/09/2026</td>
-<td>ق-2026/102</td>
-<td>المحكمة المختصة</td>
-<td>جلسة مرافعة</td>
-<td>مجدولة</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<br>
-
-<div class="card">
-
-<h2 class="section-title">
-المحضر الذكي
-</h2>
-
-<div class="form-group">
-
-<textarea
-id="minutesEditor"
-placeholder="اكتب محضر الجلسة هنا بالكيبورد..."></textarea>
-
-</div>
-
-<div style="display:flex;gap:8px;flex-wrap:wrap">
-
-<button class="btn btn-primary"
-onclick="startVoice()">
-<i class="fa-solid fa-microphone"></i>
-كتابة بالصوت
-</button>
-
-<button class="btn btn-primary"
-onclick="window.print()">
-<i class="fa-solid fa-print"></i>
-طباعة
-</button>
-
-<button class="btn btn-primary"
-onclick="saveMinutes()">
-<i class="fa-solid fa-floppy-disk"></i>
-حفظ
-</button>
-
-<button class="btn btn-primary"
-onclick="exportText()">
-<i class="fa-solid fa-file-export"></i>
-تصدير
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- LIBRARY -->
-
-<section id="library" class="dashboard">
-
-<div class="container">
-
-<div class="card">
-
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
-
-<h2 class="section-title">
-المكتبة القانونية
-</h2>
-
-<button class="btn btn-primary"
-onclick="openModal('bookModal')">
-<i class="fa-solid fa-upload"></i>
-نشر كتاب أو بحث
-</button>
-
-</div>
-
-<div class="grid">
-
-<div class="card service-card">
-
-<i class="fa-solid fa-book"></i>
-
-<h3>
-مبادئ المرافعات
-</h3>
-
-<p>
-بحث قانوني منشور في المكتبة.
-</p>
-
-<br>
-
-<button class="btn btn-primary"
-onclick="showNotification('تم فتح الكتاب للقراءة')">
-قراءة
-</button>
-
-</div>
-
-
-<div class="card service-card">
-
-<i class="fa-solid fa-file-lines"></i>
-
-<h3>
-بحث قانوني
-</h3>
-
-<p>
-يمكن للمحامين والقضاة نشر الأبحاث القانونية.
-</p>
-
-<br>
-
-<button class="btn btn-primary"
-onclick="showNotification('تم فتح البحث للقراءة')">
-قراءة
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- MODAL LOGIN -->
-
-<div class="modal" id="loginModal">
-
+<div id="feed">'''
+if marker not in html:
+    raise RuntimeError("profile insertion marker not found")
+html = html.replace(marker, profile_section, 1)
+
+# Edit modal
+modal_marker = "<!-- PROFESSIONAL PAGE -->"
+edit_modal = '''<!-- EDIT PERSONAL PROFILE -->
+<div class="modal" id="profileEditModal">
 <div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-تسجيل الدخول
-</h2>
-
-<button class="close"
-onclick="closeModal('loginModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>البريد الإلكتروني أو اسم المستخدم</label>
-
-<input
-id="loginEmail"
-type="text"
-placeholder="أدخل بيانات الدخول">
-
-</div>
-
-<div class="form-group">
-
-<label>كلمة المرور</label>
-
-<input
-id="loginPassword"
-type="password"
-placeholder="كلمة المرور">
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="loginUser()">
-
-دخول
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- REGISTER -->
-
-<div class="modal" id="registerModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-إنشاء حساب
-</h2>
-
-<button class="close"
-onclick="closeModal('registerModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>الاسم الكامل</label>
-
-<input id="registerName"
-type="text"
-placeholder="الاسم الكامل">
-
-</div>
-
-<div class="form-group">
-
-<label>نوع الحساب</label>
-
-<select id="registerRole">
-
-<option value="user">مستخدم</option>
-
-<option value="lawyer">
-محامي
-</option>
-
-<option value="trainee">
-محامي تحت التمرين
-</option>
-
-<option value="judge">
-قاضي
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>البريد الإلكتروني</label>
-
-<input id="registerEmail"
-type="email"
-placeholder="example@email.com">
-
-</div>
-
-<div class="form-group">
-
-<label>كلمة المرور</label>
-
-<input id="registerPassword"
-type="password"
-placeholder="كلمة المرور">
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="registerUser()">
-
-إنشاء الحساب
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PROFESSIONAL PAGE -->
-
-<div class="modal" id="professionalModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-إنشاء صفحة مهنية
-</h2>
-
-<button class="close"
-onclick="closeModal('professionalModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>نوع الصفحة</label>
-
-<select id="professionalType">
-
-<option>صفحة محامي</option>
-<option>صفحة محامي تحت التمرين</option>
-<option>صفحة قاضي</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>الاسم المهني</label>
-
-<input
-id="professionalName"
-placeholder="الاسم الذي سيظهر للزوار">
-
-</div>
-
-<div class="form-group">
-
-<label>نبذة مهنية</label>
-
-<textarea
-id="professionalBio"
-placeholder="اكتب نبذة عن الصفحة..."></textarea>
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="createProfessionalPage()">
-
-إنشاء الصفحة
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- CASE MODAL -->
-
-<div class="modal" id="caseModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-إضافة قضية
-</h2>
-
-<button class="close"
-onclick="closeModal('caseModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>رقم القضية</label>
-
-<input id="caseNumber"
-placeholder="مثال: ق-2026/150">
-
-</div>
-
-<div class="form-group">
-
-<label>اسم القضية</label>
-
-<input id="caseName"
-placeholder="اسم القضية">
-
-</div>
-
-<div class="form-group">
-
-<label>صفة المستخدم</label>
-
-<select id="caseRole">
-
-<option>محامي</option>
-<option>مدعي</option>
-<option>مدعى عليه</option>
-<option>وكيل</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>ملخص القضية</label>
-
-<textarea id="caseSummary"></textarea>
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="createCase()">
-
-حفظ القضية
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- SESSION MODAL -->
-
-<div class="modal" id="sessionModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-إضافة جلسة
-</h2>
-
-<button class="close"
-onclick="closeModal('sessionModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>التاريخ</label>
-
-<input id="sessionDate" type="date">
-
-</div>
-
-<div class="form-group">
-
-<label>رقم القضية</label>
-
-<input id="sessionCase"
-placeholder="رقم القضية">
-
-</div>
-
-<div class="form-group">
-
-<label>نوع الجلسة</label>
-
-<input id="sessionType"
-placeholder="مرافعة / نطق بالحكم / تأجيل...">
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="createSession()">
-
-حفظ الجلسة
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- BOOK MODAL -->
-
-<div class="modal" id="bookModal">
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>
-نشر كتاب أو بحث
-</h2>
-
-<button class="close"
-onclick="closeModal('bookModal')">
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>العنوان</label>
-
-<input id="bookTitle">
-
-</div>
-
-<div class="form-group">
-
-<label>نوع المنشور</label>
-
-<select id="bookType">
-
-<option>كتاب</option>
-<option>بحث قانوني</option>
-<option>دراسة</option>
-<option>مقال</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>الوصف</label>
-
-<textarea id="bookDescription"></textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>الملف</label>
-
-<input type="file">
-
-</div>
-
-<button class="btn btn-primary"
-style="width:100%"
-onclick="publishBook()">
-
-نشر في المكتبة
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="notification" id="notification"></div>
-
-
-<footer>
-
-<div class="footer-inner">
-
-<div>
-
-<h3>
-وسيط القانوني والقضائي
-</h3>
-
-<p>
-منصة رقمية متخصصة في الخدمات القانونية والقضائية
-والمعرفة والتواصل المهني.
-</p>
-
-</div>
-
-<div>
-
-<h3>
-الخدمات
-</h3>
-
-<p>
-إدارة القضايا</p>
-<p>المحاضر الذكية</p>
-<p>المكتبة القانونية</p>
-
-</div>
-
-<div>
-
-<h3>
-المجتمع
-</h3>
-
-<p>
-المحامون والقضاة والباحثون
-والمحامون تحت التمرين.
-</p>
-
-</div>
-
-</div>
-
-</footer>
-
-
-<script>
-
-/* =========================
-   BASIC NAVIGATION
+<div class="modal-header"><h2>تعديل الحساب الشخصي</h2><button class="close" onclick="closeModal('profileEditModal')">×</button></div>
+<div class="form-group"><label>الاسم الكامل</label><input id="editProfileName" type="text"></div>
+<div class="form-group"><label>اسم المستخدم</label><input id="editProfileUsername" type="text"></div>
+<div class="form-group"><label>نبذة شخصية</label><textarea id="editProfileBio" placeholder="اكتب نبذة عن نفسك..."></textarea></div>
+<div class="form-group"><label>نوع الحساب</label>
+<select id="editProfileRole">
+<option value="user">مستخدم</option><option value="lawyer">محامي</option>
+<option value="trainee">محامي تحت التمرين</option><option value="judge">قاضي</option>
+</select></div>
+<button class="btn btn-primary" style="width:100%" onclick="saveProfileChanges()"><i class="fa-solid fa-floppy-disk"></i> حفظ التعديلات</button>
+</div></div>
+
+'''
+html = html.replace(modal_marker, edit_modal + modal_marker, 1)
+
+# Locate JS block using regex, robust to spacing.
+start_match = re.search(r'/\* =========================\s+REGISTER\s+========================= \*/', html)
+if not start_match:
+    # inspect nearby marker and use simpler marker
+    start = html.index("/* =========================\n   REGISTER")
+else:
+    start = start_match.start()
+
+end_match = re.search(r'/\* =========================\s+PROFESSIONAL PAGE\s+========================= \*/', html[start:])
+if not end_match:
+    # actual source has variable spaces; find next PROFESSIONAL PAGE comment
+    pos = html.find("PROFESSIONAL PAGE", start)
+    if pos == -1:
+        raise RuntimeError("professional page marker not found")
+    end = html.rfind("/*", start, pos)
+else:
+    end = start + end_match.start()
+
+account_js = r'''/* =========================
+   ACCOUNT / REGISTER / LOGIN
 ========================= */
+const ACCOUNT_KEY="wasitAccounts_v2";
+const CURRENT_ACCOUNT_KEY="wasitCurrentAccount_v2";
 
-function hideAllSections(){
-
-    document.querySelectorAll(
-        "#home,#social,#cases,#sessions,#library"
-    ).forEach(section=>{
-        section.classList.remove("active");
-        section.style.display="none";
-    });
+function getAccounts(){try{return JSON.parse(localStorage.getItem(ACCOUNT_KEY)||"[]")}catch(e){return[]}}
+function saveAccounts(a){localStorage.setItem(ACCOUNT_KEY,JSON.stringify(a))}
+function getCurrentAccount(){try{return JSON.parse(localStorage.getItem(CURRENT_ACCOUNT_KEY)||"null")}catch(e){return null}}
+function saveCurrentAccount(u){localStorage.setItem(CURRENT_ACCOUNT_KEY,JSON.stringify(u));localStorage.setItem("wasitUser",JSON.stringify(u))}
+function normalizeEmail(v){return String(v||"").trim().toLowerCase()}
+function createUsername(name,accounts){
+    let base=(name||"user").replace(/\s+/g,"").replace(/[^\u0600-\u06FFa-zA-Z0-9_]/g,"").slice(0,18)||"user";
+    let u=base,n=1; while(accounts.some(a=>a.username===u))u=base+(n++); return u;
 }
-
-function showHome(){
-
-    hideAllSections();
-
-    document.getElementById("home").style.display="block";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
-
-function showSection(id){
-
-    hideAllSections();
-
-    const section=document.getElementById(id);
-
-    section.classList.add("active");
-    section.style.display="block";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
-
-
-/* =========================
-   MODALS
-========================= */
-
-function openModal(id){
-
-    document.getElementById(id)
-        .classList.add("active");
-}
-
-function closeModal(id){
-
-    document.getElementById(id)
-        .classList.remove("active");
-}
-
-
-/* =========================
-   NOTIFICATION
-========================= */
-
-function showNotification(message){
-
-    const box=document.getElementById("notification");
-
-    box.textContent=message;
-    box.style.display="block";
-
-    setTimeout(()=>{
-        box.style.display="none";
-    },3000);
-}
-
-
-/* =========================
-   REGISTER
-========================= */
-
 function registerUser(){
-
-    const name=document.getElementById("registerName").value;
+    const name=document.getElementById("registerName").value.trim();
     const role=document.getElementById("registerRole").value;
-    const email=document.getElementById("registerEmail").value;
+    const email=normalizeEmail(document.getElementById("registerEmail").value);
     const password=document.getElementById("registerPassword").value;
-
-    if(!name || !email || !password){
-
-        showNotification("يرجى استكمال بيانات الحساب");
-
-        return;
-    }
-
-    const user={
-        name:name,
-        role:role,
-        email:email
-    };
-
-    localStorage.setItem(
-        "wasitUser",
-        JSON.stringify(user)
-    );
-
-    document.getElementById("profileName")
-        .textContent=name;
-
-    document.getElementById("profileRole")
-        .textContent=getRoleName(role);
-
-    closeModal("registerModal");
-
-    showNotification("تم إنشاء الحساب بنجاح");
-
-    showSection("social");
+    if(!name||!email||!password)return showNotification("يرجى استكمال بيانات الحساب");
+    if(password.length<6)return showNotification("كلمة المرور يجب ألا تقل عن 6 أحرف");
+    const accounts=getAccounts();
+    if(accounts.some(a=>a.email===email))return showNotification("هذا البريد مسجل مسبقًا");
+    const user={id:"u_"+Date.now(),name,username:createUsername(name,accounts),role,email,password,bio:"",avatar:"",createdAt:new Date().toISOString()};
+    accounts.push(user);saveAccounts(accounts);saveCurrentAccount(user);updateAccountUI(user);updatePrivateProfile(user);
+    closeModal("registerModal");showNotification("تم إنشاء الحساب وتسجيل الدخول بنجاح");showSection("social");socialTab("profile");
 }
-
-function getRoleName(role){
-
-    const roles={
-        user:"مستخدم",
-        lawyer:"محامي",
-        trainee:"محامي تحت التمرين",
-        judge:"قاضي"
-    };
-
-    return roles[role] || "عضو";
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
 function loginUser(){
-
-    const email=
-        document.getElementById("loginEmail").value;
-
-    if(!email){
-
-        showNotification("أدخل بيانات الدخول");
-
-        return;
-    }
-
-    closeModal("loginModal");
-
-    showNotification("تم تسجيل الدخول");
-
-    showSection("social");
+    const identifier=normalizeEmail(document.getElementById("loginEmail").value);
+    const password=document.getElementById("loginPassword").value;
+    const user=getAccounts().find(a=>(normalizeEmail(a.email)===identifier||normalizeEmail(a.username)===identifier)&&a.password===password);
+    if(!user)return showNotification("بيانات الدخول غير صحيحة");
+    saveCurrentAccount(user);updateAccountUI(user);updatePrivateProfile(user);closeModal("loginModal");
+    document.getElementById("loginPassword").value="";showNotification("تم تسجيل الدخول بنجاح");showSection("social");socialTab("profile");
 }
-
-
-/* =========================
-   PROFESSIONAL PAGE
-========================= */
-
-function createProfessionalPage(){
-
-    const name=
-        document.getElementById("professionalName").value;
-
-    const bio=
-        document.getElementById("professionalBio").value;
-
-    const type=
-        document.getElementById("professionalType").value;
-
-    if(!name){
-
-        showNotification("أدخل الاسم المهني");
-
-        return;
-    }
-
-    const page={
-        name:name,
-        bio:bio,
-        type:type
-    };
-
-    localStorage.setItem(
-        "professionalPage",
-        JSON.stringify(page)
-    );
-
-    document.getElementById("profileName")
-        .textContent=name;
-
-    document.getElementById("profileRole")
-        .textContent=type;
-
-    closeModal("professionalModal");
-
-    socialTab("profile");
-
-    showNotification(
-        "تم إنشاء الصفحة المهنية"
-    );
+function logoutUser(){
+    localStorage.removeItem(CURRENT_ACCOUNT_KEY);localStorage.removeItem("wasitUser");
+    closeAccountMenu();document.getElementById("guestActions").style.display="flex";showNotification("تم تسجيل الخروج");showHome();
 }
+function updateAccountUI(user){
+    if(!user)return;
+    document.getElementById("guestActions").style.display="none";document.getElementById("accountMenu").classList.add("active");
+    document.getElementById("headerUserName").textContent=user.name;document.getElementById("menuUserName").textContent=user.name;
+    document.getElementById("menuUserRole").textContent=getRoleName(user.role);
+    document.getElementById("headerAvatar").innerHTML=user.avatar?`<img src="${user.avatar}" alt="صورة الحساب">`:`<i class="fa-solid fa-user"></i>`;
+}
+function updatePrivateProfile(user){
+    if(!user)return;
+    document.getElementById("privateProfileName").textContent=user.name||"المستخدم";
+    document.getElementById("privateProfileRole").textContent=getRoleName(user.role);
+    document.getElementById("privateProfileRole2").textContent=getRoleName(user.role);
+    document.getElementById("privateProfileEmail").textContent=user.email||"—";
+    document.getElementById("privateProfileUsername").textContent="@"+(user.username||"user");
+    document.getElementById("privateProfileBio").textContent=user.bio||"لم تتم إضافة نبذة شخصية بعد.";
+    document.getElementById("privateAvatar").innerHTML=user.avatar?`<img src="${user.avatar}" alt="صورة الحساب">`:`<i class="fa-solid fa-user"></i>`;
+}
+function toggleAccountMenu(){document.getElementById("accountDropdown").classList.toggle("open")}
+function closeAccountMenu(){document.getElementById("accountDropdown").classList.remove("open")}
+function openMyProfile(){closeAccountMenu();showSection("social");socialTab("profile")}
+function openProfileEditor(){
+    const u=getCurrentAccount();if(!u){showNotification("يرجى تسجيل الدخول أولًا");openModal("loginModal");return}
+    document.getElementById("editProfileName").value=u.name||"";
+    document.getElementById("editProfileUsername").value=u.username||"";
+    document.getElementById("editProfileBio").value=u.bio||"";
+    document.getElementById("editProfileRole").value=u.role||"user";
+    closeAccountMenu();openModal("profileEditModal");
+}
+function saveProfileChanges(){
+    const u=getCurrentAccount();if(!u)return;
+    const name=document.getElementById("editProfileName").value.trim(),username=document.getElementById("editProfileUsername").value.trim();
+    const bio=document.getElementById("editProfileBio").value.trim(),role=document.getElementById("editProfileRole").value;
+    if(!name||!username)return showNotification("الاسم واسم المستخدم مطلوبان");
+    const accounts=getAccounts(),idx=accounts.findIndex(a=>a.id===u.id);
+    if(idx<0)return;
+    if(accounts.some(a=>a.id!==u.id&&a.username===username))return showNotification("اسم المستخدم مستخدم بالفعل");
+    accounts[idx]={...accounts[idx],name,username,bio,role};saveAccounts(accounts);saveCurrentAccount(accounts[idx]);
+    updateAccountUI(accounts[idx]);updatePrivateProfile(accounts[idx]);closeModal("profileEditModal");showNotification("تم حفظ بيانات الحساب");
+}
+function changeAvatar(event){
+    const file=event.target.files&&event.target.files[0],u=getCurrentAccount();if(!file||!u)return;
+    if(!file.type.startsWith("image/"))return showNotification("يرجى اختيار صورة");
+    const r=new FileReader();r.onload=e=>{
+        const a=getAccounts(),i=a.findIndex(x=>x.id===u.id);if(i<0)return;
+        a[i].avatar=e.target.result;saveAccounts(a);saveCurrentAccount(a[i]);updateAccountUI(a[i]);updatePrivateProfile(a[i]);showNotification("تم تحديث الصورة الشخصية");
+    };r.readAsDataURL(file);
+}
+'''
+html = html[:start] + account_js + "\n\n" + html[end:]
 
-
-/* =========================
-   SOCIAL TABS
-========================= */
-
-function socialTab(tab){
+# Update socialTab
+old_social = '''function socialTab(tab){
 
     ["feed","profile","friends","messages"]
     .forEach(id=>{
@@ -1897,381 +251,86 @@ function socialTab(tab){
 
     document.getElementById(tab)
         .style.display="block";
-}
-
-
-/* =========================
-   POSTS
-========================= */
-
-function publishPost(){
-
-    const text=
-        document.getElementById("newPost").value.trim();
-
-    if(!text){
-
-        showNotification("اكتب محتوى المنشور أولًا");
-
-        return;
+}'''
+new_social = '''function socialTab(tab){
+    const user=getCurrentAccount();
+    if((tab==="profile"||tab==="friends"||tab==="messages")&&!user){
+        showNotification("يرجى تسجيل الدخول للوصول إلى حسابك الشخصي");openModal("loginModal");return;
     }
-
-    const post=document.createElement("div");
-
-    post.className="post";
-
-    post.innerHTML=`
-
-        <div class="post-head">
-
-            <div class="small-avatar">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div>
-                <strong>المستخدم</strong>
-                <br>
-                <small>الآن</small>
-            </div>
-
-        </div>
-
-        <div class="post-text">
-            ${escapeHTML(text)}
-        </div>
-
-        <div class="post-actions">
-
-            <button>
-                <i class="fa-regular fa-thumbs-up"></i>
-                إعجاب
-            </button>
-
-            <button>
-                <i class="fa-regular fa-comment"></i>
-                تعليق
-            </button>
-
-            <button>
-                <i class="fa-solid fa-share"></i>
-                مشاركة
-            </button>
-
-        </div>
-    `;
-
-    document
-        .getElementById("posts")
-        .prepend(post);
-
-    document.getElementById("newPost").value="";
-
-    showNotification("تم نشر المنشور");
-}
-
-
-/* =========================
-   CASES
-========================= */
-
-function createCase(){
-
-    const number=
-        document.getElementById("caseNumber").value;
-
-    const name=
-        document.getElementById("caseName").value;
-
-    const role=
-        document.getElementById("caseRole").value;
-
-    if(!number || !name){
-
-        showNotification("أدخل بيانات القضية");
-
-        return;
-    }
-
-    const row=document.createElement("tr");
-
-    row.innerHTML=`
-
-        <td>${escapeHTML(number)}</td>
-
-        <td>${escapeHTML(name)}</td>
-
-        <td>${escapeHTML(role)}</td>
-
-        <td>لم تحدد</td>
-
-        <td>جديدة</td>
-
-        <td>
-            <button
-                class="btn btn-primary"
-                onclick="openCase()">
-                فتح الملف
-            </button>
-        </td>
-    `;
-
-    document
-        .getElementById("casesTable")
-        .appendChild(row);
-
-    closeModal("caseModal");
-
-    showNotification("تم إنشاء ملف القضية");
-}
-
-function openCase(){
-
-    showNotification(
-        "سيتم فتح نظام ملف القضية المتكامل في المرحلة التالية"
-    );
-}
-
-
-/* =========================
-   SESSIONS
-========================= */
-
-function createSession(){
-
-    const date=
-        document.getElementById("sessionDate").value;
-
-    const caseNumber=
-        document.getElementById("sessionCase").value;
-
-    const type=
-        document.getElementById("sessionType").value;
-
-    if(!date || !caseNumber){
-
-        showNotification(
-            "يرجى إدخال تاريخ الجلسة ورقم القضية"
-        );
-
-        return;
-    }
-
-    const row=document.createElement("tr");
-
-    row.innerHTML=`
-
-        <td>${escapeHTML(date)}</td>
-
-        <td>${escapeHTML(caseNumber)}</td>
-
-        <td>المحكمة المختصة</td>
-
-        <td>${escapeHTML(type)}</td>
-
-        <td>مجدولة</td>
-    `;
-
-    document
-        .getElementById("sessionsTable")
-        .appendChild(row);
-
-    closeModal("sessionModal");
-
-    showNotification("تمت إضافة الجلسة");
-}
-
-
-/* =========================
-   VOICE
-========================= */
-
-function startVoice(){
-
-    const SpeechRecognition=
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-
-        showNotification(
-            "المتصفح لا يدعم الكتابة الصوتية"
-        );
-
-        return;
-    }
-
-    const recognition=
-        new SpeechRecognition();
-
-    recognition.lang="ar-SA";
-
-    recognition.continuous=false;
-
-    recognition.interimResults=false;
-
-    recognition.start();
-
-    showNotification(
-        "تحدث الآن..."
-    );
-
-    recognition.onresult=function(event){
-
-        const text=
-            event.results[0][0].transcript;
-
-        document.getElementById(
-            "minutesEditor"
-        ).value += " " + text;
-    };
-
-    recognition.onerror=function(){
-
-        showNotification(
-            "تعذر التعرف على الصوت"
-        );
-
-    };
-}
-
-
-/* =========================
-   MINUTES
-========================= */
-
-function saveMinutes(){
-
-    const text=
-        document.getElementById("minutesEditor")
-        .value;
-
-    localStorage.setItem(
-        "sessionMinutes",
-        text
-    );
-
-    showNotification(
-        "تم حفظ المحضر على الجهاز"
-    );
-}
-
-function exportText(){
-
-    const text=
-        document.getElementById("minutesEditor")
-        .value;
-
-    if(!text){
-
-        showNotification(
-            "لا يوجد نص لتصديره"
-        );
-
-        return;
-    }
-
-    const blob=
-        new Blob(
-            [text],
-            {type:"text/plain;charset=utf-8"}
-        );
-
-    const url=
-        URL.createObjectURL(blob);
-
-    const a=
-        document.createElement("a");
-
-    a.href=url;
-
-    a.download="محضر-جلسة.txt";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-}
-
-
-/* =========================
-   LIBRARY
-========================= */
-
-function publishBook(){
-
-    const title=
-        document.getElementById("bookTitle").value;
-
-    const description=
-        document.getElementById("bookDescription").value;
-
-    if(!title){
-
-        showNotification(
-            "أدخل عنوان الكتاب أو البحث"
-        );
-
-        return;
-    }
-
-    closeModal("bookModal");
-
-    showNotification(
-        "تم تسجيل المنشور وسيظهر في المكتبة"
-    );
-}
-
-
-/* =========================
-   SECURITY
-========================= */
-
-function escapeHTML(text){
-
-    const div=
-        document.createElement("div");
-
-    div.textContent=text;
-
-    return div.innerHTML;
-}
-
-
-/* =========================
-   LOAD USER
-========================= */
-
-window.addEventListener("load",()=>{
-
-    const saved=
-        localStorage.getItem("wasitUser");
-
-    if(saved){
-
-        try{
-
-            const user=
-                JSON.parse(saved);
-
-            document.getElementById(
-                "profileName"
-            ).textContent=user.name;
-
-            document.getElementById(
-                "profileRole"
-            ).textContent=
-                getRoleName(user.role);
-
-        }catch(error){
-
-            console.log(error);
-
+    ["feed","profile","personalProfilePage","friends","messages"].forEach(id=>{
+        const el=document.getElementById(id);if(el)el.style.display="none";
+    });
+    if(tab==="profile"){updatePrivateProfile(user);document.getElementById("personalProfilePage").style.display="block";return}
+    document.getElementById(tab).style.display="block";
+}'''
+if old_social not in html:
+    raise RuntimeError("socialTab not found")
+html=html.replace(old_social,new_social,1)
+
+# Require login to post and use current user name.
+html=html.replace('''function publishPost(){
+
+    const text=''', '''function publishPost(){
+    const user=getCurrentAccount();
+    if(!user){showNotification("سجل الدخول أولًا حتى تنشر");openModal("loginModal");return}
+    const text=''', 1)
+html=html.replace("<strong>المستخدم</strong>", "<strong>${escapeHTML(user.name)}</strong>", 1)
+
+# Login/register switches
+html=html.replace('''<button class="btn btn-primary"
+style="width:100%"
+onclick="loginUser()">
+
+دخول
+
+</button>''', '''<button class="btn btn-primary" style="width:100%" onclick="loginUser()">دخول</button>
+<div class="auth-switch">ليس لديك حساب؟ <button onclick="closeModal('loginModal');openModal('registerModal')">إنشاء حساب جديد</button></div>''',1)
+html=html.replace('''<button class="btn btn-primary"
+style="width:100%"
+onclick="registerUser()">
+
+إنشاء الحساب
+
+</button>''', '''<button class="btn btn-primary" style="width:100%" onclick="registerUser()">إنشاء الحساب</button>
+<div class="auth-switch">لديك حساب بالفعل؟ <button onclick="closeModal('registerModal');openModal('loginModal')">تسجيل الدخول</button></div>''',1)
+
+# Replace load listener robustly: from window.addEventListener to final closing.
+load_start=html.find('window.addEventListener("load",()=>{')
+if load_start<0: raise RuntimeError("load listener not found")
+load_end=html.find('});',load_start)
+if load_end<0: raise RuntimeError("load listener end not found")
+load_end+=3
+load_js='''window.addEventListener("load",()=>{
+    let user=getCurrentAccount();
+    if(!user){
+        const oldSaved=localStorage.getItem("wasitUser");
+        if(oldSaved){
+            try{
+                const old=JSON.parse(oldSaved),accounts=getAccounts();
+                user={id:"u_"+Date.now(),name:old.name||"المستخدم",username:createUsername(old.name||"user",accounts),
+                    role:old.role||"user",email:old.email||"",password:"",bio:"",avatar:"",createdAt:new Date().toISOString()};
+                accounts.push(user);saveAccounts(accounts);saveCurrentAccount(user);
+            }catch(e){}
         }
-
     }
+    if(user){
+        updateAccountUI(user);updatePrivateProfile(user);
+        const pn=document.getElementById("profileName"),pr=document.getElementById("profileRole");
+        if(pn)pn.textContent=user.name;if(pr)pr.textContent=getRoleName(user.role);
+    }else{
+        document.getElementById("guestActions").style.display="flex";
+        document.getElementById("accountMenu").classList.remove("active");
+    }
+    document.addEventListener("click",e=>{
+        const menu=document.getElementById("accountMenu");
+        if(menu&&!menu.contains(e.target))closeAccountMenu();
+    });
+});'''
+html=html[:load_start]+load_js+html[load_end:]
 
-});
+# Ensure social buttons don't need login just to open feed.
+html=html.replace("onclick=\"showSection('social')\"", "onclick=\"showSection('social');socialTab('feed')\"")
 
-</script>
-
-</body>
-</html>
+out.write_text(html,encoding="utf-8")
+print(f"تم إنشاء الملف المعدل بنجاح: {out}")
+print(f"الحجم: {out.stat().st_size:,} بايت")
