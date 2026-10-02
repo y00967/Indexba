@@ -1,719 +1,736 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة العدالة والمحاماة الرقمية | الإصدار العالمي الفاخر</title>
+<title>منصة وسيط للاستشارات القانونية والتطوير الرقمي</title>
+<!-- Google Fonts & FontAwesome Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-  --primary: #0f172a;
-  --secondary: #1e293b;
-  --gold: #d9b44a;
-  --gold-hover: #c49d33;
-  --bg: #f8fafc;
+  --primary: #102a43;
+  --primary-hover: #0b1d30;
+  --accent: #d9b44a;
+  --accent-hover: #c4a13d;
+  --bg-color: #f4f6f8;
   --card-bg: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --danger: #ef4444;
-  --success: #22c55e;
+  --text-main: #17202a;
+  --text-muted: #627d98;
+  --border-color: #bcccdc;
+  --shadow: 0 10px 30px rgba(16, 42, 67, 0.08);
 }
 
-*{box-sizing:border-box;transition:all 0.2s ease}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer;border:0;background:none}
-.hidden{display:none!important}
-.container{width:min(1200px,92%);margin:auto}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Tajawal', Tahoma, Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.8;
+}
 
 /* Header & Nav */
-header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15);border-bottom:1px solid rgba(217,180,74,0.2)}
-.nav{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:24px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:10px;letter-spacing:-0.5px}
-.navlinks{display:flex;gap:5px;flex-wrap:wrap}
-.navlinks button,.account-btn{background:rgba(255,255,255,0.06);color:#fff;padding:10px 16px;border-radius:10px;font-weight:500;font-size:14px}
-.navlinks button:hover,.account-btn:hover{background:rgba(217,180,74,0.15);color:var(--gold)}
-.account-area{position:relative}
-.account-btn{display:flex;align-items:center;gap:10px;background:rgba(217,180,74,0.1);border:1px solid rgba(217,180,74,0.3)}
-.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--gold);color:var(--primary);display:grid;place-items:center;font-weight:bold;font-size:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
-.avatar img{width:100%;height:100%;object-fit:cover}
+header {
+  background: var(--primary);
+  color: white;
+  padding: 15px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
-.dropdown{position:absolute;left:0;top:60px;background:#fff;color:var(--text);width:240px;border-radius:14px;box-shadow:0 10px 35px rgba(0,0,0,0.15);overflow:hidden;border:1px solid var(--border)}
-.dropdown button{display:block;width:100%;text-align:right;background:#fff;padding:14px 18px;font-weight:500;border-bottom:1px solid var(--border)}
-.dropdown button:hover{background:#f8fafc;color:var(--gold)}
+header b {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-/* Main layout */
-main{padding:35px 0}
-.hero{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:24px;padding:55px 40px;margin-bottom:30px;box-shadow:0 20px 40px rgba(15,23,42,0.2);position:relative;overflow:hidden;border:1px solid rgba(217,180,74,0.2)}
-.hero::after{content:'⚖';position:absolute;left:-20px;bottom:-40px;font-size:220px;opacity:0.04;pointer-events:none}
-.hero h1{margin:0 0 15px;font-size:38px;font-weight:900;color:#fff}
-.hero h1 span{color:var(--gold)}
-.hero p{line-height:1.8;color:#cbd5e1;font-size:17px;max-width:700px;margin-bottom:25px}
+header b i {
+  color: var(--accent);
+}
 
-.grid{display:grid;grid-template-columns:2.2fr 1fr;gap:24px}
-.card{background:var(--card-bg);border-radius:20px;padding:25px;box-shadow:0 4px 20px rgba(0,0,0,0.04);margin-bottom:24px;border:1px solid var(--border)}
-.card h2,.card h3{margin-top:0;color:var(--primary);font-weight:800}
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-/* Forms & Inputs */
-textarea,input,select{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:12px;outline:none;background:#fff;font-size:15px;color:var(--text)}
-textarea:focus,input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,180,74,0.15)}
-textarea{min-height:120px;resize:vertical}
-label{display:block;margin:12px 0 6px;font-weight:700;font-size:14px;color:var(--secondary)}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
 
-/* Buttons */
-.btn{padding:12px 22px;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(15,23,42,0.15)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,23,42,0.25)}
-.btn.gold{background:var(--gold);color:var(--primary)}
-.btn.gold:hover{background:var(--gold-hover)}
-.btn.light{background:#f1f5f9;color:var(--primary)}
-.btn.light:hover{background:#e2e8f0}
-.btn.danger{background:var(--danger);color:#fff}
-.btn.success{background:var(--success);color:#fff}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+nav a:hover {
+  color: var(--accent);
+}
 
-/* Books & Posts */
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:20px}
-.book-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,0.02)}
-.book-card:hover{border-color:var(--gold);box-shadow:0 8px 25px rgba(0,0,0,0.06)}
-.post{border-top:1px solid var(--border);padding-top:20px;margin-top:20px}
-.post-head{display:flex;align-items:center;gap:14px}
-.muted{color:var(--muted);font-size:13px}
-.badge{display:inline-block;background:rgba(217,180,74,0.12);color:#9a7b20;padding:5px 12px;border-radius:30px;font-size:12px;font-weight:700}
+/* Dynamic Buttons */
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(217, 180, 74, 0.3);
+}
 
-/* Profile Cover */
-.profile-cover{height:220px;background:linear-gradient(135deg,var(--primary),var(--gold));border-radius:20px 20px 0 0;position:relative}
-.profile-main{background:#fff;border-radius:0 0 20px 20px;padding:0 30px 30px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid var(--border);border-top:0}
-.profile-avatar-container{position:relative;width:130px;height:130px;margin-top:-65px;margin-bottom:15px;display:inline-block}
-.profile-avatar{width:130px;height:130px;border-radius:50%;border:5px solid #fff;object-fit:cover;background:var(--gold);box-shadow:0 8px 25px rgba(0,0,0,0.15)}
-.upload-avatar-btn{position:absolute;bottom:0;left:0;background:var(--primary);color:#fff;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;border:3px solid #fff;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
-.upload-avatar-btn:hover{background:var(--gold);color:var(--primary)}
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
 
-/* Modals */
-.modal{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
-.modal.show{display:flex}
-.modal-box{background:#fff;width:min(600px,100%);max-height:92vh;overflow:auto;border-radius:24px;padding:30px;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)}
-@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.close{background:#f1f5f9;border-radius:50%;width:40px;height:40px;display:grid;place-items:center;font-weight:bold;font-size:18px}
-.close:hover{background:var(--danger);color:#fff}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+}
 
-.auth-tabs{display:flex;gap:10px;margin-bottom:20px;background:#f1f5f9;padding:6px;border-radius:14px}
-.auth-tabs button{flex:1;padding:12px;border-radius:10px;font-weight:700;color:var(--muted)}
-.auth-tabs button.active{background:#fff;color:var(--primary);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
 
-footer{background:var(--primary);color:#cbd5e1;padding:40px 0;text-align:center;margin-top:50px;border-top:1px solid rgba(217,180,74,0.2)}
+.badge {
+  background: var(--accent);
+  color: var(--primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  display: inline-block;
+}
 
-@media(max-width:800px){.grid{grid-template-columns:1fr}.navlinks{display:none}.hero h1{font-size:28px}}
+/* Hero Section */
+.hero {
+  padding: 80px 8%;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%);
+  color: white;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 15px 0;
+  line-height: 1.3;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+/* Cards & Grid */
+section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+/* Interactive Modules */
+.game-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.score {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.evidence div {
+  padding: 12px;
+  background: #eef2f6;
+  border-radius: 8px;
+  margin: 10px 0;
+  border-right: 4px solid var(--primary);
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 10px;
+  text-align: right;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.choice:hover {
+  background: #eef3f7;
+  border-color: var(--primary);
+}
+
+.feedback {
+  min-height: 60px;
+  padding: 15px;
+  margin-top: 15px;
+  background: #f4f6f8;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Petition Tracker & Form Controls */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.tracker-result {
+  margin-top: 15px;
+  padding: 15px;
+  background: #eef9f1;
+  border-right: 5px solid #2e7d32;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #1b5e20;
+}
+
+/* Modals & Social Login */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.social-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  font-weight: bold;
+  cursor: pointer;
+  background: white;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.social-btn.google { color: #db4437; border-color: #db4437; }
+.social-btn.google:hover { background: #fce8e6; }
+.social-btn.facebook { color: #4267B2; border-color: #4267B2; }
+.social-btn.facebook:hover { background: #e8f0fe; }
+
+/* Upload & Form Controls */
+.upload-zone {
+  border: 2px dashed var(--border-color);
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  background: #fafbfc;
+  cursor: pointer;
+}
+
+.upload-zone:hover {
+  border-color: var(--primary);
+}
+
+.payment-gateways {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.payment-card {
+  border: 1px solid var(--border-color);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ad {
+  max-width: 900px;
+  min-height: 90px;
+  margin: 30px auto;
+  border: 2px dashed #9fb3c8;
+  border-radius: 14px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.hidden { display: none !important; }
+
+footer {
+  text-align: center;
+  background: var(--primary);
+  color: white;
+  padding: 30px;
+  margin-top: 50px;
+}
+
+@media(max-width:760px) {
+  .hero, .game, .cards { grid-template-columns: 1fr; }
+  header { flex-direction: column; gap: 15px; }
+  .hero h1 { font-size: 30px; }
+}
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <header>
-<div class="container nav">
-  <div class="logo">⚖ منصة وسيط القانونية</div>
-  <div class="navlinks">
-    <button onclick="showHome()">الرئيسية</button>
-    <button onclick="showFeed()">المجتمع وتواصل</button>
-    <button onclick="showLibrary()">📚 المكتبة والبحوث</button>
-    <button id="policeTabBtn" onclick="showPolicePortal()" class="hidden">🚨 قسم الشرطة</button>
-    <button onclick="showProfile()">صفحتي الشخصية</button>
-    <button onclick="showSettings()">⚙️ الإعدادات</button>
-  </div>
-  <div class="account-area">
-    <button id="guestButtons" class="account-btn" onclick="openAuth('login')">تسجيل الدخول</button>
-    <button id="accountButton" class="account-btn hidden" onclick="toggleMenu()">
-      <span id="headerName">حسابي</span>
-      <div id="headerAvatar" class="avatar">ع</div>
-    </button>
-    <div id="accountMenu" class="dropdown hidden">
-      <button onclick="showProfile();toggleMenu()">👤 الملف الشخصي</button>
-      <button onclick="showLibrary();toggleMenu()">📚 المكتبة القانونية</button>
-      <button onclick="showSettings();toggleMenu()">⚙️️ إعدادات الحساب</button>
-      <button id="menuPolice" class="hidden" onclick="showPolicePortal();toggleMenu()">🚨 قسم الشرطة والمحاضر</button>
-      <button onclick="logout()" style="color:var(--danger)">🚪 تسجيل الخروج</button>
-    </div>
-  </div>
-</div>
+<b><i class="fa-solid fa-scale-balanced"></i> وسيط للاستشارات القانونية</b>
+<nav>
+<a href="#services">الخدمات</a>
+<a href="#trainee">قسم المتدربين</a>
+<a href="#petitions">الالتماسات</a>
+<a href="#game">التحقيق التفاعلي</a>
+<a href="#payments">طرق الدفع</a>
+<button class="btn btn-outline" id="userBtn" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> تسجيل الدخول</button>
+</nav>
 </header>
 
-<main class="container">
-
-<!-- HOME SECTION -->
-<section id="home">
-  <div class="hero">
-    <h1>المنصة الأولى عالمياً لقطاع <span>العدالة والمحاماة</span></h1>
-    <p>مساحة رقمية متكاملة تربط المحامين، القضاة، الباحثين، ومسؤولي الضبط القضائي. انشر أبحاثك، وثّق محاضرك الرسمية، وتواصل مع المجتمع القانوني بكل احترافية.</p>
-    <div class="actions">
-      <button class="btn gold" onclick="openAuth('register')">انضم إلينا مجاناً</button>
-      <button class="btn light" onclick="showLibrary()">تصفح المكتبة والكتب</button>
-    </div>
-  </div>
-  <div class="grid">
-    <div>
-      <div class="card">
-        <h2>🌐 تواصل مجتمعي ومشاركة فعالة</h2>
-        <p>ناقش القضايا القانونية، وشارك أفكارك وأبحاثك مع زملائك في المهنة في بيئة تفاعلية آمنة ومتطورة.</p>
-        <button class="btn" onclick="showFeed()">دخول المجتمع</button>
-      </div>
-      <div class="card">
-        <h2>📚 المكتبة والبحوث القانونية</h2>
-        <p>مكتبة رقمية ضخمة تتيح لك نشر الكتب والبحوث، قراءتها مباشرة، وتحميلها بكل سهولة.</p>
-        <button class="btn gold" onclick="showLibrary()">تصفح المكتبة</button>
-      </div>
-    </div>
-    <aside class="card">
-      <h3>📞 الدعم الرقمي الموحد</h3>
-      <p class="muted">تواصل معنا عبر القنوات الرسمية:</p>
-      <div style="background:#f8fafc;padding:15px;border-radius:12px;border:1px solid var(--border);margin-top:10px">
-        <p style="margin:5px 0"><b>الخط الساخن:</b> 800-WASIT</p>
-        <p style="margin:5px 0"><b>البريد:</b> support@wasit-law.ps</p>
-      </div>
-    </aside>
-  </div>
+<main>
+<!-- Hero -->
+<section class="hero">
+<div>
+<span class="badge">المنصة الأولى محلياً ورقمياً</span>
+<h1>حلول واستشارات قانونية متكاملة</h1>
+<p>ربط النخب القانونية بالعملاء، وتوفير بيئة تدريبية تفاعلية للمحامين تحت التمرين مع تتبع رقمي لعرائض الانتقال وقيد الممارسين.</p>
+<div style="display: flex; gap: 15px;">
+  <a class="btn" href="#game"><i class="fa-solid fa-magnifying-glass"></i> ابدأ التحقيق</a>
+  <a class="btn btn-outline" style="color:white; border-color:white;" href="#petitions">متابعة الالتماسات</a>
+</div>
+</div>
+<div class="card" style="color: var(--text-main);">
+<h3><i class="fa-solid fa-gavel"></i> طلب استشارة سريعة</h3>
+<p>احصل على رأي قانوني موثق من مكاتب المحاماة المعتمدة خلال دقائق.</p>
+<button class="btn" style="width:100%; justify-content:center;" onclick="openAuthModal()">احجز استشارتك الآن</button>
+</div>
 </section>
 
-<!-- FEED SECTION -->
-<section id="feed" class="hidden">
-  <div class="card">
-    <h2>🌐 مجتمع المحامين والباحثين - النشر والمشاركة</h2>
-    <label>ما الذي يدور في ذهنك قانونياً؟ (اكتب أو استخدم الإملاء الصوتي 🎤):</label>
-    <textarea id="postText" placeholder="شارك مقالاً، استشارة قانونية، أو بحثاً مع المجتمع..."></textarea>
-    <div class="actions">
-      <button class="btn gold" onclick="publishPost()">نشر في المجتمع</button>
-      <button class="btn light" onclick="toggleVoiceInput('postText')">🎤 إملاء صوتي</button>
-    </div>
-  </div>
-  <div id="postsContainer"></div>
+<!-- Ad Banner -->
+<div class="ad">
+<strong><i class="fa-solid fa-rectangle-ad"></i> مساحة إعلانية للمكاتب والشركات الراعية</strong>
+<small>إعلانات خدمات قانونية / دورات تدريبية</small>
+</div>
+
+<!-- Services -->
+<section id="services">
+<h2>خدمات المنصة الشاملة</h2>
+<div class="cards">
+<div class="card">
+<h3><i class="fa-solid fa-user-tie"></i> استشارات قانونية</h3>
+<p>طلب وحجز استشارات قانونية مباشرة عبر المنصة مع نخب المحاماة.</p>
+</div>
+<div class="card">
+<h3><i class="fa-solid fa-folder-open"></i> إدارة ملفات القضايا</h3>
+<p>تنظيم ومتابعة المستندات والأوراق الإجرائية للقضايا بكل أمان وتشفير.</p>
+</div>
+<div class="card">
+<h3><i class="fa-solid fa-graduation-cap"></i> أكاديمية التدريب</h3>
+<p>بيئة كاملة مخصصة لتدريب المحامين تحت التمرين وتطوير المهارات التحليلية.</p>
+</div>
+</div>
 </section>
 
-<!-- LIBRARY SECTION -->
-<section id="library" class="hidden">
-  <div class="card">
-    <h2>📚 المكتبة القانونية والبحثية</h2>
-    <div class="actions">
-      <button class="btn gold" onclick="openAddBookModal()">➕ نشر كتاب أو بحث جديد</button>
-    </div>
-  </div>
-  <div class="card">
-    <h3>قائمة المؤلفات والمراجع</h3>
-    <input id="bookSearch" placeholder="ابحث عن عنوان، مؤلف، أو تصنيف..." oninput="renderBooks()" style="margin-bottom:20px">
-    <div id="booksContainer" class="books-grid"></div>
-  </div>
+<!-- Trainee Module (خاص بالمحامين تحت التمرين) -->
+<section id="trainee" style="background: #eef3f8; border-radius: 20px; padding: 40px 20px;">
+<h2>مساحة المحامين تحت التمرين</h2>
+<div class="cards">
+<div class="card">
+<h3><i class="fa-solid fa-file-arrow-up"></i> رفع ودراسة قضايا (PDF)</h3>
+<p>قم برفع ملفات القضايا والمستندات لتحليلها وإعداد المذكرات.</p>
+<div class="upload-zone" onclick="alert('يرجى تسجيل الدخول لرفع الملفات إلى خادم المنصة')">
+  <i class="fa-solid fa-cloud-arrow-up" style="font-size: 30px; color: var(--primary);"></i>
+  <p style="font-size: 14px; margin: 5px 0;">اسحب الملف هنا أو اضغط للتصفح</p>
+</div>
+</div>
+<div class="card">
+<h3><i class="fa-solid fa-list-check"></i> تقييم الأداء والمذكرات</h3>
+<p>احصل على مراجعات قانونية لمذكراتك من قبل محامين ممارسين ومقيدين.</p>
+<button class="btn btn-outline" style="width: 100%; margin-top: 15px;">عرض النماذج المتاحة</button>
+</div>
+</div>
 </section>
 
-<!-- POLICE PORTAL SECTION -->
-<section id="policePortal" class="hidden">
-  <div class="card" style="border-top: 5px solid var(--danger);">
-    <h2>🚨 قسم الشرطة والضبط القضائي</h2>
-    <label>رقم المحضر / البلاغ:</label>
-    <input id="repNumber" placeholder="مثال: محضر رقم 145 لسنة 2026">
-    <label>نوع البلاغ:</label>
-    <select id="repType">
-      <option>شكوى جنائية / تعدي</option>
-      <option>بلاغ فقدان وثائق</option>
-      <option>نزاع مدني / تجاري</option>
-      <option>تحقيق أولي</option>
-    </select>
-    <label>أطراف النزاع:</label>
-    <input id="repParties" placeholder="الشاكي ضد المشكو في حقه...">
-    <label>التفاصيل:</label>
-    <textarea id="repContent" placeholder="تفاصيل المحضر..."></textarea>
-    <div class="actions">
-      <button class="btn danger" onclick="publishPoliceReport()">حفظ واعتماد المحضر</button>
-      <button class="btn light" onclick="toggleVoiceInput('repContent')">🎤 إملاء صوتي</button>
-    </div>
+<!-- New Section: Petitions & Transition (نظام متابعة الالتماسات وعرائض الانتقال) -->
+<section id="petitions">
+<h2>نظام متابعة الالتماسات وعرائض الانتقال</h2>
+<div class="card" style="max-width: 800px; margin: auto;">
+  <h3><i class="fa-solid fa-file-signature"></i> تتبع طلب التحول من متدرب إلى محامي أساسي</h3>
+  <p>أدخل رقم القيد أو رقم الالتماس الخاص بك لمتابعة حالة اعتماد الطلب وإحالته للجنة القيد.</p>
+  
+  <div class="form-group" style="margin-top: 20px;">
+    <label>رقم القيد / الالتماس:</label>
+    <input type="text" id="petitionInput" class="form-control" placeholder="مثال: PET-2026-9041">
   </div>
-  <div class="card">
-    <h3>سجل المحاضر الرسمية</h3>
-    <div id="policeReportsList"></div>
+  <button class="btn" onclick="trackPetition()"><i class="fa-solid fa-magnifying-glass"></i> استعلام عن الحالة</button>
+  
+  <div id="trackerResult" class="tracker-result hidden">
+    <!-- Result displayed dynamically -->
   </div>
+</div>
 </section>
 
-<!-- SETTINGS SECTION -->
-<section id="settings" class="hidden">
-  <div class="card" style="border-top: 5px solid var(--gold);">
-    <h2>⚙️ إعدادات الحساب الشخصي</h2>
-    <label>الاسم الكامل:</label>
-    <input id="settingsName">
-    <label>اسم المستخدم:</label>
-    <input id="settingsUsername">
-    <label>التصنيف المهني:</label>
-    <select id="settingsRole">
-      <option>مستخدم عادي</option>
-      <option>باحث قانوني</option>
-      <option>محامي</option>
-      <option>قاضي</option>
-      <option>مأمور ضبط قضائي / شرطة</option>
-    </select>
-    <label>النبذة الشخصية:</label>
-    <textarea id="settingsBio"></textarea>
-    <div class="actions">
-      <button class="btn gold" onclick="saveSettingsProfile()">حفظ التعديلات</button>
-    </div>
-  </div>
-  <div class="card">
-    <h2>🔒 الأمان وكلمة المرور</h2>
-    <label>كلمة المرور الجديدة:</label>
-    <input id="settingsNewPassword" type="password" placeholder="••••••••">
-    <div class="actions">
-      <button class="btn" onclick="saveSettingsPassword()">تحديث كلمة المرور</button>
-    </div>
-  </div>
+<!-- Interactive Game -->
+<section id="game">
+<div class="game-head">
+<h2>ملف القضية — التحقيق الذكي التفاعلي</h2>
+<div class="score">النقاط: <span id="score">0</span></div>
+</div>
+<div class="game">
+<div class="card">
+<h3 id="caseTitle">القضية</h3>
+<p id="caseText">جاري تحميل القضية...</p>
+<h3>الأدلة المتاحة</h3>
+<div id="evidence" class="evidence"></div>
+</div>
+<div class="card">
+<h3 id="question">السؤال التحليلي</h3>
+<div id="choices"></div>
+<div id="feedback" class="feedback">اختر إجابتك لتطبيق التكييف القانوني.</div>
+<button id="nextButton" class="btn hidden" style="margin-top: 15px;">القضية التالية <i class="fa-solid fa-arrow-left"></i></button>
+</div>
+</div>
 </section>
 
-<!-- PROFILE SECTION -->
-<section id="profile" class="hidden">
-  <div class="profile-cover"></div>
-  <div class="profile-main">
-    <div class="profile-avatar-container">
-      <img id="profileAvatarImg" class="profile-avatar" alt="الصورة الشخصية">
-      <label class="upload-avatar-btn" title="تغيير الصورة الشخصية">
-        📷
-        <input type="file" accept="image/*" hidden onchange="changeAvatar(event)">
-      </label>
-    </div>
-    <div class="profile-title">
-      <div>
-        <h1 id="profileName" style="margin:0 0 5px">اسم المستخدم</h1>
-        <span id="profileRoleBadge" class="badge">مستخدم</span>
-        <p id="profileBio" class="muted" style="margin-top:10px">لا توجد نبذة بعد.</p>
-      </div>
-      <div class="actions">
-        <button class="btn light" onclick="showSettings()">⚙️ تعديل الإعدادات</button>
-      </div>
-    </div>
-    <hr style="margin:25px 0; border:0; border-top:1px solid var(--border)">
-    <h3>منشوراتي ومشاركاتي</h3>
-    <div id="myPosts"></div>
-  </div>
+<!-- Payment Options -->
+<section id="payments">
+<h2>أنظمة الدفع المحلي والالكتروني المدعومة</h2>
+<p style="text-align: center;">دعم كامل للمحافط والخدمات المالية اليمنية لتسهيل التعاملات</p>
+<div class="payment-gateways">
+  <div class="payment-card"><i class="fa-solid fa-building-columns"></i> بنك الكريمي (الكريمي جوال)</div>
+  <div class="payment-card"><i class="fa-solid fa-wallet"></i> محفظة جيب (Jeeb)</div>
+  <div class="payment-card"><i class="fa-solid fa-mobile-screen"></i> محفظة ون كاش (OneCash)</div>
+  <div class="payment-card"><i class="fa-solid fa-money-bill-transfer"></i> بنك اليمن والبحر الأحمر</div>
+</div>
 </section>
 
 </main>
 
+<!-- Auth Modal (تسجيل الدخول عبر Google وفيس بوك) -->
+<div class="modal" id="authModal">
+<div class="modal-content">
+<span class="close-modal" onclick="closeAuthModal()">&times;</span>
+<h3 style="text-align: center; color: var(--primary); margin-bottom: 10px;">تسجيل الدخول إلى المنصة</h3>
+<p style="text-align: center; color: var(--text-muted); font-size: 14px;">اختر وسيلة الدخول للوصول لحسابك</p>
+
+<div class="social-btns">
+  <button class="social-btn google" onclick="loginSocial('Google')">
+    <i class="fa-brands fa-google"></i> المتابعة بواسطة Google
+  </button>
+  <button class="social-btn facebook" onclick="loginSocial('Facebook')">
+    <i class="fa-brands fa-facebook-f"></i> المتابعة بواسطة Facebook
+  </button>
+</div>
+
+<div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+  تسجيلك للدخول يعني موافقتك على شروط الاستخدام وسياسة الخصوصية للمنصة.
+</div>
+</div>
+</div>
+
 <footer>
-  <div class="container">
-    <p style="margin:0; font-weight:700; color:#fff;">منصة العدالة والمحاماة الرقمية — الإصدار العالمي الفاخر</p>
-    <p class="muted" style="margin-top:5px">جميع الحقوق محفوظة © 2026</p>
-  </div>
+<p>© 2026 منصة وسيط للاستشارات القانونية - جميع الحقوق محفوظة</p>
 </footer>
 
-<!-- ADD BOOK MODAL -->
-<div id="addBookModal" class="modal">
-<div class="modal-box">
-  <div class="modal-head"><h2>نشر كتاب أو بحث جديد</h2><button class="close" onclick="closeAddBookModal()">×</button></div>
-  <label>العنوان:</label>
-  <input id="bookTitle" placeholder="عنوان الكتاب أو البحث">
-  <label>المؤلف:</label>
-  <input id="bookAuthor" placeholder="اسم المؤلف">
-  <label>التصنيف:</label>
-  <select id="bookCategory">
-    <option>قانون مدني وتجاري</option>
-    <option>قانون جنائي وعقوبات</option>
-    <option>أبحاث ودراسات مقارنة</option>
-    <option>مرافعات وقضاء</option>
-  </select>
-  <label>نبذة مختصرة:</label>
-  <textarea id="bookDesc" placeholder="ملخص الكتاب..."></textarea>
-  <label>المحتوى الكامل (للقراءة):</label>
-  <textarea id="bookContent" placeholder="ضع النص الكامل هنا..."></textarea>
-  <button class="btn gold" onclick="saveBook()">نشر في المكتبة</button>
-</div>
-</div>
-
-<!-- READER MODAL -->
-<div id="readerModal" class="modal">
-<div class="modal-box" style="width:min(850px, 100%)">
-  <div class="modal-head">
-    <div>
-      <h2 id="readerTitle" style="margin:0">عنوان الكتاب</h2>
-      <span id="readerAuthor" class="muted">المؤلف</span>
-    </div>
-    <button class="close" onclick="closeReader()">×</button>
-  </div>
-  <hr>
-  <div id="readerBody" style="line-height:2.2; padding:15px 0; white-space:pre-wrap; max-height:55vh; overflow-y:auto; font-size:16px;"></div>
-  <div class="actions" style="justify-content:space-between; margin-top:20px">
-    <button class="btn success" onclick="downloadCurrentBook()">📥 تحميل كملف نصي</button>
-    <button class="btn light" onclick="closeReader()">إغلاق</button>
-  </div>
-</div>
-</div>
-
-<!-- AUTH MODAL -->
-<div id="authModal" class="modal">
-<div class="modal-box">
-  <div class="modal-head"><h2 id="authTitle">تسجيل الدخول</h2><button class="close" onclick="closeAuth()">×</button></div>
-  <div class="auth-tabs">
-    <button id="loginTab" onclick="openAuth('login')">تسجيل الدخول</button>
-    <button id="registerTab" onclick="openAuth('register')">إنشاء حساب جديد</button>
-  </div>
-  <div id="loginForm">
-    <label>البريد الإلكتروني أو اسم المستخدم</label>
-    <input id="loginIdentity" placeholder="example@email.com">
-    <label>كلمة المرور</label>
-    <input id="loginPassword" type="password" placeholder="••••••••">
-    <button class="btn gold" onclick="login()" style="width:100%; margin-top:15px">دخول</button>
-  </div>
-  <div id="registerForm" class="hidden">
-    <label>الاسم الكامل</label>
-    <input id="regName" placeholder="الاسم الكامل">
-    <label>البريد الإلكتروني</label>
-    <input id="regEmail" type="email" placeholder="example@email.com">
-    <label>اسم المستخدم</label>
-    <input id="regUsername" placeholder="username">
-    <label>التصنيف المهني</label>
-    <select id="regRole">
-      <option>مستخدم عادي</option>
-      <option>باحث قانوني</option>
-      <option>محامي</option>
-      <option>قاضي</option>
-      <option>مأمور ضبط قضائي / شرطة</option>
-    </select>
-    <label>كلمة المرور</label>
-    <input id="regPassword" type="password" placeholder="6 أحرف على الأقل">
-    <button class="btn gold" onclick="register()" style="width:100%; margin-top:15px">إتمام التسجيل</button>
-  </div>
-  <p id="authMessage" class="notice hidden" style="background:#fee2e2; color:#b91c1c; padding:10px; border-radius:8px; margin-top:15px"></p>
-</div>
-</div>
-
 <script>
-const USERS_KEY="wasit_accounts_v6";
-const CURRENT_KEY="wasit_current_v6";
-const POSTS_KEY="wasit_posts_v6";
-const REPORTS_KEY="wasit_police_reports_v6";
-const BOOKS_KEY="wasit_library_books_v2";
-
-let activeBookForReading = null;
-
-function getUsers(){return JSON.parse(localStorage.getItem(USERS_KEY)||"[]")}
-function saveUsers(x){localStorage.setItem(USERS_KEY,JSON.stringify(x))}
-function getCurrent(){
-  const id=localStorage.getItem(CURRENT_KEY);
-  return getUsers().find(u=>u.id===id)||null;
-}
-function saveCurrent(u){localStorage.setItem(CURRENT_KEY,u.id)}
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
-function msg(text){const e=document.getElementById("authMessage");e.textContent=text;e.classList.remove("hidden");}
-
-function openAuth(mode){
-  document.getElementById("authModal").classList.add("show");
-  const login=mode==="login";
-  document.getElementById("authTitle").textContent=login?"تسجيل الدخول":"إنشاء حساب جديد";
-  document.getElementById("loginForm").classList.toggle("hidden",!login);
-  document.getElementById("registerForm").classList.toggle("hidden",login);
-  document.getElementById("loginTab").classList.toggle("active",login);
-  document.getElementById("registerTab").classList.toggle("active",!login);
-  document.getElementById("authMessage").classList.add("hidden");
-}
-function closeAuth(){document.getElementById("authModal").classList.remove("show")}
-
-function register(){
-  const name=document.getElementById("regName").value.trim();
-  const email=document.getElementById("regEmail").value.trim().toLowerCase();
-  const username=document.getElementById("regUsername").value.trim().replace(/\s+/g,"");
-  const role=document.getElementById("regRole").value;
-  const password=document.getElementById("regPassword").value;
-  if(!name||!email||!username||!password)return msg("يرجى تعبئة كافة الحقول المطلوبة.");
-  if(password.length<6)return msg("كلمة المرور يجب ألا تقل عن 6 أحرف.");
-  const users=getUsers();
-  if(users.some(u=>u.email===email))return msg("البريد الإلكتروني مستخدم بالفعل.");
-  const user={id:"u_"+Date.now(),name,email,username,role,bio:"مرحبًا بكم في صفحتي القانونية.",password,avatar:""};
-  users.push(user);saveUsers(users);saveCurrent(user);closeAuth();updateUI();showProfile();
-}
-
-function login(){
-  const identity=document.getElementById("loginIdentity").value.trim().toLowerCase();
-  const password=document.getElementById("loginPassword").value;
-  const user=getUsers().find(u=>(u.email.toLowerCase()===identity||u.username.toLowerCase()===identity)&&u.password===password);
-  if(!user)return msg("بيانات الدخول غير صحيحة.");
-  saveCurrent(user);closeAuth();updateUI();showProfile();
-}
-
-function logout(){localStorage.removeItem(CURRENT_KEY);updateUI();showHome();}
-function toggleMenu(){document.getElementById("accountMenu").classList.toggle("hidden")}
-
-document.addEventListener("click",e=>{
-  const area=document.querySelector(".account-area");
-  if(!area.contains(e.target))document.getElementById("accountMenu").classList.add("hidden");
-});
-
-function updateUI(){
-  const u=getCurrent();
-  document.getElementById("guestButtons").classList.toggle("hidden",!!u);
-  document.getElementById("accountButton").classList.toggle("hidden",!u);
-  
-  const isPolice = u && u.role === "مأمور ضبط قضائي / شرطة";
-  document.getElementById("policeTabBtn").classList.toggle("hidden", !isPolice);
-  const menuPolice = document.getElementById("menuPolice");
-  if(menuPolice) menuPolice.classList.toggle("hidden", !isPolice);
-
-  if(u){
-    document.getElementById("headerName").textContent=u.name;
-    const av=document.getElementById("headerAvatar");
-    if(u.avatar){
-      av.innerHTML=`<img src="${u.avatar}" alt="avatar">`;
-    }else{
-      av.innerHTML=u.name.charAt(0);
-    }
+// Cases Data
+const cases = [
+  {
+    title: "القضية 01: العقد المفقود والتوقيع المزور",
+    text: "اختفى أصل عقد عقاري مهم قبل جلسة المحكمة بأيام. يوجد 3 أطراف متهمين، وتم استرجاع صورة ضوئية للطلب تحمل توقيعاً مشبوهاً.",
+    evidence: [
+      "سجل دخول المكتب: الدخول الساعة 09:12 صباحاً",
+      "رسالة بريد إلكتروني أُرسلت من الخادم الساعة 09:18 صباحاً",
+      "تقرير الخبرة الخطية: التوقيع الموجود على النسخة لا يطابق بصمة اليد الحيوية"
+    ],
+    question: "ما هو الإجراء القانوني والتكتيكي الأول الواجب اتخاذه؟",
+    choices: [
+      "توجيه الاتهام المباشر لأحدث يد دخلت المكتب",
+      "طلب طعن بالتزوير وتطبيق التسلسل الزمني للأدلة الرقمية",
+      "إلغاء القضية واعتبار المستند المفقود غير هام"
+    ],
+    correct: 1,
+    explain: "إجراء صحيح! الطعن بالتزوير واستخدام الأدلة الرقمية والزمنية هو السبيل القانوني المعتمد لإثبات حقيقة المستند."
+  },
+  {
+    title: "القضية 02: الشاهد المتناقض وتناقض الإفادات",
+    text: "شاهد في قضية تجارية ادعى عدم وجوده في مجلس العقد، ولكن توجد إشعار استلام بنكي يحمل توقيعه بنفس التاريخ.",
+    evidence: [
+      "إفادة الشاهد المكتوبة أمام النيابة",
+      "سجل الاستقبال والحركات المالية للبنك",
+      "رسالة هاتفية مؤرخة وموثقة من شركة الاتصالات"
+    ],
+    question: "كيف تتعامل مع الشاهد أمام هيئة المحكمة؟",
+    choices: [
+      "طلب تجريح الشاهد ومواجهته بالمستندات الكتابية والمؤرخة",
+      "تجاهل شهادته والاعتماد على الكلام الشفهي",
+      "الموافقة على شهادته ودعمها"
+    ],
+    correct: 0,
+    explain: "أحسنت! الإثبات الكتابي يعلو على الشهادة الشفهية، ومواجهة الشاهد بالتناقض تجرح في مصداقية شهادته."
   }
-}
+];
 
-function hideAll(){
-  ["home","feed","library","policePortal","settings","profile"].forEach(id=>{
-    document.getElementById(id).classList.add("hidden");
+let currentCase = 0;
+let score = 0;
+let answered = false;
+
+// DOM Elements
+const scoreElement = document.getElementById("score");
+const caseTitle = document.getElementById("caseTitle");
+const caseText = document.getElementById("caseText");
+const evidence = document.getElementById("evidence");
+const question = document.getElementById("question");
+const choices = document.getElementById("choices");
+const feedback = document.getElementById("feedback");
+const nextButton = document.getElementById("nextButton");
+const authModal = document.getElementById("authModal");
+const userBtn = document.getElementById("userBtn");
+
+function loadCase() {
+  const current = cases[currentCase];
+  answered = false;
+  caseTitle.textContent = current.title;
+  caseText.textContent = current.text;
+  question.textContent = current.question;
+  
+  evidence.innerHTML = "";
+  current.evidence.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.innerHTML = "<i class='fa-solid fa-magnifying-glass'></i> <strong>دليل " + (index + 1) + ":</strong> " + item;
+    evidence.appendChild(div);
   });
+
+  choices.innerHTML = "";
+  current.choices.forEach((choice, index) => {
+    const button = document.createElement("button");
+    button.className = "choice";
+    button.textContent = choice;
+    button.onclick = function() { checkAnswer(index); };
+    choices.appendChild(button);
+  });
+
+  feedback.textContent = "اختر إجابتك لتطبيق التكييف القانوني.";
+  nextButton.classList.add("hidden");
 }
 
-function showHome(){hideAll();document.getElementById("home").classList.remove("hidden");}
-function showFeed(){hideAll();document.getElementById("feed").classList.remove("hidden");renderPosts();}
-function showLibrary(){hideAll();document.getElementById("library").classList.remove("hidden");renderBooks();}
-function showPolicePortal(){
-  const u=getCurrent();
-  if(!u || u.role!=="مأمور ضبط قضائي / شرطة") return alert("هذا القسم مخصص لمسؤولي الشرطة والمحاضر الرسمية فقط.");
-  hideAll();document.getElementById("policePortal").classList.remove("hidden");renderPoliceReports();
-}
-function showSettings(){
-  const u=getCurrent();if(!u)return openAuth("login");
-  hideAll();document.getElementById("settings").classList.remove("hidden");
-  document.getElementById("settingsName").value=u.name;
-  document.getElementById("settingsUsername").value=u.username;
-  document.getElementById("settingsRole").value=u.role;
-  document.getElementById("settingsBio").value=u.bio||"";
-}
-function showProfile(){
-  const u=getCurrent();if(!u)return openAuth("login");
-  hideAll();document.getElementById("profile").classList.remove("hidden");
-  renderProfile();
-}
-
-function renderProfile(){
-  const u=getCurrent();if(!u)return;
-  document.getElementById("profileName").textContent=u.name;
-  document.getElementById("profileRoleBadge").textContent=u.role;
-  document.getElementById("profileBio").textContent=u.bio||"لا توجد نبذة شخصية بعد.";
-  const img=document.getElementById("profileAvatarImg");
-  img.src=u.avatar||`data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="130" height="130"><rect width="100%" height="100%" fill="%23d9b44a"/><text x="50%" y="58%" text-anchor="middle" font-size="55" font-family="Arial" fill="%230f172a">${u.name.charAt(0)}</text></svg>`;
+function checkAnswer(answer) {
+  if(answered) return;
+  answered = true;
+  const current = cases[currentCase];
   
-  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]").filter(p=>p.userId===u.id);
-  document.getElementById("myPosts").innerHTML=posts.length?posts.map(p=>`
-    <div class="post">
-      <p style="font-size:16px; margin:0 0 10px">${esc(p.text)}</p>
-      <div style="display:flex; justify-content:space-between; align-items:center">
-        <span class="muted">${new Date(p.date).toLocaleString("ar-YE")}</span>
-        <button class="btn light" style="padding:6px 12px; font-size:12px" onclick="shareContent('${esc(p.text)}')">📤 مشاركة</button>
-      </div>
-    </div>
-  `).join(""):"<p class='muted'>لم تنشر أي منشورات بعد.</p>";
-}
-
-function changeAvatar(e){
-  const file=e.target.files[0];if(!file)return;
-  if(!file.type.startsWith("image/"))return alert("يرجى اختيار صورة صحيحة.");
-  const reader=new FileReader();
-  reader.onload=()=>{
-    const users=getUsers(),u=getCurrent(),target=users.find(x=>x.id===u.id);
-    target.avatar=reader.result;
-    saveUsers(users);
-    updateUI();
-    renderProfile();
-    alert("تم تحديث الصورة الشخصية بنجاح!");
-  };
-  reader.readAsDataURL(file);
-}
-
-function saveSettingsProfile(){
-  const current=getCurrent();if(!current)return;
-  const users=getUsers();
-  const name=document.getElementById("settingsName").value.trim();
-  const username=document.getElementById("settingsUsername").value.trim().replace(/\s+/g,"");
-  const role=document.getElementById("settingsRole").value;
-  const bio=document.getElementById("settingsBio").value.trim();
-  if(!name||!username)return alert("الاسم واسم المستخدم مطلوبان.");
-  
-  const u=users.find(x=>x.id===current.id);
-  u.name=name;u.username=username;u.role=role;u.bio=bio;
-  saveUsers(users);updateUI();showProfile();
-  alert("تم حفظ التعديلات بنجاح!");
-}
-
-function saveSettingsPassword(){
-  const current=getCurrent();if(!current)return;
-  const p=document.getElementById("settingsNewPassword").value;
-  if(!p||p.length<6)return alert("كلمة المرور يجب ألا تقل عن 6 أحرف.");
-  const users=getUsers();
-  users.find(x=>x.id===current.id).password=p;
-  saveUsers(users);
-  document.getElementById("settingsNewPassword").value="";
-  alert("تم تحديث كلمة المرور بنجاح!");
-}
-
-// المشاركة والتواصل
-function shareContent(text){
-  if(navigator.share){
-    navigator.share({title:'منصة وسيط القانونية',text:text}).catch(()=>{});
+  if(answer === current.correct) {
+    score += 100;
+    scoreElement.textContent = score;
+    feedback.style.color = "#2e7d32";
+    feedback.textContent = "✅ تحليل قانوني سليم! (+100 نقطة) - " + current.explain;
   } else {
-    navigator.clipboard.writeText(text);
-    alert("تم نسخ النص بنجاح لمشاركته مع الآخرين!");
+    feedback.style.color = "#c62828";
+    feedback.textContent = "❌ تكييف خاطئ. " + current.explain;
+  }
+  nextButton.classList.remove("hidden");
+}
+
+nextButton.onclick = function() {
+  if(currentCase < cases.length - 1) {
+    currentCase++;
+    loadCase();
+  } else {
+    feedback.style.color = "var(--primary)";
+    feedback.textContent = "🎉 التهاني! أنجزت جميع القضايا المتاحة في هذه الجلسة التدريبية. مجموع النقاط: " + score;
+    nextButton.classList.add("hidden");
+  }
+};
+
+// Petition Tracker Function
+function trackPetition() {
+  const inputVal = document.getElementById('petitionInput').value.trim();
+  const resultDiv = document.getElementById('trackerResult');
+  
+  if(!inputVal) {
+    resultDiv.style.background = "#fce8e6";
+    resultDiv.style.borderRightColor = "#db4437";
+    resultDiv.style.color = "#c62828";
+    resultDiv.innerHTML = "⚠️ الرجاء إدخال رقم القيد أو الالتماس الصحيح.";
+    resultDiv.classList.remove('hidden');
+    return;
+  }
+  
+  resultDiv.style.background = "#eef9f1";
+  resultDiv.style.borderRightColor = "#2e7d32";
+  resultDiv.style.color = "#1b5e20";
+  resultDiv.innerHTML = `✅ حالة الالتماس (${inputVal}): <strong>تمت إحالة الطلب إلى لجنة قيد وترقية المحامين، والملف في مرحلة المراجعة النهائية للاستاصال بصفة محامي أساسي.</strong>`;
+  resultDiv.classList.remove('hidden');
+}
+
+// Auth Functions
+function openAuthModal() {
+  authModal.style.display = "flex";
+}
+
+function closeAuthModal() {
+  authModal.style.display = "none";
+}
+
+function loginSocial(provider) {
+  closeAuthModal();
+  userBtn.innerHTML = `<i class="fa-solid fa-user-check"></i> مرحباً (عبر ${provider})`;
+  userBtn.style.background = "#2e7d32";
+  userBtn.style.borderColor = "#2e7d32";
+  userBtn.style.color = "white";
+  alert(`تم تسجيل الدخول بنجاح عبر حساب ${provider}!`);
+}
+
+// Window click to close modal
+window.onclick = function(event) {
+  if (event.target == authModal) {
+    closeAuthModal();
   }
 }
 
-// المنشورات
-function publishPost(){
-  const u=getCurrent();if(!u)return openAuth("login");
-  const text=document.getElementById("postText").value.trim();
-  if(!text)return alert("اكتب محتوى المنشور أولاً.");
-  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
-  posts.unshift({id:Date.now(),userId:u.id,name:u.name,role:u.role,avatar:u.avatar,text,date:new Date().toISOString()});
-  localStorage.setItem(POSTS_KEY,JSON.stringify(posts));
-  document.getElementById("postText").value="";
-  renderPosts();
-  alert("تم نشر المحتوى في المجتمع بنجاح!");
-}
-
-function renderPosts(){
-  const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
-  const box=document.getElementById("postsContainer");
-  box.innerHTML=posts.length?posts.map(p=>`
-    <div class="card">
-      <div class="post-head">
-        <div class="avatar">${p.avatar?`<img src="${p.avatar}">`:p.name.charAt(0)}</div>
-        <div>
-          <b>${esc(p.name)}</b> <span class="badge">${esc(p.role)}</span>
-          <div class="muted">${new Date(p.date).toLocaleString("ar-YE")}</div>
-        </div>
-      </div>
-      <div class="post">
-        <p style="font-size:16px; margin:0 0 15px">${esc(p.text)}</p>
-        <div class="actions">
-          <button class="btn light" onclick="shareContent('${esc(p.text)}')">📤 مشاركة المنشور</button>
-        </div>
-      </div>
-    </div>
-  `).join(""):"<div class='card'><p class='muted'>لا توجد منشورات حالياً. كن أول المشاركين!</p></div>";
-}
-
-// المكتبة والكتب
-function openAddBookModal(){const u=getCurrent();if(!u)return openAuth("login");document.getElementById("addBookModal").classList.add("show");}
-function closeAddBookModal(){document.getElementById("addBookModal").classList.remove("show")}
-
-function saveBook(){
-  const u=getCurrent();if(!u)return openAuth("login");
-  const title=document.getElementById("bookTitle").value.trim();
-  const author=document.getElementById("bookAuthor").value.trim()||u.name;
-  const category=document.getElementById("bookCategory").value;
-  const desc=document.getElementById("bookDesc").value.trim();
-  const content=document.getElementById("bookContent").value.trim();
-  if(!title||!content)return alert("يرجى إدخال العنوان والمحتوى على الأقل.");
-
-  const books=JSON.parse(localStorage.getItem(BOOKS_KEY)||"[]");
-  books.unshift({id:"b_"+Date.now(),title,author,category,desc,content,publisher:u.name,date:new Date().toISOString()});
-  localStorage.setItem(BOOKS_KEY,JSON.stringify(books));
-  closeAddBookModal();
-  document.getElementById("bookTitle").value="";
-  document.getElementById("bookAuthor").value="";
-  document.getElementById("bookDesc").value="";
-  document.getElementById("bookContent").value="";
-  renderBooks();
-  alert("تم نشر الكتاب بنجاح في المكتبة!");
-}
-
-function renderBooks(){
-  const books=JSON.parse(localStorage.getItem(BOOKS_KEY)||"[]");
-  const q=document.getElementById("bookSearch").value.toLowerCase();
-  const filtered=books.filter(b=>b.title.toLowerCase().includes(q)||b.author.toLowerCase().includes(q)||b.category.toLowerCase().includes(q));
-  const container=document.getElementById("booksContainer");
-  container.innerHTML=filtered.length?filtered.map(b=>`
-    <div class="book-card">
-      <div>
-        <span class="badge">${esc(b.category)}</span>
-        <h3 style="margin:10px 0 6px">${esc(b.title)}</h3>
-        <p class="muted" style="margin:0 0 10px">المؤلف: ${esc(b.author)}</p>
-        <p style="font-size:14px; color:#475569">${esc(b.desc||"لا توجد نبذة.")}</p>
-      </div>
-      <div class="actions" style="margin-top:15px">
-        <button class="btn" style="flex:1; padding:10px; font-size:14px" onclick="readBook('${b.id}')">📖 قراءة</button>
-        <button class="btn light" style="padding:10px; font-size:14px" onclick="downloadBook('${b.id}')">📥 تحميل</button>
-      </div>
-    </div>
-  `).join(""):"<p class='muted'>لا توجد كتب مطابقة.</p>";
-}
-
-function readBook(id){
-  const books=JSON.parse(localStorage.getItem(BOOKS_KEY)||"[]");
-  const b=books.find(x=>x.id===id);if(!b)return;
-  activeBookForReading=b;
-  document.getElementById("readerTitle").textContent=b.title;
-  document.getElementById("readerAuthor").textContent=`المؤلف: ${b.author} | التصنيف: ${b.category}`;
-  document.getElementById("readerBody").textContent=b.content;
-  document.getElementById("readerModal").classList.add("show");
-}
-function closeReader(){document.getElementById("readerModal").classList.remove("show");activeBookForReading=null;}
-
-function downloadBook(id){
-  const books=JSON.parse(localStorage.getItem(BOOKS_KEY)||"[]");
-  const b=books.find(x=>x.id===id);if(!b)return;
-  const content=`عنوان الكتاب: ${b.title}\nالمؤلف: ${b.author}\nالتصنيف: ${b.category}\n\n---\n${b.content}`;
-  const blob=new Blob([content],{type:"text/plain;charset=utf-8"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download=`${b.title}.txt`;a.click();
-  URL.revokeObjectURL(url);
-}
-function downloadCurrentBook(){if(activeBookForReading)downloadBook(activeBookForReading.id);}
-
-// الإملاء الصوتي الذكي
-function toggleVoiceInput(targetId){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition)return alert("متصفحك لا يدعم الإملاء الصوتي المباشر.");
-  const rec=new SpeechRecognition();
-  rec.lang='ar-SA';
-  rec.start();
-  alert("🎤 جاري الاستماع... تحدث بوضوح.");
-  rec.onresult=e=>{
-    const field=document.getElementById(targetId);
-    field.value+=(field.value?" ":"")+e.results[0][0].transcript;
-  };
-}
-
-// محاضر الشرطة
-function publishPoliceReport(){
-  const u=getCurrent();if(!u||u.role!=="مأمور ضبط قضائي / شرطة")return alert("غير مسموح.");
-  const number=document.getElementById("repNumber").value.trim();
-  const type=document.getElementById("repType").value;
-  const parties=document.getElementById("repParties").value.trim();
-  const content=document.getElementById("repContent").value.trim();
-  if(!number||!content)return alert("يرجى إدخال رقم المحضر والتفاصيل.");
-  const reports=JSON.parse(localStorage.getItem(REPORTS_KEY)||"[]");
-  reports.unshift({id:Date.now(),officerName:u.name,number,type,parties,content,date:new Date().toISOString()});
-  localStorage.setItem(REPORTS_KEY,JSON.stringify(reports));
-  document.getElementById("repNumber").value="";
-  document.getElementById("repParties").value="";
-  document.getElementById("repContent").value="";
-  renderPoliceReports();
-  alert("تم اعتماد المحضر بنجاح.");
-}
-
-function renderPoliceReports(){
-  const reports=JSON.parse(localStorage.getItem(REPORTS_KEY)||"[]");
-  const box=document.getElementById("policeReportsList");
-  box.innerHTML=reports.length?reports.map(r=>`
-    <div class="post">
-      <b>محضر رقم: ${esc(r.number)}</b> (${esc(r.type)})<br>
-      <span class="muted">الأطراف: ${esc(r.parties)}</span>
-      <p style="margin:10px 0">${esc(r.content)}</p>
-      <span class="muted">حرره: ${esc(r.officerName)} | ${new Date(r.date).toLocaleString("ar-YE")}</span>
-      <div class="actions"><button class="btn light" style="font-size:12px; padding:6px 12px" onclick="shareContent('محضر رسمي رقم: ${esc(r.number)}\\nالتفاصيل: ${esc(r.content)}')">📤 مشاركة المحضر</button></div>
-    </div>
-  `).join(""):"<p class='muted'>لا توجد محاضر مسجلة.</p>";
-}
-
-window.addEventListener("load",()=>{updateUI();showHome();});
+// Init
+loadCase();
 </script>
 </body>
 </html>
-'''
-
-path=Path("/mnt/data/منصة_العدالة_والمحاماة_ملف_HTML_واحد.html")
-path.write_text(html,encoding="utf-8")
-print(path)
