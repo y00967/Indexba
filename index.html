@@ -42,6 +42,7 @@ label{display:block;margin:10px 0 6px;font-weight:bold}
 .btn.gold{background:#b98b20}
 .btn.light{background:#e8eef5;color:#102a43}
 .btn.danger{background:#b42318}
+.btn.success{background:#15803d;color:#fff}
 .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .profile-cover{height:190px;background:linear-gradient(135deg,#102a43,#d9b44a);border-radius:16px 16px 0 0;position:relative}
 .profile-main{background:#fff;border-radius:0 0 16px 16px;padding:0 25px 25px}
@@ -57,6 +58,7 @@ label{display:block;margin:10px 0 6px;font-weight:bold}
 .auth-tabs button{flex:1;padding:11px;border-radius:8px;background:#e9eef4}
 .auth-tabs button.active{background:#102a43;color:#fff}
 .notice{padding:12px;border-radius:9px;background:#eef6ff;color:#174a72;margin:10px 0}
+.contact-box{background:#f8fafc;border:1px solid #e2e8f0;padding:15px;border-radius:10px;margin-top:15px}
 footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:35px}
 @media(max-width:800px){.grid{grid-template-columns:1fr}.navlinks{display:none}.hero h1{font-size:25px}}
 </style>
@@ -69,6 +71,7 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
   <div class="navlinks">
     <button onclick="showHome()">الرئيسية</button>
     <button onclick="showFeed()">المجتمع</button>
+    <button id="policeTabBtn" onclick="showPolicePortal()" class="hidden">قسم الشرطة والمحاضر</button>
     <button onclick="showProfile()">صفحتي</button>
   </div>
   <div class="account-area">
@@ -80,6 +83,7 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
       <button onclick="showProfile();toggleMenu()">👤 صفحتي الشخصية</button>
       <button onclick="openEdit();toggleMenu()">✏️ تعديل الحساب</button>
       <button onclick="showFeed();toggleMenu()">🌐 المجتمع</button>
+      <button id="menuPolice" class="hidden" onclick="showPolicePortal();toggleMenu()">🚨 قسم الشرطة والمحاضر</button>
       <button onclick="logout()">🚪 تسجيل الخروج</button>
     </div>
   </div>
@@ -90,28 +94,35 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
 <section id="home">
   <div class="hero">
     <h1>منصة العدالة والمحاماة الرقمية</h1>
-    <p>منصة اجتماعية وقانونية تجمع المحامين والقضاة والباحثين والمستخدمين في مساحة رقمية واحدة.</p>
+    <p>منصة اجتماعية وقانونية تجمع المحامين، القضاة، مسؤولي الشرطة والمحاضر، والباحثين والمستخدمين في مساحة رقمية واحدة.</p>
     <button class="btn gold" onclick="openAuth('register')">إنشاء حساب شخصي</button>
     <button class="btn light" onclick="openAuth('login')">تسجيل الدخول</button>
   </div>
   <div class="grid">
     <div>
       <div class="card">
-        <h2>المجتمع القانوني</h2>
-        <p>أنشئ حسابك، أنشر أبحاثك ومنشوراتك، وتواصل مع المجتمع القانوني.</p>
+        <h2>المجتمع القانوني وقسم الشرطة</h2>
+        <p>أنشئ حسابك، انشر أبحاثك ومحاضرك، وتواصل مع المجتمع القانوني والأمني.</p>
         <button class="btn" onclick="showFeed()">الدخول إلى المجتمع</button>
       </div>
       <div class="card">
         <h2>مزايا المنصة</h2>
-        <div class="notice">👨‍⚖️ صفحات المحامين والقضاة</div>
-        <div class="notice">📚 مكتبة قانونية</div>
-        <div class="notice">📝 إعداد المحاضر والمذكرات</div>
+        <div class="notice">👨‍⚖️ صفحات المحامين والقضاة ومسؤولي الشرطة</div>
+        <div class="notice">🎙️ كتابة المحاضر والمنشورات بالكتابة والصوت</div>
+        <div class="notice">📋 نظام تسجيل وتحرير محاضر الشرطة والضبط</div>
         <div class="notice">🤖 تحليل القضايا بالذكاء الاصطناعي — واجهة تجريبية</div>
       </div>
     </div>
     <aside class="card">
+      <h3>أرقام التواصـل والدعم الرقمي</h3>
+      <p class="muted">تواصل معنا عبر القنوات الرسمية التالية لأي استفسارات طارئة أو قانونية:</p>
+      <div class="contact-box">
+        <p>📞 <b>الرقم الرقمي الموحد:</b> 800-WASIT-LAW</p>
+        <p>📱 <b>هاتف طوارئ الشرطة والمحاماة:</b> +967 1 234567</p>
+        <p>✉️ <b>البريد الإلكتروني:</b> support@wasit-law.ps</p>
+      </div>
+      <br>
       <h3>حسابك الشخصي</h3>
-      <p class="muted">أنشئ حسابًا خاصًا بك لتظهر صفحتك الشخصية وتدير معلوماتك ومنشوراتك.</p>
       <button class="btn" onclick="openAuth('register')">إنشاء حساب</button>
     </aside>
   </div>
@@ -119,11 +130,53 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
 
 <section id="feed" class="hidden">
   <div class="card">
-    <h2>🌐 المجتمع</h2>
-    <textarea id="postText" placeholder="بماذا تفكر؟ اكتب منشورًا قانونيًا أو بحثًا..."></textarea>
-    <div class="actions"><button class="btn" onclick="publishPost()">نشر</button></div>
+    <h2>🌐 المجتمع والمشاركات القانونية</h2>
+    <label>محتوى المنشور أو المحضر:</label>
+    <div style="position:relative">
+      <textarea id="postText" placeholder="بماذا تفكر؟ اكتب منشورًا قانونيًا أو بحثًا... أو استخدم الإملاء الصوتي 🎤"></textarea>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="publishPost()">نشر في المجتمع</button>
+      <button class="btn light" onclick="toggleVoiceInput('postText')">🎤 إملاء صوتي</button>
+    </div>
   </div>
   <div id="posts"></div>
+</section>
+
+<!-- POLICE & REPORT PORTAL SECTION -->
+<section id="policePortal" class="hidden">
+  <div class="card" style="border-top: 5px solid #b42318;">
+    <h2>🚨 قسم الشرطة والضبط القضائي - تحرير محضر رسمي</h2>
+    <p class="muted">هذا القسم مخصص حصرياً لمسؤولي الشرطة ومأموري الضبط القضائي لتدوين وتحرير محاضر الشرطة الرسمية وتوثيقها صوتياً وكتابياً.</p>
+    
+    <label>رقم المحضر / البلاغ:</label>
+    <input id="repNumber" placeholder="مثال: محضر رقم 145 لسنة 2026">
+    
+    <label>نوع البلاغ / القضية:</label>
+    <select id="repType">
+      <option>شكوى جنائية / تعدي</option>
+      <option>بلاغ فقدان وثائق / مستندات</option>
+      <option>نزاع مدني / تجاري</option>
+      <option>تحقيق أولي / استجواب</option>
+      <option>أخرى</option>
+    </select>
+
+    <label>أطراف النزاع / الشاكي والمشكو في حقه:</label>
+    <input id="repParties" placeholder="الشاكي: ... ضد المشكو في حقه: ...">
+
+    <label>تفاصيل ومضمون المحضر:</label>
+    <textarea id="repContent" placeholder="اكتب تفاصيل المحضر بدقة، أو اضغط على زر الإملاء الصوتي للتسجيل بالكلام..."></textarea>
+    
+    <div class="actions">
+      <button class="btn danger" onclick="publishPoliceReport()">حفظ واعتماد المحضر رسمياً</button>
+      <button class="btn light" onclick="toggleVoiceInput('repContent')">🎤 إملاء صوتي للمحضر</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>سجل المحاضر الرسمية المسجلة</h3>
+    <div id="policeReportsList"></div>
+  </div>
 </section>
 
 <section id="profile" class="hidden">
@@ -138,17 +191,17 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
       </div>
       <div class="actions">
         <button class="btn" onclick="openEdit()">تعديل الملف الشخصي</button>
-        <label class="btn light">تغيير الصورة<input type="file" accept="image/*" hidden onchange="changeAvatar(event)"></label>
+        <label class="btn light">📷 تغيير الصورة الشخصية<input type="file" accept="image/*" hidden onchange="changeAvatar(event)"></label>
       </div>
     </div>
     <hr>
     <h3>معلومات الحساب</h3>
     <p><b>اسم المستخدم:</b> <span id="profileUsername"></span></p>
     <p><b>البريد الإلكتروني:</b> <span id="profileEmail"></span></p>
-    <p><b>حالة الحساب:</b> <span class="badge">حساب شخصي</span></p>
+    <p><b>حالة الحساب:</b> <span class="badge">حساب معتمد</span></p>
   </div>
   <div class="card" style="margin-top:18px">
-    <h3>منشوراتي</h3>
+    <h3>منشوراتي ومشاركاتي</h3>
     <div id="myPosts"></div>
   </div>
 </section>
@@ -181,6 +234,7 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
     <label>التصنيف المهني</label>
     <select id="regRole">
       <option>مستخدم عادي</option>
+      <option>مأمور ضبط قضائي / شرطة</option>
       <option>محامي تحت التمرين</option>
       <option>محامي</option>
       <option>قاضي</option>
@@ -200,9 +254,14 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
   <div class="modal-head"><h2>تعديل الحساب</h2><button class="close" onclick="closeEdit()">×</button></div>
   <label>الاسم</label><input id="editName">
   <label>اسم المستخدم</label><input id="editUsername">
-  <label>التصنيف</label>
+  <label>التصنيف المهني</label>
   <select id="editRole">
-    <option>مستخدم عادي</option><option>محامي تحت التمرين</option><option>محامي</option><option>قاضي</option><option>باحث قانوني</option>
+    <option>مستخدم عادي</option>
+    <option>مأمور ضبط قضائي / شرطة</option>
+    <option>محامي تحت التمرين</option>
+    <option>محامي</option>
+    <option>قاضي</option>
+    <option>باحث قانوني</option>
   </select>
   <label>نبذة شخصية</label><textarea id="editBio"></textarea>
   <button class="btn" onclick="saveEdit()">حفظ التعديلات</button>
@@ -210,9 +269,10 @@ footer{background:#102a43;color:#fff;padding:25px;text-align:center;margin-top:3
 </div>
 
 <script>
-const USERS_KEY="wasit_accounts_v3";
-const CURRENT_KEY="wasit_current_v3";
-const POSTS_KEY="wasit_posts_v3";
+const USERS_KEY="wasit_accounts_v4";
+const CURRENT_KEY="wasit_current_v4";
+const POSTS_KEY="wasit_posts_v4";
+const REPORTS_KEY="wasit_police_reports_v4";
 
 function getUsers(){return JSON.parse(localStorage.getItem(USERS_KEY)||"[]")}
 function saveUsers(x){localStorage.setItem(USERS_KEY,JSON.stringify(x))}
@@ -272,6 +332,11 @@ function updateUI(){
   const u=getCurrent();
   document.getElementById("guestButtons").classList.toggle("hidden",!!u);
   document.getElementById("accountButton").classList.toggle("hidden",!u);
+  
+  const isPolice = u && u.role === "مأمور ضبط قضائي / شرطة";
+  document.getElementById("policeTabBtn").classList.toggle("hidden", !isPolice);
+  document.getElementById("menuPolice").classList.toggle("hidden", !isPolice);
+
   if(u){
     document.getElementById("headerName").textContent=u.name;
     const av=document.getElementById("headerAvatar");
@@ -282,11 +347,17 @@ function updateUI(){
 function hideAll(){
   document.getElementById("home").classList.add("hidden");
   document.getElementById("feed").classList.add("hidden");
+  document.getElementById("policePortal").classList.add("hidden");
   document.getElementById("profile").classList.add("hidden");
 }
 function showHome(){hideAll();document.getElementById("home").classList.remove("hidden")}
 function showFeed(){
   hideAll();document.getElementById("feed").classList.remove("hidden");renderPosts();
+}
+function showPolicePortal(){
+  const u=getCurrent();
+  if(!u || u.role!=="مأمور ضبط قضائي / شرطة") return alert("هذا القسم مخصص لمسؤولي الشرطة ومأموري الضبط القضائي فقط.");
+  hideAll();document.getElementById("policePortal").classList.remove("hidden");renderPoliceReports();
 }
 function showProfile(){
   const u=getCurrent();
@@ -336,26 +407,83 @@ function changeAvatar(e){
   };
   reader.readAsDataURL(file);
 }
+
+// الصوت (Speech Recognition)
+function toggleVoiceInput(targetId){
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    return alert("متصفحك لا يدعم ميزة الإملاء الصوتي المباشر. يرجى استخدام متصفح كروم حديث.");
+  }
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'ar-SA';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  
+  alert("🎤 جاري الاستماع... تحدث الآن بوضوح وسيتم كتابة النص تلقائياً.");
+  
+  recognition.start();
+  
+  recognition.onresult = function(event) {
+    const speechResult = event.results[0][0].transcript;
+    const field = document.getElementById(targetId);
+    field.value += (field.value ? " " : "") + speechResult;
+  };
+  
+  recognition.onerror = function(event) {
+    alert("حدث خطأ أثناء التسجيل الصوتي: " + event.error);
+  };
+}
+
 function publishPost(){
   const u=getCurrent();if(!u)return openAuth("login");
   const text=document.getElementById("postText").value.trim();
   if(!text)return alert("اكتب محتوى المنشور.");
   const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
-  posts.unshift({id:Date.now(),userId:u.id,name:u.name,text,date:new Date().toISOString()});
+  posts.unshift({id:Date.now(),userId:u.id,name:u.name,role:u.role,text,date:new Date().toISOString()});
   localStorage.setItem(POSTS_KEY,JSON.stringify(posts));
   document.getElementById("postText").value="";renderPosts();
+  alert("تم نشر المحتوى بنجاح في المجتمع.");
 }
+
 function renderPosts(){
   const posts=JSON.parse(localStorage.getItem(POSTS_KEY)||"[]");
   const box=document.getElementById("posts");
-  box.innerHTML=posts.length?posts.map(p=>`<div class="card"><div class="post-head"><span class="avatar">${esc(p.name.charAt(0))}</span><div><b>${esc(p.name)}</b><div class="muted">${new Date(p.date).toLocaleString("ar-YE")}</div></div></div><div class="post"><p>${esc(p.text)}</p><div class="actions"><button class="btn light">إعجاب</button><button class="btn light">تعليق</button><button class="btn light">مشاركة</button></div></div></div>`).join(""):"<div class='card'><p class='muted'>لا توجد منشورات. كن أول من ينشر.</p></div>";
+  box.innerHTML=posts.length?posts.map(p=>`<div class="card"><div class="post-head"><span class="avatar">${esc(p.name.charAt(0))}</span><div><b>${esc(p.name)}</b> <span class="badge" style="font-size:11px">${esc(p.role)}</span><div class="muted">${new Date(p.date).toLocaleString("ar-YE")}</div></div></div><div class="post"><p>${esc(p.text)}</p><div class="actions"><button class="btn light" onclick="navigator.clipboard.writeText('${esc(p.text)}');alert('تم نسخ المنشور لمشاركته!')">📤 مشاركة / نسخ</button></div></div></div>`).join(""):"<div class='card'><p class='muted'>لا توجد منشورات. كن أول من ينشر.</p></div>";
 }
+
+function publishPoliceReport(){
+  const u=getCurrent();
+  if(!u || u.role!=="مأمور ضبط قضائي / شرطة") return alert("صلاحية غير مسموحة.");
+  const number=document.getElementById("repNumber").value.trim();
+  const type=document.getElementById("repType").value;
+  const parties=document.getElementById("repParties").value.trim();
+  const content=document.getElementById("repContent").value.trim();
+  if(!number||!content)return alert("يرجى إدخال رقم المحضر ومضمون التفاصيل على الأقل.");
+  
+  const reports=JSON.parse(localStorage.getItem(REPORTS_KEY)||"[]");
+  reports.unshift({id:Date.now(),officerName:u.name,number,type,parties,content,date:new Date().toISOString()});
+  localStorage.setItem(REPORTS_KEY,JSON.stringify(reports));
+  
+  document.getElementById("repNumber").value="";
+  document.getElementById("repParties").value="";
+  document.getElementById("repContent").value="";
+  renderPoliceReports();
+  alert("تم حفظ محضر الشرطة واعتماده بنجاح.");
+}
+
+function renderPoliceReports(){
+  const reports=JSON.parse(localStorage.getItem(REPORTS_KEY)||"[]");
+  const box=document.getElementById("policeReportsList");
+  box.innerHTML=reports.length?reports.map(r=>`<div class="post"><b>رقم المحضر: ${esc(r.number)}</b> (${esc(r.type)})<br><span class="muted">الأطراف: ${esc(r.parties)}</span><p><b>التفاصيل:</b> ${esc(r.content)}</p><span class="muted">حرره: ${esc(r.officerName)} | ${new Date(r.date).toLocaleString("ar-YE")}</span><div class="actions"><button class="btn light" onclick="navigator.clipboard.writeText('محضر رسمي رقم: ${esc(r.number)}\\nالنوع: ${esc(r.type)}\\nالأطراف: ${esc(r.parties)}\\nالتفاصيل: ${esc(r.content)}');alert('تم نسخ تفاصيل المحضر للمشاركة الرسمية!')">📤 مشاركة المحضر</button></div></div>`).join(""):"<p class='muted'>لا توجد محاضر مسجلة حتى الآن.</p>";
+}
+
 window.addEventListener("load",()=>{
   updateUI();showHome();
 });
 </script>
 </body>
-</html>'''
+</html>
+'''
 
 path=Path("/mnt/data/منصة_العدالة_والمحاماة_ملف_HTML_واحد.html")
 path.write_text(html,encoding="utf-8")
